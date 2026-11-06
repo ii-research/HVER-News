@@ -29,9 +29,9 @@ Open http://127.0.0.1:8016/ and provide the configured token. Both servers bind 
 | Module | Purpose | Route |
 |---|---|---|
 | Original annotation | Original Stage 1 assessment and Stage 2 evidence annotation | `/original/` |
-| Post-revision quality | Document-level quality reassessment | `/quality-review/` |
+| Post-annotation quality | Document-level quality reassessment | `/quality-review/` |
 | Remaining annotation | Document-level Stage 2 annotation, example Group 41 | `/remaining/` |
-| Cross-document pre-assessment | Quality assessment before evidence revision | `/crossdoc-quality/` |
+| Cross-document pre-assessment | Quality assessment before evidence annotation | `/crossdoc-quality/` |
 | Cross-document Direct | Evidence annotation for pairs with Direct evidence | `/crossdoc-rel-direct/` |
 | Cross-document Partial | Evidence annotation for pairs with Partial evidence only | `/crossdoc-rel-partial/` |
 | Cross-document no evidence | Optional review of pairs without positive evidence | `/crossdoc-rel-empty/` |
@@ -43,7 +43,7 @@ Use the dashboard links to open a group. Cross-document annotation groups combin
 
 This copy contains only a small demonstration sample, not the full annotation collection. Each document-level workflow retains two relations; each grouped cross-document category retains two relations (4 Direct, 2 Partial-only and 8 no-evidence query–article pairs in total). Quality-assessment pages retain two pairs each. Initial evidence selections in these examples demonstrate the editor; they are not submitted annotations. See `EXAMPLE_MANIFEST.json` for counts.
 
-All complete input collections, historical annotations, accounts and saved drafts have been removed from this copy. The original system is unchanged.
+All complete input collections, submitted annotations, accounts and saved drafts have been removed from this copy.
 
 ## Included and excluded data
 
@@ -81,4 +81,4 @@ annotation/
 └── crossdoc_addon/                  # Cross-document UI and storage code
 ```
 
-Directory names describe their purpose rather than historical batch sizes or version numbers. Public routes and stored schema identifiers are retained for compatibility.
+Directory names describe the purpose of each module.

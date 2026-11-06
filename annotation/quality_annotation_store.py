@@ -1,4 +1,4 @@
-"""Latest quality score per account/relation, with atomic writes and migration backup."""
+"""Latest quality score per account/relation, with atomic writes and backups."""
 import json
 import os
 import shutil
@@ -85,7 +85,7 @@ class QualityAnnotationStore(LatestAnnotationStore):
                 changed = True
                 accepted += 1
             saved_backup = None
-            # Always preserve the original bytes before collapsing historical duplicates.
+            # Back up source records before deduplicating.
             if backup or len(rows) != len({self._key(r) for r in rows}):
                 saved_backup = self.path.with_name(self.path.name + datetime.now().strftime('.before_latest_%Y%m%d_%H%M%S_%f.bak'))
                 shutil.copy2(self.path, saved_backup)

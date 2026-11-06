@@ -25,7 +25,7 @@ def sentence_id_map(candidates):
 
 
 def ranked_sentence_ids(payload):
-    """Read the revised key or a historical prediction without guessing."""
+    """Read sentence rankings and reject conflicting fields."""
     if "ranked_sen_ids" in payload:
         values = payload["ranked_sen_ids"]
         if "ranked_doc_ids" in payload and payload["ranked_doc_ids"] != values:

@@ -45,7 +45,7 @@ class RelationStore(CrossdocStore):
    elif type(value) is int:value=str(value)
    if value not in ('2','1','0','unknown',None,''):raise ValueError('Invalid actor/scope score')
    normalized[key]=value
-  # Reuse legacy structural checks; partial compatibility is stored distinctly.
+  # Validate record structure; store partial compatibility distinctly.
   legacy={**normalized}
   for key in ('actor_match','scope_match'):
    legacy[key]={'2':'yes','1':'yes','0':'no'}.get(normalized[key],normalized[key])

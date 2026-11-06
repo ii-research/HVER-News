@@ -12,7 +12,7 @@ The document-level GPT and DeepSeek ranking baselines share the same prompt and 
 
 Each request contains one query and all its source-article candidate sentences, in original article order. Candidate lines have the form `[000] ID="s1" TEXT=...`. Newlines inside sentence text are replaced with spaces. Structured actor/value/direction labels, gold relevance labels, rationales and label-origin metadata are not inserted into the prompt.
 
-The model returns `{"ranked_sen_ids": ["s1", "s2"]}` with at most ten candidate IDs. These IDs identify **sentences**, not articles. Parsers map them back to complete IDs before saving and evaluation; historical `ranked_doc_ids` files remain readable. No generated evidence text or explanations are requested. The prompt requests all candidates when fewer than ten exist.
+The model returns `{"ranked_sen_ids": ["s1", "s2"]}` with at most ten candidate IDs. These IDs identify **sentences**, not articles. Parsers map them back to complete IDs before saving and evaluation. No generated evidence text or explanations are requested. The prompt requests all candidates when fewer than ten exist.
 
 The runners validate and normalize model outputs separately from prompting. In particular, the DeepSeek parser maps valid numeric candidate indices to IDs and fills short lists from remaining candidates in original order; consult its `parse_response` for this evaluation behavior.
 

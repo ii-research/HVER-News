@@ -9,7 +9,7 @@ python -m pip install -r requirements.txt
 export PYTHONPATH="$PWD:$PWD/provence_bundle/scripts:$PWD/provence_bundle/scripts/provence_final_suite:${PYTHONPATH:-}"
 ```
 
-Install a CUDA-compatible PyTorch build for your hardware before training. The dependency file gives compatibility requirements, not a frozen reproduction environment; this repository does not include historical environment snapshots. Optional API baselines require their own SDKs (`openai`) and credentials supplied through environment variables. They are not run by any setup command.
+Install a CUDA-compatible PyTorch build for your hardware before training. The dependency file gives compatibility requirements, not a frozen reproduction environment; this repository does not include environment snapshots. Optional API baselines require their own SDKs (`openai`) and credentials supplied through environment variables. They are not run by any setup command.
 
 ## Document-level baselines
 
@@ -265,12 +265,12 @@ of oversized sentences. Partial evidence stays in the input context even when
 masked from supervision. BF16 requires compatible GPUs; exact floating-point
 results can vary across hardware/software versions.
 
-## Task-name migration
+## Task paths
 
-Use `dataset/document-level` and `dataset/corpus-level`. New experiment outputs use `results/document-level`, `models/document-level`, `results/corpus-level` and `models/corpus-level`. Existing runs and checkpoints are not moved; supply their original paths explicitly when resuming.
+Use `dataset/document-level` and `dataset/corpus-level`. Experiment outputs use `results/document-level`, `models/document-level`, `results/corpus-level` and `models/corpus-level`.
 
-The preferred document-level entry points are `avr_retriever_experiment.run_document_level` and `tools/prepare_document_level.py`. The previous `run_within` and `prepare_within.py` entry points remain compatible aliases. The corpus-level implementation remains in `corpus_evidence_ranking`. Data fields such as `scope=within`, `article_local_candidate_doc_ids`, and internal model variant identifiers retain their original meanings. No loss, sampling rule, or evaluation metric changes with this naming update.
+The document-level entry points are `avr_retriever_experiment.run_document_level` and `tools/prepare_document_level.py`. The corpus-level implementation is in `corpus_evidence_ranking`.
 
 ### API output format
 
-GPT and DeepSeek automatically load the shared [ranking prompt](prompts/document_level_ranking/README.md). Model responses use `ranked_sen_ids` with local sentence IDs such as `s3`; parsing restores full IDs before saving and scoring. Historical `ranked_doc_ids` predictions remain readable. Prepare a new output directory rather than resuming requests prepared with a different prompt.
+GPT and DeepSeek automatically load the shared [ranking prompt](prompts/document_level_ranking/README.md). Model responses use `ranked_sen_ids` with local sentence IDs such as `s3`; parsing restores full IDs before saving and scoring. Prepare a new output directory rather than resuming requests prepared with a different prompt.

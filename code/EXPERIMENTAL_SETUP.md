@@ -63,7 +63,7 @@ Train and infer with the same variant. Compare seed-42 ablations with the seed-4
 
 ## Evaluation and aggregation
 
-Report nDCG and Recall at 1, 3, 5 and 10, and MRR@10. nDCG uses graded gains `2^relevance - 1`, with Direct=2, Partial=1 and Non-supporting=0. Recall and reciprocal rank count Direct evidence only. The document-level dense evaluator stores MRR@10 under the legacy key `mrr`; the corpus evaluator uses `mrr@10`.
+Report nDCG and Recall at 1, 3, 5 and 10, and MRR@10. nDCG uses graded gains `2^relevance - 1`, with Direct=2, Partial=1 and Non-supporting=0. Recall and reciprocal rank count Direct evidence only. The document-level dense evaluator stores MRR@10 under the key `mrr`; the corpus evaluator uses `mrr@10`.
 
 Metrics are macro-averaged over evaluated queries. The corpus evaluator includes queries with at least one Direct qrel and keeps returned items at their original ranks, assigning zero gain when no qrel exists. Cross-only evaluation removes source-article results and qrels, then applies the same eligibility rule. Check exported query counts: missing predictions are not a license to silently reduce evaluation coverage.
 
@@ -77,6 +77,6 @@ The released GPT/DeepSeek runners send one query and ordered source-article cand
 
 Use Python 3.11+ and [requirements.txt](requirements.txt); the API runners additionally require `openai`. BF16 needs compatible hardware. Model checkpoints and credentials are not bundled. Preserve generated configurations, dataset fingerprints, query-view manifests and seed-level metrics with each run.
 
-The repository specifies dependency lower bounds, not an exact lockfile for every historical run. It does not establish one uniform GPU model, CUDA version, API model snapshot or wall-clock runtime for all experiments. Report such details from the original run logs rather than inferring them from default code. No training or paid API calls are required to read this setup.
+The repository specifies dependency lower bounds, not an exact lockfile for every experiment. It does not establish one uniform GPU model, CUDA version, API model snapshot or wall-clock runtime for all experiments. Report such details from the original run logs rather than inferring them from default code. No training or paid API calls are required to read this setup.
 
 Implementation references: [document runner](avr_retriever_experiment/run_document_level.py), [document metrics](avr_retriever_experiment/evaluation.py), [corpus metrics](corpus_evidence_ranking/metrics.py), [Provence configuration generator](tools/make_provence_configs.py), and [hierarchical model](corpus_evidence_ranking/provence_hierarchical_model.py).

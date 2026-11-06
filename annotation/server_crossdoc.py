@@ -1,4 +1,4 @@
-"""Add two cross-document modules without editing legacy server/pages/storage."""
+"""Serve cross-document annotation and quality-assessment modules."""
 import argparse,json,mimetypes
 from pathlib import Path
 from urllib.parse import urlparse

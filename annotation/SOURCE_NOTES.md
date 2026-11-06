@@ -1,3 +1,3 @@
 # Source
 
-This is an English-localized copy of the existing HVER-News verification pipeline, not a replacement annotation implementation. Existing routing, stores and interaction logic are retained. Historical submissions, account databases, API request logs and private deployment files are excluded.
+The English-language HVER-News annotation and quality-assessment framework includes example inputs. Submitted annotations, account databases, API request logs and private deployment files are excluded.

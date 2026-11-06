@@ -15,7 +15,7 @@ The official shared prompt for GPT and DeepSeek document-level evidence ranking.
 
 The JSON braces in the user template are doubled for Python `str.format`; the rendered request contains ordinary braces. The example sentence IDs illustrate output structure only and must be replaced by actual candidate IDs. The number of returned IDs is determined by the candidate count, not by the illustrative three-item array.
 
-Requests use article-local IDs such as `s1`; parsers restore complete sentence IDs using the request candidate manifest before evaluation. Saved predictions use `ranked_sen_ids` with complete IDs to prevent cross-article collisions. Evaluation also accepts historical `ranked_doc_ids` records. Ambiguous or unknown short IDs are rejected. The prompt does not request generated rationales or introduce annotation metadata as inference inputs.
+Requests use article-local IDs such as `s1`; parsers restore complete sentence IDs using the request candidate manifest before evaluation. Saved predictions use `ranked_sen_ids` with complete IDs to prevent cross-article collisions. Ambiguous or unknown short IDs are rejected. The prompt does not request generated rationales or introduce annotation metadata as inference inputs.
 
 ## Offline preview
 
@@ -37,4 +37,4 @@ print((folder / "user_template.txt").read_text().format(
 
 This is a synthetic formatting example. It makes no API calls.
 
-For both GPT and DeepSeek, prepare a new output directory when changing prompts. No variant environment variable is needed. GPT executes its frozen request files; DeepSeek verifies the prepared prompt fingerprint before running. Historical result files can still be evaluated without rerunning paid requests.
+For both GPT and DeepSeek, prepare a new output directory when changing prompts. GPT executes its frozen request files; DeepSeek verifies the prepared prompt fingerprint before running.

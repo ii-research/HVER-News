@@ -1,4 +1,4 @@
-"""Add evidence-specific local modules; preserve legacy and v1 stores."""
+"""Serve evidence-specific annotation modules."""
 import argparse,json
 from urllib.parse import urlparse
 import server_crossdoc as old

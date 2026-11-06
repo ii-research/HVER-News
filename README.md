@@ -78,7 +78,7 @@ cd annotation
 python server_crossdoc_relations.py --port 8015
 ```
 
-The annotation demo includes **small example inputs only**. Its eight modules cover evidence annotation and quality assessment. Historical accounts and submitted annotations are excluded. Starting the demo does not call a commercial model API.
+The annotation demo includes **small example inputs only**. Its eight modules cover evidence annotation and quality assessment. Accounts and submitted annotations are excluded. Starting the demo does not call a commercial model API.
 
 ## Queries and evidence labels
 
@@ -158,7 +158,7 @@ Use the file names and schema for the task you are running. The document-level a
 - [Shared GPT/DeepSeek ranking prompts](code/prompts/README.md)
 - [Annotation and quality-assessment interface](annotation/README.md)
 
-Model weights, historical environment snapshots, private credentials, and full prediction outputs are not bundled. Optional API baselines read credentials from environment variables.
+Model weights, environment snapshots, private credentials, and full prediction outputs are not bundled. Optional API baselines read credentials from environment variables.
 
 </details>
 

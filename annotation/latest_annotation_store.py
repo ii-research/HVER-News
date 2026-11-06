@@ -1,4 +1,4 @@
-"""Latest-only storage for the remaining Stage-2 batch; legacy stores stay append-only."""
+"""Store the latest Stage-2 annotation for each record."""
 import json
 import os
 import tempfile
