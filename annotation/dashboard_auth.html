@@ -1,0 +1,85 @@
+<section class="panel" style="margin-bottom:24px" aria-label="Annotator account">
+  <div id="accountSignedIn" hidden><div class="panelhead"><div><h2>Signed in：<span id="accountName"></span></h2><p>Use this account for all annotation tasks；See below for sign-in persistence。</p></div><button id="accountLogout">Sign out</button></div></div>
+  <form id="accountForm"><h2>Sign in to your annotation account</h2><p>Sign in with your account to open a group. To create an account, enter and confirm a password, then select Create account.</p>
+    <div class="controls"><input id="accountUser" autocomplete="username" placeholder="Username" aria-label="Username" required><input id="accountPass" type="password" autocomplete="current-password" placeholder="Password" aria-label="Password" required><input id="accountConfirm" type="password" autocomplete="new-password" placeholder="Confirm password（Create account only）" aria-label="Confirm password"><button type="submit">Sign in</button><button type="button" id="accountRegister">Create account</button></div>
+  </form><p id="accountMessage" role="status" aria-live="polite"></p>
+</section>
+<script>
+// Limit fallback to account/session metadata; never delete annotation drafts.
+(()=>{
+ if(window.nevuAuthStorageFallbackInstalled)return;
+ const authKeys=new Set(['nevu_annotation_accounts_v2','nevu_annotation_session_user_v2']);
+ const proto=Storage.prototype,read=proto.getItem,write=proto.setItem,remove=proto.removeItem;
+ const fallbackKey=k=>'nevu_auth_fallback_v1:'+k;
+ window.nevuAuthTemporary=()=>[...authKeys].some(k=>read.call(sessionStorage,fallbackKey(k))!==null);
+ proto.getItem=function(k){
+  if(this===localStorage&&authKeys.has(String(k))){const value=read.call(sessionStorage,fallbackKey(k));if(value!==null)return value;}
+  return read.call(this,k);
+ };
+ proto.setItem=function(k,v){
+  if(this!==localStorage||!authKeys.has(String(k)))return write.call(this,k,v);
+  try{write.call(this,k,v);remove.call(sessionStorage,fallbackKey(k));}
+  catch(e){
+   if(e.name!=='QuotaExceededError'&&e.name!=='NS_ERROR_DOM_QUOTA_REACHED')throw e;
+   try{write.call(sessionStorage,fallbackKey(k),String(v));}
+   catch(_){throw Error('Browser sign-in storage is also full。Export unsaved annotations first，Then sign in in a new browser window；Do not clear site data without a backup。');}
+  }
+ };
+ proto.removeItem=function(k){
+  if(this===localStorage&&authKeys.has(String(k)))remove.call(sessionStorage,fallbackKey(k));
+  return remove.call(this,k);
+ };
+ window.nevuAuthStorage={
+  getItem:k=>proto.getItem.call(localStorage,k),
+  setItem:(k,v)=>proto.setItem.call(localStorage,k,v),
+  removeItem:k=>proto.removeItem.call(localStorage,k)
+ };
+ window.nevuAuthStorageFallbackInstalled=true;
+})();
+
+
+(()=>{
+  const ACCOUNT_KEY="nevu_annotation_accounts_v2",SESSION_KEY="nevu_annotation_session_user_v2";
+  const el=id=>document.getElementById(id);
+  const accounts=()=>{try{return JSON.parse(window.nevuAuthStorage.getItem(ACCOUNT_KEY)||"{}")}catch{return {}}};
+  function display(){
+    const username=window.nevuAuthStorage.getItem(SESSION_KEY),signedIn=!!(username&&accounts()[username]);
+    el('accountSignedIn').hidden=!signedIn;el('accountForm').hidden=signedIn;
+    el('accountName').textContent=signedIn?username:'';
+    el('accountMessage').textContent=window.nevuAuthTemporary?.()?'Browser storage is full：Using fallback sign-in storage，Available in this tab only。Annotations are still saved to the server；Other tabs may require separate sign-in，New accounts may need recreating after closing this tab。':'';
+    window.dispatchEvent(new Event('annotation-auth-change'));
+    if(signedIn){el('accountPass').value='';el('accountConfirm').value='';}
+  }
+  const hex=bytes=>Array.from(bytes,x=>x.toString(16).padStart(2,'0')).join('');
+  async function hash(password,salt){
+    const key=await crypto.subtle.importKey('raw',new TextEncoder().encode(password),'PBKDF2',false,['deriveBits']);
+    const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt:Uint8Array.from(salt.match(/../g),x=>parseInt(x,16)),iterations:150000,hash:'SHA-256'},key,256);
+    return hex(new Uint8Array(bits));
+  }
+  let busy=false;
+  async function authenticate(register){
+    if(busy)return;busy=true;
+    try{
+      const username=el('accountUser').value.trim(),password=el('accountPass').value;
+      if(!username||!password)throw Error('Enter a username and password。');
+      const db=accounts();
+      if(register){
+        if(username.length<2||password.length<6)throw Error('Minimum username length 2 characters，Minimum password length 6 characters。');
+        if(password!==el('accountConfirm').value)throw Error('Passwords do not match。');
+        if(db[username])throw Error('Account already exists，Please sign in directly。');
+        const salt=hex(crypto.getRandomValues(new Uint8Array(16)));
+        db[username]={salt,hash:await hash(password,salt),created_at:new Date().toISOString(),kdf:'PBKDF2-SHA256-150000'};
+        window.nevuAuthStorage.setItem(ACCOUNT_KEY,JSON.stringify(db));
+      }else{
+        if(!db[username]||await hash(password,db[username].salt)!==db[username].hash)throw Error('Incorrect username or password。');
+      }
+      window.nevuAuthStorage.setItem(SESSION_KEY,username);display();
+    }catch(e){el('accountMessage').textContent=e.message;}finally{busy=false;}
+  }
+  el('accountForm').addEventListener('submit',e=>{e.preventDefault();authenticate(false)});
+  el('accountRegister').addEventListener('click',()=>authenticate(true));
+  el('accountLogout').addEventListener('click',()=>{window.nevuAuthStorage.removeItem(SESSION_KEY);sessionStorage.removeItem(SESSION_KEY);display();el('accountMessage').textContent='Signed out，Other open group pages will also sign out。'});
+  window.addEventListener('storage',e=>{if(e.key===SESSION_KEY||e.key===ACCOUNT_KEY)display()});
+  display();
+})();
+</script>

@@ -1,0 +1,7 @@
+flowchart LR
+    R["Relation<br/>relation_id · actor · value · direction"] --> Q["Queries · Q1–Q4<br/>query_id · relation_id · source_article_id"]
+    Q --> I["Query–article records<br/>query_id · doc_id · scope<br/>Direct / Partial sentence IDs"]
+    I --> L["Query–sentence relevance<br/>2 Direct · 1 Partial · 0 Non-supporting"]
+    A["Articles and sentences<br/>Article IDs · Sentence IDs · Text"] --> L
+    classDef plain fill:#fff,stroke:#777,color:#222
+    class R,Q,I,L,A plain

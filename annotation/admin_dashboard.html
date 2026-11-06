@@ -1,0 +1,209 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NEVU Annotation Admin</title>
+<style>
+:root{--bg:#f4f6f8;--panel:#fff;--line:#d8dee7;--text:#182230;--muted:#667085;--ok:#087a3e;--warn:#b54708;--bad:#b42318;--accent:#344054;--soft:#f8fafc;--direct:#e7f6ec;--partial:#fff5cf}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+header{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);padding:10px 16px}.top{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.top h1{font-size:18px;margin:0 12px 0 0}.spacer{flex:1}.small{font-size:12px;color:var(--muted)}
+button,input,select,textarea{font:inherit}button{border:1px solid var(--line);background:#fff;border-radius:8px;padding:7px 10px;cursor:pointer}button.primary{background:#101828;color:#fff;border-color:#101828}button.danger{color:#b42318}.pill{display:inline-block;border-radius:999px;padding:3px 8px;font-size:11px;font-weight:700;background:#eef2f6}.pill.ok{background:#dcfae6;color:#087a3e}.pill.warn{background:#fff3e0;color:#b54708}.pill.bad{background:#fee4e2;color:#b42318}
+main{max-width:1500px;margin:16px auto 70px;padding:0 14px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px}.metric .n{font-size:26px;font-weight:800;margin-top:5px}.metric .label{font-size:12px;color:var(--muted)}
+.section{margin-top:14px}.section h2{font-size:16px;margin:0 0 9px}.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.scroll{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:12px}.table th,.table td{padding:8px;border-bottom:1px solid #edf0f4;text-align:left;vertical-align:top}.table th{position:sticky;top:0;background:#fafbfc;color:#475467;z-index:1}.click{cursor:pointer}.click:hover{background:#f8fafc}.bar{height:7px;background:#eaecf0;border-radius:99px;overflow:hidden;min-width:90px}.bar>i{display:block;height:100%;background:#667085}.statusline{display:flex;align-items:center;gap:7px;white-space:nowrap}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:10px}.toolbar input,.toolbar select{padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:#fff}.hidden{display:none!important}
+.overlay{position:fixed;inset:0;background:rgba(16,24,40,.64);z-index:100;display:flex;align-items:center;justify-content:center;padding:18px}.login{width:min(460px,95vw);background:#fff;padding:22px;border-radius:14px;box-shadow:0 22px 60px rgba(0,0,0,.2)}.login input{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px;margin:10px 0}
+.editor{position:fixed;inset:0;z-index:80;background:#f5f7fa;overflow:auto}.editorHeader{position:sticky;top:0;z-index:4;background:#fff;border-bottom:1px solid var(--line);padding:10px 14px;display:flex;gap:8px;align-items:center}.editorMain{max-width:1400px;margin:14px auto 70px;padding:0 14px}.meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.meta>div{background:#f8fafc;border-radius:8px;padding:8px}.meta .k{font-size:11px;color:var(--muted)}.meta .v{font-weight:700;word-break:break-word}.textblock{padding:10px;border-radius:8px;background:#eef2ff;line-height:1.5;margin-top:8px}.scoreRow{display:flex;gap:12px;flex-wrap:wrap}.scoreRow label{font-size:12px}.scoreRow select{display:block;margin-top:4px;padding:6px;border:1px solid var(--line);border-radius:7px}.query{border:1px solid var(--line);border-radius:10px;padding:11px;margin:9px 0}.qorig{background:#eef3ff;padding:8px;border-radius:7px;margin:6px 0}.query textarea{width:100%;min-height:58px;border:1px solid var(--line);border-radius:7px;padding:7px}.sentence{display:grid;grid-template-columns:65px 1fr 150px;gap:8px;padding:7px;border-bottom:1px solid #edf0f4;align-items:start}.sentence.direct{background:var(--direct)}.sentence.partial{background:var(--partial)}.sentence select{padding:5px;border:1px solid var(--line);border-radius:7px}.reason{width:100%;min-height:55px;padding:8px;border:1px solid var(--line);border-radius:8px}.saveBox{position:sticky;bottom:0;background:#fff;border-top:1px solid var(--line);padding:10px;display:flex;gap:8px;align-items:center}.msg{font-size:12px}.msg.bad{color:var(--bad)}.msg.ok{color:var(--ok)}
+@media(max-width:950px){.grid,.two,.three,.meta{grid-template-columns:1fr 1fr}.sentence{grid-template-columns:50px 1fr}.sentence select{grid-column:2}}
+@media(max-width:620px){.grid,.two,.three,.meta{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><div class="top"><h1>NEVU Annotation Admin</h1><select id="moduleSelect" aria-label="Annotation module"><option value="original">01 · Original annotation（Group 1–40）</option><option value="quality">02 · Stage 1 Quality reassessment</option><option value="remaining">03 · Stage 2 Remaining data</option></select><span id="connection" class="small"></span><div class="spacer"></div><button id="refreshBtn">Refresh</button><button id="logoutBtn">Logout</button></div></header>
+<div id="loginOverlay" class="overlay"><div class="login"><h2 style="margin:0 0 5px">Admin access</h2><div class="small">Enter the server-side admin token. It is kept only in this browser session.</div><input id="tokenInput" type="password" placeholder="Admin token"><button id="loginBtn" class="primary">Open dashboard</button><div id="loginMsg" class="msg bad" style="margin-top:9px"></div></div></div>
+<main>
+  <div id="overviewPane">
+    <div class="grid" id="metricCards"></div>
+    <div class="section two">
+      <div class="card"><h2>Stage 1 — pooled quality</h2><div id="stage1Overall"></div></div>
+      <div class="card"><h2>Stage 2 — pooled corrections</h2><div id="stage2Overall"></div></div>
+    </div>
+    <div class="section card"><h2>Annotators</h2><div class="toolbar"><input id="userSearch" placeholder="Search annotator"><span class="small">Click a row to inspect groups and relations.</span></div><div class="scroll"><table class="table"><thead><tr><th>Annotator</th><th>Groups</th><th>Expected</th><th>Touched</th><th>Stage1 locked</th><th>Completion</th><th>Material query</th><th>Evidence changed</th><th>Last save</th></tr></thead><tbody id="userBody"></tbody></table></div></div>
+  </div>
+  <div id="userPane" class="hidden">
+    <div class="toolbar"><button id="backOverview">← Overview</button><strong id="userTitle"></strong><div class="spacer"></div><select id="groupFilter"><option value="">All groups</option></select><select id="lockFilter"><option value="">All states</option><option value="locked">Locked</option><option value="unlocked">Unlocked</option></select><input id="relationSearch" placeholder="Search relation / actor / value"></div>
+    <div class="grid" id="userMetrics"></div>
+    <div class="section two"><div class="card"><h2>Stage 1 — this annotator</h2><div id="userStage1"></div></div><div class="card"><h2>Stage 2 — this annotator</h2><div id="userStage2"></div></div></div>
+    <div class="section card"><h2>Group progress</h2><div class="scroll"><table class="table"><thead><tr><th>Group</th><th>Expected</th><th>Touched</th><th>Locked</th><th>Completion</th><th>Last save</th></tr></thead><tbody id="groupBody"></tbody></table></div></div>
+    <div class="section card"><h2>Relations</h2><div class="scroll"><table class="table"><thead><tr><th>Group</th><th>Relation</th><th>Scope</th><th>Actor</th><th>Value</th><th>Direction</th><th>Stage1</th><th>Evidence changed</th><th>Material queries</th><th>Updated</th></tr></thead><tbody id="relationBody"></tbody></table></div></div>
+  </div>
+</main>
+
+<div id="editor" class="editor hidden"><div class="editorHeader"><button id="closeEditor">← Back</button><strong id="editorTitle"></strong><div class="spacer"></div><span id="editorSaved" class="small"></span></div><div class="editorMain"><div id="editorContent"></div></div><div class="saveBox"><textarea id="adminReason" class="reason" placeholder="Required: reason for this administrative edit"></textarea><button id="saveAdmin" class="primary">Save corrected state</button><span id="saveMsg" class="msg"></span></div></div>
+<script>
+let MODULE='original', MODULE_VERSION=0;
+let TOKEN=sessionStorage.getItem('nevu_admin_token')||'';
+let OVERVIEW=null, CURRENT_USER=null, CURRENT_DETAIL=null, CURRENT_EDITOR=null;
+const $=id=>document.getElementById(id);
+function esc(x){return String(x??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;')}
+function pct(x){return x==null?'N/A':(100*Number(x)).toFixed(1)+'%'}
+function num(x,d=3){return x==null?'N/A':Number(x).toFixed(d)}
+function shortTime(x){if(!x)return '';try{return new Date(x).toLocaleString()}catch(e){return x}}
+function apiUrl(path){path=String(path||'').replace(/^\/+/,'');const url=new URL(path,location.href);url.searchParams.set('module',MODULE);return url.toString()}
+async function api(path,opts={}){opts.headers={...(opts.headers||{}),'X-Admin-Token':TOKEN};if(opts.body&&!opts.headers['Content-Type'])opts.headers['Content-Type']='application/json';const version=MODULE_VERSION;const r=await fetch(apiUrl(path),{...opts,cache:'no-store'});const d=await r.json().catch(()=>({ok:false,error:'Invalid response'}));if(version!==MODULE_VERSION)throw new Error('Module changed; please reload this view.');if(!r.ok||!d.ok)throw new Error(d.error||('HTTP '+r.status));return d.data??d}
+function metric(label,value,sub=''){return `<div class="card metric"><div class="label">${esc(label)}</div><div class="n">${esc(value)}</div><div class="small">${esc(sub)}</div></div>`}
+function bar(v){const p=v==null?0:Math.max(0,Math.min(100,100*v));return `<div class="statusline"><div class="bar"><i style="width:${p}%"></i></div><span>${v==null?'N/A':p.toFixed(1)+'%'}</span></div>`}
+function scoreTable(stage1){const dims=[['Direct Evidence Validity','direct_evidence_validity'],['Partial Evidence Validity','partial_evidence_validity'],['Evidence Set Sufficiency','evidence_set_sufficiency'],['Query Semantic Faithfulness','query_semantic_faithfulness'],['Query–Evidence Consistency','query_evidence_consistency']];return `<table class="table"><thead><tr><th>Dimension</th><th>N</th><th>Mean/2</th><th>Strict (=2)</th><th>Soft (>=1)</th></tr></thead><tbody>${dims.map(([l,k])=>{const x=stage1?.[k]||{};return `<tr><td>${l}</td><td>${x.n??0}</td><td>${num(x.mean)}</td><td>${pct(x.strict_2_rate)}</td><td>${pct(x.soft_ge1_rate)}</td></tr>`}).join('')}</tbody></table>`}
+function stage2Html(s){const c=s?.query_status_counts||{};const t=s?.evidence_transitions||{};return `<div class="grid" style="grid-template-columns:repeat(2,1fr)">${metric('Keep',c.keep||0)}${metric('Surface edit',c.surface_edit||0)}${metric('Semantic edit',c.semantic_edit||0)}${metric('Exclude',c.exclude||0)}</div><div class="small" style="margin-top:10px">Material query rate: <b>${pct(s?.material_query_rate)}</b> · Evidence-changed relations: <b>${s?.evidence_changed_relations??0}</b> (${pct(s?.evidence_changed_rate)})</div><table class="table" style="margin-top:8px"><thead><tr><th>Evidence transition</th><th>Count</th></tr></thead><tbody><tr><td>Direct → Direct</td><td>${t.d_to_d||0}</td></tr><tr><td>Direct → Partial</td><td>${t.d_to_p||0}</td></tr><tr><td>Direct → None</td><td>${t.d_to_none||0}</td></tr><tr><td>Partial → Direct</td><td>${t.p_to_d||0}</td></tr><tr><td>Partial → Partial</td><td>${t.p_to_p||0}</td></tr><tr><td>Partial → None</td><td>${t.p_to_none||0}</td></tr><tr><td>None → Direct</td><td>${t.none_to_d||0}</td></tr><tr><td>None → Partial</td><td>${t.none_to_p||0}</td></tr></tbody></table>`}
+async function login(){TOKEN=$('tokenInput').value.trim();if(!TOKEN)return;try{sessionStorage.setItem('nevu_admin_token',TOKEN);await loadOverview();$('loginOverlay').classList.add('hidden');$('loginMsg').textContent=''}catch(e){$('loginMsg').textContent=e.message}}
+async function loadOverview(){OVERVIEW=await api('/api/admin/overview');$('connection').textContent='Updated '+new Date().toLocaleTimeString();const o=OVERVIEW.overall,b=OVERVIEW.benchmark;$('metricCards').innerHTML=metric('Annotators',OVERVIEW.annotator_count)+metric('Benchmark relations',b.relations,b.groups+' groups · '+b.queries+' queries')+metric('Annotation instances locked',o.annotation_instance_locked||0,'of '+(o.annotation_instance_expected||0))+metric('Overall completion',pct(o.annotation_instance_completion_rate));$('stage1Overall').innerHTML=scoreTable(o.stage1);$('stage2Overall').innerHTML=stage2Html(o.stage2);renderUsers();applyModuleView()}
+function renderUsers(){const q=$('userSearch').value.trim().toLowerCase();const rows=(OVERVIEW?.annotators||[]).filter(x=>x.annotator.toLowerCase().includes(q));$('userBody').innerHTML=rows.map(x=>`<tr class="click" onclick="openUser('${esc(x.annotator)}')"><td><b>${esc(x.annotator)}</b></td><td>${esc(x.groups.join(', '))}</td><td>${x.expected_relations}</td><td>${x.touched_relations}</td><td>${x.locked_relations}</td><td>${bar(x.completion_rate)}</td><td>${pct(x.material_query_rate)}</td><td>${pct(x.evidence_changed_rate)}</td><td>${esc(shortTime(x.last_saved_at))}</td></tr>`).join('')}
+window.openUser=async function(user){CURRENT_USER=user;CURRENT_DETAIL=await api('/api/admin/annotator?annotator='+encodeURIComponent(user));$('overviewPane').classList.add('hidden');$('userPane').classList.remove('hidden');$('userTitle').textContent='Annotator: '+user;$('userMetrics').innerHTML=metric('Expected',CURRENT_DETAIL.expected_relations)+metric('Touched',CURRENT_DETAIL.touched_relations)+metric('Stage1 locked',CURRENT_DETAIL.locked_relations)+metric('Completion',pct(CURRENT_DETAIL.completion_rate));$('userStage1').innerHTML=scoreTable(CURRENT_DETAIL.stage1);$('userStage2').innerHTML=stage2Html(CURRENT_DETAIL.stage2);$('groupFilter').innerHTML='<option value="">All groups</option>'+CURRENT_DETAIL.groups.map(g=>`<option value="${esc(g.group)}">Group ${esc(g.group)}</option>`).join('');$('groupBody').innerHTML=CURRENT_DETAIL.groups.map(g=>`<tr><td>${esc(g.group)}</td><td>${g.expected_relations}</td><td>${g.touched_relations}</td><td>${g.locked_relations}</td><td>${bar(g.completion_rate)}</td><td>${esc(shortTime(g.last_saved_at))}</td></tr>`).join('');renderRelations();applyModuleView()}
+function renderRelations(){const gf=$('groupFilter').value,lf=$('lockFilter').value,q=$('relationSearch').value.trim().toLowerCase();const rows=(CURRENT_DETAIL?.relations||[]).filter(r=>(!gf||r.group===gf)&&(!lf||(lf==='locked'?r.locked:!r.locked))&&(!q||[r.relation_id,r.actor,r.value,r.scope].join(' ').toLowerCase().includes(q)));$('relationBody').innerHTML=rows.map(r=>`<tr class="click" onclick="openRelation('${esc(r.group)}','${esc(r.relation_id)}')"><td>${esc(r.group)}</td><td>${esc(r.relation_id)}</td><td>${esc(r.scope)}</td><td>${esc(r.actor)}</td><td>${esc(r.value)}</td><td>${esc(r.direction)}</td><td>${r.locked?'<span class="pill ok">Locked</span>':'<span class="pill warn">Open</span>'}</td><td>${r.evidence_changed?'<span class="pill warn">Changed</span>':'-'}</td><td>${r.material_queries||0}</td><td>${esc(shortTime(r.updated_at))}</td></tr>`).join('');applyModuleView()}
+function s1Val(state,qid,key){const snap=state.original_assessment_snapshot||{},sq=(snap.queries||{})[qid]||{},qs=(state.queries||{})[qid]||{};if(key==='semantic')return sq.semantic_faithfulness??sq.query_quality??qs.semantic_faithfulness??qs.query_quality??'';return sq.query_evidence_consistency??qs.query_evidence_consistency??''}
+function selectScore(id,val,na=false){if(na)return '<span class="small">N/A</span>';return `<select id="${id}"><option value="" ${val===''?'selected':''}>--</option>${[2,1,0].map(v=>`<option value="${v}" ${String(val)===String(v)?'selected':''}>${v}</option>`).join('')}</select>`}
+window.openRelation=async function(group,rid){CURRENT_EDITOR=await api('/api/admin/relation?annotator='+encodeURIComponent(CURRENT_USER)+'&group='+encodeURIComponent(group)+'&relation_id='+encodeURIComponent(rid));renderEditor();$('editor').classList.remove('hidden')}
+function renderEditorBase(){const d=CURRENT_EDITOR,r=d.relation,s=d.state||{},snap=s.original_assessment_snapshot||{},ev=s.evidence||{},qstates=s.queries||{};$('editorTitle').textContent=`${d.annotator} · group ${d.group} · ${r.relation_id}`;$('editorSaved').textContent='Latest: '+shortTime(d.meta.server_saved_at);let html=`<div class="card"><div class="meta"><div><div class="k">Scope</div><div class="v">${esc(r.unit_level)}</div></div><div><div class="k">Actor</div><div class="v">${esc(r.actor_name)}</div></div><div><div class="k">Value</div><div class="v">${esc(r.value_name)}</div></div><div><div class="k">Direction</div><div class="v">${esc(r.direction)}</div></div><div><div class="k">Article</div><div class="v">${esc(r.article_title||r.guid)}</div></div><div><div class="k">Relation</div><div class="v">${esc(r.relation_id)}</div></div><div><div class="k">Stage1 locked</div><div class="v"><label><input id="ed_locked" type="checkbox" ${s.locked?'checked':''}> locked</label></div></div><div><div class="k">Last source</div><div class="v">${esc(d.meta.source||'')}</div></div></div><div class="textblock"><b>Semantic unit</b><br>${esc(r.unit_text)}</div><div class="textblock"><b>NEVU explanation</b><br>${esc(r.nevu_explanation)}</div></div>`;
+html+=`<div class="section card"><h2>Stage 1 — independent scores</h2><div class="scoreRow"><label>Direct Evidence Validity${selectScore('ed_dv',snap.direct_evidence_validity??s.direct_evidence_validity??'',!(r.direct_doc_ids||[]).length)}</label><label>Partial Evidence Validity${selectScore('ed_pv',snap.partial_evidence_validity??s.partial_evidence_validity??'',!(r.partial_doc_ids||[]).length)}</label><label>Evidence Set Sufficiency${selectScore('ed_es',snap.evidence_set_sufficiency??s.evidence_set_sufficiency??'')}</label></div><div style="margin-top:10px">${r.queries.map(q=>`<div class="query"><div class="small"><b>${esc(q.query_type)}</b> · ${esc(q.query_id)}</div><div class="qorig">${esc(q.query)}</div><div class="scoreRow"><label>Semantic faithfulness${selectScore('ed_sem_'+q.query_id,s1Val(s,q.query_id,'semantic'))}</label><label>Query–Evidence consistency${selectScore('ed_con_'+q.query_id,s1Val(s,q.query_id,'consistency'))}</label></div></div>`).join('')}</div></div>`;
+html+=`<div class="section card"><h2>Stage 2 — final evidence</h2><div class="small">Change any sentence between None / Direct / Partial. Original labels are shown in the text.</div><div class="scroll" style="max-height:540px">${r.article_sentences.map(x=>{const did=String(x.doc_id),cur=ev[did]||'none',orig=(r.direct_doc_ids||[]).includes(did)?'Direct':(r.partial_doc_ids||[]).includes(did)?'Partial':'None';return `<div class="sentence ${cur}"><div>S${esc(x.sentence_id)}</div><div>${esc(x.text)}<div class="small">Original: ${orig}</div></div><select class="evSel" data-doc="${esc(did)}"><option value="none" ${cur==='none'?'selected':''}>None</option><option value="direct" ${cur==='direct'?'selected':''}>Direct</option><option value="partial" ${cur==='partial'?'selected':''}>Partial</option></select></div>`}).join('')}</div></div>`;
+html+=`<div class="section card"><h2>Stage 2 — final queries</h2>${r.queries.map(q=>{const qs=qstates[q.query_id]||{},st=qs.status||'keep',fq=qs.final_query??q.query;return `<div class="query"><div class="small"><b>${esc(q.query_type)}</b> · ${esc(q.query_id)}</div><div class="qorig">Original: ${esc(q.query)}</div><label class="small">Status <select id="ed_status_${q.query_id}">${['keep','surface_edit','semantic_edit','exclude'].map(v=>`<option value="${v}" ${st===v?'selected':''}>${v}</option>`).join('')}</select></label><textarea id="ed_final_${q.query_id}">${esc(fq)}</textarea></div>`}).join('')}</div>`;$('editorContent').innerHTML=html;$('adminReason').value='';$('saveMsg').textContent=''}
+function val(id){const e=$(id);return e?e.value:null}
+async function saveOriginalAdminEdit(){const d=CURRENT_EDITOR,r=d.relation,s=JSON.parse(JSON.stringify(d.state||{})),reason=$('adminReason').value.trim();if(!reason){$('saveMsg').className='msg bad';$('saveMsg').textContent='Please enter an edit reason.';return}s.locked=$('ed_locked').checked;s.direct_evidence_validity=(r.direct_doc_ids||[]).length?val('ed_dv'):null;s.partial_evidence_validity=(r.partial_doc_ids||[]).length?val('ed_pv'):null;s.evidence_set_sufficiency=val('ed_es');s.queries=s.queries||{};const snap=s.original_assessment_snapshot||{queries:{}};snap.direct_evidence_validity=s.direct_evidence_validity;snap.partial_evidence_validity=s.partial_evidence_validity;snap.evidence_set_sufficiency=s.evidence_set_sufficiency;snap.queries=snap.queries||{};for(const q of r.queries){const qs=s.queries[q.query_id]||{};const sem=val('ed_sem_'+q.query_id),con=val('ed_con_'+q.query_id);qs.query_quality=sem;qs.query_evidence_consistency=con;qs.status=val('ed_status_'+q.query_id)||'keep';qs.final_query=val('ed_final_'+q.query_id)??q.query;s.queries[q.query_id]=qs;const sq=snap.queries[q.query_id]||{};sq.query_quality=sem;sq.query_evidence_consistency=con;snap.queries[q.query_id]=sq}s.original_assessment_snapshot=snap;s.evidence={};document.querySelectorAll('.evSel').forEach(e=>{if(e.value!=='none')s.evidence[e.dataset.doc]=e.value});$('saveMsg').className='msg';$('saveMsg').textContent='Saving…';try{await api('/api/admin/save-state',{method:'POST',body:JSON.stringify({annotator:d.annotator,group:d.group,relation_id:r.relation_id,state:s,reason})});$('saveMsg').className='msg ok';$('saveMsg').textContent='Saved. A new append-only record was added.';CURRENT_EDITOR=await api('/api/admin/relation?annotator='+encodeURIComponent(d.annotator)+'&group='+encodeURIComponent(d.group)+'&relation_id='+encodeURIComponent(r.relation_id));renderEditor();if(CURRENT_USER)CURRENT_DETAIL=await api('/api/admin/annotator?annotator='+encodeURIComponent(CURRENT_USER))}catch(e){$('saveMsg').className='msg bad';$('saveMsg').textContent=e.message}}
+
+function applyModuleView(){
+  for(const id of ['stage1Overall','userStage1'])$(id).parentElement.hidden=MODULE==='remaining';
+  for(const id of ['stage2Overall','userStage2'])$(id).parentElement.hidden=MODULE==='quality';
+  document.querySelectorAll('th').forEach(el=>{
+    if(!el.dataset.originalLabel)el.dataset.originalLabel=el.textContent;
+    const old=el.dataset.originalLabel;
+    el.textContent=MODULE==='original'?old:(['Stage1 locked','Locked','Stage1'].includes(old)?'Complete':old);
+    el.hidden=MODULE==='quality'&&['Material query','Evidence changed','Material queries'].includes(old);
+  });
+  for(const [id,columns] of [['userBody',[6,7]],['relationBody',[7,8]]])
+    for(const row of $(id).rows)for(const i of columns)row.cells[i].hidden=MODULE==='quality';
+  for(const id of ['metricCards','userMetrics'])$(id).querySelectorAll('.label').forEach(el=>{
+    if(MODULE!=='original'&&/locked/i.test(el.textContent))el.textContent='Completed and saved';
+  });
+  $('lockFilter').options[1].textContent=MODULE==='original'?'Locked':'Complete';
+  $('lockFilter').options[2].textContent=MODULE==='original'?'Unlocked':'Incomplete';
+  if(MODULE!=='original')$('relationBody').querySelectorAll('.pill').forEach(el=>{
+    if(el.textContent==='Locked')el.textContent='Complete';if(el.textContent==='Open')el.textContent='Incomplete';
+  });
+  let note=$('moduleNote');if(!note){note=document.createElement('div');note.id='moduleNote';note.className='small section';$('metricCards').after(note)}
+  note.textContent=MODULE==='remaining'?'Only confirmed saves count as completed；Invalid data are excluded from edit-rate statistics。Skip status is stored in the annotator’s browser，Not included in admin statistics。':MODULE==='quality'?'Only completed and saved ratings count as completed；This module only performs Stage 1 Quality assessment。':'Original Stage 1 + Stage 2 Annotation；Preserve legacy statistics。';
+}
+function detectOutdatedScores(){return CURRENT_EDITOR?.meta?.outdated_scores===true}
+function renderEditor(){
+  renderEditorBase();if(MODULE==='original')return;
+  const r=CURRENT_EDITOR.relation,s=CURRENT_EDITOR.state||{};
+  $('ed_locked').closest('.meta > div').hidden=true;
+  for(const card of $('editorContent').querySelectorAll('.section.card')){
+    const title=card.querySelector('h2')?.textContent||'';
+    card.hidden=MODULE==='quality'?title.startsWith('Stage 2'):title.startsWith('Stage 1');
+  }
+  const box=document.createElement('div');box.className='section card';
+  if(MODULE==='remaining'){
+    box.innerHTML=`<h2>Annotation status</h2><label><input id="ed_valid" type="checkbox" ${s.valid!==false?'checked':''}> Valid data</label> · <label><input id="ed_confirmed" type="checkbox" ${s.human_confirmed===true?'checked':''}> Confirmed annotations</label><p><input id="ed_invalid_reason" style="width:100%" placeholder="Reason for invalidity" value="${esc(s.invalid_reason||'')}"></p>`;
+  }else{
+    box.innerHTML='<h2>Article and evidence（Read-only）</h2>'+r.article_sentences.map(x=>`<div class="sentence ${(r.direct_doc_ids||[]).includes(String(x.doc_id))?'direct':(r.partial_doc_ids||[]).includes(String(x.doc_id))?'partial':''}"><span>S${esc(x.sentence_id)}</span><span>${esc(x.text)}</span></div>`).join('');
+  }
+  $('editorContent').append(box);
+  if(detectOutdatedScores()){const notice=document.createElement('p');notice.className='msg bad';notice.textContent='This item has been revised。Showing an empty rating form for the new version，Saving replaces this account’s previous ratings。';$('editorContent').prepend(notice)}
+}
+async function saveAdminEdit(){
+  if(MODULE==='original')return saveOriginalAdminEdit();
+  const d=CURRENT_EDITOR,r=d.relation,s=JSON.parse(JSON.stringify(d.state||{})),reason=$('adminReason').value.trim();
+  if(!reason){$('saveMsg').textContent='Enter a reason for the change';return}
+  s.queries=s.queries||{};
+  if(MODULE==='quality'){
+    s.direct_evidence_validity=r.direct_doc_ids.length?val('ed_dv'):null;
+    s.partial_evidence_validity=r.partial_doc_ids.length?val('ed_pv'):null;
+    s.evidence_set_sufficiency=val('ed_es');
+    for(const q of r.queries){const z=s.queries[q.query_id]||(s.queries[q.query_id]={});z.query_quality=val('ed_sem_'+q.query_id);z.query_evidence_consistency=val('ed_con_'+q.query_id)}
+  }else{
+    s.valid=$('ed_valid').checked;s.invalid_reason=$('ed_invalid_reason').value;s.human_confirmed=$('ed_confirmed').checked;
+    s.evidence={};document.querySelectorAll('.evSel').forEach(el=>{if(el.value!=='none')s.evidence[el.dataset.doc]=el.value});
+    for(const q of r.queries){const z=s.queries[q.query_id]||(s.queries[q.query_id]={});z.status=val('ed_status_'+q.query_id);z.final_query=val('ed_final_'+q.query_id)}
+  }
+  $('saveAdmin').disabled=true;$('saveMsg').textContent='Saving…';
+  try{
+    await api('/api/admin/save-state',{method:'POST',body:JSON.stringify({annotator:d.annotator,group:d.group,relation_id:r.relation_id,state:s,reason})});
+    CURRENT_EDITOR=await api('/api/admin/relation?annotator='+encodeURIComponent(d.annotator)+'&group='+encodeURIComponent(d.group)+'&relation_id='+encodeURIComponent(r.relation_id));
+    renderEditor();$('saveMsg').textContent='Saved to this module，Change reason recorded';$('saveMsg').className='msg ok';await loadOverview();
+  }catch(e){$('saveMsg').textContent=e.message;$('saveMsg').className='msg bad'}finally{$('saveAdmin').disabled=false}
+}
+$('moduleSelect').onchange=async()=>{
+  MODULE=$('moduleSelect').value;MODULE_VERSION++;CURRENT_USER=null;CURRENT_DETAIL=null;CURRENT_EDITOR=null;OVERVIEW=null;
+  $('editor').classList.add('hidden');$('userPane').classList.add('hidden');$('overviewPane').classList.remove('hidden');
+  $('userBody').textContent='';$('metricCards').textContent='Loading…';$('groupFilter').value='';$('lockFilter').value='';
+  try{await loadOverview()}catch(e){$('connection').textContent=e.message}
+};
+
+/* QUALITY_DATASET_EDITOR */
+let DATASET_PAGE=1,DATASET_RECORD=null,DATASET_REQUEST=0;
+const datasetPanel=document.createElement('div');datasetPanel.id='datasetPanel';datasetPanel.className='editor hidden';
+datasetPanel.innerHTML=`<div class="editorHeader"><button id="closeDataset">← Back to admin</button><strong>02 · Edit reassessment data</strong><div class="spacer"></div><button id="exportDataset">Export current data JSON</button></div>
+<div class="editorMain"><div class="card"><p>These edits change the reassessment content seen by everyone，Not an individual annotator score。Original test_human Snapshot retained，Revisions are stored separately。After saving，Reopen the relevant 02 page to see the changes；The revised item needs new ratings；Only this account’s latest ratings are retained。</p>
+<div class="toolbar"><select id="datasetGroup"><option value="">All Group</option></select><input id="datasetSearch" placeholder="Search relation、guid、query or content"><button id="searchDataset">Search</button><span id="datasetCount" class="small"></span></div>
+<div class="scroll"><table class="table"><thead><tr><th>Group</th><th>Relation / GUID</th><th>Actor / Value</th><th>Version</th><th></th></tr></thead><tbody id="datasetRows"></tbody></table></div><div class="toolbar"><button id="datasetPrev">Previous page</button><button id="datasetNext">Next page</button><span id="datasetMessage" class="msg"></span></div></div>
+<div id="datasetForm" class="section hidden"></div></div>`;
+document.body.append(datasetPanel);
+const datasetButton=document.createElement('button');datasetButton.id='editDatasetButton';datasetButton.textContent='Edit 02 Reassessment data';datasetButton.hidden=true;
+$('moduleSelect').after(datasetButton);
+const previousApplyModuleView=applyModuleView;
+applyModuleView=function(){previousApplyModuleView();datasetButton.hidden=MODULE!=='quality'};
+async function loadDatasetList(){
+ const request=++DATASET_REQUEST;
+ const d=await api('/api/admin/dataset/list?'+new URLSearchParams({group:$('datasetGroup').value,q:$('datasetSearch').value,page:String(DATASET_PAGE)}));
+ if(request!==DATASET_REQUEST)return;
+ const selected=$('datasetGroup').value;$('datasetGroup').innerHTML='<option value="">All Group</option>'+d.groups.map(g=>`<option value="${esc(g)}">Group ${esc(g)}</option>`).join('');$('datasetGroup').value=selected;
+ $('datasetCount').textContent=`${d.total} items relation · No. ${d.page}/${Math.max(1,Math.ceil(d.total/50))} pages`;
+ $('datasetPrev').disabled=d.page<=1;$('datasetNext').disabled=d.page*50>=d.total;
+ $('datasetRows').innerHTML=d.rows.map(r=>`<tr><td>${esc(r.group)}</td><td>${esc(r.relation_id)}<div class="small">${esc(r.guid)}</div></td><td>${esc(r.actor_name)}<br>${esc(r.value_name)}</td><td>${r._dataset_revision?'Revised':'Initial version'}</td><td><button data-edit-relation="${esc(r.relation_id)}">Edit data</button></td></tr>`).join('');
+ $('datasetRows').querySelectorAll('[data-edit-relation]').forEach(button=>button.onclick=()=>datasetAction(()=>openDatasetRelation(button.dataset.editRelation)));
+}
+async function datasetAction(action){try{await action();$('datasetMessage').textContent=''}catch(e){$('datasetMessage').textContent=e.message;$('datasetMessage').className='msg bad'}}
+async function openDatasetRelation(rid){
+ const d=await api('/api/admin/dataset/relation?relation_id='+encodeURIComponent(rid));DATASET_RECORD=d;
+ const r=d.relation;$('datasetForm').classList.remove('hidden');
+ $('datasetForm').innerHTML=`<div class="card"><h2>Group ${esc(r.group)} · ${esc(r.relation_id)}</h2><div class="small">GUID: ${esc(r.guid)} · Scope: ${esc(r.unit_level)} · Current version: ${esc(r._dataset_revision||'Initial version')}</div>
+ <div class="two">${[['actor_name','Actor'],['value_name','Value'],['direction','Direction'],['scope_title','Scope title'],['unit_text','Semantic unit'],['nevu_explanation','NEVU explanation']].map(([k,label])=>`<label>${label}<textarea id="dataset_${k}" class="reason">${esc(r[k]||'')}</textarea></label>`).join('')}</div></div>
+ <div class="section card"><h2>Query Text</h2>${r.queries.map((q,i)=>`<div class="query"><label>${esc(q.query_type)} · ${esc(q.query_id)}<textarea id="dataset_query_${i}">${esc(q.query)}</textarea></label></div>`).join('')}</div>
+ <div class="section card"><h2>Evidence labels</h2><p class="small">Original article text is read-only；Select Direct、Partial or Non-support。Each sentence can have only one label。</p>${r.article_sentences.map((x,i)=>{const id=String(x.doc_id),kind=r.direct_doc_ids.includes(id)?'direct':r.partial_doc_ids.includes(id)?'partial':'none';return `<div class="sentence ${kind}"><span>S${esc(x.sentence_id)}</span><span>${esc(x.text)}</span><select id="dataset_evidence_${i}" aria-label="Sentence ${esc(x.sentence_id)} Evidence labels">${[['none','Non-support'],['direct','Direct'],['partial','Partial']].map(([k,l])=>`<option value="${k}" ${kind===k?'selected':''}>${l}</option>`).join('')}</select></div>`}).join('')}</div>
+ <div class="section card"><h2>Change log</h2>${d.history.length?d.history.slice().reverse().map(h=>`<p>${esc(shortTime(h.edited_at))} · ${esc(h.reason)}</p>`).join(''):'No changes yet'}</div>
+ <div class="saveBox"><textarea id="datasetReason" class="reason" placeholder="Required：Reason for this data edit"></textarea><button id="saveDataset" class="primary">Save and update 02 Page</button><span id="datasetSaveMsg" class="msg"></span></div>`;
+ $('saveDataset').onclick=saveDataset;
+ $('datasetForm').querySelectorAll('.sentence select').forEach(el=>el.onchange=()=>{el.closest('.sentence').className='sentence '+el.value});
+ $('datasetForm').scrollIntoView({block:'start'});
+}
+async function saveDataset(){
+ const r=DATASET_RECORD.relation,changes={},reason=$('datasetReason').value.trim();
+ if(!reason){$('datasetSaveMsg').textContent='Enter a reason for the change';return}
+ for(const k of ['actor_name','value_name','direction','scope_title','unit_text','nevu_explanation'])changes[k]=$('dataset_'+k).value;
+ changes.queries=Object.fromEntries(r.queries.map((q,i)=>[q.query_id,$('dataset_query_'+i).value]));
+ changes.direct_doc_ids=[];changes.partial_doc_ids=[];
+ r.article_sentences.forEach((x,i)=>{const kind=$('dataset_evidence_'+i).value;if(kind!=='none')changes[kind+'_doc_ids'].push(String(x.doc_id))});
+ $('saveDataset').disabled=true;
+ try{
+  const result=await api('/api/admin/dataset/save',{method:'POST',body:JSON.stringify({group:r.group,relation_id:r.relation_id,expected_revision:r._dataset_revision||'0',changes,reason})});
+  await openDatasetRelation(r.relation_id);$('datasetSaveMsg').textContent=result.changed?'Saved。Reopen the relevant 02 page to assess the new version。':'No changes，No new version needed。';$('datasetSaveMsg').className='msg ok';
+  await loadDatasetList();await loadOverview();
+ }catch(e){$('datasetSaveMsg').textContent=e.message;$('datasetSaveMsg').className='msg bad'}finally{$('saveDataset').disabled=false}
+}
+datasetButton.onclick=()=>{datasetPanel.classList.remove('hidden');datasetAction(loadDatasetList)};
+$('closeDataset').onclick=()=>datasetPanel.classList.add('hidden');
+$('searchDataset').onclick=()=>{DATASET_PAGE=1;datasetAction(loadDatasetList)};
+$('datasetSearch').onkeydown=e=>{if(e.key==='Enter')$('searchDataset').click()};
+$('datasetGroup').onchange=()=>{DATASET_PAGE=1;datasetAction(loadDatasetList)};
+$('datasetPrev').onclick=()=>{DATASET_PAGE--;datasetAction(loadDatasetList)};
+$('datasetNext').onclick=()=>{DATASET_PAGE++;datasetAction(loadDatasetList)};
+$('exportDataset').onclick=()=>datasetAction(async()=>{
+ const data=await api('/api/admin/dataset/export'),url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})),a=document.createElement('a');
+ a.href=url;a.download='quality_review_effective_relations.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+
+$('loginBtn').onclick=login;$('tokenInput').addEventListener('keydown',e=>{if(e.key==='Enter')login()});$('logoutBtn').onclick=()=>{sessionStorage.removeItem('nevu_admin_token');TOKEN='';location.reload()};$('refreshBtn').onclick=loadOverview;$('userSearch').addEventListener('input',renderUsers);$('backOverview').onclick=()=>{$('userPane').classList.add('hidden');$('overviewPane').classList.remove('hidden')};$('groupFilter').onchange=renderRelations;$('lockFilter').onchange=renderRelations;$('relationSearch').addEventListener('input',renderRelations);$('closeEditor').onclick=()=>{$('editor').classList.add('hidden');if(CURRENT_USER)openUser(CURRENT_USER)};$('saveAdmin').onclick=saveAdminEdit;
+(async()=>{if(TOKEN){try{await loadOverview();$('loginOverlay').classList.add('hidden')}catch(e){sessionStorage.removeItem('nevu_admin_token');TOKEN='';$('loginMsg').textContent=e.message}}})();
+</script>
+</body>
+</html>

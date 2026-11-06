@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="650" viewBox="0 0 1100 650" role="img" aria-label="Dataset structure and links between released records">
+<rect width="1100" height="650" fill="white"/>
+<defs><marker id="arrow" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0 L7,3.5 L0,7" fill="#555"/></marker></defs><style>text{font-family:Arial,Helvetica,sans-serif;fill:#222}.heading{font-size:20px;font-weight:600}.body{font-size:17px}.small{font-size:15px;fill:#555}.mono{font-family:monospace;font-size:14px;fill:#444}.label{font-size:15px;font-weight:600}.rule{fill:none;stroke:#666;stroke-width:1.2}</style>
+<text x="30" y="35" class="heading" text-anchor="start">How the released records connect</text>
+<text x="1070" y="35" class="small" text-anchor="end">Each split: train / dev / test</text>
+<path d="M30,49 H1070" class="rule"/>
+<rect x="30" y="85" width="270" height="193" fill="white" stroke="#888" stroke-width="1"/>
+<text x="48" y="117" class="heading" text-anchor="start">Relation</text>
+<path d="M30,133 H300" class="rule"/>
+<rect x="370" y="85" width="310" height="193" fill="white" stroke="#888" stroke-width="1"/>
+<text x="388" y="117" class="heading" text-anchor="start">Queries</text>
+<path d="M370,133 H680" class="rule"/>
+<rect x="750" y="85" width="320" height="193" fill="white" stroke="#888" stroke-width="1"/>
+<text x="768" y="117" class="heading" text-anchor="start">Query–article records</text>
+<path d="M750,133 H1070" class="rule"/>
+<text x="48" y="165" class="mono" text-anchor="start">relation_id</text>
+<text x="48" y="197" class="body" text-anchor="start">Actor · Value · Direction</text>
+<text x="48" y="245" class="small" text-anchor="start">Shared relation identity</text>
+<text x="388" y="165" class="mono" text-anchor="start">query_id · relation_id</text>
+<text x="388" y="197" class="body" text-anchor="start">Q1   Q2   Q3   Q4</text>
+<text x="388" y="224" class="mono" text-anchor="start">query · query_type</text>
+<text x="388" y="250" class="mono" text-anchor="start">source_article_id</text>
+<text x="768" y="165" class="mono" text-anchor="start">query_id · doc_id</text>
+<text x="768" y="197" class="mono" text-anchor="start">scope: within / cross</text>
+<text x="768" y="224" class="mono" text-anchor="start">direct_sentence_ids</text>
+<text x="768" y="250" class="mono" text-anchor="start">partial_sentence_ids</text>
+<path d="M300,181 H363" class="rule" marker-end="url(#arrow)"/>
+<path d="M680,181 H743" class="rule" marker-end="url(#arrow)"/>
+<text x="525" y="306" class="mono" text-anchor="middle">queries.jsonl</text>
+<text x="910" y="306" class="mono" text-anchor="middle">instances.jsonl</text>
+<rect x="30" y="365" width="380" height="150" fill="white" stroke="#888" stroke-width="1"/>
+<text x="48" y="398" class="heading" text-anchor="start">Articles and sentences</text>
+<path d="M30,414 H410" class="rule"/>
+<text x="48" y="446" class="body" text-anchor="start">Article IDs · Sentence IDs · Text</text>
+<text x="48" y="482" class="mono" text-anchor="start">articles.jsonl · corpus.jsonl</text>
+<rect x="510" y="365" width="560" height="150" fill="white" stroke="#888" stroke-width="1"/>
+<text x="528" y="398" class="heading" text-anchor="start">Query–sentence relevance</text>
+<path d="M510,414 H1070" class="rule"/>
+<text x="528" y="446" class="body" text-anchor="start">2 · Direct  /  1 · Partial  /  0 · Non-supporting</text>
+<text x="528" y="482" class="small" text-anchor="start">Evidence IDs link each label to its sentence.</text>
+<path d="M910,319 V357" class="rule" marker-end="url(#arrow)"/>
+<path d="M410,445 H503" class="rule" marker-end="url(#arrow)"/>
+<path d="M30,549 H1070" class="rule"/>
+<text x="30" y="581" class="label" text-anchor="start">Document-level</text>
+<text x="220" y="581" class="body" text-anchor="start">Source article only; Q1–Q4 share evidence labels.</text>
+<text x="30" y="615" class="label" text-anchor="start">Corpus-level</text>
+<text x="220" y="615" class="body" text-anchor="start">Source + cross-document judgments; cross-document labels are query-specific.</text>
+</svg>

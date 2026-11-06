@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>HVER-News · Dataset overview</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fff;color:#172b4d;font:15px system-ui,sans-serif}header{padding:24px 28px;background:white;border-bottom:1px solid #dce3ee}h1{margin:0 0 8px;font-size:25px}p{margin:8px 0;color:#526078}button{background:white;border:1px solid #bbc9dc;border-radius:8px;padding:8px 14px;cursor:pointer;color:#172b4d}button:hover{background:#fff}button:focus-visible{outline:3px solid #5375b5}.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:14px}#viewport{height:calc(100vh - 204px);min-height:450px;overflow:hidden;touch-action:none;cursor:grab;position:relative}#canvas{position:absolute;width:960px;height:1080px;transform-origin:0 0}svg{position:absolute;inset:0;overflow:visible;pointer-events:none}.node{position:absolute;width:400px;border:1px solid #5375b5;border-radius:0;padding:17px;background:#fff;cursor:grab;user-select:none;line-height:1.6}.node strong{display:block;font-size:19px;margin-bottom:6px}.node.query{background:#fff;border-color:#8060b0}.node.task{background:#fff;border-color:#3d8990}.node.labels{background:#faf5e7;border-color:#b18a32}footer{padding:12px 28px;font-size:13px;background:white;border-top:1px solid #dce3ee}#scale{min-width:46px}a{color:#315ea4}
+</style></head>
+<body>
+<header><h1>HVER-News · Dataset overview</h1><p>From actor–value–direction relations to document-level and corpus-level evidence ranking.</p><div class="toolbar"><button id="out" aria-label="Zoom out">−</button><span id="scale">100%</span><button id="in" aria-label="Zoom in">+</button><button id="fit">Fit diagram</button><button id="reset">Reset layout</button><span>Drag cards to rearrange · Drag background to pan · Use + / − to zoom</span></div></header>
+<main id="viewport" aria-label="Interactive dataset overview"><div id="canvas"><svg width="960" height="1080" aria-hidden="true"><defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8" fill="#8395ac"/></marker></defs><g id="edges"></g></svg></div></main>
+<footer>All splits are separate. Corpus-level includes source and cross-document evidence. An absent cross-document judgment is not an explicit negative. No network requests or external libraries.</footer>
+<script>
+const nodes=[
+{id:'source',x:30,y:20,w:400,kind:'source',title:'Data source',body:'NEVU news articles<br>Source articles and relation annotations'},
+{id:'relation',x:530,y:20,w:400,kind:'source',title:'Target relation',body:'Actor · Value · Direction<br>Aligned or contradictory'},
+{id:'query',x:170,y:220,w:620,kind:'query',title:'Four query formulations',body:'Q1: Explicit actor · Explicit value<br>Q2: Indirect actor · Explicit value<br>Q3: Explicit actor · Naturalized value<br>Q4: Indirect actor · Naturalized value'},
+{id:'doc',x:30,y:500,w:430,kind:'task',title:'Document-level ranking',body:'Sentences in the source article<br>Q1–Q4 share source-article labels'},
+{id:'corpus',x:500,y:500,w:430,kind:'task',title:'Corpus-level ranking',body:'Source article + other articles in the split<br>Cross-document labels are query-specific'},
+{id:'labels',x:170,y:720,w:620,kind:'labels',title:'Sentence evidence labels',body:'2 · Direct: supports the target relation<br>1 · Partial: specific supporting context<br>0 · Non-supporting: no support'},
+{id:'files',x:170,y:940,w:620,kind:'source',title:'Train · Dev · Test',body:'Articles · Sentences · Queries · Instances · Qrels'}];
+const links=[['source','relation'],['relation','query'],['query','doc'],['query','corpus'],['doc','labels'],['corpus','labels'],['labels','files']];
+const initial=nodes.map(n=>({x:n.x,y:n.y}));const viewport=document.getElementById('viewport'),canvas=document.getElementById('canvas');let zoom=1,tx=0,ty=0,drag=null;
+for(const n of nodes){const e=document.createElement('div');e.className='node '+n.kind;e.dataset.id=n.id;e.style.width=n.w+'px';e.innerHTML='<strong>'+n.title+'</strong>'+n.body;canvas.appendChild(e);n.el=e;}
+function draw(){for(const n of nodes){n.el.style.left=n.x+'px';n.el.style.top=n.y+'px';}document.getElementById('edges').innerHTML=links.map(([a,b])=>{const A=nodes.find(n=>n.id===a),B=nodes.find(n=>n.id===b);const side=A.y===B.y;const x1=A.x+(side?A.w:A.w/2),y1=A.y+(side?A.el.offsetHeight/2:A.el.offsetHeight),x2=B.x+(side?0:B.w*(b==='labels'?(a==='doc'?.25:.75):.5)),y2=B.y+(side?B.el.offsetHeight/2:0);const bend=(y1+y2)/2;return `<path d="${side?`M${x1},${y1} L${x2},${y2}`:`M${x1},${y1} C${x1},${bend} ${x2},${bend} ${x2},${y2}`}" fill="none" stroke="#8395ac" stroke-width="2" marker-end="url(#arrow)"/>`;}).join('');canvas.style.transform=`translate(${tx}px,${ty}px) scale(${zoom})`;document.getElementById('scale').textContent=Math.round(zoom*100)+'%';}
+function fit(){zoom=Math.min(viewport.clientWidth/960,viewport.clientHeight/1080,1);tx=(viewport.clientWidth-960*zoom)/2;ty=8;draw();}
+function changeZoom(factor){const next=Math.max(.25,Math.min(2.5,zoom*factor)),cx=viewport.clientWidth/2,cy=viewport.clientHeight/2;tx=cx-(cx-tx)*next/zoom;ty=cy-(cy-ty)*next/zoom;zoom=next;draw();}
+viewport.addEventListener('pointerdown',e=>{if(e.button!==0)return;const el=e.target.closest('.node');drag={x:e.clientX,y:e.clientY,node:el?nodes.find(n=>n.id===el.dataset.id):null};viewport.setPointerCapture(e.pointerId);});
+viewport.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;if(drag.node){drag.node.x+=dx/zoom;drag.node.y+=dy/zoom;}else{tx+=dx;ty+=dy;}drag.x=e.clientX;drag.y=e.clientY;draw();});
+for(const event of ['pointerup','pointercancel','lostpointercapture'])viewport.addEventListener(event,()=>drag=null);
+document.getElementById('in').onclick=()=>changeZoom(1.2);document.getElementById('out').onclick=()=>changeZoom(1/1.2);document.getElementById('fit').onclick=fit;document.getElementById('reset').onclick=()=>{nodes.forEach((n,i)=>Object.assign(n,initial[i]));fit();};window.addEventListener('resize',fit);fit();
+</script></body></html>

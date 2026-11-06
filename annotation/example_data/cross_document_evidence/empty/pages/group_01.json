@@ -1,0 +1,447 @@
+{
+  "module": "annotation",
+  "view_id": "evidence_v2_empty",
+  "title": "Cross-document annotation · No evidence",
+  "group": 1,
+  "protocol": "crossdoc_annotation_v1",
+  "pairs": [
+    {
+      "query_id": "q_1d5670ab9e1a4bf4",
+      "query": "What evidence in the article supports that Russian Government acts contrary to the human value \"Have a stable society\"?",
+      "query_type": "Q1",
+      "relation_id": "rel_784dac8feed8e037",
+      "source_article_id": "0-4299-6-2",
+      "doc_id": "1-14831-2-3",
+      "split": "test_human_all",
+      "document_relevance": 0,
+      "document_label": "non_support",
+      "direct_sentence_ids": [],
+      "partial_sentence_ids": [],
+      "identity_sentence_ids": [],
+      "actor_match": "yes",
+      "scope_match": "yes",
+      "issue": "insufficient_evidence",
+      "source": "gemini",
+      "human_verified": false,
+      "validation_status": "structurally_valid",
+      "review_flags": [],
+      "pair_id": "cross_d693b5e295fec8a1e26a98fc",
+      "reference": {
+        "actor_name": "Russian Government",
+        "value_name": "Have a stable society",
+        "direction": "contradictory",
+        "unit_text": "Russia asserts that any Russian citizens fighting alongside separatists in Ukraine are doing so in a private capacity, while Ukraine accuses Russia of actively sending troops and heavy weapons into Ukraine.",
+        "nevu_explanation": "The alleged act of sending troops and heavy weapons into another country's conflict directly fuels instability and undermines any efforts to establish a peaceful and orderly society."
+      }
+    },
+    {
+      "query_id": "q_56c9e2229736101f",
+      "query": "Which passages show the Kremlin's actions undermining efforts to have a stable society during the Minsk negotiations?",
+      "query_type": "Q2",
+      "relation_id": "rel_784dac8feed8e037",
+      "source_article_id": "0-4299-6-2",
+      "doc_id": "1-14831-2-3",
+      "split": "test_human_all",
+      "document_relevance": 0,
+      "document_label": "non_support",
+      "direct_sentence_ids": [],
+      "partial_sentence_ids": [],
+      "identity_sentence_ids": [],
+      "actor_match": "no",
+      "scope_match": "no",
+      "issue": "scope_mismatch",
+      "source": "gemini",
+      "human_verified": false,
+      "validation_status": "structurally_valid",
+      "review_flags": [],
+      "pair_id": "cross_fe9e45aa5ec22316c3d81714",
+      "reference": {
+        "actor_name": "Russian Government",
+        "value_name": "Have a stable society",
+        "direction": "contradictory",
+        "unit_text": "Russia asserts that any Russian citizens fighting alongside separatists in Ukraine are doing so in a private capacity, while Ukraine accuses Russia of actively sending troops and heavy weapons into Ukraine.",
+        "nevu_explanation": "The alleged act of sending troops and heavy weapons into another country's conflict directly fuels instability and undermines any efforts to establish a peaceful and orderly society."
+      }
+    }
+  ],
+  "articles": {
+    "1-14831-2-3": {
+      "doc_id": "1-14831-2-3",
+      "split": "test_human_all",
+      "title": "As Nagorno-Karabakh Conflict Expands, Israel-Azerbaijan Arms Trade Thrives",
+      "text": "Ben­­-Gurion Airport is quiet with civilian flights almost at a standstill.\nHowever, cargo flights on the Azerbaijan route have been very busy over the last two weeks.\nThe high number of flights is a direct result of the renewal of fighting between Armenia and Azerbaijan over the disputed enclave of Nagorno-Karabakh.\nNo fewer than four Ilyushin­­-76 planes, operated by the Azeri cargo airline Silk Way, which serves the Azeri defense ministry, have touched down and taken off from the Uvda air base in southern Israel – two, before the outbreak of fighting, and two, afterwards.\nAccording to flight regulations, that is the only airport from which planes loaded with explosive material are allowed to take off.\nThe monitoring of takeoffs and landings and the movement of planes across the Middle East and outside the region is done by professionals and amateurs alike.\nOne of these is my colleague Avi Scharf, the editor-in-chief of the English edition of Haaretz.\nThe four Azeri planes flew directly from Baku to Uvda and back, their flight path documented on various open websites that monitor air traffic.\nSome of these planes also flew from Baku to Ankara and Istanbul and back over the last two weeks.\nFourth Azeri heavylifter in less than a week heading (prob) Israel AF base down south.\nThe fighting resumed on September 27 with a surprise Azeri attack along the entire front.\nAt least 300 people, including men in uniform and civilians, have been killed so far.\nBoth sides are using artillery, tanks and airstrikes (by helicopters and drones) against towns and villages.\nPeople are in shelters or cellars; some have already moved to more secure locations, while others are still fleeing.\nNagorno-Karabakh is a 4.400-square-kilometer (1,700-square-mile) enclave with a population of 150,000.\nIt is situated in the heart of Azerbaijan, but most of the population are Christian Armenians, with only a minority of Azeris or Turks.\nThe enclave is a result of a Soviet tradition, the aim of which was to pursue a policy of divide-and-rule.\nWith the dissolution of the Soviet Union, Armenia tried using peaceful methods in order to transfer the enclave to its sovereignty, but this met with opposition.\nWar broke out between the two countries in 1988 over control of this enclave.\nThis intensified in 1991 and lasted for three years, and included ethnic cleansing and a massacre of Armenians in Baku.\nThirty thousand people died, and one million lost their homes.\nA cease­­­-fire was declared in the enclave in 1994, with borders determined, but since then, all international efforts to reach a permanent solution have been in vain.\nThe Armenians in the enclave declared an independent state called the Republic of Artsakh, which has not been recognized by any country, not even Armenia.\nThe relative quiet reigning there over the last 25 years was breached from time to time with border incidents flaring up, or with short exchanges of fire.\nThis is not the case this time, not in the extent of forces involved or in the intensity of fighting.\nThis conflict is a classic geographical, historical, religious and ethnic one, but it exceeds the boundaries of the Caucasian region, interfacing with the battle between Shi’ite Iran and Turkey over regional hegemony, all under the eyes of Big Brother, namely Russia.\nIn trying to describe the conduct of the parties involved in this fight, a cynical observer might quote from “The Tempest,” Shakespeare’s last play: “Misery acquaints a man with strange bedfellows.”\nThis is how Turkey and Israel, currently hostile to one another (with Recep Tayyip Erdogan stating only last week that Jerusalem belongs to the Moslems), find themselves both supporting Azerbaijan, a Shi’ite Moslem country.\nOn the other side, Iran, a third of whose population is of Azeri extraction (including its Supreme Leader Ali Khamenei), is supporting Christian Armenia and, according to some reports, supplying it with weapons.\nRussia, which has a military base in Armenia, is trying to please everyone, arming Azerbaijan as well.\nThe same pattern of behavior characterizes the Kremlin’s policy in Syria, with Vladimir Putin assisting the regime of Bashar Assad and the Iranians, while providing Israel with “silent encouragement” for carrying out air strikes against Iranian positions, Hezbollah and Shi’ite militias.\nGreece, a strategic ally of Israel, currently in conflict with Turkey over the transport of natural gas in the eastern Mediterranean basin, is supporting Armenia.\nThis is indeed a seriously muddled issue.\nOne other issue that should worry Israel and any other conscientious Jew is that Israel, the state of a people that was murdered in the Holocaust, is refusing to recognize the massacre of Armenians by the Ottoman Empire during World War I, a genocide avant la lettre.\nFor years, this position was adopted in order not to annoy Turkey, which for 50 years was Israel’s strategic ally against Syria and, later, Iran.\nThe Mossad and Turkish intelligence cooperated with each other, with Israel’s defense industries selling arms to Turkey for billions of dollars.\nIronically, among the systems sold to Turkey were drones and technology which helped Turkey build a comparable industry.\nTurkish Bayraktar drones are now in action in Nagorno-Karabakh’s battlefields, as well as in Iraq, Syria and Libya.\nTurkey, which declared a policy of zero-conflict with its neighbors in the past, is currently in conflict with all of them, or at least involved in their wars.\nThe dismantling of the strategic alliance between Turkey and Israel is a systematic and deliberate process, begun by Erdogan a decade and a half ago.\nYet Israel has not used this as an opportunity to fulfill its historic duty and follow its conscience and values regarding the Armenian genocide.\nThe reason for this is Azerbaijan.\nAt the same time that Erdogan started distancing himself from Israel, Azerbaijan and Israel grew closer.\nIt soon became clear that the two countries had set up a strategic alliance centered on their mutual hostilities towards Iran.\nFour years ago, Prime Minister Benjamin Netanyahu went on a snap visit to Baku, during which the Azeri president, Ilham Aliyev, a tyrant who violates human rights and harshly suppresses any opposition, revealed that Azerbaijan had purchased weapons from Israel to the tune of $5 billion.\nMoreover, according to foreign sources, the Mossad established a station in Azerbaijan, serving as the “eyes, ears and a springboard” for monitoring Iran.\nAccording to these reports, Azerbaijan prepared an airfield that would assist Israel in case it attacked Iran.\nOther reports claimed that the Iranian nuclear archive that was stolen by Mossad agents in Tehran two and a half years ago was smuggled to Israel through Azerbaijan.\nAccording to some reports, Israel’s aerospace industries, Elbit, Rafael and other smaller companies are selling Baku just about anything.\nThis includes artillery (a few years ago I discovered a questionable revolving deal between Elbit and the Czech Republic and Slovakia; this too involved the Uvda airport); missiles, naval vessels, intelligence equipment and a large number of drones.\nAlmost all the Israeli companies that make drones, including attack or self-destructing (“kamikaza” ones), have sold their wares to the Azeri army.\nArmenian spokesmen have said in the past that some of these, including ones made by Aeronautics Ltd., were downed during incidents along the border with Azerbaijan.\n“For you this is trading in arms, but for us these are death weapons”, Armenia’s foreign minister Zohrab Mnatsakanyan told me in an interview a year and a half ago, when I visited Armenia.\nDespite this, he expressed his wish for improved relations with Israel, hoping that this would lead to an Israeli recognition of the Armenian genocide.\nAt that time, there was some warming in relations.\nArmenia opened an embassy in Tel Aviv, with a non-resident Israeli ambassador appointed to Armenia.\nCharter flights between the two countries were launched and there was some attempt to promote trade.\nThese attempts are now imploding with the resumed fighting in Nagorno-Karabakh.\nArmenia’s ambassador to Israel, who was on home leave, was told to remain there, in a typical act of diplomatic censure.\nArmenia’s President Armen Sarkissian called President Reuven Rivlin on Monday, expressing his concern over the continued sale of Israeli weapons to Azerbaijan.\nRivlin expressed his regret over the outbreak of hostilities and noted that Israel has had a long-dstanding relationship with Azerbaijan, adding that their cooperation was not directed at any other country.\nYesterday, the Armenian foreign ministry’s spokesperson Anna Naghdalyan had this to say, in conversation with Haaretz: “Armenia has consistently raised the issue of arm supplies from Israel to Azerbaijan.\nMost recently, during the July aggression of Azerbaijan against Armenia, the Foreign Minister stated clearly that Israel should stop this deadly business with Azerbaijan.\n“For sure, the provision of modern weapons by Israel to Azerbaijan is unacceptable for us.\nWe have repeatedly informed our Israeli counterparts about this through diplomatic channels; it should be noted that it is especially painful at a time when Azerbaijan, with the support of Turkey, is carrying out a large-scale aggression against Artsakh and Armenia.\n“Instead, these days, when the whole international community calls on the Azerbaijani side to stop hostilities, the Israeli side continues to supply weapons to Azerbaijan.\nThese armaments are being delivered against the civilian populations and civilian infrastructure of Artsakh and Armenia.\nThese kind of actions are unacceptable for us, especially in this period.\nBased on the current situation, the Ministry of Foreign Affairs has decided to recall the Ambassador of Armenia to Israel for consultations.”\nIt’s hard to expect that Israel, which always decries rockets launched against civilians by Hezbollah and Hamas, will change its ways.\nAnother country may have declared a suspension of shipments, even temporarily.\nIn anything related to the Holocaust, to historical memory and to the sale of weapons, the hypocrisy of Israeli governments over the years is nothing new.\nThe government’s current silence on the matter speaks volumes.\nThe ministries of defense and foreign affairs adamantly refused to relate to the issue.",
+      "sentences": [
+        {
+          "position": 0,
+          "sentence_id": "1-14831-2-3::s0",
+          "text": "Ben­­-Gurion Airport is quiet with civilian flights almost at a standstill."
+        },
+        {
+          "position": 1,
+          "sentence_id": "1-14831-2-3::s1",
+          "text": "However, cargo flights on the Azerbaijan route have been very busy over the last two weeks."
+        },
+        {
+          "position": 2,
+          "sentence_id": "1-14831-2-3::s2",
+          "text": "The high number of flights is a direct result of the renewal of fighting between Armenia and Azerbaijan over the disputed enclave of Nagorno-Karabakh."
+        },
+        {
+          "position": 3,
+          "sentence_id": "1-14831-2-3::s3",
+          "text": "No fewer than four Ilyushin­­-76 planes, operated by the Azeri cargo airline Silk Way, which serves the Azeri defense ministry, have touched down and taken off from the Uvda air base in southern Israel – two, before the outbreak of fighting, and two, afterwards."
+        },
+        {
+          "position": 4,
+          "sentence_id": "1-14831-2-3::s4",
+          "text": "According to flight regulations, that is the only airport from which planes loaded with explosive material are allowed to take off."
+        },
+        {
+          "position": 5,
+          "sentence_id": "1-14831-2-3::s5",
+          "text": "The monitoring of takeoffs and landings and the movement of planes across the Middle East and outside the region is done by professionals and amateurs alike."
+        },
+        {
+          "position": 6,
+          "sentence_id": "1-14831-2-3::s6",
+          "text": "One of these is my colleague Avi Scharf, the editor-in-chief of the English edition of Haaretz."
+        },
+        {
+          "position": 7,
+          "sentence_id": "1-14831-2-3::s7",
+          "text": "The four Azeri planes flew directly from Baku to Uvda and back, their flight path documented on various open websites that monitor air traffic."
+        },
+        {
+          "position": 8,
+          "sentence_id": "1-14831-2-3::s8",
+          "text": "Some of these planes also flew from Baku to Ankara and Istanbul and back over the last two weeks."
+        },
+        {
+          "position": 9,
+          "sentence_id": "1-14831-2-3::s9",
+          "text": "Fourth Azeri heavylifter in less than a week heading (prob) Israel AF base down south."
+        },
+        {
+          "position": 10,
+          "sentence_id": "1-14831-2-3::s10",
+          "text": "The fighting resumed on September 27 with a surprise Azeri attack along the entire front."
+        },
+        {
+          "position": 11,
+          "sentence_id": "1-14831-2-3::s11",
+          "text": "At least 300 people, including men in uniform and civilians, have been killed so far."
+        },
+        {
+          "position": 12,
+          "sentence_id": "1-14831-2-3::s12",
+          "text": "Both sides are using artillery, tanks and airstrikes (by helicopters and drones) against towns and villages."
+        },
+        {
+          "position": 13,
+          "sentence_id": "1-14831-2-3::s13",
+          "text": "People are in shelters or cellars; some have already moved to more secure locations, while others are still fleeing."
+        },
+        {
+          "position": 14,
+          "sentence_id": "1-14831-2-3::s14",
+          "text": "Nagorno-Karabakh is a 4.400-square-kilometer (1,700-square-mile) enclave with a population of 150,000."
+        },
+        {
+          "position": 15,
+          "sentence_id": "1-14831-2-3::s15",
+          "text": "It is situated in the heart of Azerbaijan, but most of the population are Christian Armenians, with only a minority of Azeris or Turks."
+        },
+        {
+          "position": 16,
+          "sentence_id": "1-14831-2-3::s16",
+          "text": "The enclave is a result of a Soviet tradition, the aim of which was to pursue a policy of divide-and-rule."
+        },
+        {
+          "position": 17,
+          "sentence_id": "1-14831-2-3::s17",
+          "text": "With the dissolution of the Soviet Union, Armenia tried using peaceful methods in order to transfer the enclave to its sovereignty, but this met with opposition."
+        },
+        {
+          "position": 18,
+          "sentence_id": "1-14831-2-3::s18",
+          "text": "War broke out between the two countries in 1988 over control of this enclave."
+        },
+        {
+          "position": 19,
+          "sentence_id": "1-14831-2-3::s19",
+          "text": "This intensified in 1991 and lasted for three years, and included ethnic cleansing and a massacre of Armenians in Baku."
+        },
+        {
+          "position": 20,
+          "sentence_id": "1-14831-2-3::s20",
+          "text": "Thirty thousand people died, and one million lost their homes."
+        },
+        {
+          "position": 21,
+          "sentence_id": "1-14831-2-3::s21",
+          "text": "A cease­­­-fire was declared in the enclave in 1994, with borders determined, but since then, all international efforts to reach a permanent solution have been in vain."
+        },
+        {
+          "position": 22,
+          "sentence_id": "1-14831-2-3::s22",
+          "text": "The Armenians in the enclave declared an independent state called the Republic of Artsakh, which has not been recognized by any country, not even Armenia."
+        },
+        {
+          "position": 23,
+          "sentence_id": "1-14831-2-3::s23",
+          "text": "The relative quiet reigning there over the last 25 years was breached from time to time with border incidents flaring up, or with short exchanges of fire."
+        },
+        {
+          "position": 24,
+          "sentence_id": "1-14831-2-3::s24",
+          "text": "This is not the case this time, not in the extent of forces involved or in the intensity of fighting."
+        },
+        {
+          "position": 25,
+          "sentence_id": "1-14831-2-3::s25",
+          "text": "This conflict is a classic geographical, historical, religious and ethnic one, but it exceeds the boundaries of the Caucasian region, interfacing with the battle between Shi’ite Iran and Turkey over regional hegemony, all under the eyes of Big Brother, namely Russia."
+        },
+        {
+          "position": 26,
+          "sentence_id": "1-14831-2-3::s26",
+          "text": "In trying to describe the conduct of the parties involved in this fight, a cynical observer might quote from “The Tempest,” Shakespeare’s last play: “Misery acquaints a man with strange bedfellows.”"
+        },
+        {
+          "position": 27,
+          "sentence_id": "1-14831-2-3::s27",
+          "text": "This is how Turkey and Israel, currently hostile to one another (with Recep Tayyip Erdogan stating only last week that Jerusalem belongs to the Moslems), find themselves both supporting Azerbaijan, a Shi’ite Moslem country."
+        },
+        {
+          "position": 28,
+          "sentence_id": "1-14831-2-3::s28",
+          "text": "On the other side, Iran, a third of whose population is of Azeri extraction (including its Supreme Leader Ali Khamenei), is supporting Christian Armenia and, according to some reports, supplying it with weapons."
+        },
+        {
+          "position": 29,
+          "sentence_id": "1-14831-2-3::s29",
+          "text": "Russia, which has a military base in Armenia, is trying to please everyone, arming Azerbaijan as well."
+        },
+        {
+          "position": 30,
+          "sentence_id": "1-14831-2-3::s30",
+          "text": "The same pattern of behavior characterizes the Kremlin’s policy in Syria, with Vladimir Putin assisting the regime of Bashar Assad and the Iranians, while providing Israel with “silent encouragement” for carrying out air strikes against Iranian positions, Hezbollah and Shi’ite militias."
+        },
+        {
+          "position": 31,
+          "sentence_id": "1-14831-2-3::s31",
+          "text": "Greece, a strategic ally of Israel, currently in conflict with Turkey over the transport of natural gas in the eastern Mediterranean basin, is supporting Armenia."
+        },
+        {
+          "position": 32,
+          "sentence_id": "1-14831-2-3::s32",
+          "text": "This is indeed a seriously muddled issue."
+        },
+        {
+          "position": 33,
+          "sentence_id": "1-14831-2-3::s33",
+          "text": "One other issue that should worry Israel and any other conscientious Jew is that Israel, the state of a people that was murdered in the Holocaust, is refusing to recognize the massacre of Armenians by the Ottoman Empire during World War I, a genocide avant la lettre."
+        },
+        {
+          "position": 34,
+          "sentence_id": "1-14831-2-3::s34",
+          "text": "For years, this position was adopted in order not to annoy Turkey, which for 50 years was Israel’s strategic ally against Syria and, later, Iran."
+        },
+        {
+          "position": 35,
+          "sentence_id": "1-14831-2-3::s35",
+          "text": "The Mossad and Turkish intelligence cooperated with each other, with Israel’s defense industries selling arms to Turkey for billions of dollars."
+        },
+        {
+          "position": 36,
+          "sentence_id": "1-14831-2-3::s36",
+          "text": "Ironically, among the systems sold to Turkey were drones and technology which helped Turkey build a comparable industry."
+        },
+        {
+          "position": 37,
+          "sentence_id": "1-14831-2-3::s37",
+          "text": "Turkish Bayraktar drones are now in action in Nagorno-Karabakh’s battlefields, as well as in Iraq, Syria and Libya."
+        },
+        {
+          "position": 38,
+          "sentence_id": "1-14831-2-3::s38",
+          "text": "Turkey, which declared a policy of zero-conflict with its neighbors in the past, is currently in conflict with all of them, or at least involved in their wars."
+        },
+        {
+          "position": 39,
+          "sentence_id": "1-14831-2-3::s39",
+          "text": "The dismantling of the strategic alliance between Turkey and Israel is a systematic and deliberate process, begun by Erdogan a decade and a half ago."
+        },
+        {
+          "position": 40,
+          "sentence_id": "1-14831-2-3::s40",
+          "text": "Yet Israel has not used this as an opportunity to fulfill its historic duty and follow its conscience and values regarding the Armenian genocide."
+        },
+        {
+          "position": 41,
+          "sentence_id": "1-14831-2-3::s41",
+          "text": "The reason for this is Azerbaijan."
+        },
+        {
+          "position": 42,
+          "sentence_id": "1-14831-2-3::s42",
+          "text": "At the same time that Erdogan started distancing himself from Israel, Azerbaijan and Israel grew closer."
+        },
+        {
+          "position": 43,
+          "sentence_id": "1-14831-2-3::s43",
+          "text": "It soon became clear that the two countries had set up a strategic alliance centered on their mutual hostilities towards Iran."
+        },
+        {
+          "position": 44,
+          "sentence_id": "1-14831-2-3::s44",
+          "text": "Four years ago, Prime Minister Benjamin Netanyahu went on a snap visit to Baku, during which the Azeri president, Ilham Aliyev, a tyrant who violates human rights and harshly suppresses any opposition, revealed that Azerbaijan had purchased weapons from Israel to the tune of $5 billion."
+        },
+        {
+          "position": 45,
+          "sentence_id": "1-14831-2-3::s45",
+          "text": "Moreover, according to foreign sources, the Mossad established a station in Azerbaijan, serving as the “eyes, ears and a springboard” for monitoring Iran."
+        },
+        {
+          "position": 46,
+          "sentence_id": "1-14831-2-3::s46",
+          "text": "According to these reports, Azerbaijan prepared an airfield that would assist Israel in case it attacked Iran."
+        },
+        {
+          "position": 47,
+          "sentence_id": "1-14831-2-3::s47",
+          "text": "Other reports claimed that the Iranian nuclear archive that was stolen by Mossad agents in Tehran two and a half years ago was smuggled to Israel through Azerbaijan."
+        },
+        {
+          "position": 48,
+          "sentence_id": "1-14831-2-3::s48",
+          "text": "According to some reports, Israel’s aerospace industries, Elbit, Rafael and other smaller companies are selling Baku just about anything."
+        },
+        {
+          "position": 49,
+          "sentence_id": "1-14831-2-3::s49",
+          "text": "This includes artillery (a few years ago I discovered a questionable revolving deal between Elbit and the Czech Republic and Slovakia; this too involved the Uvda airport); missiles, naval vessels, intelligence equipment and a large number of drones."
+        },
+        {
+          "position": 50,
+          "sentence_id": "1-14831-2-3::s50",
+          "text": "Almost all the Israeli companies that make drones, including attack or self-destructing (“kamikaza” ones), have sold their wares to the Azeri army."
+        },
+        {
+          "position": 51,
+          "sentence_id": "1-14831-2-3::s51",
+          "text": "Armenian spokesmen have said in the past that some of these, including ones made by Aeronautics Ltd., were downed during incidents along the border with Azerbaijan."
+        },
+        {
+          "position": 52,
+          "sentence_id": "1-14831-2-3::s52",
+          "text": "“For you this is trading in arms, but for us these are death weapons”, Armenia’s foreign minister Zohrab Mnatsakanyan told me in an interview a year and a half ago, when I visited Armenia."
+        },
+        {
+          "position": 53,
+          "sentence_id": "1-14831-2-3::s53",
+          "text": "Despite this, he expressed his wish for improved relations with Israel, hoping that this would lead to an Israeli recognition of the Armenian genocide."
+        },
+        {
+          "position": 54,
+          "sentence_id": "1-14831-2-3::s54",
+          "text": "At that time, there was some warming in relations."
+        },
+        {
+          "position": 55,
+          "sentence_id": "1-14831-2-3::s55",
+          "text": "Armenia opened an embassy in Tel Aviv, with a non-resident Israeli ambassador appointed to Armenia."
+        },
+        {
+          "position": 56,
+          "sentence_id": "1-14831-2-3::s56",
+          "text": "Charter flights between the two countries were launched and there was some attempt to promote trade."
+        },
+        {
+          "position": 57,
+          "sentence_id": "1-14831-2-3::s57",
+          "text": "These attempts are now imploding with the resumed fighting in Nagorno-Karabakh."
+        },
+        {
+          "position": 58,
+          "sentence_id": "1-14831-2-3::s58",
+          "text": "Armenia’s ambassador to Israel, who was on home leave, was told to remain there, in a typical act of diplomatic censure."
+        },
+        {
+          "position": 59,
+          "sentence_id": "1-14831-2-3::s59",
+          "text": "Armenia’s President Armen Sarkissian called President Reuven Rivlin on Monday, expressing his concern over the continued sale of Israeli weapons to Azerbaijan."
+        },
+        {
+          "position": 60,
+          "sentence_id": "1-14831-2-3::s60",
+          "text": "Rivlin expressed his regret over the outbreak of hostilities and noted that Israel has had a long-dstanding relationship with Azerbaijan, adding that their cooperation was not directed at any other country."
+        },
+        {
+          "position": 61,
+          "sentence_id": "1-14831-2-3::s61",
+          "text": "Yesterday, the Armenian foreign ministry’s spokesperson Anna Naghdalyan had this to say, in conversation with Haaretz: “Armenia has consistently raised the issue of arm supplies from Israel to Azerbaijan."
+        },
+        {
+          "position": 62,
+          "sentence_id": "1-14831-2-3::s62",
+          "text": "Most recently, during the July aggression of Azerbaijan against Armenia, the Foreign Minister stated clearly that Israel should stop this deadly business with Azerbaijan."
+        },
+        {
+          "position": 63,
+          "sentence_id": "1-14831-2-3::s63",
+          "text": "“For sure, the provision of modern weapons by Israel to Azerbaijan is unacceptable for us."
+        },
+        {
+          "position": 64,
+          "sentence_id": "1-14831-2-3::s64",
+          "text": "We have repeatedly informed our Israeli counterparts about this through diplomatic channels; it should be noted that it is especially painful at a time when Azerbaijan, with the support of Turkey, is carrying out a large-scale aggression against Artsakh and Armenia."
+        },
+        {
+          "position": 65,
+          "sentence_id": "1-14831-2-3::s65",
+          "text": "“Instead, these days, when the whole international community calls on the Azerbaijani side to stop hostilities, the Israeli side continues to supply weapons to Azerbaijan."
+        },
+        {
+          "position": 66,
+          "sentence_id": "1-14831-2-3::s66",
+          "text": "These armaments are being delivered against the civilian populations and civilian infrastructure of Artsakh and Armenia."
+        },
+        {
+          "position": 67,
+          "sentence_id": "1-14831-2-3::s67",
+          "text": "These kind of actions are unacceptable for us, especially in this period."
+        },
+        {
+          "position": 68,
+          "sentence_id": "1-14831-2-3::s68",
+          "text": "Based on the current situation, the Ministry of Foreign Affairs has decided to recall the Ambassador of Armenia to Israel for consultations.”"
+        },
+        {
+          "position": 69,
+          "sentence_id": "1-14831-2-3::s69",
+          "text": "It’s hard to expect that Israel, which always decries rockets launched against civilians by Hezbollah and Hamas, will change its ways."
+        },
+        {
+          "position": 70,
+          "sentence_id": "1-14831-2-3::s70",
+          "text": "Another country may have declared a suspension of shipments, even temporarily."
+        },
+        {
+          "position": 71,
+          "sentence_id": "1-14831-2-3::s71",
+          "text": "In anything related to the Holocaust, to historical memory and to the sale of weapons, the hypocrisy of Israeli governments over the years is nothing new."
+        },
+        {
+          "position": 72,
+          "sentence_id": "1-14831-2-3::s72",
+          "text": "The government’s current silence on the matter speaks volumes."
+        },
+        {
+          "position": 73,
+          "sentence_id": "1-14831-2-3::s73",
+          "text": "The ministries of defense and foreign affairs adamantly refused to relate to the issue."
+        }
+      ]
+    }
+  }
+}

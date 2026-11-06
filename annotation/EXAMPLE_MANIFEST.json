@@ -1,0 +1,44 @@
+{
+  "purpose": "UI demonstration only; not an evaluation dataset",
+  "document_level": {
+    "original": [
+      {
+        "group": 1,
+        "relations": 2,
+        "queries": 8,
+        "ready": 0
+      }
+    ],
+    "remaining": [
+      {
+        "group": 41,
+        "relations": 2,
+        "queries": 8,
+        "ready": 0
+      }
+    ],
+    "quality": [
+      {
+        "group": 1,
+        "relations": 2,
+        "queries": 8,
+        "ready": 0
+      }
+    ]
+  },
+  "cross_document": {
+    "direct": {
+      "relations": 2,
+      "query_article_pairs": 4
+    },
+    "partial": {
+      "relations": 2,
+      "query_article_pairs": 2
+    },
+    "empty": {
+      "relations": 2,
+      "query_article_pairs": 8
+    }
+  },
+  "historical_submissions_included": false
+}

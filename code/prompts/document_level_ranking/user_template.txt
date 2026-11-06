@@ -1,0 +1,16 @@
+QUERY:
+{query}
+
+CANDIDATE SENTENCES (original article order):
+{candidate_sentences}
+
+Input format:
+Each candidate line contains its position, sentence ID, and text:
+[position] ID="sentence_id" TEXT=sentence text
+
+Return the 10 best unique candidate sentence IDs in descending order of evidential support, or all IDs if fewer than 10 exist. Return ID strings, not position indices.
+
+Required output format:
+{{"ranked_sen_ids": ["s3", "s1", "s8"]}}
+
+Every returned ID must identify a supplied sentence. The IDs above illustrate the JSON format only. Use actual IDs from the candidates; the example does not fix the list length.

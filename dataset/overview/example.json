@@ -1,0 +1,95 @@
+{
+  "split": "test",
+  "relation_id": "rel_5469bdc553b732cf",
+  "actor": "Extinction Rebellion Activists and Supporters",
+  "value": "Be protecting the environment",
+  "direction": "aligned",
+  "queries": [
+    {
+      "query_id": "q_9fa2cde63f6105b9",
+      "query": "What evidence in the article supports that Extinction Rebellion Activists and Supporters is aligned with the human value \"Be protecting the environment\"?",
+      "query_type": "Q1",
+      "split": "test",
+      "guid": "0-4621-1-t",
+      "original_split": "test_human_all",
+      "original_query_type": "entity_value_explicit",
+      "source_article_id": "0-4621-1-t",
+      "relation_id": "rel_5469bdc553b732cf"
+    },
+    {
+      "query_id": "q_aa3f04174f1320f1",
+      "query": "Where in the article do the demonstrations by environmental campaigners in London show an intention to be protecting the environment?",
+      "query_type": "Q2",
+      "split": "test",
+      "guid": "0-4621-1-t",
+      "original_split": "test_human_all",
+      "original_query_type": "entity_implicit_value_explicit",
+      "source_article_id": "0-4621-1-t",
+      "relation_id": "rel_5469bdc553b732cf"
+    },
+    {
+      "query_id": "q_d54791ffb467f788",
+      "query": "Does the report provide details on how Extinction Rebellion activists justified their actions through ecological defense and climate advocacy?",
+      "query_type": "Q3",
+      "split": "test",
+      "guid": "0-4621-1-t",
+      "original_split": "test_human_all",
+      "original_query_type": "entity_explicit_value_naturalized",
+      "source_article_id": "0-4621-1-t",
+      "relation_id": "rel_5469bdc553b732cf"
+    },
+    {
+      "query_id": "q_51a6dfa1e84ef7ae",
+      "query": "What evidence indicates that the individuals gathering in defiance of city restrictions were motivated by ecological concerns?",
+      "query_type": "Q4",
+      "split": "test",
+      "guid": "0-4621-1-t",
+      "original_split": "test_human_all",
+      "original_query_type": "entity_value_implicit",
+      "source_article_id": "0-4621-1-t",
+      "relation_id": "rel_5469bdc553b732cf"
+    }
+  ],
+  "evidence_examples": [
+    {
+      "query_id": "q_9fa2cde63f6105b9",
+      "article_id": "0-4621-1-t",
+      "sentence_id": "0-4621-1-t::s4",
+      "text": "A number of demonstrations have been staged across the capital by the group, which is calling on the government to do more to tackle climate change.",
+      "relevance": 2,
+      "scope": "within"
+    },
+    {
+      "query_id": "q_9fa2cde63f6105b9",
+      "article_id": "0-4621-1-t",
+      "sentence_id": "0-4621-1-t::s0",
+      "text": "Extinction Rebellion activists say they have left London's Trafalgar Square after police issued a ban on the group's climate change protests.",
+      "relevance": 1,
+      "scope": "within"
+    },
+    {
+      "query_id": "q_9fa2cde63f6105b9",
+      "article_id": "0-4621-1-t",
+      "sentence_id": "0-4621-1-t::s1",
+      "text": "In a statement issued on Monday evening, the Metropolitan Police said demonstrators protesting in the capital after 21:00 BST could be arrested.",
+      "relevance": 0,
+      "scope": "within"
+    },
+    {
+      "query_id": "q_9fa2cde63f6105b9",
+      "article_id": "0-4621-2-6",
+      "sentence_id": "0-4621-2-6::s21",
+      "text": "Extinction Rebellion said HS2 would damage or destroy 108 ancient woodlands in the largest single act of deforestation in Britain since World War One.",
+      "relevance": 2,
+      "scope": "cross"
+    },
+    {
+      "query_id": "q_9fa2cde63f6105b9",
+      "article_id": "0-4621-2-6",
+      "sentence_id": "0-4621-2-6::s0",
+      "text": "LONDON (Reuters) - Climate change activists, including one of the founders of Extinction Rebellion, defied a police order to end protests on Tuesday after a week of disruption in London, targeting Britain’s transport ministry and security agency MI5.",
+      "relevance": 1,
+      "scope": "cross"
+    }
+  ]
+}

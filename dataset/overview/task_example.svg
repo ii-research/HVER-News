@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="1160" viewBox="0 0 1100 1160" role="img" aria-labelledby="title desc">
+<title id="title">HVER-News: Query Formulations and Evidence-Ranking Tasks</title>
+<desc id="desc">Four real query formulations and selected Q1-labeled sentences from two articles. The document-level scope contains the source article. The corpus-level scope contains the source article and all other articles in the same split.</desc>
+<rect width="1100" height="1160" fill="white"/>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#252525}.title{font-size:23px;font-weight:600}.head{font-size:19px;font-weight:600}.body{font-size:17px}.small{font-size:15px;fill:#555}.label{font-size:14px;font-weight:600}.mono{font:14px monospace;fill:#555}</style>
+<text x="28" y="37" class="title" text-anchor="start">HVER-News: Query Formulations and Evidence-Ranking Tasks</text>
+<text x="1072" y="65" class="small" text-anchor="end">Real example · Test split</text>
+<path d="M28,80 H1072" fill="none" stroke="#ccc"/>
+<text x="28" y="108" class="small" text-anchor="start">Actor: Extinction Rebellion Activists and Supporters</text>
+<text x="28" y="132" class="small" text-anchor="start">Value: Be protecting the environment · Direction: aligned</text>
+<text x="28" y="171" class="head" text-anchor="start">Q1</text>
+<text x="86" y="171" class="body" text-anchor="start">What evidence in the article supports that Extinction Rebellion Activists and Supporters is aligned with</text>
+<text x="86" y="194" class="body" text-anchor="start">the human value &quot;Be protecting the environment&quot;?</text>
+<text x="28" y="233" class="head" text-anchor="start">Q2</text>
+<text x="86" y="233" class="body" text-anchor="start">Where in the article do the demonstrations by environmental campaigners in London show an intention to be</text>
+<text x="86" y="256" class="body" text-anchor="start">protecting the environment?</text>
+<text x="28" y="295" class="head" text-anchor="start">Q3</text>
+<text x="86" y="295" class="body" text-anchor="start">Does the report provide details on how Extinction Rebellion activists justified their actions through</text>
+<text x="86" y="318" class="body" text-anchor="start">ecological defense and climate advocacy?</text>
+<text x="28" y="357" class="head" text-anchor="start">Q4</text>
+<text x="86" y="357" class="body" text-anchor="start">What evidence indicates that the individuals gathering in defiance of city restrictions were motivated by</text>
+<text x="86" y="380" class="body" text-anchor="start">ecological concerns?</text>
+<text x="28" y="430" class="label" text-anchor="start">Evidence labels shown for Q1. Cross-document labels may differ for Q2–Q4.</text>
+<g transform="translate(0 240)">
+<rect x="28" y="229" width="1044" height="620" fill="white" stroke="#555"/>
+<text x="48" y="260" class="head" text-anchor="start">Corpus-level</text>
+<text x="188" y="260" class="body" text-anchor="start">All articles in the same split, including the source article</text>
+<path d="M28,278 H1072" fill="none" stroke="#ccc"/>
+<rect x="48" y="298" width="488" height="506" fill="white" stroke="#777" stroke-dasharray="5 4"/>
+<text x="66" y="329" class="head" text-anchor="start">Document-level</text>
+<text x="236" y="329" class="small" text-anchor="start">Source article only</text>
+<text x="66" y="361" class="mono" text-anchor="start">Article A · 0-4621-1-t</text>
+<text x="578" y="329" class="head" text-anchor="start">Cross-document evidence</text>
+<text x="578" y="361" class="mono" text-anchor="start">Article B · 0-4621-2-6</text>
+<rect x="60" y="379" width="464" height="130" fill="#eef5ef" stroke="none"/>
+<text x="72" y="401" class="mono" text-anchor="start">s4</text>
+<text x="512" y="401" class="label" text-anchor="end">2 · Direct</text>
+<text x="72" y="427" class="body" text-anchor="start">A number of demonstrations have been staged across</text>
+<text x="72" y="449" class="body" text-anchor="start">the capital by the group, which is calling on the</text>
+<text x="72" y="471" class="body" text-anchor="start">government to do more to tackle climate change.</text>
+<rect x="60" y="521" width="464" height="130" fill="#fbf6e9" stroke="none"/>
+<text x="72" y="543" class="mono" text-anchor="start">s0</text>
+<text x="512" y="543" class="label" text-anchor="end">1 · Partial</text>
+<text x="72" y="569" class="body" text-anchor="start">Extinction Rebellion activists say they have left</text>
+<text x="72" y="591" class="body" text-anchor="start">London&#x27;s Trafalgar Square after police issued a</text>
+<text x="72" y="613" class="body" text-anchor="start">ban on the group&#x27;s climate change protests.</text>
+<rect x="60" y="663" width="464" height="130" fill="#f5f5f5" stroke="none"/>
+<text x="72" y="685" class="mono" text-anchor="start">s1</text>
+<text x="512" y="685" class="label" text-anchor="end">0 · Non-supporting</text>
+<text x="72" y="711" class="body" text-anchor="start">In a statement issued on Monday evening, the</text>
+<text x="72" y="733" class="body" text-anchor="start">Metropolitan Police said demonstrators protesting</text>
+<text x="72" y="755" class="body" text-anchor="start">in the capital after 21:00 BST could be arrested.</text>
+<rect x="566" y="379" width="486" height="152" fill="#eef5ef" stroke="none"/>
+<text x="578" y="401" class="mono" text-anchor="start">s21</text>
+<text x="1040" y="401" class="label" text-anchor="end">2 · Direct</text>
+<text x="578" y="427" class="body" text-anchor="start">Extinction Rebellion said HS2 would damage or</text>
+<text x="578" y="449" class="body" text-anchor="start">destroy 108 ancient woodlands in the largest</text>
+<text x="578" y="471" class="body" text-anchor="start">single act of deforestation in Britain since World</text>
+<text x="578" y="493" class="body" text-anchor="start">War One.</text>
+<rect x="566" y="543" width="486" height="218" fill="#fbf6e9" stroke="none"/>
+<text x="578" y="565" class="mono" text-anchor="start">s0</text>
+<text x="1040" y="565" class="label" text-anchor="end">1 · Partial</text>
+<text x="578" y="591" class="body" text-anchor="start">LONDON (Reuters) - Climate change activists,</text>
+<text x="578" y="613" class="body" text-anchor="start">including one of the founders of Extinction</text>
+<text x="578" y="635" class="body" text-anchor="start">Rebellion, defied a police order to end protests</text>
+<text x="578" y="657" class="body" text-anchor="start">on Tuesday after a week of disruption in London,</text>
+<text x="578" y="679" class="body" text-anchor="start">targeting Britain’s transport ministry and</text>
+<text x="578" y="701" class="body" text-anchor="start">security agency MI5.</text>
+<text x="578" y="793" class="small" text-anchor="start">… additional articles in the split</text>
+<text x="48" y="833" class="small" text-anchor="start">Sentence labels are query-specific; only selected sentences are displayed here.</text>
+<text x="28" y="881" class="small" text-anchor="start">The scopes define which sentences a model ranks. These are reference labels, not a predicted ranking.</text>
+</g>
+</svg>

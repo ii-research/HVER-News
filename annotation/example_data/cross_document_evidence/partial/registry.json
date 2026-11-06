@@ -1,0 +1,118 @@
+{
+  "1": {
+    "cross_ca5f1f26ed28a918f642bd70": {
+      "query_id": "q_399b537aba18bb04",
+      "doc_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0",
+      "sentence_ids": [
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s0",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s1",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s2",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s3",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s4",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s5",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s6",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s7",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s8",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s9",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s10",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s11",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s12",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s13",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s14",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s15",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s16",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s17",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s18",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s19"
+      ],
+      "has_direct": false,
+      "has_partial": true
+    },
+    "cross_6a90f8ba3ded96ea02eda7d0": {
+      "query_id": "q_c38d688dc9582ff8",
+      "doc_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0",
+      "sentence_ids": [
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s0",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s1",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s2",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s3",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s4",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s5",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s6",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s7",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s8",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s9",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s10",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s11",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s12",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s13",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s14",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s15",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s16",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s17",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s18",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s19"
+      ],
+      "has_direct": false,
+      "has_partial": true
+    }
+  },
+  "15": {
+    "cross_099122359370bed559bdea47": {
+      "query_id": "q_6418a3d9413e4428",
+      "doc_id": "3-wiki-img/17073-7/17073-7-1",
+      "sentence_ids": [
+        "3-wiki-img/17073-7/17073-7-1::s0",
+        "3-wiki-img/17073-7/17073-7-1::s1",
+        "3-wiki-img/17073-7/17073-7-1::s2",
+        "3-wiki-img/17073-7/17073-7-1::s3",
+        "3-wiki-img/17073-7/17073-7-1::s4",
+        "3-wiki-img/17073-7/17073-7-1::s5",
+        "3-wiki-img/17073-7/17073-7-1::s6",
+        "3-wiki-img/17073-7/17073-7-1::s7",
+        "3-wiki-img/17073-7/17073-7-1::s8",
+        "3-wiki-img/17073-7/17073-7-1::s9",
+        "3-wiki-img/17073-7/17073-7-1::s10",
+        "3-wiki-img/17073-7/17073-7-1::s11",
+        "3-wiki-img/17073-7/17073-7-1::s12",
+        "3-wiki-img/17073-7/17073-7-1::s13",
+        "3-wiki-img/17073-7/17073-7-1::s14",
+        "3-wiki-img/17073-7/17073-7-1::s15",
+        "3-wiki-img/17073-7/17073-7-1::s16",
+        "3-wiki-img/17073-7/17073-7-1::s17",
+        "3-wiki-img/17073-7/17073-7-1::s18",
+        "3-wiki-img/17073-7/17073-7-1::s19",
+        "3-wiki-img/17073-7/17073-7-1::s20",
+        "3-wiki-img/17073-7/17073-7-1::s21",
+        "3-wiki-img/17073-7/17073-7-1::s22",
+        "3-wiki-img/17073-7/17073-7-1::s23",
+        "3-wiki-img/17073-7/17073-7-1::s24",
+        "3-wiki-img/17073-7/17073-7-1::s25"
+      ],
+      "has_direct": false,
+      "has_partial": true
+    }
+  },
+  "20": {
+    "cross_1e5f64e8809d30d16c103f3e": {
+      "query_id": "q_8ee76d3418c6db9e",
+      "doc_id": "26-13937-1-t",
+      "sentence_ids": [
+        "26-13937-1-t::s0",
+        "26-13937-1-t::s1",
+        "26-13937-1-t::s2",
+        "26-13937-1-t::s3",
+        "26-13937-1-t::s4",
+        "26-13937-1-t::s5",
+        "26-13937-1-t::s6",
+        "26-13937-1-t::s7",
+        "26-13937-1-t::s8",
+        "26-13937-1-t::s9",
+        "26-13937-1-t::s10",
+        "26-13937-1-t::s11"
+      ],
+      "has_direct": false,
+      "has_partial": true
+    }
+  }
+}

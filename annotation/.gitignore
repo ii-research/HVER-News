@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.DS_Store
+**/server_data/
+**/backups/
+**/exports/
+*.log
+.env
+.env.*
+*accounts*.json
+*assignments*.json

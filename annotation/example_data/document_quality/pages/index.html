@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>NEVU Annotation dashboard</title>
+<style>
+:root{--ink:#183b3a;--muted:#657a79;--line:#d8e4e0;--teal:#13786b;--bg:#f5f8f6}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:1180px;margin:auto;padding:44px 24px 60px}.eyebrow{font-size:12px;letter-spacing:2px;color:var(--teal);font-weight:700}h1{font-size:32px;letter-spacing:-1px;margin:8px 0}p{margin:0;color:var(--muted)}.top{display:flex;justify-content:space-between;gap:24px;align-items:center;margin-bottom:28px}.toplinks{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.pill{white-space:nowrap;border:1px solid var(--line);border-radius:30px;padding:7px 12px;font-size:12px;background:white}.areas{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-bottom:26px}button,input,select{font:inherit}button{cursor:pointer}.area{text-align:left;border:1px solid var(--line);background:white;border-radius:16px;padding:20px;color:var(--ink);transition:.15s}.area[aria-selected=true]{border:2px solid var(--teal);padding:19px;background:#eef8f3}.area:hover{box-shadow:0 5px 18px #123a3310}.area .number{font-size:11px;letter-spacing:1px;color:var(--muted)}.area h2{font-size:18px;margin:9px 0 5px}.area p{font-size:13px;min-height:42px}.area .count{margin-top:16px;font-weight:650;font-size:14px}.area .range{font-size:12px;color:var(--muted);margin-top:3px}.panel{background:white;border:1px solid var(--line);border-radius:18px;padding:25px}.panelhead{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}.panel h2{font-size:22px;margin:0 0 4px}.primary{background:var(--teal);color:white;text-decoration:none;white-space:nowrap;border-radius:9px;padding:10px 15px;font-size:14px;display:inline-block}.note{font-size:13px;background:#f1f6f3;padding:11px 13px;border-radius:9px;margin-top:18px}.controls{display:flex;gap:10px;margin:22px 0 16px;align-items:center;flex-wrap:wrap}input,select{border:1px solid var(--line);border-radius:8px;padding:9px 11px;background:white;color:var(--ink)}input{width:240px}.total{margin-left:auto;color:var(--muted);font-size:13px}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px}.group{border:1px solid var(--line);padding:15px;border-radius:11px;text-decoration:none;color:var(--ink)}.group:hover{border-color:var(--teal);background:#f6faf7}.group strong{font-size:16px}.group .meta{color:var(--muted);font-size:12px;margin:6px 0 11px}.tag{display:inline-block;font-size:11px;padding:3px 7px;border-radius:5px;background:#eef2f1;color:#667875}.tag.ready{background:#ddf3e7;color:#166745}.tag.partial{background:#fff0cb;color:#876918}.pagination{display:flex;justify-content:center;align-items:center;gap:15px;margin-top:22px;font-size:13px}.pagination button{background:white;border:1px solid var(--line);border-radius:7px;padding:6px 12px;color:var(--ink)}button:disabled{opacity:.35;cursor:default}.footer{font-size:12px;color:var(--muted);margin-top:20px}.empty{grid-column:1/-1;text-align:center;padding:35px;color:var(--muted)}:focus-visible{outline:3px solid #65bfae;outline-offset:3px}@media(max-width:800px){.areas{grid-template-columns:1fr}.area p{min-height:0}.grid{grid-template-columns:repeat(2,1fr)}.panelhead,.top{flex-direction:column}.total{margin-left:0}main{padding:25px 16px}.panel{padding:18px}}@media(max-width:420px){.grid{grid-template-columns:1fr}input{width:100%}}
+.group.confirmed{background:#effaf1;border-color:#a5d8b2}.annotation-progress{font-size:12px;color:#27603b;margin-top:9px}
+</style></head><body><main>
+<div class="top"><div><div class="eyebrow">NEVU · HUMAN REVIEW</div><h1>Annotation dashboard</h1><p>Example data only. Select a task to try evidence annotation or quality assessment.</p></div><div class="toplinks"><span class="pill">Three task types · Save independently</span><a class="primary" id="valuesLink" href="/values.html" target="_blank" rel="noopener noreferrer">Value definitions ↗</a></div></div>
+<section class="panel" style="margin-bottom:24px" aria-label="Annotator account">
+  <div id="accountSignedIn" hidden><div class="panelhead"><div><h2>Signed in：<span id="accountName"></span></h2><p>One account for all three task types。Sign-in is retained，until sign-out。</p></div><button id="accountLogout">Sign out</button></div></div>
+  <form id="accountForm"><h2>Sign in to your annotation account</h2><p>Sign in with your account to open a group. To create an account, enter and confirm a password, then select Create account.</p>
+    <div class="controls"><input id="accountUser" autocomplete="username" placeholder="Username" aria-label="Username" required><input id="accountPass" type="password" autocomplete="current-password" placeholder="Password" aria-label="Password" required><input id="accountConfirm" type="password" autocomplete="new-password" placeholder="Confirm password（Create account only）" aria-label="Confirm password"><button type="submit">Sign in</button><button type="button" id="accountRegister">Create account</button></div>
+  </form><p id="accountMessage" role="status" aria-live="polite"></p>
+</section>
+<script>
+(()=>{
+  const ACCOUNT_KEY="nevu_annotation_accounts_v2",SESSION_KEY="nevu_annotation_session_user_v2";
+  const el=id=>document.getElementById(id);
+  const accounts=()=>{try{return JSON.parse(localStorage.getItem(ACCOUNT_KEY)||"{}")}catch{return {}}};
+  function display(){
+    const username=localStorage.getItem(SESSION_KEY),signedIn=!!(username&&accounts()[username]);
+    el('accountSignedIn').hidden=!signedIn;el('accountForm').hidden=signedIn;
+    el('accountName').textContent=signedIn?username:'';
+    el('accountMessage').textContent='';
+    window.dispatchEvent(new Event('annotation-auth-change'));
+    if(signedIn){el('accountPass').value='';el('accountConfirm').value='';}
+  }
+  const hex=bytes=>Array.from(bytes,x=>x.toString(16).padStart(2,'0')).join('');
+  async function hash(password,salt){
+    const key=await crypto.subtle.importKey('raw',new TextEncoder().encode(password),'PBKDF2',false,['deriveBits']);
+    const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt:Uint8Array.from(salt.match(/../g),x=>parseInt(x,16)),iterations:150000,hash:'SHA-256'},key,256);
+    return hex(new Uint8Array(bits));
+  }
+  let busy=false;
+  async function authenticate(register){
+    if(busy)return;busy=true;
+    try{
+      const username=el('accountUser').value.trim(),password=el('accountPass').value;
+      if(!username||!password)throw Error('Enter a username and password。');
+      const db=accounts();
+      if(register){
+        if(username.length<2||password.length<6)throw Error('Minimum username length 2 characters，Minimum password length 6 characters。');
+        if(password!==el('accountConfirm').value)throw Error('Passwords do not match。');
+        if(db[username])throw Error('Account already exists，Please sign in directly。');
+        const salt=hex(crypto.getRandomValues(new Uint8Array(16)));
+        db[username]={salt,hash:await hash(password,salt),created_at:new Date().toISOString(),kdf:'PBKDF2-SHA256-150000'};
+        localStorage.setItem(ACCOUNT_KEY,JSON.stringify(db));
+      }else{
+        if(!db[username]||await hash(password,db[username].salt)!==db[username].hash)throw Error('Incorrect username or password。');
+      }
+      localStorage.setItem(SESSION_KEY,username);display();
+    }catch(e){el('accountMessage').textContent=e.message;}finally{busy=false;}
+  }
+  el('accountForm').addEventListener('submit',e=>{e.preventDefault();authenticate(false)});
+  el('accountRegister').addEventListener('click',()=>authenticate(true));
+  el('accountLogout').addEventListener('click',()=>{localStorage.removeItem(SESSION_KEY);sessionStorage.removeItem(SESSION_KEY);display();el('accountMessage').textContent='Signed out，Other open group pages will also sign out。'});
+  window.addEventListener('storage',e=>{if(e.key===SESSION_KEY||e.key===ACCOUNT_KEY)display()});
+  display();
+})();
+</script>
+
+<div class="areas" role="tablist" aria-label="Task type" id="areas"></div>
+<section class="panel" id="taskPanel" role="tabpanel" aria-labelledby="activeTitle"><div class="panelhead"><div><h2 id="activeTitle"></h2><p id="description"></p></div><a class="primary" id="quickOpen" target="_blank" rel="noopener noreferrer"></a></div>
+<div class="note" id="note"></div>
+<div class="controls"><input id="search" type="search" placeholder="Search group number，For example 41" aria-label="Search group number"><select id="status" aria-label="Filter Fable Suggestion status"><option value="all">All suggestion states</option><option value="ready">Suggestions loaded</option><option value="pending">Suggestions pending</option></select><span class="total" id="total" aria-live="polite"></span></div>
+<p id="annotationSummary" class="small" aria-live="polite" style="margin-bottom:14px"></p><div class="grid" id="groups"></div><div class="pagination"><button id="prev">Previous page</button><span id="pageLabel"></span><button id="next">Next page</button></div>
+</section><div class="footer">“Suggestions loaded” refers to model suggestions, not completed human annotations. Sign in to view your progress.</div>
+</main><script>
+const DATA={"original": [{"group": 1, "relations": 2, "queries": 8, "ready": 0}], "quality": [{"group": 1, "relations": 2, "queries": 8, "ready": 0}], "remaining": [{"group": 41, "relations": 2, "queries": 8, "ready": 0}]};
+const LOCAL={"original": "../../pages/", "quality": "./", "remaining": "../../document_annotation/pages/", "values": "../../values.html"};
+document.getElementById("valuesLink").href=location.protocol==="file:"?LOCAL.values:"/values.html";
+const CONFIG={
+original:{title:'Original-data annotation',desc:'Example Group 1: Stage 1 assessment and Stage 2 annotation.',note:'Historical annotation entry。Original pages and existing progress are preserved，Continue using the original annotation file。',tag:'Original page',prefix:'/original/'},
+quality:{title:'Post-revision quality assessment',desc:'Assess the revised test data using Stage 1 only.',note:'Not required lock。Automatically complete when all applicable ratings are filled，Still editable；Ratings are saved to a separate reassessment file。',tag:'Only Stage 1',prefix:'/quality-review/'},
+remaining:{title:'Remaining-data annotation',desc:'Example Group 41: Stage 2 annotation with optional model suggestions.',note:'Mark invalid items as needed. Confirm and save each item before proceeding. Opening a page does not call a model.',tag:'Only Stage 2',prefix:'/remaining/'}
+};
+let remainingProgress=null,progressMessage='Sign in to view personal annotation progress',progressRequest=0;
+async function refreshProgress(){
+ const version=++progressRequest,user=localStorage.getItem('nevu_annotation_session_user_v2');
+ remainingProgress=null;progressMessage=user?'Loading personal annotation progress…':'Sign in to view personal annotation progress';renderGroups();
+ if(!user)return;
+ try{
+  const response=await fetch('/remaining/api/progress?annotator='+encodeURIComponent(user),{cache:'no-store'}),data=await response.json();
+  if(!response.ok||!data.ok)throw Error('load failed');
+  if(version!==progressRequest)return;
+  remainingProgress=data.groups;
+ }catch(e){if(version!==progressRequest)return;progressMessage='Failed to read progress，Refresh and retry';}
+ renderGroups();
+}
+function groupProgress(r){
+ if(remainingProgress===null)return '';
+ const n=Math.min(r.relations,Number(remainingProgress[r.group]||0));
+ return `<div class="annotation-progress">${n}/${r.relations} items confirmed · ${r.relations-n} items unconfirmed</div>`;
+}
+let active=new URLSearchParams(location.search).get('area')||'remaining',page=0;
+if(!CONFIG[active])active='remaining';
+const fmt=n=>n.toLocaleString('en-US');
+function url(area,n){const file=`group_${String(n).padStart(2,'0')}.html`;return location.protocol==='file:'?LOCAL[area]+file:CONFIG[area].prefix+file}
+function choose(area){active=area;page=0;document.getElementById('search').value='';document.getElementById('status').value='all';render()}
+function render(){
+ document.getElementById('areas').innerHTML=Object.entries(CONFIG).map(([key,c],i)=>{const rows=DATA[key],qs=rows.reduce((a,r)=>a+r.queries,0);return `<button class="area" role="tab" id="tab-${key}" aria-controls="taskPanel" aria-selected="${active===key}" onclick="choose('${key}')"><div class="number">0${i+1} / ${c.tag}</div><h2>${c.title}</h2><p>${c.desc}</p><div class="count">${rows.length} groups · ${fmt(qs)} items query</div><div class="range">${rows.length?'Group '+rows[0].group+'–'+rows.at(-1).group:'Not yet generated'}</div></button>`}).join('');
+ const c=CONFIG[active],rows=DATA[active];document.getElementById('activeTitle').textContent=c.title;document.getElementById('description').textContent=c.desc;document.getElementById('note').textContent=c.note;
+ document.getElementById('status').hidden=active!=='remaining';
+ const first=active==='remaining'?(rows.find(r=>r.ready===r.relations)||rows[0]):rows[0];
+ const link=document.getElementById('quickOpen');link.hidden=!first;if(first){link.href=url(active,first.group);link.textContent=`Open Group ${first.group} →`}
+ renderGroups();
+}
+function renderGroups(){
+ const summary=document.getElementById('annotationSummary');summary.hidden=active!=='remaining';
+ if(active==='remaining'){
+  const complete=remainingProgress===null?0:DATA.remaining.filter(r=>(remainingProgress[r.group]||0)>=r.relations).length;
+  const started=remainingProgress===null?0:DATA.remaining.filter(r=>(remainingProgress[r.group]||0)>0&&(remainingProgress[r.group]||0)<r.relations).length;
+  summary.textContent=remainingProgress===null?progressMessage:`Current account：Complete ${complete} pages · Incomplete ${DATA.remaining.length-complete} pages（including ${started} pages in progress）。After all items on a page are confirmed and saved，The page turns light green。`;
+ }
+ const search=document.getElementById('search').value.trim().replace(/^group[_\s-]*/i,'').replace(/^0+(?=\d)/,'');const filter=document.getElementById('status').value;
+ const rows=DATA[active].filter(r=>(!search||String(r.group).includes(search))&&(active!=='remaining'||filter==='all'||(filter==='ready'?r.ready===r.relations:r.ready<r.relations)));
+ const pages=Math.max(1,Math.ceil(rows.length/20));page=Math.min(page,pages-1);
+ document.getElementById('groups').innerHTML=rows.slice(page*20,page*20+20).map(r=>{const ready=r.ready===r.relations;const status=active==='remaining'?(ready?'Suggestions loaded':r.ready?`Some suggestions ${r.ready}/${r.relations}`:'Suggestions pending'):CONFIG[active].tag;return `<a class="group ${active==='remaining'&&remainingProgress!==null&&(remainingProgress[r.group]||0)>=r.relations?'confirmed':''}" href="${url(active,r.group)}" target="_blank" rel="noopener noreferrer"><strong>Group ${String(r.group).padStart(2,'0')}</strong><div class="meta">${r.relations} relations · ${r.queries} queries</div><span class="tag ${active==='remaining'?(ready?'ready':r.ready?'partial':''):''}">${status}</span>${active==='remaining'?groupProgress(r):''}</a>`}).join('')||'<div class="empty">No matching groups</div>';
+ document.getElementById('total').textContent=`Total ${rows.length} groups${active==='remaining'?' · Entire batch '+DATA.remaining.filter(r=>r.ready===r.relations).length+' groups with suggestions loaded':''}`;
+ document.getElementById('pageLabel').textContent=`${page+1} / ${pages}`;document.getElementById('prev').disabled=page===0;document.getElementById('next').disabled=page>=pages-1;
+}
+document.getElementById('search').oninput=()=>{page=0;renderGroups()};document.getElementById('status').onchange=()=>{page=0;renderGroups()};document.getElementById('prev').onclick=()=>{page--;renderGroups()};document.getElementById('next').onclick=()=>{page++;renderGroups()};render();
+window.addEventListener('annotation-auth-change',refreshProgress);
+window.addEventListener('focus',refreshProgress);
+window.addEventListener('storage',e=>{if(['nevu_remaining_progress_changed','nevu_annotation_session_user_v2'].includes(e.key))refreshProgress()});
+refreshProgress();
+</script></body></html>

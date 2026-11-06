@@ -1,0 +1,944 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEVU Human Annotation - Group 41</title>
+<style>
+:root{
+  --bg:#f5f7fa;--panel:#fff;--line:#d9dee7;--text:#1f2937;--muted:#667085;
+  --direct:#dff4e6;--partial:#fff0bf;--orig:#e8eefc;--claude:#f3e8ff;
+  --stage2:#eefbf1;--danger:#fff0f0;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line);padding:10px 16px}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button,select,input,textarea{font:inherit}
+button,select{padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}
+button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.45}
+main{max-width:1220px;margin:16px auto 60px;padding:0 14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+.meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-bottom:14px}
+.meta>div{padding:7px 9px;background:#f8fafc;border-radius:7px}
+.label{font-size:11px;color:var(--muted)}.val{font-weight:600;word-break:break-word}
+.block{margin-top:16px}.block h3{font-size:15px;margin:0 0 7px}
+.explanation{background:#eef2ff;padding:10px;border-radius:7px;line-height:1.5}
+.rating{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin:8px 0}.rating label{font-size:13px}
+.qbox{border:1px solid var(--line);border-radius:10px;padding:12px;margin:10px 0}
+.qtype{font-size:12px;color:var(--muted);font-weight:700}
+.original{background:var(--orig);padding:8px;border-radius:7px;margin:6px 0;line-height:1.45}
+.claude{background:var(--claude);padding:10px;border-radius:7px;margin:8px 0;line-height:1.45}
+.query-edit{width:100%;min-height:66px;border:1px solid var(--line);border-radius:7px;padding:8px}
+.sentences{max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:9px;padding:7px}
+.stage2 .sentences{background:#fff}
+.sentence{display:grid;grid-template-columns:70px 1fr 220px;gap:8px;align-items:start;
+padding:7px;border-radius:7px;margin:3px 0;border:1px solid transparent}
+.sentence.direct{background:var(--direct)}.sentence.partial{background:var(--partial)}
+.sid{font-size:12px;color:var(--muted);padding-top:5px}.tags{font-size:11px;color:var(--muted);margin-top:3px}
+.stateBtns{display:flex;gap:4px;justify-content:flex-end}.stateBtns button{font-size:11px;padding:5px 7px}
+.stateBtns .active{font-weight:700;border-color:#555}.small{font-size:12px;color:var(--muted)}
+.notes{width:100%;min-height:55px;border:1px solid var(--line);border-radius:7px;padding:7px}
+.nav{font-weight:700}.stageBox{border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:16px}
+.stage2{background:var(--stage2)}.stageTitle{font-weight:800;margin-bottom:5px}
+.lockedBadge{display:inline-block;padding:4px 8px;border-radius:999px;background:#dcfce7;font-size:12px;font-weight:700}
+.unlockedBadge{display:inline-block;padding:4px 8px;border-radius:999px;background:#fee2e2;font-size:12px;font-weight:700}
+.warning{background:var(--danger);padding:9px;border-radius:8px;margin-top:8px;font-size:12px}
+.diffGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.diffCell{background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px}
+.diffLabel{font-size:11px;color:var(--muted);font-weight:700}.actionBtns{display:flex;gap:6px;flex-wrap:wrap;margin:7px 0}
+@media(max-width:850px){.meta{grid-template-columns:repeat(2,minmax(0,1fr))}
+.sentence{grid-template-columns:55px 1fr}.stateBtns{grid-column:2}.diffGrid{grid-template-columns:1fr}}
+
+.authOverlay{
+  position:fixed;inset:0;z-index:9999;background:rgba(17,24,39,.58);
+  display:flex;align-items:center;justify-content:center;padding:18px
+}
+.authOverlay.hidden{display:none}
+.authCard{
+  width:min(430px,96vw);background:#fff;border-radius:14px;padding:22px;
+  box-shadow:0 18px 55px rgba(0,0,0,.24)
+}
+.authCard h2{margin:0 0 6px}
+.authCard p{margin:0 0 14px;color:var(--muted);font-size:13px;line-height:1.45}
+.authField{margin:10px 0}
+.authField label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
+.authField input{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px}
+.authActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.authMessage{min-height:20px;margin-top:10px;font-size:12px}
+.authMessage.error{color:#b42318}
+.authMessage.ok{color:#087a3e}
+
+.card.human-confirmed{background:#effaf1;border:1px solid #a5d8b2}#confirmationStatus{font-weight:600;color:#27603b}
+.card.human-skipped{background:#fff0f0;border:1px solid #e5aaaa}
+</style>
+</head>
+<body>
+<header>
+<div class="toolbar">
+<strong>Human Annotation Group 41</strong>
+<span id="annotatorBadge" class="lockedBadge"></span>
+<span class="nav" id="counter"></span>
+<span id="saveStatus" class="small">Not saved yet</span>
+<button id="saveProgress" title="Save this item only">Confirm and save the current item</button>
+<button id="prev">← Previous relation</button>
+<button id="next">Next relation →</button>
+<button id="logoutBtn">Logout</button>
+<button id="exportData">Export corrected JSONL</button>
+<button id="exportLog">Export annotation log</button>
+</div>
+<div class="small" style="margin-top:6px">
+Stage 2 only · Valid by default；Problematic data can be marked invalid，Then click Next manually。After completing a valid item, click“Complete this item”。
+When served through server.py, progress is autosaved to the shared server JSONL file as well as local browser storage.
+</div>
+</header>
+
+<div id="authOverlay" class="authOverlay hidden">
+  <div class="authCard">
+    <h2>NEVU Annotation Login</h2>
+    <p>
+      Each account has a separate annotation workspace in this browser.
+      Create an account once, then log in with the same username/password.
+    </p>
+
+    <div class="authField">
+      <label>Username</label>
+      <input id="authUser" autocomplete="username" placeholder="e.g., annotator01">
+    </div>
+
+    <div class="authField">
+      <label>Password</label>
+      <input id="authPass" type="password" autocomplete="current-password" placeholder="Password">
+    </div>
+
+    <div class="authField">
+      <label>Confirm password <span class="small">(Create Account only)</span></label>
+      <input id="authPass2" type="password" autocomplete="new-password" placeholder="Repeat password">
+    </div>
+
+    <div class="authActions">
+      <button id="loginBtn">Login</button>
+      <button id="registerBtn">Create Account</button>
+    </div>
+
+    <div id="authMessage" class="authMessage"></div>
+  </div>
+</div>
+
+<main><div id="app"></div></main>
+
+<script>
+const RELATIONS=[{"original": {"relation_id": "rel_7b2e2fd8bc623473", "guid": "12-8193-1-1", "article_title": "No compulsory school or preschool on Monday", "unit_level": "subevent", "unit_id": "3", "unit_text": "The Minister of Health has activated the authorizations of the Infectious Diseases Act, resulting in temporary restrictions on school operations.", "actor_name": "Municipal Authorities and National Health Officials (e.g., SSH, Minister of Health)", "value_name": "Be compliant", "direction": "aligned", "nevu_explanation": "Activation of the Infectious Diseases Act enforces legal compliance to address public health emergencies.", "nevu_confidence": "9.234560e-01", "direct_doc_ids": ["12-8193-1-1::s5", "12-8193-1-1::s6"], "partial_doc_ids": ["12-8193-1-1::s4"], "article_sentences": [{"doc_id": "12-8193-1-1::s0", "sentence_id": 0, "text": "The Association of Municipalities in the Capital Area has decided that Monday will be a staff planning day at all compulsory schools and preschools in the capital area, so that administrators and staff can plan school activities as effectively as possible for the period during which restrictions on school operations apply."}, {"doc_id": "12-8193-1-1::s1", "sentence_id": 1, "text": "This means that children attending compulsory schools and preschools in the capital area will not be at school on Monday."}, {"doc_id": "12-8193-1-1::s2", "sentence_id": 2, "text": "After-school activities are also cancelled."}, {"doc_id": "12-8193-1-1::s3", "sentence_id": 3, "text": "This was stated in an announcement issued by SSH in the afternoon."}, {"doc_id": "12-8193-1-1::s4", "sentence_id": 4, "text": "“As reported in the media today, the Minister of Health has decided to invoke the powers granted by the Infectious Diseases Act, which include temporary restrictions on school operations."}, {"doc_id": "12-8193-1-1::s5", "sentence_id": 5, "text": "The detailed arrangements will be developed in accordance with the recommendations of the authorities."}, {"doc_id": "12-8193-1-1::s6", "sentence_id": 6, "text": "The municipalities in the capital area are now planning school activities in light of the above decisions,” the announcement states."}, {"doc_id": "12-8193-1-1::s7", "sentence_id": 7, "text": "“It has already been decided that Monday, March 16, will be a staff planning day at compulsory schools and preschools in the capital area, so that school administrators and staff can plan school activities as effectively as possible during the period covered by the restrictions."}, {"doc_id": "12-8193-1-1::s8", "sentence_id": 8, "text": "Parents of preschool and compulsory-school children are asked to pay close attention to information that will be published over the weekend and on Monday, including on municipal websites and the websites of compulsory schools and preschools."}, {"doc_id": "12-8193-1-1::s9", "sentence_id": 9, "text": "Joint guidelines from the municipalities in the capital area are also being prepared for after-school centres, sports activities, sports facilities, school bands and other children’s leisure activities.”"}], "queries": [{"query_id": "q_8f8f2b550cb622ea", "query_type": "entity_value_explicit", "query": "What evidence in the article supports that Municipal Authorities and National Health Officials (e.g., SSH, Minister of Health) is aligned with the human value \"Be compliant\"?"}, {"query_id": "q_2480721aa0f0cd9b", "query_type": "entity_implicit_value_explicit", "query": "Where in the article do civic leaders and healthcare authorities show an effort to be compliant with rules or official guidance?"}, {"query_id": "q_7bfd418c74d6aa5f", "query_type": "entity_explicit_value_naturalized", "query": "Does the report provide evidence that Municipal Authorities and National Health Officials adhered to established regulations and official safety mandates?"}, {"query_id": "q_3781d8ee0df56187", "query_type": "entity_value_implicit", "query": "Which excerpts indicate that local governance and medical officials followed established directives and acted in accordance with authorized protocols?"}], "rows": [{"schema_version": "nevu_verification_sample_v2", "query_id": "q_8f8f2b550cb622ea", "relation_id": "rel_7b2e2fd8bc623473", "guid": "12-8193-1-1", "article_title": "No compulsory school or preschool on Monday", "query_type": "entity_value_explicit", "unit_level": "subevent", "unit_id": "3", "unit_text": "The Minister of Health has activated the authorizations of the Infectious Diseases Act, resulting in temporary restrictions on school operations.", "scope_title": "", "actor_name": "Municipal Authorities and National Health Officials (e.g., SSH, Minister of Health)", "value_name": "Be compliant", "direction": "aligned", "nevu_explanation": "Activation of the Infectious Diseases Act enforces legal compliance to address public health emergencies.", "nevu_confidence": "9.234560e-01", "query": "What evidence in the article supports that Municipal Authorities and National Health Officials (e.g., SSH, Minister of Health) is aligned with the human value \"Be compliant\"?", "direct_doc_ids": ["12-8193-1-1::s5", "12-8193-1-1::s6"], "partial_doc_ids": ["12-8193-1-1::s4"], "direct_evidence": [{"doc_id": "12-8193-1-1::s5", "sentence_id": 5, "text": "The detailed arrangements will be developed in accordance with the recommendations of the authorities."}, {"doc_id": "12-8193-1-1::s6", "sentence_id": 6, "text": "The municipalities in the capital area are now planning school activities in light of the above decisions,” the announcement states."}], "partial_evidence": [{"doc_id": "12-8193-1-1::s4", "sentence_id": 4, "text": "“As reported in the media today, the Minister of Health has decided to invoke the powers granted by the Infectious Diseases Act, which include temporary restrictions on school operations."}], "article_sentences": [{"doc_id": "12-8193-1-1::s0", "sentence_id": 0, "text": "The Association of Municipalities in the Capital Area has decided that Monday will be a staff planning day at all compulsory schools and preschools in the capital area, so that administrators and staff can plan school activities as effectively as possible for the period during which restrictions on school operations apply."}, {"doc_id": "12-8193-1-1::s1", "sentence_id": 1, "text": "This means that children attending compulsory schools and preschools in the capital area will not be at school on Monday."}, {"doc_id": "12-8193-1-1::s2", "sentence_id": 2, "text": "After-school activities are also cancelled."}, {"doc_id": "12-8193-1-1::s3", "sentence_id": 3, "text": "This was stated in an announcement issued by SSH in the afternoon."}, {"doc_id": "12-8193-1-1::s4", "sentence_id": 4, "text": "“As reported in the media today, the Minister of Health has decided to invoke the powers granted by the Infectious Diseases Act, which include temporary restrictions on school operations."}, {"doc_id": "12-8193-1-1::s5", "sentence_id": 5, "text": "The detailed arrangements will be developed in accordance with the recommendations of the authorities."}, {"doc_id": "12-8193-1-1::s6", "sentence_id": 6, "text": "The municipalities in the capital area are now planning school activities in light of the above decisions,” the announcement states."}, {"doc_id": "12-8193-1-1::s7", "sentence_id": 7, "text": "“It has already been decided that Monday, March 16, will be a staff planning day at compulsory schools and preschools in the capital area, so that school administrators and staff can plan school activities as effectively as possible during the period covered by the restrictions."}, {"doc_id": "12-8193-1-1::s8", "sentence_id": 8, "text": "Parents of preschool and compulsory-school children are asked to pay close attention to information that will be published over the weekend and on Monday, including on municipal websites and the websites of compulsory schools and preschools."}, {"doc_id": "12-8193-1-1::s9", "sentence_id": 9, "text": "Joint guidelines from the municipalities in the capital area are also being prepared for after-school centres, sports activities, sports facilities, school bands and other children’s leisure activities.”"}]}, {"schema_version": "nevu_verification_sample_v2", "query_id": "q_2480721aa0f0cd9b", "relation_id": "rel_7b2e2fd8bc623473", "guid": "12-8193-1-1", "article_title": "No compulsory school or preschool on Monday", "query_type": "entity_implicit_value_explicit", "unit_level": "subevent", "unit_id": "3", "unit_text": "The Minister of Health has activated the authorizations of the Infectious Diseases Act, resulting in temporary restrictions on school operations.", "scope_title": "", "actor_name": "Municipal Authorities and National Health Officials (e.g., SSH, Minister of Health)", "value_name": "Be compliant", "direction": "aligned", "nevu_explanation": "Activation of the Infectious Diseases Act enforces legal compliance to address public health emergencies.", "nevu_confidence": "9.234560e-01", "query": "Where in the article do civic leaders and healthcare authorities show an effort to be compliant with rules or official guidance?", "direct_doc_ids": ["12-8193-1-1::s5", "12-8193-1-1::s6"], "partial_doc_ids": ["12-8193-1-1::s4"], "direct_evidence": [{"doc_id": "12-8193-1-1::s5", "sentence_id": 5, "text": "The detailed arrangements will be developed in accordance with the recommendations of the authorities."}, {"doc_id": "12-8193-1-1::s6", "sentence_id": 6, "text": "The municipalities in the capital area are now planning school activities in light of the above decisions,” the announcement states."}], "partial_evidence": [{"doc_id": "12-8193-1-1::s4", "sentence_id": 4, "text": "“As reported in the media today, the Minister of Health has decided to invoke the powers granted by the Infectious Diseases Act, which include temporary restrictions on school operations."}], "article_sentences": [{"doc_id": "12-8193-1-1::s0", "sentence_id": 0, "text": "The Association of Municipalities in the Capital Area has decided that Monday will be a staff planning day at all compulsory schools and preschools in the capital area, so that administrators and staff can plan school activities as effectively as possible for the period during which restrictions on school operations apply."}, {"doc_id": "12-8193-1-1::s1", "sentence_id": 1, "text": "This means that children attending compulsory schools and preschools in the capital area will not be at school on Monday."}, {"doc_id": "12-8193-1-1::s2", "sentence_id": 2, "text": "After-school activities are also cancelled."}, {"doc_id": "12-8193-1-1::s3", "sentence_id": 3, "text": "This was stated in an announcement issued by SSH in the afternoon."}, {"doc_id": "12-8193-1-1::s4", "sentence_id": 4, "text": "“As reported in the media today, the Minister of Health has decided to invoke the powers granted by the Infectious Diseases Act, which include temporary restrictions on school operations."}, {"doc_id": "12-8193-1-1::s5", "sentence_id": 5, "text": "The detailed arrangements will be developed in accordance with the recommendations of the authorities."}, {"doc_id": "12-8193-1-1::s6", "sentence_id": 6, "text": "The municipalities in the capital area are now planning school activities in light of the above decisions,” the announcement states."}, {"doc_id": "12-8193-1-1::s7", "sentence_id": 7, "text": "“It has already been decided that Monday, March 16, will be a staff planning day at compulsory schools and preschools in the capital area, so that school administrators and staff can plan school activities as effectively as possible during the period covered by the restrictions."}, {"doc_id": "12-8193-1-1::s8", "sentence_id": 8, "text": "Parents of preschool and compulsory-school children are asked to pay close attention to information that will be published over the weekend and on Monday, including on municipal websites and the websites of compulsory schools and preschools."}, {"doc_id": "12-8193-1-1::s9", "sentence_id": 9, "text": "Joint guidelines from the municipalities in the capital area are also being prepared for after-school centres, sports activities, sports facilities, school bands and other children’s leisure activities.”"}]}, {"schema_version": "nevu_verification_sample_v2", "query_id": "q_7bfd418c74d6aa5f", "relation_id": "rel_7b2e2fd8bc623473", "guid": "12-8193-1-1", "article_title": "No compulsory school or preschool on Monday", "query_type": "entity_explicit_value_naturalized", "unit_level": "subevent", "unit_id": "3", "unit_text": "The Minister of Health has activated the authorizations of the Infectious Diseases Act, resulting in temporary restrictions on school operations.", "scope_title": "", "actor_name": "Municipal Authorities and National Health Officials (e.g., SSH, Minister of Health)", "value_name": "Be compliant", "direction": "aligned", "nevu_explanation": "Activation of the Infectious Diseases Act enforces legal compliance to address public health emergencies.", "nevu_confidence": "9.234560e-01", "query": "Does the report provide evidence that Municipal Authorities and National Health Officials adhered to established regulations and official safety mandates?", "direct_doc_ids": ["12-8193-1-1::s5", "12-8193-1-1::s6"], "partial_doc_ids": ["12-8193-1-1::s4"], "direct_evidence": [{"doc_id": "12-8193-1-1::s5", "sentence_id": 5, "text": "The detailed arrangements will be developed in accordance with the recommendations of the authorities."}, {"doc_id": "12-8193-1-1::s6", "sentence_id": 6, "text": "The municipalities in the capital area are now planning school activities in light of the above decisions,” the announcement states."}], "partial_evidence": [{"doc_id": "12-8193-1-1::s4", "sentence_id": 4, "text": "“As reported in the media today, the Minister of Health has decided to invoke the powers granted by the Infectious Diseases Act, which include temporary restrictions on school operations."}], "article_sentences": [{"doc_id": "12-8193-1-1::s0", "sentence_id": 0, "text": "The Association of Municipalities in the Capital Area has decided that Monday will be a staff planning day at all compulsory schools and preschools in the capital area, so that administrators and staff can plan school activities as effectively as possible for the period during which restrictions on school operations apply."}, {"doc_id": "12-8193-1-1::s1", "sentence_id": 1, "text": "This means that children attending compulsory schools and preschools in the capital area will not be at school on Monday."}, {"doc_id": "12-8193-1-1::s2", "sentence_id": 2, "text": "After-school activities are also cancelled."}, {"doc_id": "12-8193-1-1::s3", "sentence_id": 3, "text": "This was stated in an announcement issued by SSH in the afternoon."}, {"doc_id": "12-8193-1-1::s4", "sentence_id": 4, "text": "“As reported in the media today, the Minister of Health has decided to invoke the powers granted by the Infectious Diseases Act, which include temporary restrictions on school operations."}, {"doc_id": "12-8193-1-1::s5", "sentence_id": 5, "text": "The detailed arrangements will be developed in accordance with the recommendations of the authorities."}, {"doc_id": "12-8193-1-1::s6", "sentence_id": 6, "text": "The municipalities in the capital area are now planning school activities in light of the above decisions,” the announcement states."}, {"doc_id": "12-8193-1-1::s7", "sentence_id": 7, "text": "“It has already been decided that Monday, March 16, will be a staff planning day at compulsory schools and preschools in the capital area, so that school administrators and staff can plan school activities as effectively as possible during the period covered by the restrictions."}, {"doc_id": "12-8193-1-1::s8", "sentence_id": 8, "text": "Parents of preschool and compulsory-school children are asked to pay close attention to information that will be published over the weekend and on Monday, including on municipal websites and the websites of compulsory schools and preschools."}, {"doc_id": "12-8193-1-1::s9", "sentence_id": 9, "text": "Joint guidelines from the municipalities in the capital area are also being prepared for after-school centres, sports activities, sports facilities, school bands and other children’s leisure activities.”"}]}, {"schema_version": "nevu_verification_sample_v2", "query_id": "q_3781d8ee0df56187", "relation_id": "rel_7b2e2fd8bc623473", "guid": "12-8193-1-1", "article_title": "No compulsory school or preschool on Monday", "query_type": "entity_value_implicit", "unit_level": "subevent", "unit_id": "3", "unit_text": "The Minister of Health has activated the authorizations of the Infectious Diseases Act, resulting in temporary restrictions on school operations.", "scope_title": "", "actor_name": "Municipal Authorities and National Health Officials (e.g., SSH, Minister of Health)", "value_name": "Be compliant", "direction": "aligned", "nevu_explanation": "Activation of the Infectious Diseases Act enforces legal compliance to address public health emergencies.", "nevu_confidence": "9.234560e-01", "query": "Which excerpts indicate that local governance and medical officials followed established directives and acted in accordance with authorized protocols?", "direct_doc_ids": ["12-8193-1-1::s5", "12-8193-1-1::s6"], "partial_doc_ids": ["12-8193-1-1::s4"], "direct_evidence": [{"doc_id": "12-8193-1-1::s5", "sentence_id": 5, "text": "The detailed arrangements will be developed in accordance with the recommendations of the authorities."}, {"doc_id": "12-8193-1-1::s6", "sentence_id": 6, "text": "The municipalities in the capital area are now planning school activities in light of the above decisions,” the announcement states."}], "partial_evidence": [{"doc_id": "12-8193-1-1::s4", "sentence_id": 4, "text": "“As reported in the media today, the Minister of Health has decided to invoke the powers granted by the Infectious Diseases Act, which include temporary restrictions on school operations."}], "article_sentences": [{"doc_id": "12-8193-1-1::s0", "sentence_id": 0, "text": "The Association of Municipalities in the Capital Area has decided that Monday will be a staff planning day at all compulsory schools and preschools in the capital area, so that administrators and staff can plan school activities as effectively as possible for the period during which restrictions on school operations apply."}, {"doc_id": "12-8193-1-1::s1", "sentence_id": 1, "text": "This means that children attending compulsory schools and preschools in the capital area will not be at school on Monday."}, {"doc_id": "12-8193-1-1::s2", "sentence_id": 2, "text": "After-school activities are also cancelled."}, {"doc_id": "12-8193-1-1::s3", "sentence_id": 3, "text": "This was stated in an announcement issued by SSH in the afternoon."}, {"doc_id": "12-8193-1-1::s4", "sentence_id": 4, "text": "“As reported in the media today, the Minister of Health has decided to invoke the powers granted by the Infectious Diseases Act, which include temporary restrictions on school operations."}, {"doc_id": "12-8193-1-1::s5", "sentence_id": 5, "text": "The detailed arrangements will be developed in accordance with the recommendations of the authorities."}, {"doc_id": "12-8193-1-1::s6", "sentence_id": 6, "text": "The municipalities in the capital area are now planning school activities in light of the above decisions,” the announcement states."}, {"doc_id": "12-8193-1-1::s7", "sentence_id": 7, "text": "“It has already been decided that Monday, March 16, will be a staff planning day at compulsory schools and preschools in the capital area, so that school administrators and staff can plan school activities as effectively as possible during the period covered by the restrictions."}, {"doc_id": "12-8193-1-1::s8", "sentence_id": 8, "text": "Parents of preschool and compulsory-school children are asked to pay close attention to information that will be published over the weekend and on Monday, including on municipal websites and the websites of compulsory schools and preschools."}, {"doc_id": "12-8193-1-1::s9", "sentence_id": 9, "text": "Joint guidelines from the municipalities in the capital area are also being prepared for after-school centres, sports activities, sports facilities, school bands and other children’s leisure activities.”"}]}]}, "claude": {}}, {"original": {"relation_id": "rel_b32fdfa1f9d698fe", "guid": "12-8193-1-1", "article_title": "No compulsory school or preschool on Monday", "unit_level": "subevent", "unit_id": "3", "unit_text": "The Minister of Health has activated the authorizations of the Infectious Diseases Act, resulting in temporary restrictions on school operations.", "actor_name": "Municipal Authorities and National Health Officials (e.g., SSH, Minister of Health)", "value_name": "Be responsible", "direction": "aligned", "nevu_explanation": "Government intervention demonstrates accountability in safeguarding population health.", "nevu_confidence": "8.876540e-01", "direct_doc_ids": ["12-8193-1-1::s4"], "partial_doc_ids": ["12-8193-1-1::s5", "12-8193-1-1::s6"], "article_sentences": [{"doc_id": "12-8193-1-1::s0", "sentence_id": 0, "text": "The Association of Municipalities in the Capital Area has decided that Monday will be a staff planning day at all compulsory schools and preschools in the capital area, so that administrators and staff can plan school activities as effectively as possible for the period during which restrictions on school operations apply."}, {"doc_id": "12-8193-1-1::s1", "sentence_id": 1, "text": "This means that children attending compulsory schools and preschools in the capital area will not be at school on Monday."}, {"doc_id": "12-8193-1-1::s2", "sentence_id": 2, "text": "After-school activities are also cancelled."}, {"doc_id": "12-8193-1-1::s3", "sentence_id": 3, "text": "This was stated in an announcement issued by SSH in the afternoon."}, {"doc_id": "12-8193-1-1::s4", "sentence_id": 4, "text": "“As reported in the media today, the Minister of Health has decided to invoke the powers granted by the Infectious Diseases Act, which include temporary restrictions on school operations."}, {"doc_id": "12-8193-1-1::s5", "sentence_id": 5, "text": "The detailed arrangements will be developed in accordance with the recommendations of the authorities."}, {"doc_id": "12-8193-1-1::s6", "sentence_id": 6, "text": "The municipalities in the capital area are now planning school activities in light of the above decisions,” the announcement states."}, {"doc_id": "12-8193-1-1::s7", "sentence_id": 7, "text": "“It has already been decided that Monday, March 16, will be a staff planning day at compulsory schools and preschools in the capital area, so that school administrators and staff can plan school activities as effectively as possible during the period covered by the restrictions."}, {"doc_id": "12-8193-1-1::s8", "sentence_id": 8, "text": "Parents of preschool and compulsory-school children are asked to pay close attention to information that will be published over the weekend and on Monday, including on municipal websites and the websites of compulsory schools and preschools."}, {"doc_id": "12-8193-1-1::s9", "sentence_id": 9, "text": "Joint guidelines from the municipalities in the capital area are also being prepared for after-school centres, sports activities, sports facilities, school bands and other children’s leisure activities.”"}], "queries": [{"query_id": "q_a55b3c787d17043f", "query_type": "entity_value_explicit", "query": "What evidence in the article supports that Municipal Authorities and National Health Officials (e.g., SSH, Minister of Health) is aligned with the human value \"Be responsible\"?"}, {"query_id": "q_7feb221bc698d41a", "query_type": "entity_implicit_value_explicit", "query": "Where in the article do civic leaders and healthcare leadership demonstrate the need to be responsible during the school disruptions?"}, {"query_id": "q_0fc8614146f52ba6", "query_type": "entity_explicit_value_naturalized", "query": "What passages show municipal authorities and national health officials taking prudent, accountable steps to protect public welfare?"}, {"query_id": "q_e47ff9451c52a94d", "query_type": "entity_value_implicit", "query": "Which excerpts document regional governance and medical directors exercising due diligence and accountability regarding operational decisions?"}], "rows": [{"schema_version": "nevu_verification_sample_v2", "query_id": "q_a55b3c787d17043f", "relation_id": "rel_b32fdfa1f9d698fe", "guid": "12-8193-1-1", "article_title": "No compulsory school or preschool on Monday", "query_type": "entity_value_explicit", "unit_level": "subevent", "unit_id": "3", "unit_text": "The Minister of Health has activated the authorizations of the Infectious Diseases Act, resulting in temporary restrictions on school operations.", "scope_title": "", "actor_name": "Municipal Authorities and National Health Officials (e.g., SSH, Minister of Health)", "value_name": "Be responsible", "direction": "aligned", "nevu_explanation": "Government intervention demonstrates accountability in safeguarding population health.", "nevu_confidence": "8.876540e-01", "query": "What evidence in the article supports that Municipal Authorities and National Health Officials (e.g., SSH, Minister of Health) is aligned with the human value \"Be responsible\"?", "direct_doc_ids": ["12-8193-1-1::s4"], "partial_doc_ids": ["12-8193-1-1::s5", "12-8193-1-1::s6"], "direct_evidence": [{"doc_id": "12-8193-1-1::s4", "sentence_id": 4, "text": "“As reported in the media today, the Minister of Health has decided to invoke the powers granted by the Infectious Diseases Act, which include temporary restrictions on school operations."}], "partial_evidence": [{"doc_id": "12-8193-1-1::s5", "sentence_id": 5, "text": "The detailed arrangements will be developed in accordance with the recommendations of the authorities."}, {"doc_id": "12-8193-1-1::s6", "sentence_id": 6, "text": "The municipalities in the capital area are now planning school activities in light of the above decisions,” the announcement states."}], "article_sentences": [{"doc_id": "12-8193-1-1::s0", "sentence_id": 0, "text": "The Association of Municipalities in the Capital Area has decided that Monday will be a staff planning day at all compulsory schools and preschools in the capital area, so that administrators and staff can plan school activities as effectively as possible for the period during which restrictions on school operations apply."}, {"doc_id": "12-8193-1-1::s1", "sentence_id": 1, "text": "This means that children attending compulsory schools and preschools in the capital area will not be at school on Monday."}, {"doc_id": "12-8193-1-1::s2", "sentence_id": 2, "text": "After-school activities are also cancelled."}, {"doc_id": "12-8193-1-1::s3", "sentence_id": 3, "text": "This was stated in an announcement issued by SSH in the afternoon."}, {"doc_id": "12-8193-1-1::s4", "sentence_id": 4, "text": "“As reported in the media today, the Minister of Health has decided to invoke the powers granted by the Infectious Diseases Act, which include temporary restrictions on school operations."}, {"doc_id": "12-8193-1-1::s5", "sentence_id": 5, "text": "The detailed arrangements will be developed in accordance with the recommendations of the authorities."}, {"doc_id": "12-8193-1-1::s6", "sentence_id": 6, "text": "The municipalities in the capital area are now planning school activities in light of the above decisions,” the announcement states."}, {"doc_id": "12-8193-1-1::s7", "sentence_id": 7, "text": "“It has already been decided that Monday, March 16, will be a staff planning day at compulsory schools and preschools in the capital area, so that school administrators and staff can plan school activities as effectively as possible during the period covered by the restrictions."}, {"doc_id": "12-8193-1-1::s8", "sentence_id": 8, "text": "Parents of preschool and compulsory-school children are asked to pay close attention to information that will be published over the weekend and on Monday, including on municipal websites and the websites of compulsory schools and preschools."}, {"doc_id": "12-8193-1-1::s9", "sentence_id": 9, "text": "Joint guidelines from the municipalities in the capital area are also being prepared for after-school centres, sports activities, sports facilities, school bands and other children’s leisure activities.”"}]}, {"schema_version": "nevu_verification_sample_v2", "query_id": "q_7feb221bc698d41a", "relation_id": "rel_b32fdfa1f9d698fe", "guid": "12-8193-1-1", "article_title": "No compulsory school or preschool on Monday", "query_type": "entity_implicit_value_explicit", "unit_level": "subevent", "unit_id": "3", "unit_text": "The Minister of Health has activated the authorizations of the Infectious Diseases Act, resulting in temporary restrictions on school operations.", "scope_title": "", "actor_name": "Municipal Authorities and National Health Officials (e.g., SSH, Minister of Health)", "value_name": "Be responsible", "direction": "aligned", "nevu_explanation": "Government intervention demonstrates accountability in safeguarding population health.", "nevu_confidence": "8.876540e-01", "query": "Where in the article do civic leaders and healthcare leadership demonstrate the need to be responsible during the school disruptions?", "direct_doc_ids": ["12-8193-1-1::s4"], "partial_doc_ids": ["12-8193-1-1::s5", "12-8193-1-1::s6"], "direct_evidence": [{"doc_id": "12-8193-1-1::s4", "sentence_id": 4, "text": "“As reported in the media today, the Minister of Health has decided to invoke the powers granted by the Infectious Diseases Act, which include temporary restrictions on school operations."}], "partial_evidence": [{"doc_id": "12-8193-1-1::s5", "sentence_id": 5, "text": "The detailed arrangements will be developed in accordance with the recommendations of the authorities."}, {"doc_id": "12-8193-1-1::s6", "sentence_id": 6, "text": "The municipalities in the capital area are now planning school activities in light of the above decisions,” the announcement states."}], "article_sentences": [{"doc_id": "12-8193-1-1::s0", "sentence_id": 0, "text": "The Association of Municipalities in the Capital Area has decided that Monday will be a staff planning day at all compulsory schools and preschools in the capital area, so that administrators and staff can plan school activities as effectively as possible for the period during which restrictions on school operations apply."}, {"doc_id": "12-8193-1-1::s1", "sentence_id": 1, "text": "This means that children attending compulsory schools and preschools in the capital area will not be at school on Monday."}, {"doc_id": "12-8193-1-1::s2", "sentence_id": 2, "text": "After-school activities are also cancelled."}, {"doc_id": "12-8193-1-1::s3", "sentence_id": 3, "text": "This was stated in an announcement issued by SSH in the afternoon."}, {"doc_id": "12-8193-1-1::s4", "sentence_id": 4, "text": "“As reported in the media today, the Minister of Health has decided to invoke the powers granted by the Infectious Diseases Act, which include temporary restrictions on school operations."}, {"doc_id": "12-8193-1-1::s5", "sentence_id": 5, "text": "The detailed arrangements will be developed in accordance with the recommendations of the authorities."}, {"doc_id": "12-8193-1-1::s6", "sentence_id": 6, "text": "The municipalities in the capital area are now planning school activities in light of the above decisions,” the announcement states."}, {"doc_id": "12-8193-1-1::s7", "sentence_id": 7, "text": "“It has already been decided that Monday, March 16, will be a staff planning day at compulsory schools and preschools in the capital area, so that school administrators and staff can plan school activities as effectively as possible during the period covered by the restrictions."}, {"doc_id": "12-8193-1-1::s8", "sentence_id": 8, "text": "Parents of preschool and compulsory-school children are asked to pay close attention to information that will be published over the weekend and on Monday, including on municipal websites and the websites of compulsory schools and preschools."}, {"doc_id": "12-8193-1-1::s9", "sentence_id": 9, "text": "Joint guidelines from the municipalities in the capital area are also being prepared for after-school centres, sports activities, sports facilities, school bands and other children’s leisure activities.”"}]}, {"schema_version": "nevu_verification_sample_v2", "query_id": "q_0fc8614146f52ba6", "relation_id": "rel_b32fdfa1f9d698fe", "guid": "12-8193-1-1", "article_title": "No compulsory school or preschool on Monday", "query_type": "entity_explicit_value_naturalized", "unit_level": "subevent", "unit_id": "3", "unit_text": "The Minister of Health has activated the authorizations of the Infectious Diseases Act, resulting in temporary restrictions on school operations.", "scope_title": "", "actor_name": "Municipal Authorities and National Health Officials (e.g., SSH, Minister of Health)", "value_name": "Be responsible", "direction": "aligned", "nevu_explanation": "Government intervention demonstrates accountability in safeguarding population health.", "nevu_confidence": "8.876540e-01", "query": "What passages show municipal authorities and national health officials taking prudent, accountable steps to protect public welfare?", "direct_doc_ids": ["12-8193-1-1::s4"], "partial_doc_ids": ["12-8193-1-1::s5", "12-8193-1-1::s6"], "direct_evidence": [{"doc_id": "12-8193-1-1::s4", "sentence_id": 4, "text": "“As reported in the media today, the Minister of Health has decided to invoke the powers granted by the Infectious Diseases Act, which include temporary restrictions on school operations."}], "partial_evidence": [{"doc_id": "12-8193-1-1::s5", "sentence_id": 5, "text": "The detailed arrangements will be developed in accordance with the recommendations of the authorities."}, {"doc_id": "12-8193-1-1::s6", "sentence_id": 6, "text": "The municipalities in the capital area are now planning school activities in light of the above decisions,” the announcement states."}], "article_sentences": [{"doc_id": "12-8193-1-1::s0", "sentence_id": 0, "text": "The Association of Municipalities in the Capital Area has decided that Monday will be a staff planning day at all compulsory schools and preschools in the capital area, so that administrators and staff can plan school activities as effectively as possible for the period during which restrictions on school operations apply."}, {"doc_id": "12-8193-1-1::s1", "sentence_id": 1, "text": "This means that children attending compulsory schools and preschools in the capital area will not be at school on Monday."}, {"doc_id": "12-8193-1-1::s2", "sentence_id": 2, "text": "After-school activities are also cancelled."}, {"doc_id": "12-8193-1-1::s3", "sentence_id": 3, "text": "This was stated in an announcement issued by SSH in the afternoon."}, {"doc_id": "12-8193-1-1::s4", "sentence_id": 4, "text": "“As reported in the media today, the Minister of Health has decided to invoke the powers granted by the Infectious Diseases Act, which include temporary restrictions on school operations."}, {"doc_id": "12-8193-1-1::s5", "sentence_id": 5, "text": "The detailed arrangements will be developed in accordance with the recommendations of the authorities."}, {"doc_id": "12-8193-1-1::s6", "sentence_id": 6, "text": "The municipalities in the capital area are now planning school activities in light of the above decisions,” the announcement states."}, {"doc_id": "12-8193-1-1::s7", "sentence_id": 7, "text": "“It has already been decided that Monday, March 16, will be a staff planning day at compulsory schools and preschools in the capital area, so that school administrators and staff can plan school activities as effectively as possible during the period covered by the restrictions."}, {"doc_id": "12-8193-1-1::s8", "sentence_id": 8, "text": "Parents of preschool and compulsory-school children are asked to pay close attention to information that will be published over the weekend and on Monday, including on municipal websites and the websites of compulsory schools and preschools."}, {"doc_id": "12-8193-1-1::s9", "sentence_id": 9, "text": "Joint guidelines from the municipalities in the capital area are also being prepared for after-school centres, sports activities, sports facilities, school bands and other children’s leisure activities.”"}]}, {"schema_version": "nevu_verification_sample_v2", "query_id": "q_e47ff9451c52a94d", "relation_id": "rel_b32fdfa1f9d698fe", "guid": "12-8193-1-1", "article_title": "No compulsory school or preschool on Monday", "query_type": "entity_value_implicit", "unit_level": "subevent", "unit_id": "3", "unit_text": "The Minister of Health has activated the authorizations of the Infectious Diseases Act, resulting in temporary restrictions on school operations.", "scope_title": "", "actor_name": "Municipal Authorities and National Health Officials (e.g., SSH, Minister of Health)", "value_name": "Be responsible", "direction": "aligned", "nevu_explanation": "Government intervention demonstrates accountability in safeguarding population health.", "nevu_confidence": "8.876540e-01", "query": "Which excerpts document regional governance and medical directors exercising due diligence and accountability regarding operational decisions?", "direct_doc_ids": ["12-8193-1-1::s4"], "partial_doc_ids": ["12-8193-1-1::s5", "12-8193-1-1::s6"], "direct_evidence": [{"doc_id": "12-8193-1-1::s4", "sentence_id": 4, "text": "“As reported in the media today, the Minister of Health has decided to invoke the powers granted by the Infectious Diseases Act, which include temporary restrictions on school operations."}], "partial_evidence": [{"doc_id": "12-8193-1-1::s5", "sentence_id": 5, "text": "The detailed arrangements will be developed in accordance with the recommendations of the authorities."}, {"doc_id": "12-8193-1-1::s6", "sentence_id": 6, "text": "The municipalities in the capital area are now planning school activities in light of the above decisions,” the announcement states."}], "article_sentences": [{"doc_id": "12-8193-1-1::s0", "sentence_id": 0, "text": "The Association of Municipalities in the Capital Area has decided that Monday will be a staff planning day at all compulsory schools and preschools in the capital area, so that administrators and staff can plan school activities as effectively as possible for the period during which restrictions on school operations apply."}, {"doc_id": "12-8193-1-1::s1", "sentence_id": 1, "text": "This means that children attending compulsory schools and preschools in the capital area will not be at school on Monday."}, {"doc_id": "12-8193-1-1::s2", "sentence_id": 2, "text": "After-school activities are also cancelled."}, {"doc_id": "12-8193-1-1::s3", "sentence_id": 3, "text": "This was stated in an announcement issued by SSH in the afternoon."}, {"doc_id": "12-8193-1-1::s4", "sentence_id": 4, "text": "“As reported in the media today, the Minister of Health has decided to invoke the powers granted by the Infectious Diseases Act, which include temporary restrictions on school operations."}, {"doc_id": "12-8193-1-1::s5", "sentence_id": 5, "text": "The detailed arrangements will be developed in accordance with the recommendations of the authorities."}, {"doc_id": "12-8193-1-1::s6", "sentence_id": 6, "text": "The municipalities in the capital area are now planning school activities in light of the above decisions,” the announcement states."}, {"doc_id": "12-8193-1-1::s7", "sentence_id": 7, "text": "“It has already been decided that Monday, March 16, will be a staff planning day at compulsory schools and preschools in the capital area, so that school administrators and staff can plan school activities as effectively as possible during the period covered by the restrictions."}, {"doc_id": "12-8193-1-1::s8", "sentence_id": 8, "text": "Parents of preschool and compulsory-school children are asked to pay close attention to information that will be published over the weekend and on Monday, including on municipal websites and the websites of compulsory schools and preschools."}, {"doc_id": "12-8193-1-1::s9", "sentence_id": 9, "text": "Joint guidelines from the municipalities in the capital area are also being prepared for after-school centres, sports activities, sports facilities, school bands and other children’s leisure activities.”"}]}]}, "claude": {}}];
+const GROUP=41;
+
+let annotator=null;
+let idx=0;
+let states={};
+let saveTimer=null;
+
+const SERVER_SYNC_ENABLED=(location.protocol==="http:"||location.protocol==="https:");
+const ANNOTATION_PROTOCOL="stage2_only_fable_assisted_remaining_v1";
+const serverSaveTimers={};
+
+function isoNow(){return new Date().toISOString()}
+function parseTime(s){const t=Date.parse(s||"");return Number.isFinite(t)?t:0}
+function cloneJson(x){return JSON.parse(JSON.stringify(x))}
+
+function currentRelationAndState(){
+  if(!RELATIONS.length)return [null,null];
+  const r=RELATIONS[idx];
+  const rid=r?.original?.relation_id;
+  return [rid,rid?states[rid]:null];
+}
+
+let remainingServerVerified=false;
+async function verifyRemainingServer(){
+  if(remainingServerVerified)return;
+  const resp=await fetch("/api/health",{cache:"no-store",signal:AbortSignal.timeout(10000)});
+  const info=await resp.json();
+  if(!resp.ok||!info.ok||info.storage_layout!=="document_annotation_groups_of_20_v1"){
+    throw new Error("Please use server_document_annotation.py；The server is not using the new batch’s separate storage。");
+  }
+  remainingServerVerified=true;
+}
+
+async function sendStateToServer(payload){
+  if(!SERVER_SYNC_ENABLED)return {ok:false,disabled:true};
+  await verifyRemainingServer();
+  const resp=await fetch("/api/save",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify(payload),
+    signal:AbortSignal.timeout(10000),
+    cache:"no-store"
+  });
+  const data=await resp.json().catch(()=>({ok:false,error:"invalid server response"}));
+  if(!resp.ok||!data.ok)throw new Error(data.error||(`HTTP ${resp.status}`));
+  return data;
+}
+
+// New batch: local drafts only until the user explicitly clicks Save.
+const serverSnapshots={};
+let manualSaveInFlight=false;
+function fingerprint(state){
+  const clean=cloneJson(state);
+  delete clean._client_updated_at;delete clean.completed_at;delete clean.confirmed_at;delete clean.claude_visible;
+  const stable=x=>Array.isArray(x)?x.map(stable):x&&typeof x==="object"?Object.fromEntries(Object.keys(x).sort().map(k=>[k,stable(x[k])])):x;
+  return JSON.stringify(stable(clean));
+}
+function baseline(rid){
+  if(serverSnapshots[rid]!==undefined)return serverSnapshots[rid];
+  const rel=RELATIONS.find(r=>String(r.original.relation_id)===String(rid));
+  return fingerprint(defaultState(rel));
+}
+function skippedMap(){try{return JSON.parse(localStorage.getItem(storageKey()+":skipped")||"{}")}catch{return {}}}
+function isSkipped(rid){return skippedMap()[rid]===true}
+window.toggleSkip=async function(){
+  if(!annotator||manualSaveInFlight)return;
+  const rid=RELATIONS[idx].original.relation_id;
+  harvestStage2();
+  const skipped=skippedMap();
+  if(skipped[rid]){delete skipped[rid];localStorage.setItem(storageKey()+":skipped",JSON.stringify(skipped));refreshRelationControls();return;}
+  manualSaveInFlight=true;
+  try{
+    if(SERVER_SYNC_ENABLED){
+      await verifyRemainingServer();
+      const response=await fetch("/api/skip",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({annotator,group:String(GROUP),relation_id:rid,manual_save:true}),signal:AbortSignal.timeout(10000)});
+      const result=await response.json();if(!response.ok||!result.ok)throw Error(result.error||"Skip failed");
+    }
+    skipped[rid]=true;delete serverSnapshots[rid];
+    localStorage.setItem(storageKey()+":skipped",JSON.stringify(skipped));
+    localStorage.setItem("nevu_remaining_progress_changed",String(Date.now()));
+    manualSaveInFlight=false;refreshRelationControls();
+  }catch(e){manualSaveInFlight=false;markSaved("Skip failed："+e.message,true);}
+};
+function isDirty(rid,state){return !isSkipped(rid)&&fingerprint(state)!==baseline(rid)}
+function isConfirmed(rid,state){return !isSkipped(rid)&&state.human_confirmed===true&&serverSnapshots[rid]!==undefined&&!isDirty(rid,state)}
+function updateManualStatus(){
+  const [rid,state]=currentRelationAndState();
+  const skipped=isSkipped(rid),confirmed=!!state&&isConfirmed(rid,state);
+  document.querySelector("#app .card")?.classList.toggle("human-skipped",skipped);
+  document.querySelector("#app .card")?.classList.toggle("human-confirmed",confirmed);
+  const counter=document.getElementById("counter");
+  if(counter)counter.textContent=`Relation ${idx+1}/${RELATIONS.length} · `+(skipped?"Skipped（Not stored on the server）":confirmed?"Confirmed and saved by a human":"Awaiting human confirmation and save");
+  const badge=document.getElementById("confirmationStatus");
+  if(badge)badge.textContent=confirmed?"✓ This item was confirmed and saved by a human":"This item is not confirmed，or contains new changes；Check and click Save";
+  if(manualSaveInFlight){markSaved("Saving to server…");return;}
+  if(!state)return;
+  if(skipped){markSaved("Skipped，Remember in this browser only；Not stored on the server");return;}
+  markSaved(isDirty(rid,state)?"Unsaved changes（Keep a local draft only）":serverSnapshots[rid]!==undefined?"Saved to server":"Not yet saved；After checking, click Save below",isDirty(rid,state));
+}
+async function loadServerStates(){
+  Object.keys(serverSnapshots).forEach(k=>delete serverSnapshots[k]);
+  if(!SERVER_SYNC_ENABLED||!annotator)return;
+  try{
+    await verifyRemainingServer();
+    const resp=await fetch(`/api/load?annotator=${encodeURIComponent(annotator)}&group=${encodeURIComponent(String(GROUP))}`,{cache:"no-store",signal:AbortSignal.timeout(10000)});
+    const data=await resp.json();
+    if(!resp.ok||!data.ok)throw Error(data.error||"Read failed");
+    Object.entries(data.states||{}).forEach(([rid,remote])=>{
+      serverSnapshots[rid]=fingerprint(remote);
+      if(!states[rid]||parseTime(remote._client_updated_at)>=parseTime(states[rid]._client_updated_at))states[rid]=remote;
+    });
+    localStorage.setItem(storageKey(),JSON.stringify(states));
+  }catch(e){markSaved("Server read failed，Local draft not uploaded；Refresh and retry",true);}
+}
+window.saveCurrentToServer=async function(){
+  if(!annotator||manualSaveInFlight||isSkipped(RELATIONS[idx].original.relation_id))return false;
+  harvestStage2();
+  const owner=annotator,r=RELATIONS[idx],rid=r.original.relation_id,state=getState(r);
+  if(state.valid&&Object.values(state.queries).some(q=>q.status!=="exclude"&&!q.final_query.trim())){
+    alert("Valid query Cannot be empty；Please select Exclude or mark this item invalid。");return false;
+  }
+  if(state.valid){state.completed=true;state.completed_at=isoNow();}
+  state.human_confirmed=true;state.confirmed_at=isoNow();
+  save();
+  if(serverSnapshots[rid]===fingerprint(state)){markSaved("Saved to server（No new changes）");return true;}
+  if(!SERVER_SYNC_ENABLED){markSaved("Open this page through the local server before saving",true);return false;}
+  const snapshot=cloneJson(state);
+  manualSaveInFlight=true;updateManualStatus();
+  try{
+    await sendStateToServer({annotator:owner,group:String(GROUP),relation_id:String(rid),protocol:ANNOTATION_PROTOCOL,manual_save:true,client_updated_at:snapshot._client_updated_at,state:snapshot});
+    if(annotator===owner)serverSnapshots[rid]=fingerprint(snapshot);
+    localStorage.setItem("nevu_remaining_progress_changed",String(Date.now()));
+    manualSaveInFlight=false;updateManualStatus();
+    return true;
+  }catch(e){
+    manualSaveInFlight=false;markSaved("Save failed："+(e?.message||String(e))+"；Draft remains local，Click Save again",true);return false;
+  }
+};
+
+function safeAnnotator(){
+  return (annotator||"annotator").replace(/[^A-Za-z0-9._-]+/g,"_").slice(0,60)||"annotator";
+}
+function storageKey(){
+  if(!annotator)return "";
+  return "nevu_human_document_annotation_group_"+GROUP+"__annotator__"+encodeURIComponent(annotator);
+}
+function loadStates(){
+  if(!annotator)return {};
+  try{return JSON.parse(localStorage.getItem(storageKey())||"{}")}catch(e){return {}}
+}
+
+function esc(s){return String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;")}
+
+function updateUserBadge(){
+  const el=document.getElementById("annotatorBadge");
+  if(el)el.textContent="Annotator: "+annotator;
+}
+
+function markSaved(message="Saved locally",isError=false){
+  const el=document.getElementById("saveStatus");
+  if(el){
+    const t=new Date().toLocaleTimeString();
+    el.textContent=(isError?"⚠ ":"✓ ")+message+" · "+t;
+    el.style.color=isError?"#b42318":"";
+  }
+}
+
+function save(){
+  if(!annotator)return;
+  const [rid,state]=currentRelationAndState();
+  if(state&&isDirty(rid,state))state._client_updated_at=isoNow();
+  localStorage.setItem(storageKey(),JSON.stringify(states));
+  updateManualStatus();
+}
+
+function persistCurrent(){
+  const r=RELATIONS[idx],s=getState(r);
+  harvestStage2();
+  save();
+}
+
+function scheduleAutosave(event){
+  if(!annotator||!event?.target?.closest("#app"))return;
+  // Keep a local draft; never upload until Save is clicked.
+  try{harvestStage2()}catch(e){console.warn("autosave failed",e)}
+}
+
+
+const ACCOUNT_DB_KEY="nevu_annotation_accounts_v2";
+const SESSION_KEY="nevu_annotation_session_user_v2";
+
+function getAccounts(){
+  try{return JSON.parse(localStorage.getItem(ACCOUNT_DB_KEY)||"{}")}
+  catch(e){return {}}
+}
+
+function saveAccounts(accounts){
+  localStorage.setItem(ACCOUNT_DB_KEY,JSON.stringify(accounts));
+}
+
+function bytesToHex(bytes){
+  return Array.from(bytes).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+
+function hexToBytes(hex){
+  const out=new Uint8Array(hex.length/2);
+  for(let i=0;i<out.length;i++){
+    out[i]=parseInt(hex.slice(i*2,i*2+2),16);
+  }
+  return out;
+}
+
+function newSalt(){
+  const b=new Uint8Array(16);
+  crypto.getRandomValues(b);
+  return bytesToHex(b);
+}
+
+async function passwordHash(password,saltHex){
+  if(!window.crypto || !crypto.subtle){
+    throw new Error(
+      "Web Crypto is unavailable. Open the page in a modern browser, preferably via http://localhost."
+    );
+  }
+
+  const enc=new TextEncoder();
+  const baseKey=await crypto.subtle.importKey(
+    "raw",enc.encode(password),"PBKDF2",false,["deriveBits"]
+  );
+
+  const bits=await crypto.subtle.deriveBits(
+    {
+      name:"PBKDF2",
+      salt:hexToBytes(saltHex),
+      iterations:150000,
+      hash:"SHA-256"
+    },
+    baseKey,
+    256
+  );
+
+  return bytesToHex(new Uint8Array(bits));
+}
+
+function authMessage(text,type=""){
+  const el=document.getElementById("authMessage");
+  if(!el)return;
+  el.textContent=text||"";
+  el.className="authMessage"+(type?(" "+type):"");
+}
+
+function showAuth(message=""){
+  document.getElementById("authOverlay")?.classList.remove("hidden");
+  authMessage(message);
+  setTimeout(()=>document.getElementById("authUser")?.focus(),50);
+}
+
+function hideAuth(){
+  document.getElementById("authOverlay")?.classList.add("hidden");
+  authMessage("");
+  const p=document.getElementById("authPass");
+  const p2=document.getElementById("authPass2");
+  if(p)p.value="";
+  if(p2)p2.value="";
+}
+
+async function enterWorkspace(username){
+  annotator=username;
+  sessionStorage.setItem(SESSION_KEY,annotator);
+  states=loadStates();
+  idx=0;
+  hideAuth();
+  updateUserBadge();
+  markSaved(SERVER_SYNC_ENABLED?"Loading server backup…":"User workspace loaded");
+  await loadServerStates();
+  render();
+}
+
+async function registerAccount(){
+  const username=(document.getElementById("authUser")?.value||"").trim();
+  const password=document.getElementById("authPass")?.value||"";
+  const confirm=document.getElementById("authPass2")?.value||"";
+
+  if(username.length<2){
+    authMessage("Username must contain at least 2 characters.","error");
+    return;
+  }
+  if(password.length<6){
+    authMessage("Password must contain at least 6 characters.","error");
+    return;
+  }
+  if(password!==confirm){
+    authMessage("The two passwords do not match.","error");
+    return;
+  }
+
+  const accounts=getAccounts();
+  if(accounts[username]){
+    authMessage("This username already exists. Please login instead.","error");
+    return;
+  }
+
+  try{
+    authMessage("Creating account...");
+    const salt=newSalt();
+    const hash=await passwordHash(password,salt);
+    accounts[username]={
+      salt:salt,
+      hash:hash,
+      created_at:new Date().toISOString(),
+      kdf:"PBKDF2-SHA256-150000"
+    };
+    saveAccounts(accounts);
+    authMessage("Account created.","ok");
+    await enterWorkspace(username);
+  }catch(e){
+    authMessage(String(e),"error");
+  }
+}
+
+async function loginAccount(){
+  const username=(document.getElementById("authUser")?.value||"").trim();
+  const password=document.getElementById("authPass")?.value||"";
+  const accounts=getAccounts();
+  const account=accounts[username];
+
+  if(!account){
+    authMessage("Unknown username. Create an account first.","error");
+    return;
+  }
+
+  try{
+    authMessage("Checking password...");
+    const hash=await passwordHash(password,account.salt);
+    if(hash!==account.hash){
+      authMessage("Incorrect password.","error");
+      return;
+    }
+    await enterWorkspace(username);
+  }catch(e){
+    authMessage(String(e),"error");
+  }
+}
+
+async function logoutAccount(){
+  try{persistCurrent()}catch(e){console.warn(e)}
+  sessionStorage.removeItem(SESSION_KEY);
+  annotator=null;
+  states={};
+  idx=0;
+
+  const badge=document.getElementById("annotatorBadge");
+  if(badge)badge.textContent="";
+  const status=document.getElementById("saveStatus");
+  if(status)status.textContent="Logged out";
+  const app=document.getElementById("app");
+  if(app)app.innerHTML="";
+
+  showAuth("Logged out. Login to continue.");
+}
+
+async function bootAuth(){
+  const accounts=getAccounts();
+  const sessionUser=sessionStorage.getItem(SESSION_KEY);
+
+  if(sessionUser && accounts[sessionUser]){
+    await enterWorkspace(sessionUser);
+  }else{
+    sessionStorage.removeItem(SESSION_KEY);
+    showAuth();
+  }
+}
+
+
+function defaultState(r){
+  const evidence={};
+  (r.original.direct_doc_ids||[]).forEach(x=>evidence[String(x)]="direct");
+  (r.original.partial_doc_ids||[]).forEach(x=>{if(!evidence[String(x)])evidence[String(x)]="partial"});
+  const qs={};
+  r.original.queries.forEach(q=>{
+    qs[q.query_id]={
+      final_query:q.query,
+      status:"keep",
+      note:""
+    };
+  });
+  return {
+    valid:true,
+    invalid_reason:"",
+    completed:false,
+    completed_at:"",
+    evidence:evidence,
+    evidence_note:"",
+    queries:qs,
+    claude_visible:true
+  };
+}
+
+function getState(r){
+  const rid=r.original.relation_id;
+  if(!states[rid])states[rid]=defaultState(r);
+  return states[rid];
+}
+
+function queryTypeHint(qtype){
+  const hints={
+    "entity_value_explicit":
+      "Expected form: actor and value are explicit. Judge whether the semantic actor–value–direction relation is preserved.",
+    "entity_implicit_value_explicit":
+      "Expected form: the actor may be implicit or indirectly referred to; the value is explicit. Do NOT penalize the missing literal actor name.",
+    "entity_explicit_value_naturalized":
+      "Expected form: the actor is explicit; the value may be naturally paraphrased. Do NOT require the exact taxonomy label.",
+    "entity_value_implicit":
+      "Expected form: both actor and value may be implicit/contextual. Do NOT penalize intended implicitness; judge whether the intended relation is still semantically recoverable."
+  };
+  return hints[qtype]||"Judge the intended relation semantically, not by literal string overlap.";
+}
+
+function originalTag(r,did){
+  const t=[];
+  if((r.original.direct_doc_ids||[]).includes(did))t.push("Original:Direct");
+  if((r.original.partial_doc_ids||[]).includes(did))t.push("Original:Partial");
+  return t.join(" · ");
+}
+function fableTag(r,did){
+  const t=[];
+  if((r.claude?.direct_doc_ids||[]).includes(did))t.push("Fable:Direct");
+  if((r.claude?.partial_doc_ids||[]).includes(did))t.push("Fable:Partial");
+  return t.join(" · ");
+}
+
+function evidenceDiffSummary(r){
+  const od=new Set((r.original.direct_doc_ids||[]).map(String));
+  const op=new Set((r.original.partial_doc_ids||[]).map(String));
+  const fd=new Set((r.claude?.direct_doc_ids||[]).map(String));
+  const fp=new Set((r.claude?.partial_doc_ids||[]).map(String));
+  const promoted=[...fd].filter(x=>op.has(x));
+  const demoted=[...fp].filter(x=>od.has(x));
+  const added=[...new Set([...fd,...fp])].filter(x=>!od.has(x)&&!op.has(x));
+  const removed=[...new Set([...od,...op])].filter(x=>!fd.has(x)&&!fp.has(x));
+  const fmt=xs=>xs.length?xs.join(", "):"none";
+  return `<div class="diffGrid">
+    <div class="diffCell"><div class="diffLabel">Fable added</div>${esc(fmt(added))}</div>
+    <div class="diffCell"><div class="diffLabel">Fable removed</div>${esc(fmt(removed))}</div>
+    <div class="diffCell"><div class="diffLabel">Partial → Direct</div>${esc(fmt(promoted))}</div>
+    <div class="diffCell"><div class="diffLabel">Direct → Partial</div>${esc(fmt(demoted))}</div>
+  </div>`;
+}
+
+function harvestStage2(){
+  const r=RELATIONS[idx],s=getState(r);
+  if(!s.valid){s.invalid_reason=document.getElementById("invalidReason")?.value??s.invalid_reason;save();return;}
+  r.original.queries.forEach(q=>{
+    const z=s.queries[q.query_id];
+    z.final_query=document.getElementById("q_"+q.query_id)?.value??s.queries[q.query_id].final_query;
+    z.status=document.getElementById("status_"+q.query_id)?.value||"keep";
+    z.note=document.getElementById("note_"+q.query_id)?.value??z.note??"";
+  });
+  s.evidence_note=document.getElementById("evnote2")?.value??s.evidence_note??"";
+  save();
+}
+
+window.toggleFable=function(){
+  harvestStage2();
+  const r=RELATIONS[idx],s=getState(r);
+  if(!s.valid)return;
+  s.claude_visible=!s.claude_visible;
+  save();refreshRelationControls();
+};
+
+// Update existing rows in place so evidence scrolling, focus and query edits survive.
+function refreshEvidenceSelection(){
+  const s=getState(RELATIONS[idx]);
+  document.querySelectorAll(".sentence[data-doc-id]").forEach(row=>{
+    const selected=s.evidence[row.dataset.docId]||"none";
+    row.classList.remove("none","direct","partial");
+    row.classList.add(selected);
+    row.querySelectorAll("button[data-evidence-state]").forEach(button=>{
+      const active=button.dataset.evidenceState===selected;
+      button.classList.toggle("active",active);
+      button.setAttribute("aria-pressed",String(active));
+    });
+  });
+}
+
+window.setEvidence=function(did,state){
+  harvestStage2();
+  const r=RELATIONS[idx],s=getState(r);
+  if(!s.valid)return;
+  if(state==="none")delete s.evidence[did];else s.evidence[did]=state;
+  save();refreshEvidenceSelection();
+};
+
+window.useOriginalEvidence=function(){
+  harvestStage2();
+  const r=RELATIONS[idx],s=getState(r);
+  if(!s.valid)return;
+  s.evidence={};
+  (r.original.direct_doc_ids||[]).forEach(x=>s.evidence[String(x)]="direct");
+  (r.original.partial_doc_ids||[]).forEach(x=>{if(!s.evidence[String(x)])s.evidence[String(x)]="partial"});
+  save();refreshEvidenceSelection();
+};
+
+window.applyFableEvidence=function(){
+  harvestStage2();
+  const r=RELATIONS[idx],s=getState(r);
+  if(!s.valid||!s.claude_visible||!r.claude?.available)return;
+  s.evidence={};
+  (r.claude?.direct_doc_ids||[]).forEach(x=>s.evidence[String(x)]="direct");
+  (r.claude?.partial_doc_ids||[]).forEach(x=>{if(!s.evidence[String(x)])s.evidence[String(x)]="partial"});
+  save();refreshEvidenceSelection();
+};
+
+window.useOriginalQuery=function(qid){
+  harvestStage2();
+  const r=RELATIONS[idx],s=getState(r);
+  const oq=r.original.queries.find(x=>x.query_id===qid)?.query||"";
+  s.queries[qid].final_query=oq;
+  s.queries[qid].status="keep";
+  save();refreshQueryFields(qid);
+};
+
+window.useFableQuery=function(qid){
+  harvestStage2();
+  const r=RELATIONS[idx],s=getState(r);
+  if(!s.valid||!s.claude_visible||!r.claude?.available)return;
+  const cq=(r.claude?.queries||[]).find(x=>x.query_id===qid);
+  if(!cq||!cq.query)return;
+  const action=String(cq.action||"keep").toLowerCase();
+  if(action==="exclude" || action==="drop"){
+    s.queries[qid].final_query=r.original.queries.find(x=>x.query_id===qid)?.query||"";
+    s.queries[qid].status="exclude";
+  }else if(action==="surface_edit"){
+    s.queries[qid].final_query=cq.query;
+    s.queries[qid].status="surface_edit";
+  }else if(action==="semantic_edit" || action==="edit"){
+    s.queries[qid].final_query=cq.query;
+    s.queries[qid].status="semantic_edit";
+  }else{
+    s.queries[qid].final_query=r.original.queries.find(x=>x.query_id===qid)?.query||"";
+    s.queries[qid].status="keep";
+  }
+  save();refreshQueryFields(qid);
+};
+
+function sentenceRows(r,s){
+  return r.original.article_sentences.map(x=>{
+    const did=String(x.doc_id),st=s.evidence[did]||"none";
+    const tags=[originalTag(r,did)];
+
+    const tagText=tags.filter(Boolean).join(" · ");
+    const dis=!s.valid?"disabled":"";
+    return `<div class="sentence ${st}" data-doc-id="${esc(did)}">
+      <div class="sid">S${esc(x.sentence_id)}</div>
+      <div><div>${esc(x.text)}</div><div class="tags">${esc(tagText)}<span data-fable>${r.claude?.available&&fableTag(r,did)?" · "+esc(fableTag(r,did)):""}</span></div></div>
+      <div class="stateBtns">
+        <button ${dis} data-evidence-state="none" aria-pressed="${st==="none"}" class="${st==="none"?"active":""}" onclick="setEvidence('${esc(did)}','none')">None</button>
+        <button ${dis} data-evidence-state="direct" aria-pressed="${st==="direct"}" class="${st==="direct"?"active":""}" onclick="setEvidence('${esc(did)}','direct')">Direct</button>
+        <button ${dis} data-evidence-state="partial" aria-pressed="${st==="partial"}" class="${st==="partial"?"active":""}" onclick="setEvidence('${esc(did)}','partial')">Partial</button>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function stage2Query(r,s,q){
+  const z=s.queries[q.query_id];
+  const cq=(r.claude?.queries||[]).find(x=>x.query_id===q.query_id);
+  const fable=r.claude?.available
+    ? `<div class="claude" data-fable><b>Fable suggestion:</b><br>${esc(cq?.query||"(none)")}
+       <div class="small" style="margin-top:5px">
+         Semantic faithfulness: ${esc(cq?.query_semantic_faithfulness_score ?? "")}/2 ·
+         Material issue: ${esc(cq?.material_issue ?? false)} ·
+         Issue type: ${esc(cq?.query_issue_type ?? "none")} ·
+         Action: ${esc(cq?.action ?? "keep")}
+       </div>
+       ${cq?.reason?`<div class="small" style="margin-top:5px">Reason: ${esc(cq.reason)}</div>`:""}
+       </div>`
+    : "";
+  return `<div class="qbox">
+    <div class="qtype">${esc(q.query_type)} · ${esc(q.query_id)}</div>
+    <div class="small" style="margin:4px 0 6px"><b>Expected explicitness:</b> ${esc(queryTypeHint(q.query_type))}</div>
+    <div class="small">Original query</div><div class="original">${esc(q.query)}</div>
+    ${fable}
+    <div class="actionBtns">
+      <button onclick="useOriginalQuery('${esc(q.query_id)}')">Use Original</button>
+      <button data-use-fable ${s.claude_visible&&r.claude?.available?"":"disabled"} onclick="useFableQuery('${esc(q.query_id)}')">Use Fable</button>
+    </div>
+    <div class="small">Final human-edited query. Do not rewrite merely for style; use Surface Edit only if you intentionally polish wording, and Semantic Edit only for a material relation/meaning correction.</div>
+    <textarea class="query-edit" id="q_${esc(q.query_id)}">${esc(z.final_query)}</textarea>
+    <div class="rating"><label>Status
+      <select id="status_${esc(q.query_id)}">
+        <option value="keep" ${z.status==="keep"?"selected":""}>Keep</option>
+        <option value="surface_edit" ${z.status==="surface_edit"?"selected":""}>Surface Edit (grammar/style only)</option>
+        <option value="semantic_edit" ${z.status==="semantic_edit"||z.status==="edited"?"selected":""}>Semantic Edit (material)</option>
+        <option value="exclude" ${z.status==="exclude"?"selected":""}>Exclude</option>
+      </select></label></div>
+    <input style="width:100%;padding:7px;border:1px solid #d9dee7;border-radius:7px"
+      id="note_${esc(q.query_id)}" value="${esc(z.note||"")}" placeholder="Optional adjudication note">
+  </div>`;
+}
+
+window.toggleValidity=function(){
+  harvestStage2();
+  const s=getState(RELATIONS[idx]);
+  s.valid=!s.valid;s.completed=false;s.completed_at="";
+  save();refreshRelationControls();
+};
+
+function refreshQueryFields(qid){
+  const query=getState(RELATIONS[idx]).queries[qid];
+  const field=document.getElementById("q_"+qid),status=document.getElementById("status_"+qid);
+  if(field){const top=field.scrollTop,left=field.scrollLeft;field.value=query.final_query;field.scrollTop=top;field.scrollLeft=left;}
+  if(status)status.value=query.status;
+}
+
+function refreshRelationControls(){
+  const r=RELATIONS[idx],s=getState(r),skipped=isSkipped(r.original.relation_id);
+  const controls=document.getElementById("annotationControls");
+  if(!controls)return;
+  controls.inert=skipped;controls.style.opacity=skipped?"0.55":"";
+  document.getElementById("skipRelation").textContent=skipped?"Cancel skip，Continue annotation":"Skip this item";
+  document.getElementById("toggleValidity").textContent=s.valid?"Mark invalid（query / Evidence / Problem with the article）":"Restore as valid";
+  document.getElementById("invalidDetails").hidden=s.valid;
+  const panel=document.getElementById("stage2Panel");
+  // Keep the panel in place when invalid so toggling does not collapse the page.
+  panel.inert=!s.valid;panel.style.opacity=s.valid?"":"0.55";
+  document.getElementById("toggleFable").textContent=(s.claude_visible?"Hide":"Reveal")+" Fable Suggestions";
+  document.querySelectorAll("[data-fable]").forEach(el=>{el.hidden=!s.claude_visible});
+  document.querySelectorAll("[data-use-fable]").forEach(el=>{el.disabled=!s.valid||!s.claude_visible||!r.claude?.available});
+  document.querySelectorAll(".stateBtns button").forEach(el=>{el.disabled=!s.valid});
+  updateManualStatus();
+}
+
+function render(){
+  document.getElementById("prev").disabled=idx===0;
+  document.getElementById("next").disabled=idx>=RELATIONS.length-1;
+  const app=document.getElementById("app"),r=RELATIONS[idx],s=getState(r);
+  document.getElementById("counter").innerHTML=
+    `Relation ${idx+1}/${RELATIONS.length} · `+
+    (s.valid ? (s.completed ? "Complete" : "Valid · To complete") : "Invalid · Skipped");
+  const skipped=isSkipped(r.original.relation_id);
+  const skipControl=`<div class="stageBox"><button id="skipRelation" onclick="toggleSkip()">${skipped?"Cancel skip，Continue annotation":"Skip this item"}</button><div class="small">Skipped items are not saved to the server；Your existing record will be removed。Skip status is retained in this browser only。</div></div>`;
+  const validity=`<div class="stageBox">
+    <b>Data validity</b>
+    <button id="toggleValidity" onclick="toggleValidity()">${s.valid ? "Mark invalid（query / Evidence / Problem with the article）" : "Restore as valid"}</button>
+    <div class="small">Valid by default。No further answers required after marking invalid，Still requires confirmation and saving，Then proceed to the next item。</div>
+    <div id="invalidDetails"><div class="warning">This item is marked invalid，Excluded from valid annotation exports。</div>
+    <input id="invalidReason" style="width:100%;margin-top:8px" placeholder="Reason for invalidity（Optional）" value="${esc(s.invalid_reason)}"></div>
+  </div>`;
+
+  let stage2="";
+  {
+    const fableBlock=r.claude?.available
+      ? `<div class="claude" data-fable><b>Fable evidence assessment (assistant only)</b><br>
+         Direct validity: ${esc(r.claude?.direct_evidence_validity_score??"N/A")} / 2<br>
+         Partial validity: ${esc(r.claude?.partial_evidence_validity_score??"N/A")} / 2<br>
+         Set sufficiency: ${esc(r.claude?.evidence_set_sufficiency_score??"")} / 2
+         ${r.claude?.evidence_reason?`<div class="small">Reason: ${esc(r.claude.evidence_reason)}</div>`:""}
+         ${evidenceDiffSummary(r)}
+         </div>`
+      : "";
+    stage2=`<div class="stageBox stage2" id="stage2Panel">
+      <div class="stageTitle">Stage 2 — Human adjudication / correction</div>
+      <div class="small">Fable is optional assistance. The final decision is human.</div>
+      <div class="actionBtns">
+        <button id="toggleFable" onclick="toggleFable()">${s.claude_visible?"Hide":"Reveal"} Fable Suggestions</button>
+        <button onclick="useOriginalEvidence()">Reset Evidence to Original</button>
+        <button data-use-fable ${s.claude_visible&&r.claude?.available?"":"disabled"} onclick="applyFableEvidence()">Apply Fable Evidence</button>
+      </div>
+      ${!r.claude?.available ? '<div class="warning">Fable has not processed this item。Run Fable Regenerate the page afterward to load suggestions。</div>' : ""}
+      ${fableBlock}
+      <div class="block"><h3>Editable evidence</h3><div class="sentences">${sentenceRows(r,s)}</div>
+        <textarea class="notes" id="evnote2" placeholder="Optional final evidence note">${esc(s.evidence_note||"")}</textarea>
+      </div>
+      <div class="block"><h3>Editable queries</h3>${r.original.queries.map(q=>stage2Query(r,s,q)).join("")}</div>
+    </div>`;
+  }
+
+  app.innerHTML=`<div class="card">
+    <div class="meta">
+      <div><div class="label">Scope</div><div class="val">${esc(r.original.unit_level)}</div></div>
+      <div><div class="label">Actor</div><div class="val">${esc(r.original.actor_name)}</div></div>
+      <div><div class="label">Value</div><div class="val">${esc(r.original.value_name)}</div></div>
+      <div><div class="label">Direction</div><div class="val">${esc(r.original.direction)}</div></div>
+      <div><div class="label">Relation ID</div><div class="val">${esc(r.original.relation_id)}</div></div>
+      <div><div class="label">Article</div><div class="val">${esc(r.original.article_title||r.original.guid)}</div></div>
+      <div><div class="label">Unit ID</div><div class="val">${esc(r.original.unit_id)}</div></div>
+      <div><div class="label">NEVU confidence</div><div class="val">${esc(r.original.nevu_confidence)}</div></div>
+    </div>
+    <div class="block"><h3>Semantic unit</h3><div class="explanation">${esc(r.original.unit_text)}</div></div>
+    <div class="block"><h3>NEVU explanation</h3><div class="explanation">${esc(r.original.nevu_explanation)}</div></div>
+    ${skipControl}
+    <div id="annotationControls" ${skipped?'inert style="opacity:0.55"':''}>
+    ${validity}
+    ${stage2}
+    <div class="actionBtns"><button id="confirmSave" onclick="saveCurrentToServer()">Confirm annotations and save to server</button><span class="small" id="confirmationStatus"></span></div>
+    <div class="small">No edits needed if everything is correct，Click Confirm and Save；Invalid items must also be confirmed and saved。</div>
+    </div>
+  </div>`;
+  refreshRelationControls();
+}
+
+function move(d){
+  const target=idx+d;
+  if(target<0||target>=RELATIONS.length)return;
+  const r=RELATIONS[idx],s=getState(r);
+  harvestStage2();
+  if(manualSaveInFlight){alert("Saving，Wait for the save result before switching。");return;}
+  if(d>0&&!isSkipped(r.original.relation_id)&&!isConfirmed(r.original.relation_id,s)){
+    alert("This item is not confirmed and saved，or changed since saving。First click below‘Confirm annotations and save to server’，Save successfully before the next item。");
+    document.getElementById("confirmSave")?.scrollIntoView({block:"center",behavior:"smooth"});return;
+  }
+  idx=target;
+  render();window.scrollTo(0,0);
+}
+document.getElementById("prev").onclick=()=>move(-1);
+document.getElementById("next").onclick=()=>move(1);
+
+function evidenceObjects(r,s,state){
+  return r.original.article_sentences
+    .filter(x=>(s.evidence[String(x.doc_id)]||"none")===state)
+    .map(x=>({doc_id:String(x.doc_id),sentence_id:x.sentence_id,text:x.text}));
+}
+function buildCorrectedRows(){
+  const r=RELATIONS[idx],s=getState(r);
+  harvestStage2();
+  let rows=[];
+  RELATIONS.forEach(rel=>{
+    const st=getState(rel);
+    if(isSkipped(rel.original.relation_id)||!st.valid||!st.completed)return;
+    const direct=evidenceObjects(rel,st,"direct");
+    const partial=evidenceObjects(rel,st,"partial");
+    const directIds=direct.map(x=>String(x.doc_id));
+    const partialIds=partial.map(x=>String(x.doc_id));
+    rel.original.rows.forEach(orig=>{
+      const qs=st.queries[orig.query_id];
+      if(qs.status==="exclude")return;
+      const x=JSON.parse(JSON.stringify(orig));
+      x.query=qs.final_query;
+      x.direct_doc_ids=directIds;
+      x.partial_doc_ids=partialIds;
+      x.direct_evidence=direct;
+      x.partial_evidence=partial;
+      x.human_verified=true;
+      x.human_group=GROUP;
+      x.human_annotator=annotator;
+      x.human_completed_at=st.completed_at;
+      x.human_protocol=ANNOTATION_PROTOCOL;
+      x.human_query_edit_status=qs.status;
+      rows.push(x);
+    });
+  });
+  return rows;
+}
+function allCompleted(){return RELATIONS.every(r=>{const s=getState(r);return isSkipped(r.original.relation_id)||!s.valid||s.completed})}
+function download(name,text,type="text/plain"){
+  const blob=new Blob([text],{type}),a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href);
+}
+document.getElementById("saveProgress").onclick=()=>saveCurrentToServer();
+
+document.getElementById("logoutBtn").onclick=logoutAccount;
+document.getElementById("loginBtn").onclick=loginAccount;
+document.getElementById("registerBtn").onclick=registerAccount;
+
+document.getElementById("authPass").addEventListener("keydown",e=>{
+  if(e.key==="Enter")loginAccount();
+});
+document.getElementById("authPass2").addEventListener("keydown",e=>{
+  if(e.key==="Enter")registerAccount();
+});
+
+document.getElementById("exportData").onclick=()=>{
+  persistCurrent();
+  if(!allCompleted()){
+    const n=RELATIONS.filter(r=>{const s=getState(r);return isSkipped(r.original.relation_id)||!s.valid||s.completed}).length;
+    if(!confirm(`Only ${n}/${RELATIONS.length} relations are completed or skipped. Export completed valid relations only?`))return;
+  }
+  const rows=buildCorrectedRows();
+  download(
+    `human_${safeAnnotator()}_group_${String(GROUP).padStart(2,"0")}.jsonl`,
+    rows.map(x=>JSON.stringify(x)).join("\n")+"\n"
+  );
+};
+document.getElementById("exportLog").onclick=()=>{
+  persistCurrent();
+  download(
+    `human_${safeAnnotator()}_group_${String(GROUP).padStart(2,"0")}_annotations.json`,
+    JSON.stringify({
+      annotator:annotator,
+      group:GROUP,
+      exported_at:new Date().toISOString(),
+      protocol:"stage2_only_fable_assisted_remaining_v1",
+      states:Object.fromEntries(Object.entries(states).filter(([rid])=>!isSkipped(rid)))
+    },null,2),
+    "application/json"
+  );
+};
+
+// Real-time local autosave for text fields and selects.
+document.addEventListener("input",scheduleAutosave);
+document.addEventListener("change",scheduleAutosave);
+window.addEventListener("beforeunload",event=>{
+  if(!annotator)return;
+  harvestStage2();
+  if(manualSaveInFlight||Object.entries(states).some(([rid,state])=>isDirty(rid,state))){event.preventDefault();event.returnValue="";}
+});
+
+bootAuth();
+</script>
+</body>
+</html>

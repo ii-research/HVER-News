@@ -1,0 +1,448 @@
+{
+  "module": "quality",
+  "group": 1,
+  "protocol": "crossdoc_quality_v1",
+  "pairs": [
+    {
+      "query_id": "q_77029c7db0e689a3",
+      "query": "What evidence in the article supports that Chilean Protesters and Social Movements is aligned with the human value \"Be courageous\"?",
+      "query_type": "Q1",
+      "relation_id": "rel_778ed7ad55622fad",
+      "source_article_id": "0-4716-1-2",
+      "doc_id": "0-4716-3-2",
+      "split": "test_human_all",
+      "document_relevance": 2,
+      "document_label": "sufficient_support",
+      "direct_sentence_ids": [
+        "0-4716-3-2::s14",
+        "0-4716-3-2::s15",
+        "0-4716-3-2::s65"
+      ],
+      "partial_sentence_ids": [
+        "0-4716-3-2::s1",
+        "0-4716-3-2::s2",
+        "0-4716-3-2::s7",
+        "0-4716-3-2::s10",
+        "0-4716-3-2::s16",
+        "0-4716-3-2::s17",
+        "0-4716-3-2::s18",
+        "0-4716-3-2::s41",
+        "0-4716-3-2::s58"
+      ],
+      "identity_sentence_ids": [],
+      "actor_match": "yes",
+      "scope_match": "yes",
+      "issue": "none",
+      "source": "gemini",
+      "human_verified": false,
+      "validation_status": "structurally_valid",
+      "review_flags": [],
+      "pair_id": "cross_48e3cca30851691b2d721b23",
+      "reference": {
+        "actor_name": "Chilean Protesters and Social Movements",
+        "value_name": "Be courageous",
+        "direction": "aligned",
+        "unit_text": "In October 2019, masses of Chilean people began protesting and demanding structural change despite ferocious repression by the militarized Carabineros police force.",
+        "nevu_explanation": "Protesters demonstrate immense bravery by continuing to protest and demand structural reforms even while facing ferocious and violent repression from the militarized police force, risking their own safety for their cause."
+      }
+    },
+    {
+      "query_id": "q_7ff7ad4757553d53",
+      "query": "Where does the text provide evidence that grassroots demonstrators and activist groups in Chile managed to be courageous during reform efforts?",
+      "query_type": "Q2",
+      "relation_id": "rel_778ed7ad55622fad",
+      "source_article_id": "0-4716-1-2",
+      "doc_id": "0-4716-3-2",
+      "split": "test_human_all",
+      "document_relevance": 2,
+      "document_label": "sufficient_support",
+      "direct_sentence_ids": [
+        "0-4716-3-2::s14",
+        "0-4716-3-2::s15",
+        "0-4716-3-2::s65"
+      ],
+      "partial_sentence_ids": [
+        "0-4716-3-2::s1",
+        "0-4716-3-2::s2",
+        "0-4716-3-2::s7",
+        "0-4716-3-2::s10",
+        "0-4716-3-2::s16",
+        "0-4716-3-2::s17",
+        "0-4716-3-2::s18",
+        "0-4716-3-2::s41",
+        "0-4716-3-2::s58"
+      ],
+      "identity_sentence_ids": [],
+      "actor_match": "yes",
+      "scope_match": "yes",
+      "issue": "none",
+      "source": "gemini",
+      "human_verified": false,
+      "validation_status": "structurally_valid",
+      "review_flags": [],
+      "pair_id": "cross_01d0fa7343656cd32caa273f",
+      "reference": {
+        "actor_name": "Chilean Protesters and Social Movements",
+        "value_name": "Be courageous",
+        "direction": "aligned",
+        "unit_text": "In October 2019, masses of Chilean people began protesting and demanding structural change despite ferocious repression by the militarized Carabineros police force.",
+        "nevu_explanation": "Protesters demonstrate immense bravery by continuing to protest and demand structural reforms even while facing ferocious and violent repression from the militarized police force, risking their own safety for their cause."
+      }
+    }
+  ],
+  "articles": {
+    "0-4716-3-2": {
+      "doc_id": "0-4716-3-2",
+      "split": "test_human_all",
+      "title": "Chile protests: What prompted the unrest?",
+      "text": "Santiago – Chile has been gripped by protests against high living costs and inequality for nearly two weeks.\nAngry over President Sebastian Pinera‘s response to the protests, demonstrators are calling for him to step down.\nAlthough the country is no longer under a state of emergency, which was initially declared after the demonstrations began, protests have continued, with frequent clashes between police and protesters.\nPolice have used tear gas, water cannon, rubber bullets and pellets, prompting allegations of rights abuses.\nLooting has also taken place and supermarkets and petrol stations have been set on fire.\nAt least 20 civilians have been killed, according to officials.\nIt is the worst violence the country has witnessed since the 17-year-long military dictatorship of Augusto Pinochet, which ended in 1990.\nDespite the unrest, the majority of protesters have been peaceful, with many banging spoons against cooking pots – a form of protest known as cacerolazo.\nAs the protests continue, Al Jazeera examines the underlying reasons behind the protests in what is considered one of South America’s most stable countries.\n1. How did the protests start, and who was behind them?\nThe protests began as a student-led demonstration against transport fares.\nIn early October, the government announced that the metro rush hour prices would rise by 30 pesos ($0.04).\nResponding to public outcry against the rising fare, then-Minister of Economy Juan Andres Fontaine announced that those upset with the price rise could wake up earlier and pay a lower rate.\n“When the costs rise, there are not many options,” he said at the time.\nOutrage grew after the remarks, leading students to conduct a mass fare evasion by jumping over the metro turnstiles, and, in some instances, destroying them.\n“Evade, and not pay, is another way of fighting,” they chanted at the time.\nAccording to Victor Villegas, a sociologist at Santiago’s Alberto Hurtado University, “it’s not a coincidence” that the movement began with high school students because “they have always driven Chilean social movements”.\n“Since the dictatorship, they have been involved in political movements, and this time again, they again took the baton and started the protests,” he said.\nAs police attempted to stop the students at the stations with force, the protests spilled out into the streets.\nMetro stations, supermarkets, and petrol stations were burned, leading the president to declare a state of emergency.\n2. Are the protests still about the metro prices?\nThe anger goes far beyond the cost of transport.\nChileans are also frustrated with the increasing cost of living, low wages and pensions, a lack of education rights, a poor public health system and crippling inequality.\n“The 30 cents ($0.04) were just the tip of the iceberg,” said Jacinta Urivi, a 29-year-old publicist who has been taken part in the street protests since they began.\n“We don’t have good public health, the salaries are low – there are so many things that act against the people, that they (the politicians) fill their pockets with.\nI am proud and happy that people are waking up,” Urivi told Al Jazeera.\nAccording to Jose Miguel Ahumada, a political economist and associate professor at the University of Chile, the country is “one of the most unequal countries in Latin America”.\n“Highly unequal societies invest less in human capital, invest less in education, and produce more social problems,” he said.\n3. What are the protesters demands?\nThe protesters’ demands vary, but many have called for a change to the pension system and an increase of the minimum wage in addition to Pinera’s resignation.\nAlthough Pinera has addressed both in his reform plans, protesters are frustrated that his proposals come at a cost to the state, rather than to the private industries.\nPinera’s brother, Jose Pinera, is the mastermind of the current privatised pension system, which was introduced during the dictatorship.\nThere are calls to completely change model to a more social scheme.\nThere are also demands for a new constitution, as the current one was introduced in the dictatorship.\n“We want a constitutional assembly to write a new constitution” says Iraci Hassler, a Santiago councilwoman.\n“One that prioritises the lives of human beings above private property”\n4. What has been Pinera’s response?\nResponding to the protests, Pinera initially declared a state of emergency, which allowed for the suspension of certain freedoms, including movement and assembly.\nIt also meant military forces were deployed to the streets and curfews were enforced.\nMany criticised Pinera’s decision to declare the state of emergency so quickly, without addressing the public first.\nHe justified the decision, saying he wanted to maintain public order against vandals and crime.\nBut after a mass protest on Friday, which saw more than one million people rally in cities across the country, Pinera opted for a more positive approach.\n“We are all listening and understanding,” he said in a statement.\nHe lifted the state of emergency on Sunday, and a day later he replaced eight of his cabinet members, including the minister of the economy and Andres Chadwick, Pinera’s cousin and minister of internal affairs, who called protesters “criminals”.\nThe unpopular education, health and transport ministers were kept in their positions, however.\nThe new ministers were also criticised for having little experience.\nPinera has also proposed new social reforms, including a rise in the minimum wage, an increase in the state pension and the stabilisation of the costs of electricity.\nAlthough some welcomed the reforms, others said they did not go far enough.\n“The state continues paying, without touching the profits of the companies,” said Hassler, the councilwoman.\n“There’s a problem that the right wing are not understanding.”\nChile was set to host the APEC trade summit next month, and the climate change summit COP25 in December, but Pinera backed out of the events on Wednesday, saying he had to prioritise “re-establishing public order”.\n5. How many people have died?\nHow many have been arrested?\nVideos have surfaced on social media showing the military and police hitting, shooting and running over civilians on the street.\nOfficials have said that 20 people have died as a result of the unrest, including 11 who died in arson attempts, looting and rioting and five who were killed by military officials.\nOn Tuesday, the National Institute of Human Rights (INDH) said more than 1,233 civilians had gone to hospital with injuries from the unrest.\nAt least 688 of those injured had wounds caused by weapons, according to the institute.\nThousands have also been arrested.\nUN investigators arrived in the country on Monday after UN High Commissioner for Human Rights Michelle Bachelet called for an independent investigation into the deaths and “disturbing allegations” of excessive force used on protesters.\nPinera welcomed the investigators, saying “we have nothing to hide”.\nSergio Micco, the head of the INDH, criticised the police after one of his team members was shot seven times by metal pellets on Tuesday.\n“It’s fine for the police to harshly confronts the looting, but they must respect demonstrations that are carried out peacefully,” he said.\nResponding to the criticism, the director of the Chilean police said protesters “want to criminalise us because we are fulfilling a constitutional mandate to restore public order”.\nHe also emphasised that many allegations of abuse have yet to be properly investigated.\n6. Is there any sign of the unrest calming?\nPinera’s concessions have so far failed to satisfy protesters, with many vowing to stay in the streets until he steps down.\nGreater reforms for social services will have to be introduced if the government hopes to ease any tensions going forward, according to analysts.\n“Chileans feel like they are losing public participation” in political decision making, Villegas, the sociologist, said.\n“That they are treated as subjects of consumerism more than people with rights.”",
+      "sentences": [
+        {
+          "position": 0,
+          "sentence_id": "0-4716-3-2::s0",
+          "text": "Santiago – Chile has been gripped by protests against high living costs and inequality for nearly two weeks."
+        },
+        {
+          "position": 1,
+          "sentence_id": "0-4716-3-2::s1",
+          "text": "Angry over President Sebastian Pinera‘s response to the protests, demonstrators are calling for him to step down."
+        },
+        {
+          "position": 2,
+          "sentence_id": "0-4716-3-2::s2",
+          "text": "Although the country is no longer under a state of emergency, which was initially declared after the demonstrations began, protests have continued, with frequent clashes between police and protesters."
+        },
+        {
+          "position": 3,
+          "sentence_id": "0-4716-3-2::s3",
+          "text": "Police have used tear gas, water cannon, rubber bullets and pellets, prompting allegations of rights abuses."
+        },
+        {
+          "position": 4,
+          "sentence_id": "0-4716-3-2::s4",
+          "text": "Looting has also taken place and supermarkets and petrol stations have been set on fire."
+        },
+        {
+          "position": 5,
+          "sentence_id": "0-4716-3-2::s5",
+          "text": "At least 20 civilians have been killed, according to officials."
+        },
+        {
+          "position": 6,
+          "sentence_id": "0-4716-3-2::s6",
+          "text": "It is the worst violence the country has witnessed since the 17-year-long military dictatorship of Augusto Pinochet, which ended in 1990."
+        },
+        {
+          "position": 7,
+          "sentence_id": "0-4716-3-2::s7",
+          "text": "Despite the unrest, the majority of protesters have been peaceful, with many banging spoons against cooking pots – a form of protest known as cacerolazo."
+        },
+        {
+          "position": 8,
+          "sentence_id": "0-4716-3-2::s8",
+          "text": "As the protests continue, Al Jazeera examines the underlying reasons behind the protests in what is considered one of South America’s most stable countries."
+        },
+        {
+          "position": 9,
+          "sentence_id": "0-4716-3-2::s9",
+          "text": "1. How did the protests start, and who was behind them?"
+        },
+        {
+          "position": 10,
+          "sentence_id": "0-4716-3-2::s10",
+          "text": "The protests began as a student-led demonstration against transport fares."
+        },
+        {
+          "position": 11,
+          "sentence_id": "0-4716-3-2::s11",
+          "text": "In early October, the government announced that the metro rush hour prices would rise by 30 pesos ($0.04)."
+        },
+        {
+          "position": 12,
+          "sentence_id": "0-4716-3-2::s12",
+          "text": "Responding to public outcry against the rising fare, then-Minister of Economy Juan Andres Fontaine announced that those upset with the price rise could wake up earlier and pay a lower rate."
+        },
+        {
+          "position": 13,
+          "sentence_id": "0-4716-3-2::s13",
+          "text": "“When the costs rise, there are not many options,” he said at the time."
+        },
+        {
+          "position": 14,
+          "sentence_id": "0-4716-3-2::s14",
+          "text": "Outrage grew after the remarks, leading students to conduct a mass fare evasion by jumping over the metro turnstiles, and, in some instances, destroying them."
+        },
+        {
+          "position": 15,
+          "sentence_id": "0-4716-3-2::s15",
+          "text": "“Evade, and not pay, is another way of fighting,” they chanted at the time."
+        },
+        {
+          "position": 16,
+          "sentence_id": "0-4716-3-2::s16",
+          "text": "According to Victor Villegas, a sociologist at Santiago’s Alberto Hurtado University, “it’s not a coincidence” that the movement began with high school students because “they have always driven Chilean social movements”."
+        },
+        {
+          "position": 17,
+          "sentence_id": "0-4716-3-2::s17",
+          "text": "“Since the dictatorship, they have been involved in political movements, and this time again, they again took the baton and started the protests,” he said."
+        },
+        {
+          "position": 18,
+          "sentence_id": "0-4716-3-2::s18",
+          "text": "As police attempted to stop the students at the stations with force, the protests spilled out into the streets."
+        },
+        {
+          "position": 19,
+          "sentence_id": "0-4716-3-2::s19",
+          "text": "Metro stations, supermarkets, and petrol stations were burned, leading the president to declare a state of emergency."
+        },
+        {
+          "position": 20,
+          "sentence_id": "0-4716-3-2::s20",
+          "text": "2. Are the protests still about the metro prices?"
+        },
+        {
+          "position": 21,
+          "sentence_id": "0-4716-3-2::s21",
+          "text": "The anger goes far beyond the cost of transport."
+        },
+        {
+          "position": 22,
+          "sentence_id": "0-4716-3-2::s22",
+          "text": "Chileans are also frustrated with the increasing cost of living, low wages and pensions, a lack of education rights, a poor public health system and crippling inequality."
+        },
+        {
+          "position": 23,
+          "sentence_id": "0-4716-3-2::s23",
+          "text": "“The 30 cents ($0.04) were just the tip of the iceberg,” said Jacinta Urivi, a 29-year-old publicist who has been taken part in the street protests since they began."
+        },
+        {
+          "position": 24,
+          "sentence_id": "0-4716-3-2::s24",
+          "text": "“We don’t have good public health, the salaries are low – there are so many things that act against the people, that they (the politicians) fill their pockets with."
+        },
+        {
+          "position": 25,
+          "sentence_id": "0-4716-3-2::s25",
+          "text": "I am proud and happy that people are waking up,” Urivi told Al Jazeera."
+        },
+        {
+          "position": 26,
+          "sentence_id": "0-4716-3-2::s26",
+          "text": "According to Jose Miguel Ahumada, a political economist and associate professor at the University of Chile, the country is “one of the most unequal countries in Latin America”."
+        },
+        {
+          "position": 27,
+          "sentence_id": "0-4716-3-2::s27",
+          "text": "“Highly unequal societies invest less in human capital, invest less in education, and produce more social problems,” he said."
+        },
+        {
+          "position": 28,
+          "sentence_id": "0-4716-3-2::s28",
+          "text": "3. What are the protesters demands?"
+        },
+        {
+          "position": 29,
+          "sentence_id": "0-4716-3-2::s29",
+          "text": "The protesters’ demands vary, but many have called for a change to the pension system and an increase of the minimum wage in addition to Pinera’s resignation."
+        },
+        {
+          "position": 30,
+          "sentence_id": "0-4716-3-2::s30",
+          "text": "Although Pinera has addressed both in his reform plans, protesters are frustrated that his proposals come at a cost to the state, rather than to the private industries."
+        },
+        {
+          "position": 31,
+          "sentence_id": "0-4716-3-2::s31",
+          "text": "Pinera’s brother, Jose Pinera, is the mastermind of the current privatised pension system, which was introduced during the dictatorship."
+        },
+        {
+          "position": 32,
+          "sentence_id": "0-4716-3-2::s32",
+          "text": "There are calls to completely change model to a more social scheme."
+        },
+        {
+          "position": 33,
+          "sentence_id": "0-4716-3-2::s33",
+          "text": "There are also demands for a new constitution, as the current one was introduced in the dictatorship."
+        },
+        {
+          "position": 34,
+          "sentence_id": "0-4716-3-2::s34",
+          "text": "“We want a constitutional assembly to write a new constitution” says Iraci Hassler, a Santiago councilwoman."
+        },
+        {
+          "position": 35,
+          "sentence_id": "0-4716-3-2::s35",
+          "text": "“One that prioritises the lives of human beings above private property”"
+        },
+        {
+          "position": 36,
+          "sentence_id": "0-4716-3-2::s36",
+          "text": "4. What has been Pinera’s response?"
+        },
+        {
+          "position": 37,
+          "sentence_id": "0-4716-3-2::s37",
+          "text": "Responding to the protests, Pinera initially declared a state of emergency, which allowed for the suspension of certain freedoms, including movement and assembly."
+        },
+        {
+          "position": 38,
+          "sentence_id": "0-4716-3-2::s38",
+          "text": "It also meant military forces were deployed to the streets and curfews were enforced."
+        },
+        {
+          "position": 39,
+          "sentence_id": "0-4716-3-2::s39",
+          "text": "Many criticised Pinera’s decision to declare the state of emergency so quickly, without addressing the public first."
+        },
+        {
+          "position": 40,
+          "sentence_id": "0-4716-3-2::s40",
+          "text": "He justified the decision, saying he wanted to maintain public order against vandals and crime."
+        },
+        {
+          "position": 41,
+          "sentence_id": "0-4716-3-2::s41",
+          "text": "But after a mass protest on Friday, which saw more than one million people rally in cities across the country, Pinera opted for a more positive approach."
+        },
+        {
+          "position": 42,
+          "sentence_id": "0-4716-3-2::s42",
+          "text": "“We are all listening and understanding,” he said in a statement."
+        },
+        {
+          "position": 43,
+          "sentence_id": "0-4716-3-2::s43",
+          "text": "He lifted the state of emergency on Sunday, and a day later he replaced eight of his cabinet members, including the minister of the economy and Andres Chadwick, Pinera’s cousin and minister of internal affairs, who called protesters “criminals”."
+        },
+        {
+          "position": 44,
+          "sentence_id": "0-4716-3-2::s44",
+          "text": "The unpopular education, health and transport ministers were kept in their positions, however."
+        },
+        {
+          "position": 45,
+          "sentence_id": "0-4716-3-2::s45",
+          "text": "The new ministers were also criticised for having little experience."
+        },
+        {
+          "position": 46,
+          "sentence_id": "0-4716-3-2::s46",
+          "text": "Pinera has also proposed new social reforms, including a rise in the minimum wage, an increase in the state pension and the stabilisation of the costs of electricity."
+        },
+        {
+          "position": 47,
+          "sentence_id": "0-4716-3-2::s47",
+          "text": "Although some welcomed the reforms, others said they did not go far enough."
+        },
+        {
+          "position": 48,
+          "sentence_id": "0-4716-3-2::s48",
+          "text": "“The state continues paying, without touching the profits of the companies,” said Hassler, the councilwoman."
+        },
+        {
+          "position": 49,
+          "sentence_id": "0-4716-3-2::s49",
+          "text": "“There’s a problem that the right wing are not understanding.”"
+        },
+        {
+          "position": 50,
+          "sentence_id": "0-4716-3-2::s50",
+          "text": "Chile was set to host the APEC trade summit next month, and the climate change summit COP25 in December, but Pinera backed out of the events on Wednesday, saying he had to prioritise “re-establishing public order”."
+        },
+        {
+          "position": 51,
+          "sentence_id": "0-4716-3-2::s51",
+          "text": "5. How many people have died?"
+        },
+        {
+          "position": 52,
+          "sentence_id": "0-4716-3-2::s52",
+          "text": "How many have been arrested?"
+        },
+        {
+          "position": 53,
+          "sentence_id": "0-4716-3-2::s53",
+          "text": "Videos have surfaced on social media showing the military and police hitting, shooting and running over civilians on the street."
+        },
+        {
+          "position": 54,
+          "sentence_id": "0-4716-3-2::s54",
+          "text": "Officials have said that 20 people have died as a result of the unrest, including 11 who died in arson attempts, looting and rioting and five who were killed by military officials."
+        },
+        {
+          "position": 55,
+          "sentence_id": "0-4716-3-2::s55",
+          "text": "On Tuesday, the National Institute of Human Rights (INDH) said more than 1,233 civilians had gone to hospital with injuries from the unrest."
+        },
+        {
+          "position": 56,
+          "sentence_id": "0-4716-3-2::s56",
+          "text": "At least 688 of those injured had wounds caused by weapons, according to the institute."
+        },
+        {
+          "position": 57,
+          "sentence_id": "0-4716-3-2::s57",
+          "text": "Thousands have also been arrested."
+        },
+        {
+          "position": 58,
+          "sentence_id": "0-4716-3-2::s58",
+          "text": "UN investigators arrived in the country on Monday after UN High Commissioner for Human Rights Michelle Bachelet called for an independent investigation into the deaths and “disturbing allegations” of excessive force used on protesters."
+        },
+        {
+          "position": 59,
+          "sentence_id": "0-4716-3-2::s59",
+          "text": "Pinera welcomed the investigators, saying “we have nothing to hide”."
+        },
+        {
+          "position": 60,
+          "sentence_id": "0-4716-3-2::s60",
+          "text": "Sergio Micco, the head of the INDH, criticised the police after one of his team members was shot seven times by metal pellets on Tuesday."
+        },
+        {
+          "position": 61,
+          "sentence_id": "0-4716-3-2::s61",
+          "text": "“It’s fine for the police to harshly confronts the looting, but they must respect demonstrations that are carried out peacefully,” he said."
+        },
+        {
+          "position": 62,
+          "sentence_id": "0-4716-3-2::s62",
+          "text": "Responding to the criticism, the director of the Chilean police said protesters “want to criminalise us because we are fulfilling a constitutional mandate to restore public order”."
+        },
+        {
+          "position": 63,
+          "sentence_id": "0-4716-3-2::s63",
+          "text": "He also emphasised that many allegations of abuse have yet to be properly investigated."
+        },
+        {
+          "position": 64,
+          "sentence_id": "0-4716-3-2::s64",
+          "text": "6. Is there any sign of the unrest calming?"
+        },
+        {
+          "position": 65,
+          "sentence_id": "0-4716-3-2::s65",
+          "text": "Pinera’s concessions have so far failed to satisfy protesters, with many vowing to stay in the streets until he steps down."
+        },
+        {
+          "position": 66,
+          "sentence_id": "0-4716-3-2::s66",
+          "text": "Greater reforms for social services will have to be introduced if the government hopes to ease any tensions going forward, according to analysts."
+        },
+        {
+          "position": 67,
+          "sentence_id": "0-4716-3-2::s67",
+          "text": "“Chileans feel like they are losing public participation” in political decision making, Villegas, the sociologist, said."
+        },
+        {
+          "position": 68,
+          "sentence_id": "0-4716-3-2::s68",
+          "text": "“That they are treated as subjects of consumerism more than people with rights.”"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,1317 @@
+{
+  "bucket": "empty",
+  "group": 1,
+  "tasks": [
+    {
+      "bucket": "empty",
+      "relation_id": "rel_004cac3dd577f440",
+      "pairs": [
+        {
+          "query_id": "q_e39deea3600f589a",
+          "query": "What evidence in the article supports that Government / DEFRA / Ministers acts contrary to the human value \"Be responsible\"?",
+          "query_type": "Q1",
+          "relation_id": "rel_004cac3dd577f440",
+          "source_article_id": "https://www.bbc.com/news/articles/c3e5y85p488o#1",
+          "doc_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0",
+          "split": "test_human_all",
+          "document_relevance": 0,
+          "document_label": "non_support",
+          "direct_sentence_ids": [],
+          "partial_sentence_ids": [],
+          "identity_sentence_ids": [],
+          "actor_match": "no",
+          "scope_match": "no",
+          "issue": "actor_mismatch",
+          "source": "gemini",
+          "human_verified": false,
+          "validation_status": "structurally_valid",
+          "review_flags": [],
+          "pair_id": "cross_649e7da05fa1dfa076ac67b4",
+          "reference": {
+            "actor_name": "Government / DEFRA / Ministers",
+            "value_name": "Be responsible",
+            "direction": "contradictory",
+            "unit_text": "Emma Howard Boyd, former chair of the Environment Agency, publicly stated that successive governments have failed to address the threat posed by spreading sewage sludge containing toxic chemicals on farmers' fields.",
+            "nevu_explanation": "This subevent explicitly accuses successive governments of failing to address the known threat of toxic sewage sludge. This highlights a direct contradiction to their responsibility to create and enforce regulations that protect public health and the environment."
+          },
+          "storage_bucket": "empty",
+          "storage_group": 567
+        },
+        {
+          "query_id": "q_e39deea3600f589a",
+          "query": "What evidence in the article supports that Government / DEFRA / Ministers acts contrary to the human value \"Be responsible\"?",
+          "query_type": "Q1",
+          "relation_id": "rel_004cac3dd577f440",
+          "source_article_id": "https://www.bbc.com/news/articles/c3e5y85p488o#1",
+          "doc_id": "https://www.bbc.com/news/articles/cy8nvl37zkdo#4",
+          "split": "test_human_all",
+          "document_relevance": 0,
+          "document_label": "non_support",
+          "direct_sentence_ids": [],
+          "partial_sentence_ids": [],
+          "identity_sentence_ids": [],
+          "actor_match": "no",
+          "scope_match": "no",
+          "issue": "actor_mismatch",
+          "source": "gemini",
+          "human_verified": false,
+          "validation_status": "structurally_valid",
+          "review_flags": [],
+          "pair_id": "cross_fc8643f7874f92ebc15d6598",
+          "reference": {
+            "actor_name": "Government / DEFRA / Ministers",
+            "value_name": "Be responsible",
+            "direction": "contradictory",
+            "unit_text": "Emma Howard Boyd, former chair of the Environment Agency, publicly stated that successive governments have failed to address the threat posed by spreading sewage sludge containing toxic chemicals on farmers' fields.",
+            "nevu_explanation": "This subevent explicitly accuses successive governments of failing to address the known threat of toxic sewage sludge. This highlights a direct contradiction to their responsibility to create and enforce regulations that protect public health and the environment."
+          },
+          "storage_bucket": "empty",
+          "storage_group": 567
+        },
+        {
+          "query_id": "q_e39deea3600f589a",
+          "query": "What evidence in the article supports that Government / DEFRA / Ministers acts contrary to the human value \"Be responsible\"?",
+          "query_type": "Q1",
+          "relation_id": "rel_004cac3dd577f440",
+          "source_article_id": "https://www.bbc.com/news/articles/c3e5y85p488o#1",
+          "doc_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity",
+          "split": "test_human_all",
+          "document_relevance": 0,
+          "document_label": "non_support",
+          "direct_sentence_ids": [],
+          "partial_sentence_ids": [],
+          "identity_sentence_ids": [],
+          "actor_match": "no",
+          "scope_match": "no",
+          "issue": "scope_mismatch",
+          "source": "gemini",
+          "human_verified": false,
+          "validation_status": "structurally_valid",
+          "review_flags": [],
+          "pair_id": "cross_041e9f944f5d0fd67fee1e0b",
+          "reference": {
+            "actor_name": "Government / DEFRA / Ministers",
+            "value_name": "Be responsible",
+            "direction": "contradictory",
+            "unit_text": "Emma Howard Boyd, former chair of the Environment Agency, publicly stated that successive governments have failed to address the threat posed by spreading sewage sludge containing toxic chemicals on farmers' fields.",
+            "nevu_explanation": "This subevent explicitly accuses successive governments of failing to address the known threat of toxic sewage sludge. This highlights a direct contradiction to their responsibility to create and enforce regulations that protect public health and the environment."
+          },
+          "storage_bucket": "empty",
+          "storage_group": 567
+        },
+        {
+          "query_id": "q_f467fb15320d00e2",
+          "query": "Where does the text provide evidence that environmental authorities and policymakers failed to be responsible regarding toxic chemicals on farmland?",
+          "query_type": "Q2",
+          "relation_id": "rel_004cac3dd577f440",
+          "source_article_id": "https://www.bbc.com/news/articles/c3e5y85p488o#1",
+          "doc_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0",
+          "split": "test_human_all",
+          "document_relevance": 0,
+          "document_label": "non_support",
+          "direct_sentence_ids": [],
+          "partial_sentence_ids": [],
+          "identity_sentence_ids": [],
+          "actor_match": "no",
+          "scope_match": "no",
+          "issue": "scope_mismatch",
+          "source": "gemini",
+          "human_verified": false,
+          "validation_status": "structurally_valid",
+          "review_flags": [],
+          "pair_id": "cross_c2a1af44eeee376d8b025c1b",
+          "reference": {
+            "actor_name": "Government / DEFRA / Ministers",
+            "value_name": "Be responsible",
+            "direction": "contradictory",
+            "unit_text": "Emma Howard Boyd, former chair of the Environment Agency, publicly stated that successive governments have failed to address the threat posed by spreading sewage sludge containing toxic chemicals on farmers' fields.",
+            "nevu_explanation": "This subevent explicitly accuses successive governments of failing to address the known threat of toxic sewage sludge. This highlights a direct contradiction to their responsibility to create and enforce regulations that protect public health and the environment."
+          },
+          "storage_bucket": "empty",
+          "storage_group": 567
+        }
+      ],
+      "articles": {
+        "https://www.bbc.com/news/articles/c3d15z9zrxdo#0": {
+          "doc_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0",
+          "split": "test_human_all",
+          "title": "Post Office scandal: Government didn't want victims to feel harassed",
+          "text": "The government feared that victims of the Post Office scandal who had not yet sought compensation would feel \"harassed\" if officials chased them to apply, MPs have been told.\nThe Public Accounts Committee (PAC) of MPs, which has scrutinised payments, found that many of the wrongly-accused or convicted sub-postmasters were yet to receive \"fair and timely\" redress.\nIn a report, it said the government had taken \"insufficient action\" to ensure people entitled to compensation had applied for it.\nThe Department for Business and Trade (DBT) said it had paid out more £1bn in compensation to date.\nThe committee revealed the government had no current plans to follow up with people eligible for compensation, after just one in five letters sent to sub-postmasters about restitution received a response.\nMPs said they were \"concerned about the potential for further delay of settlements if letters which had not yet received a reply were not being followed up\".\nChris Head, who ran a Post Office in West Boldon, South Tyneside, said the current compensation processes were not working.\nMr Head, who was made an OBE last year for services to justice, was wrongly accused of stealing £88,000 and when the criminal investigation against him was dropped, the Post Office later launched a civil case.\n\"You have Sir Alan Bates, offered less than 50% of his claim… you have other people on the Overturned Convictions Scheme, who are the worst affected people... not been fully compensated.\n\"How can you tell people to come forward, to make a claim when the worst people affected are not being paid?\nThe DBT said it was \"concerned that individuals receiving letters would feel harassed if they had a series of letters asking the same thing\".\nHowever, the DBT did agree to consult the Horizon Compensation Advisory Board on the suggestion that follow-up letters should be sent to potential Horizon Shortfall Scheme applicants who have not yet applied for redress.\nThere are four main schemes that sub-postmasters can apply to for compensation, and individual eligibility depends on the circumstances of each case.\nBetween 1999 and 2015, more than 900 sub-postmasters were wrongly prosecuted after the faulty Horizon IT system made it look like money was missing from branch accounts.\nSome sub-postmasters ended up going to prison, while many more were financially ruined and lost their livelihoods.\nSome died while waiting for justice.\nThe scandal has been described as the biggest miscarriage of justice in British legal history, but many victims are still waiting for financial redress, despite government pledges to speed up payouts.\nThe Department for Business and Trade said the PAC report was based on a \"period before last year's election\".\nHowever, the committee said that while the report did scrutinise the annual accounts for the Department for Business and Trade from April 2023 to March 2024, while the Conservatives were in power, the report also reflected the record of the current government.\nThe report includes evidence heard in April this year and reflected some figures as recent as May.\nThe committee said: By March this year, the Post Office, which is owned by the government, had written to 18,500 people, regarding applications for the Horizon Shortfall Scheme (HSS), but the majority had not responded.\nbut the majority had not responded.\nThe Horizon Convictions Redress Scheme (HCRS) , which offers 800 eligible people a choice between applying for a £600,000 flat-rate settlement or the option to pursue a \"full claim assessment\", had received 536 applications by May this year.\nOf those, 339 had chosen the flat payout sum.\nThe report said the government had yet to receive any full claim assessment applications\n, which offers 800 eligible people a choice between applying for a £600,000 flat-rate settlement or the option to pursue a \"full claim assessment\", had received 536 applications by May this year.\nOf those, 339 had chosen the flat payout sum.\nThe report said the government had yet to receive any full claim assessment applications In relation to the Overturned Convictions Scheme, 25 eligible individuals out of 111 people had not yet submitted a claim.\nSome 86 had submitted full and final claims, of which 69 had been paid.\nThe PAC report said the government had \"no plans for following up with people who are, or may be, eligible to claim under the schemes but who have not yet applied\".\nIt added the government did not yet have clarity on the value of claims expected through the HSS and HCRS schemes.\nLatest figures showed a total of £1.039bn has been awarded to just over 7,300 sub-postmasters across all the redress schemes.\nSir Geoffrey Clifton-Brown, chair of the committee, said it was \"deeply dissatisfactory\" to find that the compensation schemes were still moving \"far too slowly, with no government plans to track down the majority of potential claimants who may not yet be aware of their proper entitlements\".\n\"It is entirely unacceptable that those affected by this scandal, some of whom have had to go through the courts to clear their names, are being forced to relitigate their cases,\" he added.\nThe committee has made several recommendations to the government with the broad message that every postmaster be made fully aware of the options for claiming compensation.\nThe Department for Business said: \"We will consider the recommendations and work with the Post Office, who have already written to over 24,000 postmasters, to ensure that everyone who may be eligible for redress is given the opportunity to apply for it.\"\nThe long-running public inquiry into the Post Office scandal, which has examined the treatment of thousands of sub-postmasters and sought to establish who was to blame for the wrongful prosecutions, will publish its final report on 8 July.",
+          "sentences": [
+            {
+              "position": 0,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s0",
+              "text": "The government feared that victims of the Post Office scandal who had not yet sought compensation would feel \"harassed\" if officials chased them to apply, MPs have been told."
+            },
+            {
+              "position": 1,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s1",
+              "text": "The Public Accounts Committee (PAC) of MPs, which has scrutinised payments, found that many of the wrongly-accused or convicted sub-postmasters were yet to receive \"fair and timely\" redress."
+            },
+            {
+              "position": 2,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s2",
+              "text": "In a report, it said the government had taken \"insufficient action\" to ensure people entitled to compensation had applied for it."
+            },
+            {
+              "position": 3,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s3",
+              "text": "The Department for Business and Trade (DBT) said it had paid out more £1bn in compensation to date."
+            },
+            {
+              "position": 4,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s4",
+              "text": "The committee revealed the government had no current plans to follow up with people eligible for compensation, after just one in five letters sent to sub-postmasters about restitution received a response."
+            },
+            {
+              "position": 5,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s5",
+              "text": "MPs said they were \"concerned about the potential for further delay of settlements if letters which had not yet received a reply were not being followed up\"."
+            },
+            {
+              "position": 6,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s6",
+              "text": "Chris Head, who ran a Post Office in West Boldon, South Tyneside, said the current compensation processes were not working."
+            },
+            {
+              "position": 7,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s7",
+              "text": "Mr Head, who was made an OBE last year for services to justice, was wrongly accused of stealing £88,000 and when the criminal investigation against him was dropped, the Post Office later launched a civil case."
+            },
+            {
+              "position": 8,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s8",
+              "text": "\"You have Sir Alan Bates, offered less than 50% of his claim… you have other people on the Overturned Convictions Scheme, who are the worst affected people... not been fully compensated."
+            },
+            {
+              "position": 9,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s9",
+              "text": "\"How can you tell people to come forward, to make a claim when the worst people affected are not being paid?"
+            },
+            {
+              "position": 10,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s10",
+              "text": "The DBT said it was \"concerned that individuals receiving letters would feel harassed if they had a series of letters asking the same thing\"."
+            },
+            {
+              "position": 11,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s11",
+              "text": "However, the DBT did agree to consult the Horizon Compensation Advisory Board on the suggestion that follow-up letters should be sent to potential Horizon Shortfall Scheme applicants who have not yet applied for redress."
+            },
+            {
+              "position": 12,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s12",
+              "text": "There are four main schemes that sub-postmasters can apply to for compensation, and individual eligibility depends on the circumstances of each case."
+            },
+            {
+              "position": 13,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s13",
+              "text": "Between 1999 and 2015, more than 900 sub-postmasters were wrongly prosecuted after the faulty Horizon IT system made it look like money was missing from branch accounts."
+            },
+            {
+              "position": 14,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s14",
+              "text": "Some sub-postmasters ended up going to prison, while many more were financially ruined and lost their livelihoods."
+            },
+            {
+              "position": 15,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s15",
+              "text": "Some died while waiting for justice."
+            },
+            {
+              "position": 16,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s16",
+              "text": "The scandal has been described as the biggest miscarriage of justice in British legal history, but many victims are still waiting for financial redress, despite government pledges to speed up payouts."
+            },
+            {
+              "position": 17,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s17",
+              "text": "The Department for Business and Trade said the PAC report was based on a \"period before last year's election\"."
+            },
+            {
+              "position": 18,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s18",
+              "text": "However, the committee said that while the report did scrutinise the annual accounts for the Department for Business and Trade from April 2023 to March 2024, while the Conservatives were in power, the report also reflected the record of the current government."
+            },
+            {
+              "position": 19,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s19",
+              "text": "The report includes evidence heard in April this year and reflected some figures as recent as May."
+            },
+            {
+              "position": 20,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s20",
+              "text": "The committee said: By March this year, the Post Office, which is owned by the government, had written to 18,500 people, regarding applications for the Horizon Shortfall Scheme (HSS), but the majority had not responded."
+            },
+            {
+              "position": 21,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s21",
+              "text": "but the majority had not responded."
+            },
+            {
+              "position": 22,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s22",
+              "text": "The Horizon Convictions Redress Scheme (HCRS) , which offers 800 eligible people a choice between applying for a £600,000 flat-rate settlement or the option to pursue a \"full claim assessment\", had received 536 applications by May this year."
+            },
+            {
+              "position": 23,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s23",
+              "text": "Of those, 339 had chosen the flat payout sum."
+            },
+            {
+              "position": 24,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s24",
+              "text": "The report said the government had yet to receive any full claim assessment applications"
+            },
+            {
+              "position": 25,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s25",
+              "text": ", which offers 800 eligible people a choice between applying for a £600,000 flat-rate settlement or the option to pursue a \"full claim assessment\", had received 536 applications by May this year."
+            },
+            {
+              "position": 26,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s26",
+              "text": "Of those, 339 had chosen the flat payout sum."
+            },
+            {
+              "position": 27,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s27",
+              "text": "The report said the government had yet to receive any full claim assessment applications In relation to the Overturned Convictions Scheme, 25 eligible individuals out of 111 people had not yet submitted a claim."
+            },
+            {
+              "position": 28,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s28",
+              "text": "Some 86 had submitted full and final claims, of which 69 had been paid."
+            },
+            {
+              "position": 29,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s29",
+              "text": "The PAC report said the government had \"no plans for following up with people who are, or may be, eligible to claim under the schemes but who have not yet applied\"."
+            },
+            {
+              "position": 30,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s30",
+              "text": "It added the government did not yet have clarity on the value of claims expected through the HSS and HCRS schemes."
+            },
+            {
+              "position": 31,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s31",
+              "text": "Latest figures showed a total of £1.039bn has been awarded to just over 7,300 sub-postmasters across all the redress schemes."
+            },
+            {
+              "position": 32,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s32",
+              "text": "Sir Geoffrey Clifton-Brown, chair of the committee, said it was \"deeply dissatisfactory\" to find that the compensation schemes were still moving \"far too slowly, with no government plans to track down the majority of potential claimants who may not yet be aware of their proper entitlements\"."
+            },
+            {
+              "position": 33,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s33",
+              "text": "\"It is entirely unacceptable that those affected by this scandal, some of whom have had to go through the courts to clear their names, are being forced to relitigate their cases,\" he added."
+            },
+            {
+              "position": 34,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s34",
+              "text": "The committee has made several recommendations to the government with the broad message that every postmaster be made fully aware of the options for claiming compensation."
+            },
+            {
+              "position": 35,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s35",
+              "text": "The Department for Business said: \"We will consider the recommendations and work with the Post Office, who have already written to over 24,000 postmasters, to ensure that everyone who may be eligible for redress is given the opportunity to apply for it.\""
+            },
+            {
+              "position": 36,
+              "sentence_id": "https://www.bbc.com/news/articles/c3d15z9zrxdo#0::s36",
+              "text": "The long-running public inquiry into the Post Office scandal, which has examined the treatment of thousands of sub-postmasters and sought to establish who was to blame for the wrongful prosecutions, will publish its final report on 8 July."
+            }
+          ]
+        },
+        "https://www.bbc.com/news/articles/cy8nvl37zkdo#4": {
+          "doc_id": "https://www.bbc.com/news/articles/cy8nvl37zkdo#4",
+          "split": "test_human_all",
+          "title": "Cash to self-isolate would have saved lives, Covid inquiry told",
+          "text": "If the UK had spent more money helping people to self-isolate during the pandemic then fewer people would have been infected or died, the former head of NHS Test and Trace has said.\nBaroness Dido Harding, who was in charge of the programme in England, told the Covid inquiry she repeatedly argued to increase financial support, but was \"frustrated\" by the response of then chancellor, Rishi Sunak.\n\"There was an intransigence that I think was very sad,\" she said in her evidence.\nOn 28 September 2020, the government did bring in a £500 self-isolation payment for low income workers on state benefits who were told to stay at home after being in contact with an infected person.\nA parallel scheme of discretionary payments was set up by some local authorities to support those outside the welfare system.\nIn her evidence, Baroness Harding said the UK spent proportionally \"much less than other developed countries enabling disadvantaged people to self-isolate\".\n\"If we had allocated more of the NHS Test and Trace budget to isolation support, I strongly suspect that fewer would have died and infection rates would have been lower with all the benefits that would have brought,\" she said in her witness statement.\n\"It's certainly the thing that I wished I had succeeded in persuading ministers to do,\" she added in the hearing.\n\"But I wasn't the decision maker.\nThe decision maker in this was the chancellor and at every opportunity, from June [2020] onwards, the chancellor rejected the proposals.\"\nLast week, the inquiry was shown private diary entries written by the government's then chief scientific adviser, Lord Patrick Vallance.\nHe wrote at the time that it was the \"instinct\" of policy makers to use the \"stick\" of enforcement and fines to convince people to self-isolate, rather than the \"carrot\" of financial support favoured by the government's science advisers.\nAfter one meeting, on 27 July 2020, he wrote: \"Dido [Harding] pushed to get financial support for people to get tested in low socio-economic groups.\n\"Rishi [Sunak] reacted strongly to that and said basically: 'Just stop the social interactions.'\"",
+          "sentences": [
+            {
+              "position": 0,
+              "sentence_id": "https://www.bbc.com/news/articles/cy8nvl37zkdo#4::s0",
+              "text": "If the UK had spent more money helping people to self-isolate during the pandemic then fewer people would have been infected or died, the former head of NHS Test and Trace has said."
+            },
+            {
+              "position": 1,
+              "sentence_id": "https://www.bbc.com/news/articles/cy8nvl37zkdo#4::s1",
+              "text": "Baroness Dido Harding, who was in charge of the programme in England, told the Covid inquiry she repeatedly argued to increase financial support, but was \"frustrated\" by the response of then chancellor, Rishi Sunak."
+            },
+            {
+              "position": 2,
+              "sentence_id": "https://www.bbc.com/news/articles/cy8nvl37zkdo#4::s2",
+              "text": "\"There was an intransigence that I think was very sad,\" she said in her evidence."
+            },
+            {
+              "position": 3,
+              "sentence_id": "https://www.bbc.com/news/articles/cy8nvl37zkdo#4::s3",
+              "text": "On 28 September 2020, the government did bring in a £500 self-isolation payment for low income workers on state benefits who were told to stay at home after being in contact with an infected person."
+            },
+            {
+              "position": 4,
+              "sentence_id": "https://www.bbc.com/news/articles/cy8nvl37zkdo#4::s4",
+              "text": "A parallel scheme of discretionary payments was set up by some local authorities to support those outside the welfare system."
+            },
+            {
+              "position": 5,
+              "sentence_id": "https://www.bbc.com/news/articles/cy8nvl37zkdo#4::s5",
+              "text": "In her evidence, Baroness Harding said the UK spent proportionally \"much less than other developed countries enabling disadvantaged people to self-isolate\"."
+            },
+            {
+              "position": 6,
+              "sentence_id": "https://www.bbc.com/news/articles/cy8nvl37zkdo#4::s6",
+              "text": "\"If we had allocated more of the NHS Test and Trace budget to isolation support, I strongly suspect that fewer would have died and infection rates would have been lower with all the benefits that would have brought,\" she said in her witness statement."
+            },
+            {
+              "position": 7,
+              "sentence_id": "https://www.bbc.com/news/articles/cy8nvl37zkdo#4::s7",
+              "text": "\"It's certainly the thing that I wished I had succeeded in persuading ministers to do,\" she added in the hearing."
+            },
+            {
+              "position": 8,
+              "sentence_id": "https://www.bbc.com/news/articles/cy8nvl37zkdo#4::s8",
+              "text": "\"But I wasn't the decision maker."
+            },
+            {
+              "position": 9,
+              "sentence_id": "https://www.bbc.com/news/articles/cy8nvl37zkdo#4::s9",
+              "text": "The decision maker in this was the chancellor and at every opportunity, from June [2020] onwards, the chancellor rejected the proposals.\""
+            },
+            {
+              "position": 10,
+              "sentence_id": "https://www.bbc.com/news/articles/cy8nvl37zkdo#4::s10",
+              "text": "Last week, the inquiry was shown private diary entries written by the government's then chief scientific adviser, Lord Patrick Vallance."
+            },
+            {
+              "position": 11,
+              "sentence_id": "https://www.bbc.com/news/articles/cy8nvl37zkdo#4::s11",
+              "text": "He wrote at the time that it was the \"instinct\" of policy makers to use the \"stick\" of enforcement and fines to convince people to self-isolate, rather than the \"carrot\" of financial support favoured by the government's science advisers."
+            },
+            {
+              "position": 12,
+              "sentence_id": "https://www.bbc.com/news/articles/cy8nvl37zkdo#4::s12",
+              "text": "After one meeting, on 27 July 2020, he wrote: \"Dido [Harding] pushed to get financial support for people to get tested in low socio-economic groups."
+            },
+            {
+              "position": 13,
+              "sentence_id": "https://www.bbc.com/news/articles/cy8nvl37zkdo#4::s13",
+              "text": "\"Rishi [Sunak] reacted strongly to that and said basically: 'Just stop the social interactions.'\""
+            }
+          ]
+        },
+        "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity": {
+          "doc_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity",
+          "split": "test_human_all",
+          "title": "Mixed reaction to Starmer’s migrant deal as charities add to calls for clarity",
+          "text": "Keir Starmer’s migrant return deal is under scrutiny after charities called for more clarity on how people will be chosen for deportation and the EU said it was still assessing the agreement.\nNo 10 said on Friday it was confident in the legality of the deal to return about 50 people a week to France in return for accepting the same number through a safe and legal route.\nHowever, the agreement has had a mixed reception by those supporting refugees in Calais.\nThe charity Médecins Sans Frontières said it was a shameful and dangerous pact that was reducing men, women and children to “exchangeable tokens”, while Care4Calais questioned whether “racial profiling” would be used to choose which people were deported back to France.\nNatacha Bouchart, the mayor of Calais, was also unhappy, saying she believed it would act as a pull factor bringing more people to France hoping to cross into the UK by small boat or to claim asylum legally.\nOthers were more positive, including the Refugee Council which urged the government to make sure the scheme was “implemented in a way that treats all those seeking asylum fairly and with respect and dignity”.\nThe United Nations refugee agency said the deal “could help achieve a more managed and shared approach, offering alternatives to dangerous journeys, while upholding access to asylum”.\nA spokesperson for the European Commission on Friday said it would “assess the concrete modalities of this cooperation” and whether it complied with the “spirit and the letter of EU law”.\nDespite concerns raised by Italy, Spain, Greece, Malta and Cyprus, British officials are convinced that the EU will end up supporting the deal, while Whitehall sources said there would be little that could be done to stop it going ahead regardless.\nSteve Peers, a professor of EU law at Royal Holloway, University of London, said the commission could not realistically unpick the deal.\n“Even if it were that the commission thinks that this breaches EU law, then they can’t order France not to do it.\nFrance might say, ‘That’s interesting, we have a different view, we’re going to do it anyway’, and then it would be up to the commission to sue France,” he said.\nOne diplomat from one of the five nations with reservations about the deal said they understood that France had “to give something to the UK to satisfy public opinion” at a time when the EU wants to keep the British government tied into to future defence and security in the face of continued Russian aggression.\nBut the diplomat said there was surprise at the content of the deal.\nThe return of 50 people a week represents one in 17 of the average weekly arrivals by small boats this year so far.\n“It is difficult to see why the French over-stepped the EU treaties without delivering something more spectacular,” they said.\n“We do want to help the British government to be engaged with Europe and that is a priority, but I find it very difficult to see this agreement go smoothly because the French overstepped the mark.”\nOther nations said the deal with the UK was just “smoke and mirrors” because France can return people to the country of arrival under the EU’s Dublin rules.\nMore than 21,000 people have made the Channel crossing in rudimentary vessels this year.\nMany details of the scheme remain unclear, such as how many people will be returned, how those involved will be chosen and when it will start.\nSteve Smith, the chief executive of Care4Calais, said the announcement was a “gimmick that lacks any operational credibility”.\n“How will those refugees be selected?\nIf our previous experience of supporting people accommodated at sites such as the Wethersfield camp and the Bibby Stockholm barge is anything to go by, then we fully expect this plan will lack any form of sophisticated selection process.\nWill the government, shamefully, choose to implement some form of racial profiling?\nOr will people simply be selected at random?” he said.\n“The indication is that 50 people, chosen at random, will have their human right to claim asylum unilaterally removed.\nThis scheme will have no impact on Channel crossings.\nWhy?\nBecause it fails to recognise that those making the crossing are desperate.\nThey have fled war, conflict and persecution.\nThey may have survived violence and torture during their journey.\nThey are willing to risk their lives to seek safety in the UK, and, as we have seen time and time again, these so-called deterrents will not deter people from seeking safety in the UK.”\nLouise Calvey, the executive director of Asylum Matters, was also unconvinced, saying it was a “convoluted Rwanda-style gimmick and yet another example of our governments choosing not to implement the only policy that will save lives: safe and accessible routes for all who need them”.\nLegal experts suggested the deal would be harder to challenge than the Conservatives’ Rwanda plan because people will be returned to France, which is considered a safe country.\nHowever, Zoe Bantleman, the legal director of the Immigration Law Practitioners’ Association, said the process must be fair.\n“At the moment, we have no details as to how the deal will work in practice, who will be chosen for return, whether it will create another backlog of ‘inadmissible’ asylum claims, leaving people lingering in limbo and detention, how the UK will ensure it does not unlawfully discriminate, or how individual rights and access to justice will be upheld,” she said.\n“All of these are questions the government will need to answer in the weeks ahead.”",
+          "sentences": [
+            {
+              "position": 0,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s0",
+              "text": "Keir Starmer’s migrant return deal is under scrutiny after charities called for more clarity on how people will be chosen for deportation and the EU said it was still assessing the agreement."
+            },
+            {
+              "position": 1,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s1",
+              "text": "No 10 said on Friday it was confident in the legality of the deal to return about 50 people a week to France in return for accepting the same number through a safe and legal route."
+            },
+            {
+              "position": 2,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s2",
+              "text": "However, the agreement has had a mixed reception by those supporting refugees in Calais."
+            },
+            {
+              "position": 3,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s3",
+              "text": "The charity Médecins Sans Frontières said it was a shameful and dangerous pact that was reducing men, women and children to “exchangeable tokens”, while Care4Calais questioned whether “racial profiling” would be used to choose which people were deported back to France."
+            },
+            {
+              "position": 4,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s4",
+              "text": "Natacha Bouchart, the mayor of Calais, was also unhappy, saying she believed it would act as a pull factor bringing more people to France hoping to cross into the UK by small boat or to claim asylum legally."
+            },
+            {
+              "position": 5,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s5",
+              "text": "Others were more positive, including the Refugee Council which urged the government to make sure the scheme was “implemented in a way that treats all those seeking asylum fairly and with respect and dignity”."
+            },
+            {
+              "position": 6,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s6",
+              "text": "The United Nations refugee agency said the deal “could help achieve a more managed and shared approach, offering alternatives to dangerous journeys, while upholding access to asylum”."
+            },
+            {
+              "position": 7,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s7",
+              "text": "A spokesperson for the European Commission on Friday said it would “assess the concrete modalities of this cooperation” and whether it complied with the “spirit and the letter of EU law”."
+            },
+            {
+              "position": 8,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s8",
+              "text": "Despite concerns raised by Italy, Spain, Greece, Malta and Cyprus, British officials are convinced that the EU will end up supporting the deal, while Whitehall sources said there would be little that could be done to stop it going ahead regardless."
+            },
+            {
+              "position": 9,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s9",
+              "text": "Steve Peers, a professor of EU law at Royal Holloway, University of London, said the commission could not realistically unpick the deal."
+            },
+            {
+              "position": 10,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s10",
+              "text": "“Even if it were that the commission thinks that this breaches EU law, then they can’t order France not to do it."
+            },
+            {
+              "position": 11,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s11",
+              "text": "France might say, ‘That’s interesting, we have a different view, we’re going to do it anyway’, and then it would be up to the commission to sue France,” he said."
+            },
+            {
+              "position": 12,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s12",
+              "text": "One diplomat from one of the five nations with reservations about the deal said they understood that France had “to give something to the UK to satisfy public opinion” at a time when the EU wants to keep the British government tied into to future defence and security in the face of continued Russian aggression."
+            },
+            {
+              "position": 13,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s13",
+              "text": "But the diplomat said there was surprise at the content of the deal."
+            },
+            {
+              "position": 14,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s14",
+              "text": "The return of 50 people a week represents one in 17 of the average weekly arrivals by small boats this year so far."
+            },
+            {
+              "position": 15,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s15",
+              "text": "“It is difficult to see why the French over-stepped the EU treaties without delivering something more spectacular,” they said."
+            },
+            {
+              "position": 16,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s16",
+              "text": "“We do want to help the British government to be engaged with Europe and that is a priority, but I find it very difficult to see this agreement go smoothly because the French overstepped the mark.”"
+            },
+            {
+              "position": 17,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s17",
+              "text": "Other nations said the deal with the UK was just “smoke and mirrors” because France can return people to the country of arrival under the EU’s Dublin rules."
+            },
+            {
+              "position": 18,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s18",
+              "text": "More than 21,000 people have made the Channel crossing in rudimentary vessels this year."
+            },
+            {
+              "position": 19,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s19",
+              "text": "Many details of the scheme remain unclear, such as how many people will be returned, how those involved will be chosen and when it will start."
+            },
+            {
+              "position": 20,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s20",
+              "text": "Steve Smith, the chief executive of Care4Calais, said the announcement was a “gimmick that lacks any operational credibility”."
+            },
+            {
+              "position": 21,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s21",
+              "text": "“How will those refugees be selected?"
+            },
+            {
+              "position": 22,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s22",
+              "text": "If our previous experience of supporting people accommodated at sites such as the Wethersfield camp and the Bibby Stockholm barge is anything to go by, then we fully expect this plan will lack any form of sophisticated selection process."
+            },
+            {
+              "position": 23,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s23",
+              "text": "Will the government, shamefully, choose to implement some form of racial profiling?"
+            },
+            {
+              "position": 24,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s24",
+              "text": "Or will people simply be selected at random?” he said."
+            },
+            {
+              "position": 25,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s25",
+              "text": "“The indication is that 50 people, chosen at random, will have their human right to claim asylum unilaterally removed."
+            },
+            {
+              "position": 26,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s26",
+              "text": "This scheme will have no impact on Channel crossings."
+            },
+            {
+              "position": 27,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s27",
+              "text": "Why?"
+            },
+            {
+              "position": 28,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s28",
+              "text": "Because it fails to recognise that those making the crossing are desperate."
+            },
+            {
+              "position": 29,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s29",
+              "text": "They have fled war, conflict and persecution."
+            },
+            {
+              "position": 30,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s30",
+              "text": "They may have survived violence and torture during their journey."
+            },
+            {
+              "position": 31,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s31",
+              "text": "They are willing to risk their lives to seek safety in the UK, and, as we have seen time and time again, these so-called deterrents will not deter people from seeking safety in the UK.”"
+            },
+            {
+              "position": 32,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s32",
+              "text": "Louise Calvey, the executive director of Asylum Matters, was also unconvinced, saying it was a “convoluted Rwanda-style gimmick and yet another example of our governments choosing not to implement the only policy that will save lives: safe and accessible routes for all who need them”."
+            },
+            {
+              "position": 33,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s33",
+              "text": "Legal experts suggested the deal would be harder to challenge than the Conservatives’ Rwanda plan because people will be returned to France, which is considered a safe country."
+            },
+            {
+              "position": 34,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s34",
+              "text": "However, Zoe Bantleman, the legal director of the Immigration Law Practitioners’ Association, said the process must be fair."
+            },
+            {
+              "position": 35,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s35",
+              "text": "“At the moment, we have no details as to how the deal will work in practice, who will be chosen for return, whether it will create another backlog of ‘inadmissible’ asylum claims, leaving people lingering in limbo and detention, how the UK will ensure it does not unlawfully discriminate, or how individual rights and access to justice will be upheld,” she said."
+            },
+            {
+              "position": 36,
+              "sentence_id": "https://www.theguardian.com/uk-news/2025/jul/11/mixed-reaction-to-starmers-migrant-deal-as-charities-add-to-calls-for-clarity::s36",
+              "text": "“All of these are questions the government will need to answer in the weeks ahead.”"
+            }
+          ]
+        }
+      },
+      "required_pair_ids": [
+        "cross_649e7da05fa1dfa076ac67b4",
+        "cross_fc8643f7874f92ebc15d6598",
+        "cross_041e9f944f5d0fd67fee1e0b",
+        "cross_c2a1af44eeee376d8b025c1b"
+      ]
+    },
+    {
+      "bucket": "empty",
+      "relation_id": "rel_0081519444f95d07",
+      "pairs": [
+        {
+          "query_id": "q_13a62544dbbeb065",
+          "query": "What evidence in the article supports that European Union and Member States is aligned with the human value \"Be responsible\"?",
+          "query_type": "Q1",
+          "relation_id": "rel_0081519444f95d07",
+          "source_article_id": "1-14823-1-1",
+          "doc_id": "1-14855-6-1",
+          "split": "test_human_all",
+          "document_relevance": 0,
+          "document_label": "non_support",
+          "direct_sentence_ids": [],
+          "partial_sentence_ids": [],
+          "identity_sentence_ids": [],
+          "actor_match": "no",
+          "scope_match": "no",
+          "issue": "insufficient_evidence",
+          "source": "gemini",
+          "human_verified": false,
+          "validation_status": "structurally_valid",
+          "review_flags": [],
+          "pair_id": "cross_512b56626ec693ccbd1c4e8f",
+          "reference": {
+            "actor_name": "European Union and Member States",
+            "value_name": "Be responsible",
+            "direction": "aligned",
+            "unit_text": "EU and UK prepare for talks on fisheries -> EU and UK set out negotiating mandates",
+            "nevu_explanation": "The chain of preparing for talks and then setting out formal negotiating mandates shows a responsible, structured approach to managing a complex and contentious international disagreement, following established diplomatic protocols."
+          },
+          "storage_bucket": "empty",
+          "storage_group": 90
+        },
+        {
+          "query_id": "q_13a62544dbbeb065",
+          "query": "What evidence in the article supports that European Union and Member States is aligned with the human value \"Be responsible\"?",
+          "query_type": "Q1",
+          "relation_id": "rel_0081519444f95d07",
+          "source_article_id": "1-14823-1-1",
+          "doc_id": "6-20228-4-t",
+          "split": "test_human_all",
+          "document_relevance": 0,
+          "document_label": "non_support",
+          "direct_sentence_ids": [],
+          "partial_sentence_ids": [],
+          "identity_sentence_ids": [],
+          "actor_match": "no",
+          "scope_match": "no",
+          "issue": "actor_mismatch",
+          "source": "gemini",
+          "human_verified": false,
+          "validation_status": "structurally_valid",
+          "review_flags": [],
+          "pair_id": "cross_fb97459fb9852e15b1fe52b3",
+          "reference": {
+            "actor_name": "European Union and Member States",
+            "value_name": "Be responsible",
+            "direction": "aligned",
+            "unit_text": "EU and UK prepare for talks on fisheries -> EU and UK set out negotiating mandates",
+            "nevu_explanation": "The chain of preparing for talks and then setting out formal negotiating mandates shows a responsible, structured approach to managing a complex and contentious international disagreement, following established diplomatic protocols."
+          },
+          "storage_bucket": "empty",
+          "storage_group": 90
+        },
+        {
+          "query_id": "q_6c6bcca43cc9370a",
+          "query": "Where does the article show the Brussels side and its member states taking steps to be responsible during the fisheries negotiations?",
+          "query_type": "Q2",
+          "relation_id": "rel_0081519444f95d07",
+          "source_article_id": "1-14823-1-1",
+          "doc_id": "1-14855-6-1",
+          "split": "test_human_all",
+          "document_relevance": 0,
+          "document_label": "non_support",
+          "direct_sentence_ids": [],
+          "partial_sentence_ids": [],
+          "identity_sentence_ids": [],
+          "actor_match": "no",
+          "scope_match": "no",
+          "issue": "scope_mismatch",
+          "source": "gemini",
+          "human_verified": false,
+          "validation_status": "structurally_valid",
+          "review_flags": [],
+          "pair_id": "cross_8f8b522b3012da248a195c0c",
+          "reference": {
+            "actor_name": "European Union and Member States",
+            "value_name": "Be responsible",
+            "direction": "aligned",
+            "unit_text": "EU and UK prepare for talks on fisheries -> EU and UK set out negotiating mandates",
+            "nevu_explanation": "The chain of preparing for talks and then setting out formal negotiating mandates shows a responsible, structured approach to managing a complex and contentious international disagreement, following established diplomatic protocols."
+          },
+          "storage_bucket": "empty",
+          "storage_group": 90
+        },
+        {
+          "query_id": "q_6c6bcca43cc9370a",
+          "query": "Where does the article show the Brussels side and its member states taking steps to be responsible during the fisheries negotiations?",
+          "query_type": "Q2",
+          "relation_id": "rel_0081519444f95d07",
+          "source_article_id": "1-14823-1-1",
+          "doc_id": "12-7895-1-t",
+          "split": "test_human_all",
+          "document_relevance": 0,
+          "document_label": "non_support",
+          "direct_sentence_ids": [],
+          "partial_sentence_ids": [],
+          "identity_sentence_ids": [],
+          "actor_match": "no",
+          "scope_match": "no",
+          "issue": "scope_mismatch",
+          "source": "gemini",
+          "human_verified": false,
+          "validation_status": "structurally_valid",
+          "review_flags": [],
+          "pair_id": "cross_8b52b207b2a558c612022ab6",
+          "reference": {
+            "actor_name": "European Union and Member States",
+            "value_name": "Be responsible",
+            "direction": "aligned",
+            "unit_text": "EU and UK prepare for talks on fisheries -> EU and UK set out negotiating mandates",
+            "nevu_explanation": "The chain of preparing for talks and then setting out formal negotiating mandates shows a responsible, structured approach to managing a complex and contentious international disagreement, following established diplomatic protocols."
+          },
+          "storage_bucket": "empty",
+          "storage_group": 90
+        }
+      ],
+      "articles": {
+        "1-14855-6-1": {
+          "doc_id": "1-14855-6-1",
+          "split": "test_human_all",
+          "title": "Turkey’s EU dream is over, for now, top EU official says",
+          "text": "Turkey has turned its back on joining the European Union, at least for now, the bloc’s top official dealing with Ankara said, offering economic cooperation instead if both sides can restore friendly ties.\nAfter years of stalemate on Turkey’s bid to join the world’s biggest trading bloc, EU governments say the process is dead, citing President Recep Tayyip Erdoğan’s crackdown on dissidents, his “Nazi” jibes at Germany and a referendum giving him sweeping new powers that a rights group says lack checks and balances.\n“Everybody’s clear that, currently at least, Turkey is moving away from a European perspective,” European Commissioner Johannes Hahn, who oversees EU membership bids, told Reuters.\n“The focus of our relationship has to be something else,” he said in an interview after EU foreign ministers met in Malta and where France and Germany led efforts to consider a new deal with Ankara based on trade and security ties.\n“We have to see what could be done in the future, to see if we can restart some kind of cooperation,” Hahn said on April 29, saying that he had not had meetings on the economy with NATO-member Turkey since January last year, normally a fixture of accession talks.\nThe EU process is not formally frozen, but EU lawmakers called last week for a formal halt to talks, with some saying Turkey no longer met the democratic criteria to be considered a candidate, let alone a full member, for the EU.\nErdoğan told Reuters in an interview last week that Turkey would not wait at Europe’s door forever and would walk away from accession talks if what he said was rising Islamophobia and hostility from some member states persist.\nLaunched in 2005 after decades of seeking the formal start of an EU membership bid, negotiations dovetailed with Erdoğan’s first economic reforms in power as prime minister from 2003.\nThe European Union is Turkey’s biggest foreign investor and biggest trading partner, while Turkey shares a border with Iraq, Syria and with Russia in the Black Sea.\nHahn said he would present a report by early next year to EU governments to clarify Turkey’s status.\nThe lack of urgency shows the reluctance of EU states to upset Ankara, given that they rely on Turkey to keep migrants from coming to Europe, diplomats said.\nBut Hahn said that limits on with press freedoms, mass jailing and shrinking civil rights made it almost impossible at the present time for Turkey to meet EU joining criteria.\nHahn said EU rules “were not negotiable” and the bloc would not “decouple the human rights situation” from discussions.\n“There is no version of Turkish democracy.\nThere is only democracy.\nTurkish people have the same rights to live in freedom as Europeans do,” said Hahn, whose delegation in Turkey has visited suspects in prison.\nA slim majority of 51.4 percent of Turkish voters voted in April to grant the president sweeping new powers, the biggest overhaul of the country’s politics since the founding of the modern republic.\nAsked if the European Union was partly responsible for Turkey’s turn towards a more centralized system, Hahn said the drive to change had come from inside the country.\n“Nobody can claim to be blameless, but it is always the sovereign decision of a country [to decide policy] ... If you have a certain vision in mind, it is difficult to intervene in a meaningful way,” Hahn said.\n“All these reform efforts are not done for the European Union but for the sake of [Turkish] citizens,” Hahn said, referring to the process that helped transform former communist countries in central and eastern Europe into thriving market democracies as they sought to join the European Union.\n“This is not about serving the Europeans,” he said.",
+          "sentences": [
+            {
+              "position": 0,
+              "sentence_id": "1-14855-6-1::s0",
+              "text": "Turkey has turned its back on joining the European Union, at least for now, the bloc’s top official dealing with Ankara said, offering economic cooperation instead if both sides can restore friendly ties."
+            },
+            {
+              "position": 1,
+              "sentence_id": "1-14855-6-1::s1",
+              "text": "After years of stalemate on Turkey’s bid to join the world’s biggest trading bloc, EU governments say the process is dead, citing President Recep Tayyip Erdoğan’s crackdown on dissidents, his “Nazi” jibes at Germany and a referendum giving him sweeping new powers that a rights group says lack checks and balances."
+            },
+            {
+              "position": 2,
+              "sentence_id": "1-14855-6-1::s2",
+              "text": "“Everybody’s clear that, currently at least, Turkey is moving away from a European perspective,” European Commissioner Johannes Hahn, who oversees EU membership bids, told Reuters."
+            },
+            {
+              "position": 3,
+              "sentence_id": "1-14855-6-1::s3",
+              "text": "“The focus of our relationship has to be something else,” he said in an interview after EU foreign ministers met in Malta and where France and Germany led efforts to consider a new deal with Ankara based on trade and security ties."
+            },
+            {
+              "position": 4,
+              "sentence_id": "1-14855-6-1::s4",
+              "text": "“We have to see what could be done in the future, to see if we can restart some kind of cooperation,” Hahn said on April 29, saying that he had not had meetings on the economy with NATO-member Turkey since January last year, normally a fixture of accession talks."
+            },
+            {
+              "position": 5,
+              "sentence_id": "1-14855-6-1::s5",
+              "text": "The EU process is not formally frozen, but EU lawmakers called last week for a formal halt to talks, with some saying Turkey no longer met the democratic criteria to be considered a candidate, let alone a full member, for the EU."
+            },
+            {
+              "position": 6,
+              "sentence_id": "1-14855-6-1::s6",
+              "text": "Erdoğan told Reuters in an interview last week that Turkey would not wait at Europe’s door forever and would walk away from accession talks if what he said was rising Islamophobia and hostility from some member states persist."
+            },
+            {
+              "position": 7,
+              "sentence_id": "1-14855-6-1::s7",
+              "text": "Launched in 2005 after decades of seeking the formal start of an EU membership bid, negotiations dovetailed with Erdoğan’s first economic reforms in power as prime minister from 2003."
+            },
+            {
+              "position": 8,
+              "sentence_id": "1-14855-6-1::s8",
+              "text": "The European Union is Turkey’s biggest foreign investor and biggest trading partner, while Turkey shares a border with Iraq, Syria and with Russia in the Black Sea."
+            },
+            {
+              "position": 9,
+              "sentence_id": "1-14855-6-1::s9",
+              "text": "Hahn said he would present a report by early next year to EU governments to clarify Turkey’s status."
+            },
+            {
+              "position": 10,
+              "sentence_id": "1-14855-6-1::s10",
+              "text": "The lack of urgency shows the reluctance of EU states to upset Ankara, given that they rely on Turkey to keep migrants from coming to Europe, diplomats said."
+            },
+            {
+              "position": 11,
+              "sentence_id": "1-14855-6-1::s11",
+              "text": "But Hahn said that limits on with press freedoms, mass jailing and shrinking civil rights made it almost impossible at the present time for Turkey to meet EU joining criteria."
+            },
+            {
+              "position": 12,
+              "sentence_id": "1-14855-6-1::s12",
+              "text": "Hahn said EU rules “were not negotiable” and the bloc would not “decouple the human rights situation” from discussions."
+            },
+            {
+              "position": 13,
+              "sentence_id": "1-14855-6-1::s13",
+              "text": "“There is no version of Turkish democracy."
+            },
+            {
+              "position": 14,
+              "sentence_id": "1-14855-6-1::s14",
+              "text": "There is only democracy."
+            },
+            {
+              "position": 15,
+              "sentence_id": "1-14855-6-1::s15",
+              "text": "Turkish people have the same rights to live in freedom as Europeans do,” said Hahn, whose delegation in Turkey has visited suspects in prison."
+            },
+            {
+              "position": 16,
+              "sentence_id": "1-14855-6-1::s16",
+              "text": "A slim majority of 51.4 percent of Turkish voters voted in April to grant the president sweeping new powers, the biggest overhaul of the country’s politics since the founding of the modern republic."
+            },
+            {
+              "position": 17,
+              "sentence_id": "1-14855-6-1::s17",
+              "text": "Asked if the European Union was partly responsible for Turkey’s turn towards a more centralized system, Hahn said the drive to change had come from inside the country."
+            },
+            {
+              "position": 18,
+              "sentence_id": "1-14855-6-1::s18",
+              "text": "“Nobody can claim to be blameless, but it is always the sovereign decision of a country [to decide policy] ... If you have a certain vision in mind, it is difficult to intervene in a meaningful way,” Hahn said."
+            },
+            {
+              "position": 19,
+              "sentence_id": "1-14855-6-1::s19",
+              "text": "“All these reform efforts are not done for the European Union but for the sake of [Turkish] citizens,” Hahn said, referring to the process that helped transform former communist countries in central and eastern Europe into thriving market democracies as they sought to join the European Union."
+            },
+            {
+              "position": 20,
+              "sentence_id": "1-14855-6-1::s20",
+              "text": "“This is not about serving the Europeans,” he said."
+            }
+          ]
+        },
+        "12-7895-1-t": {
+          "doc_id": "12-7895-1-t",
+          "split": "test_human_all",
+          "title": "NextGenerationEU: European Commission endorses Portugal's €16.6 billion recovery and resilience plan",
+          "text": "he European Commission has today adopted a positive assessment of Portugal's recovery and resilience plan.\nThis is an important step towards the EU disbursing €13.9 billion in grants and €2.7 billion in loans under the Recovery and Resilience Facility (RRF) over the period 2021-2026.\nThis financing will support the implementation of the crucial investment and reform measures outlined in Portugal's recovery and resilience plan.\nIt will play a key role in enabling Portugal to emerge stronger from the COVID-19 pandemic.\nThe RRF - at the heart of NextGenerationEU - will provide up to €672.5 billion (in current prices) to support investments and reforms across the EU.\nThe Portuguese plan forms part of an unprecedented coordinated EU response to the COVID-19 crisis, to address common European challenges by embracing the green and digital transitions, to strengthen economic and social resilience and the cohesion of the Single Market.\nThe Commission assessed Portugal's plan based on the criteria set out in the RRF Regulation.\nThe Commission's analysis considered, in particular, whether the investments and reforms contained in Portugal's plan support the green and digital transitions; contribute to effectively addressing challenges identified in the European Semester; and strengthen its growth potential, job creation and economic and social resilience.\nThe Commission's assessment finds that Portugal's plan devotes 38% of its total allocation to measures that support climate objectives.\nThis includes investments to finance a large-scale renovation programme to increase the energy efficiency of buildings or the promotion of energy efficiency and the use of alternative energy sources in industrial processes.\nThe Commission finds that the Portugal's plan devotes 22% of its total allocation to measures that support the digital transition.\nThis includes efforts to digitalise the public administration and to modernise the computer systems of the National Health Service, as well as technological laboratories in secondary schools and professional training centres.\nThe Commission considers that Portugal's plan includes an extensive set of mutually reinforcing reforms and investments that contribute to effectively addressing all or a significant subset of the economic and social challenges outlined in the country-specific recommendations addressed to Portugal by the Council in the European Semester in 2019 and in 2020.\nIt includes measures in the areas of accessibility and resilience of social services and the health system, labour market, education and skills, R&D and innovation, climate and digital transition, business environment, quality and sustainability of public finances and efficiency of the justice system.\nThe plan represents a comprehensive and adequately balanced response to Portugal's economic and social situation, thereby contributing appropriately to all six pillars of the RRF Regulation.\nPortugal's plan proposes projects in six European flagship areas.\nThese are specific investment projects, which address issues that are common to all Member States in areas that create jobs and growth and are needed for the green and digital transition.\nFor instance, Portugal has proposed to provide €610 million to renovate public and private buildings to improve their energy performance.\nThis will result in Portugal reducing its energy bill, greenhouse gas emissions and energy dependence, as well as reducing energy poverty.\nThe assessment also finds that none of the measures included in the plan significantly harm the environment, in line with the requirements laid out in the RRF Regulation.\nThe control systems put in place by Portugal are considered adequate to protect the financial interests of the Union.\nThe plan provides sufficient details on how national authorities will prevent, detect and correct instances of conflict of interest, corruption and fraud relating to the use of funds.\nPresident Ursula von der Leyen said: “Today, the European Commission has decided to give its green light to Portugal's €16.6 billion recovery and resilience plan, the first to be endorsed by the Commission.\nThe plan was designed in Portugal.\nThe reforms and investments contained in this plan will allow Portugal to emerge from the COVID-19 crisis stronger, more resilient, and better prepared for the future.\nIn short, it will help build a better future for the Portuguese people.\nWe will stand by Portugal every step of the way.\nYour success will be our success.\nA European success.”\nValdis Dombrovskis, Executive Vice-President for an Economy that Works for People, said: “Portugal was the first country to present its plan and today we are happy to confirm our positive assessment.\nThis is a solid plan that will put Portugal on a path of higher growth, create new jobs for the future as well as stronger and sustainable social protection.\nThe proposed measures cover a broad spectrum of reforms and investments to equip Portugal for the green and digital transition, ranging from digitalising the public administration, improving workers' skills, creating energy-efficient housing, to better protecting the country's vast forests.\nI also welcome the plan's strong social focus, including measures to improve childcare and strengthen the health care system.\nThis plan will allow Portugal to grow back stronger.\nWe will now work closely with Portugal on its full implementation.”\nPaolo Gentiloni, Commissioner for Economy, said: “The reforms and investments included in the Portuguese plan will enhance the country's resilience and give a strong boost to its climate transition and digital transformation efforts.\nWith its measures to support social services, the national health service and education and training, the plan also has a very strong social dimension.\nThis is our first completed assessment of a national recovery and resilience plan, marking a key milestone in the implementation of NextGenerationEU.\nAnd it is fitting that the first plan to be assessed positively is Portugal's: not only because it was the first to be submitted, but also because the Portuguese Presidency played such a key role in putting in place the legal and financial framework for this unprecedented common European endeavour.”\nThe Commission has today adopted a proposal for a Council Implementing Decision to provide €13.9 billion in grants and €2.7 billion in loans to Portugal under the RRF.\nThe Council will now have, as a rule, four weeks to adopt the Commission's proposal.\nThe Council's approval of the plan would allow for the disbursement of €2.2 billion to Portugal in pre-financing.\nThis represents 13% of the total allocated amount for Portugal.\nThe Commission will authorise further disbursements based on the satisfactory fulfilment of the milestones and targets outlined in the Council Implementing Decision, reflecting progress on the implementation of the investments and reforms.",
+          "sentences": [
+            {
+              "position": 0,
+              "sentence_id": "12-7895-1-t::s0",
+              "text": "he European Commission has today adopted a positive assessment of Portugal's recovery and resilience plan."
+            },
+            {
+              "position": 1,
+              "sentence_id": "12-7895-1-t::s1",
+              "text": "This is an important step towards the EU disbursing €13.9 billion in grants and €2.7 billion in loans under the Recovery and Resilience Facility (RRF) over the period 2021-2026."
+            },
+            {
+              "position": 2,
+              "sentence_id": "12-7895-1-t::s2",
+              "text": "This financing will support the implementation of the crucial investment and reform measures outlined in Portugal's recovery and resilience plan."
+            },
+            {
+              "position": 3,
+              "sentence_id": "12-7895-1-t::s3",
+              "text": "It will play a key role in enabling Portugal to emerge stronger from the COVID-19 pandemic."
+            },
+            {
+              "position": 4,
+              "sentence_id": "12-7895-1-t::s4",
+              "text": "The RRF - at the heart of NextGenerationEU - will provide up to €672.5 billion (in current prices) to support investments and reforms across the EU."
+            },
+            {
+              "position": 5,
+              "sentence_id": "12-7895-1-t::s5",
+              "text": "The Portuguese plan forms part of an unprecedented coordinated EU response to the COVID-19 crisis, to address common European challenges by embracing the green and digital transitions, to strengthen economic and social resilience and the cohesion of the Single Market."
+            },
+            {
+              "position": 6,
+              "sentence_id": "12-7895-1-t::s6",
+              "text": "The Commission assessed Portugal's plan based on the criteria set out in the RRF Regulation."
+            },
+            {
+              "position": 7,
+              "sentence_id": "12-7895-1-t::s7",
+              "text": "The Commission's analysis considered, in particular, whether the investments and reforms contained in Portugal's plan support the green and digital transitions; contribute to effectively addressing challenges identified in the European Semester; and strengthen its growth potential, job creation and economic and social resilience."
+            },
+            {
+              "position": 8,
+              "sentence_id": "12-7895-1-t::s8",
+              "text": "The Commission's assessment finds that Portugal's plan devotes 38% of its total allocation to measures that support climate objectives."
+            },
+            {
+              "position": 9,
+              "sentence_id": "12-7895-1-t::s9",
+              "text": "This includes investments to finance a large-scale renovation programme to increase the energy efficiency of buildings or the promotion of energy efficiency and the use of alternative energy sources in industrial processes."
+            },
+            {
+              "position": 10,
+              "sentence_id": "12-7895-1-t::s10",
+              "text": "The Commission finds that the Portugal's plan devotes 22% of its total allocation to measures that support the digital transition."
+            },
+            {
+              "position": 11,
+              "sentence_id": "12-7895-1-t::s11",
+              "text": "This includes efforts to digitalise the public administration and to modernise the computer systems of the National Health Service, as well as technological laboratories in secondary schools and professional training centres."
+            },
+            {
+              "position": 12,
+              "sentence_id": "12-7895-1-t::s12",
+              "text": "The Commission considers that Portugal's plan includes an extensive set of mutually reinforcing reforms and investments that contribute to effectively addressing all or a significant subset of the economic and social challenges outlined in the country-specific recommendations addressed to Portugal by the Council in the European Semester in 2019 and in 2020."
+            },
+            {
+              "position": 13,
+              "sentence_id": "12-7895-1-t::s13",
+              "text": "It includes measures in the areas of accessibility and resilience of social services and the health system, labour market, education and skills, R&D and innovation, climate and digital transition, business environment, quality and sustainability of public finances and efficiency of the justice system."
+            },
+            {
+              "position": 14,
+              "sentence_id": "12-7895-1-t::s14",
+              "text": "The plan represents a comprehensive and adequately balanced response to Portugal's economic and social situation, thereby contributing appropriately to all six pillars of the RRF Regulation."
+            },
+            {
+              "position": 15,
+              "sentence_id": "12-7895-1-t::s15",
+              "text": "Portugal's plan proposes projects in six European flagship areas."
+            },
+            {
+              "position": 16,
+              "sentence_id": "12-7895-1-t::s16",
+              "text": "These are specific investment projects, which address issues that are common to all Member States in areas that create jobs and growth and are needed for the green and digital transition."
+            },
+            {
+              "position": 17,
+              "sentence_id": "12-7895-1-t::s17",
+              "text": "For instance, Portugal has proposed to provide €610 million to renovate public and private buildings to improve their energy performance."
+            },
+            {
+              "position": 18,
+              "sentence_id": "12-7895-1-t::s18",
+              "text": "This will result in Portugal reducing its energy bill, greenhouse gas emissions and energy dependence, as well as reducing energy poverty."
+            },
+            {
+              "position": 19,
+              "sentence_id": "12-7895-1-t::s19",
+              "text": "The assessment also finds that none of the measures included in the plan significantly harm the environment, in line with the requirements laid out in the RRF Regulation."
+            },
+            {
+              "position": 20,
+              "sentence_id": "12-7895-1-t::s20",
+              "text": "The control systems put in place by Portugal are considered adequate to protect the financial interests of the Union."
+            },
+            {
+              "position": 21,
+              "sentence_id": "12-7895-1-t::s21",
+              "text": "The plan provides sufficient details on how national authorities will prevent, detect and correct instances of conflict of interest, corruption and fraud relating to the use of funds."
+            },
+            {
+              "position": 22,
+              "sentence_id": "12-7895-1-t::s22",
+              "text": "President Ursula von der Leyen said: “Today, the European Commission has decided to give its green light to Portugal's €16.6 billion recovery and resilience plan, the first to be endorsed by the Commission."
+            },
+            {
+              "position": 23,
+              "sentence_id": "12-7895-1-t::s23",
+              "text": "The plan was designed in Portugal."
+            },
+            {
+              "position": 24,
+              "sentence_id": "12-7895-1-t::s24",
+              "text": "The reforms and investments contained in this plan will allow Portugal to emerge from the COVID-19 crisis stronger, more resilient, and better prepared for the future."
+            },
+            {
+              "position": 25,
+              "sentence_id": "12-7895-1-t::s25",
+              "text": "In short, it will help build a better future for the Portuguese people."
+            },
+            {
+              "position": 26,
+              "sentence_id": "12-7895-1-t::s26",
+              "text": "We will stand by Portugal every step of the way."
+            },
+            {
+              "position": 27,
+              "sentence_id": "12-7895-1-t::s27",
+              "text": "Your success will be our success."
+            },
+            {
+              "position": 28,
+              "sentence_id": "12-7895-1-t::s28",
+              "text": "A European success.”"
+            },
+            {
+              "position": 29,
+              "sentence_id": "12-7895-1-t::s29",
+              "text": "Valdis Dombrovskis, Executive Vice-President for an Economy that Works for People, said: “Portugal was the first country to present its plan and today we are happy to confirm our positive assessment."
+            },
+            {
+              "position": 30,
+              "sentence_id": "12-7895-1-t::s30",
+              "text": "This is a solid plan that will put Portugal on a path of higher growth, create new jobs for the future as well as stronger and sustainable social protection."
+            },
+            {
+              "position": 31,
+              "sentence_id": "12-7895-1-t::s31",
+              "text": "The proposed measures cover a broad spectrum of reforms and investments to equip Portugal for the green and digital transition, ranging from digitalising the public administration, improving workers' skills, creating energy-efficient housing, to better protecting the country's vast forests."
+            },
+            {
+              "position": 32,
+              "sentence_id": "12-7895-1-t::s32",
+              "text": "I also welcome the plan's strong social focus, including measures to improve childcare and strengthen the health care system."
+            },
+            {
+              "position": 33,
+              "sentence_id": "12-7895-1-t::s33",
+              "text": "This plan will allow Portugal to grow back stronger."
+            },
+            {
+              "position": 34,
+              "sentence_id": "12-7895-1-t::s34",
+              "text": "We will now work closely with Portugal on its full implementation.”"
+            },
+            {
+              "position": 35,
+              "sentence_id": "12-7895-1-t::s35",
+              "text": "Paolo Gentiloni, Commissioner for Economy, said: “The reforms and investments included in the Portuguese plan will enhance the country's resilience and give a strong boost to its climate transition and digital transformation efforts."
+            },
+            {
+              "position": 36,
+              "sentence_id": "12-7895-1-t::s36",
+              "text": "With its measures to support social services, the national health service and education and training, the plan also has a very strong social dimension."
+            },
+            {
+              "position": 37,
+              "sentence_id": "12-7895-1-t::s37",
+              "text": "This is our first completed assessment of a national recovery and resilience plan, marking a key milestone in the implementation of NextGenerationEU."
+            },
+            {
+              "position": 38,
+              "sentence_id": "12-7895-1-t::s38",
+              "text": "And it is fitting that the first plan to be assessed positively is Portugal's: not only because it was the first to be submitted, but also because the Portuguese Presidency played such a key role in putting in place the legal and financial framework for this unprecedented common European endeavour.”"
+            },
+            {
+              "position": 39,
+              "sentence_id": "12-7895-1-t::s39",
+              "text": "The Commission has today adopted a proposal for a Council Implementing Decision to provide €13.9 billion in grants and €2.7 billion in loans to Portugal under the RRF."
+            },
+            {
+              "position": 40,
+              "sentence_id": "12-7895-1-t::s40",
+              "text": "The Council will now have, as a rule, four weeks to adopt the Commission's proposal."
+            },
+            {
+              "position": 41,
+              "sentence_id": "12-7895-1-t::s41",
+              "text": "The Council's approval of the plan would allow for the disbursement of €2.2 billion to Portugal in pre-financing."
+            },
+            {
+              "position": 42,
+              "sentence_id": "12-7895-1-t::s42",
+              "text": "This represents 13% of the total allocated amount for Portugal."
+            },
+            {
+              "position": 43,
+              "sentence_id": "12-7895-1-t::s43",
+              "text": "The Commission will authorise further disbursements based on the satisfactory fulfilment of the milestones and targets outlined in the Council Implementing Decision, reflecting progress on the implementation of the investments and reforms."
+            }
+          ]
+        },
+        "6-20228-4-t": {
+          "doc_id": "6-20228-4-t",
+          "split": "test_human_all",
+          "title": "NextGenerationEU: European Commission endorses Portugal's €16.6 billion recovery and resilience plan",
+          "text": "The European Commission has today adopted a positive assessment of Portugal's recovery and resilience plan.\nThis is an important step towards the EU disbursing €13.9 billion in grants and €2.7 billion in loans under the Recovery and Resilience Facility (RRF) over the period 2021-2026.\nThis financing will support the implementation of the crucial investment and reform measures outlined in Portugal's recovery and resilience plan.\nIt will play a key role in enabling Portugal to emerge stronger from the COVID-19 pandemic.\nThe RRF - at the heart of NextGenerationEU - will provide up to €672.5 billion (in current prices) to support investments and reforms across the EU.\nThe Portuguese plan forms part of an unprecedented coordinated EU response to the COVID-19 crisis, to address common European challenges by embracing the green and digital transitions, to strengthen economic and social resilience and the cohesion of the Single Market.\nThe Commission assessed Portugal's plan based on the criteria set out in the RRF Regulation.\nThe Commission's analysis considered, in particular, whether the investments and reforms contained in Portugal's plan support the green and digital transitions; contribute to effectively addressing challenges identified in the European Semester; and strengthen its growth potential, job creation and economic and social resilience.\nThe Commission's assessment finds that Portugal's plan devotes 38% of its total allocation to measures that support climate objectives.\nThis includes investments to finance a large-scale renovation programme to increase the energy efficiency of buildings or the promotion of energy efficiency and the use of alternative energy sources in industrial processes.\nThe Commission finds that the Portugal's plan devotes 22% of its total allocation to measures that support the digital transition.\nThis includes efforts to digitalise the public administration and to modernise the computer systems of the National Health Service, as well as technological laboratories in secondary schools and professional training centres.\nThe Commission considers that Portugal's plan includes an extensive set of mutually reinforcing reforms and investments that contribute to effectively addressing all or a significant subset of the economic and social challenges outlined in the country-specific recommendations addressed to Portugal by the Council in the European Semester in 2019 and in 2020.\nIt includes measures in the areas of accessibility and resilience of social services and the health system, labour market, education and skills, R&D and innovation, climate and digital transition, business environment, quality and sustainability of public finances and efficiency of the justice system.\nThe plan represents a comprehensive and adequately balanced response to Portugal's economic and social situation, thereby contributing appropriately to all six pillars of the RRF Regulation.\nPortugal's plan proposes projects in six European flagship areas.\nThese are specific investment projects, which address issues that are common to all Member States in areas that create jobs and growth and are needed for the green and digital transition.\nFor instance, Portugal has proposed to provide €610 million to renovate public and private buildings to improve their energy performance.\nThis will result in Portugal reducing its energy bill, greenhouse gas emissions and energy dependence, as well as reducing energy poverty.\nThe assessment also finds that none of the measures included in the plan significantly harm the environment, in line with the requirements laid out in the RRF Regulation.\nThe control systems put in place by Portugal are considered adequate to protect the financial interests of the Union.\nThe plan provides sufficient details on how national authorities will prevent, detect and correct instances of conflict of interest, corruption and fraud relating to the use of funds.\nPresident Ursula von der Leyen said: “Today, the European Commission has decided to give its green light to Portugal's €16.6 billion recovery and resilience plan, the first to be endorsed by the Commission.\nThe plan was designed in Portugal.\nThe reforms and investments contained in this plan will allow Portugal to emerge from the COVID-19 crisis stronger, more resilient, and better prepared for the future.\nIn short, it will help build a better future for the Portuguese people.\nWe will stand by Portugal every step of the way.\nYour success will be our success.\nA European success.”\nValdis Dombrovskis, Executive Vice-President for an Economy that Works for People, said: “Portugal was the first country to present its plan and today we are happy to confirm our positive assessment.\nThis is a solid plan that will put Portugal on a path of higher growth, create new jobs for the future as well as stronger and sustainable social protection.\nThe proposed measures cover a broad spectrum of reforms and investments to equip Portugal for the green and digital transition, ranging from digitalising the public administration, improving workers' skills, creating energy-efficient housing, to better protecting the country's vast forests.\nI also welcome the plan's strong social focus, including measures to improve childcare and strengthen the health care system.\nThis plan will allow Portugal to grow back stronger.\nWe will now work closely with Portugal on its full implementation.”\nPaolo Gentiloni, Commissioner for Economy, said: “The reforms and investments included in the Portuguese plan will enhance the country's resilience and give a strong boost to its climate transition and digital transformation efforts.\nWith its measures to support social services, the national health service and education and training, the plan also has a very strong social dimension.\nThis is our first completed assessment of a national recovery and resilience plan, marking a key milestone in the implementation of NextGenerationEU.\nAnd it is fitting that the first plan to be assessed positively is Portugal's: not only because it was the first to be submitted, but also because the Portuguese Presidency played such a key role in putting in place the legal and financial framework for this unprecedented common European endeavour.”\nThe Commission has today adopted a proposal for a Council Implementing Decision to provide €13.9 billion in grants and €2.7 billion in loans to Portugal under the RRF.\nThe Council will now have, as a rule, four weeks to adopt the Commission's proposal.\nThe Council's approval of the plan would allow for the disbursement of €2.2 billion to Portugal in pre-financing.\nThis represents 13% of the total allocated amount for Portugal.\nThe Commission will authorise further disbursements based on the satisfactory fulfilment of the milestones and targets outlined in the Council Implementing Decision, reflecting progress on the implementation of the investments and reforms",
+          "sentences": [
+            {
+              "position": 0,
+              "sentence_id": "6-20228-4-t::s0",
+              "text": "The European Commission has today adopted a positive assessment of Portugal's recovery and resilience plan."
+            },
+            {
+              "position": 1,
+              "sentence_id": "6-20228-4-t::s1",
+              "text": "This is an important step towards the EU disbursing €13.9 billion in grants and €2.7 billion in loans under the Recovery and Resilience Facility (RRF) over the period 2021-2026."
+            },
+            {
+              "position": 2,
+              "sentence_id": "6-20228-4-t::s2",
+              "text": "This financing will support the implementation of the crucial investment and reform measures outlined in Portugal's recovery and resilience plan."
+            },
+            {
+              "position": 3,
+              "sentence_id": "6-20228-4-t::s3",
+              "text": "It will play a key role in enabling Portugal to emerge stronger from the COVID-19 pandemic."
+            },
+            {
+              "position": 4,
+              "sentence_id": "6-20228-4-t::s4",
+              "text": "The RRF - at the heart of NextGenerationEU - will provide up to €672.5 billion (in current prices) to support investments and reforms across the EU."
+            },
+            {
+              "position": 5,
+              "sentence_id": "6-20228-4-t::s5",
+              "text": "The Portuguese plan forms part of an unprecedented coordinated EU response to the COVID-19 crisis, to address common European challenges by embracing the green and digital transitions, to strengthen economic and social resilience and the cohesion of the Single Market."
+            },
+            {
+              "position": 6,
+              "sentence_id": "6-20228-4-t::s6",
+              "text": "The Commission assessed Portugal's plan based on the criteria set out in the RRF Regulation."
+            },
+            {
+              "position": 7,
+              "sentence_id": "6-20228-4-t::s7",
+              "text": "The Commission's analysis considered, in particular, whether the investments and reforms contained in Portugal's plan support the green and digital transitions; contribute to effectively addressing challenges identified in the European Semester; and strengthen its growth potential, job creation and economic and social resilience."
+            },
+            {
+              "position": 8,
+              "sentence_id": "6-20228-4-t::s8",
+              "text": "The Commission's assessment finds that Portugal's plan devotes 38% of its total allocation to measures that support climate objectives."
+            },
+            {
+              "position": 9,
+              "sentence_id": "6-20228-4-t::s9",
+              "text": "This includes investments to finance a large-scale renovation programme to increase the energy efficiency of buildings or the promotion of energy efficiency and the use of alternative energy sources in industrial processes."
+            },
+            {
+              "position": 10,
+              "sentence_id": "6-20228-4-t::s10",
+              "text": "The Commission finds that the Portugal's plan devotes 22% of its total allocation to measures that support the digital transition."
+            },
+            {
+              "position": 11,
+              "sentence_id": "6-20228-4-t::s11",
+              "text": "This includes efforts to digitalise the public administration and to modernise the computer systems of the National Health Service, as well as technological laboratories in secondary schools and professional training centres."
+            },
+            {
+              "position": 12,
+              "sentence_id": "6-20228-4-t::s12",
+              "text": "The Commission considers that Portugal's plan includes an extensive set of mutually reinforcing reforms and investments that contribute to effectively addressing all or a significant subset of the economic and social challenges outlined in the country-specific recommendations addressed to Portugal by the Council in the European Semester in 2019 and in 2020."
+            },
+            {
+              "position": 13,
+              "sentence_id": "6-20228-4-t::s13",
+              "text": "It includes measures in the areas of accessibility and resilience of social services and the health system, labour market, education and skills, R&D and innovation, climate and digital transition, business environment, quality and sustainability of public finances and efficiency of the justice system."
+            },
+            {
+              "position": 14,
+              "sentence_id": "6-20228-4-t::s14",
+              "text": "The plan represents a comprehensive and adequately balanced response to Portugal's economic and social situation, thereby contributing appropriately to all six pillars of the RRF Regulation."
+            },
+            {
+              "position": 15,
+              "sentence_id": "6-20228-4-t::s15",
+              "text": "Portugal's plan proposes projects in six European flagship areas."
+            },
+            {
+              "position": 16,
+              "sentence_id": "6-20228-4-t::s16",
+              "text": "These are specific investment projects, which address issues that are common to all Member States in areas that create jobs and growth and are needed for the green and digital transition."
+            },
+            {
+              "position": 17,
+              "sentence_id": "6-20228-4-t::s17",
+              "text": "For instance, Portugal has proposed to provide €610 million to renovate public and private buildings to improve their energy performance."
+            },
+            {
+              "position": 18,
+              "sentence_id": "6-20228-4-t::s18",
+              "text": "This will result in Portugal reducing its energy bill, greenhouse gas emissions and energy dependence, as well as reducing energy poverty."
+            },
+            {
+              "position": 19,
+              "sentence_id": "6-20228-4-t::s19",
+              "text": "The assessment also finds that none of the measures included in the plan significantly harm the environment, in line with the requirements laid out in the RRF Regulation."
+            },
+            {
+              "position": 20,
+              "sentence_id": "6-20228-4-t::s20",
+              "text": "The control systems put in place by Portugal are considered adequate to protect the financial interests of the Union."
+            },
+            {
+              "position": 21,
+              "sentence_id": "6-20228-4-t::s21",
+              "text": "The plan provides sufficient details on how national authorities will prevent, detect and correct instances of conflict of interest, corruption and fraud relating to the use of funds."
+            },
+            {
+              "position": 22,
+              "sentence_id": "6-20228-4-t::s22",
+              "text": "President Ursula von der Leyen said: “Today, the European Commission has decided to give its green light to Portugal's €16.6 billion recovery and resilience plan, the first to be endorsed by the Commission."
+            },
+            {
+              "position": 23,
+              "sentence_id": "6-20228-4-t::s23",
+              "text": "The plan was designed in Portugal."
+            },
+            {
+              "position": 24,
+              "sentence_id": "6-20228-4-t::s24",
+              "text": "The reforms and investments contained in this plan will allow Portugal to emerge from the COVID-19 crisis stronger, more resilient, and better prepared for the future."
+            },
+            {
+              "position": 25,
+              "sentence_id": "6-20228-4-t::s25",
+              "text": "In short, it will help build a better future for the Portuguese people."
+            },
+            {
+              "position": 26,
+              "sentence_id": "6-20228-4-t::s26",
+              "text": "We will stand by Portugal every step of the way."
+            },
+            {
+              "position": 27,
+              "sentence_id": "6-20228-4-t::s27",
+              "text": "Your success will be our success."
+            },
+            {
+              "position": 28,
+              "sentence_id": "6-20228-4-t::s28",
+              "text": "A European success.”"
+            },
+            {
+              "position": 29,
+              "sentence_id": "6-20228-4-t::s29",
+              "text": "Valdis Dombrovskis, Executive Vice-President for an Economy that Works for People, said: “Portugal was the first country to present its plan and today we are happy to confirm our positive assessment."
+            },
+            {
+              "position": 30,
+              "sentence_id": "6-20228-4-t::s30",
+              "text": "This is a solid plan that will put Portugal on a path of higher growth, create new jobs for the future as well as stronger and sustainable social protection."
+            },
+            {
+              "position": 31,
+              "sentence_id": "6-20228-4-t::s31",
+              "text": "The proposed measures cover a broad spectrum of reforms and investments to equip Portugal for the green and digital transition, ranging from digitalising the public administration, improving workers' skills, creating energy-efficient housing, to better protecting the country's vast forests."
+            },
+            {
+              "position": 32,
+              "sentence_id": "6-20228-4-t::s32",
+              "text": "I also welcome the plan's strong social focus, including measures to improve childcare and strengthen the health care system."
+            },
+            {
+              "position": 33,
+              "sentence_id": "6-20228-4-t::s33",
+              "text": "This plan will allow Portugal to grow back stronger."
+            },
+            {
+              "position": 34,
+              "sentence_id": "6-20228-4-t::s34",
+              "text": "We will now work closely with Portugal on its full implementation.”"
+            },
+            {
+              "position": 35,
+              "sentence_id": "6-20228-4-t::s35",
+              "text": "Paolo Gentiloni, Commissioner for Economy, said: “The reforms and investments included in the Portuguese plan will enhance the country's resilience and give a strong boost to its climate transition and digital transformation efforts."
+            },
+            {
+              "position": 36,
+              "sentence_id": "6-20228-4-t::s36",
+              "text": "With its measures to support social services, the national health service and education and training, the plan also has a very strong social dimension."
+            },
+            {
+              "position": 37,
+              "sentence_id": "6-20228-4-t::s37",
+              "text": "This is our first completed assessment of a national recovery and resilience plan, marking a key milestone in the implementation of NextGenerationEU."
+            },
+            {
+              "position": 38,
+              "sentence_id": "6-20228-4-t::s38",
+              "text": "And it is fitting that the first plan to be assessed positively is Portugal's: not only because it was the first to be submitted, but also because the Portuguese Presidency played such a key role in putting in place the legal and financial framework for this unprecedented common European endeavour.”"
+            },
+            {
+              "position": 39,
+              "sentence_id": "6-20228-4-t::s39",
+              "text": "The Commission has today adopted a proposal for a Council Implementing Decision to provide €13.9 billion in grants and €2.7 billion in loans to Portugal under the RRF."
+            },
+            {
+              "position": 40,
+              "sentence_id": "6-20228-4-t::s40",
+              "text": "The Council will now have, as a rule, four weeks to adopt the Commission's proposal."
+            },
+            {
+              "position": 41,
+              "sentence_id": "6-20228-4-t::s41",
+              "text": "The Council's approval of the plan would allow for the disbursement of €2.2 billion to Portugal in pre-financing."
+            },
+            {
+              "position": 42,
+              "sentence_id": "6-20228-4-t::s42",
+              "text": "This represents 13% of the total allocated amount for Portugal."
+            },
+            {
+              "position": 43,
+              "sentence_id": "6-20228-4-t::s43",
+              "text": "The Commission will authorise further disbursements based on the satisfactory fulfilment of the milestones and targets outlined in the Council Implementing Decision, reflecting progress on the implementation of the investments and reforms"
+            }
+          ]
+        }
+      },
+      "required_pair_ids": [
+        "cross_512b56626ec693ccbd1c4e8f",
+        "cross_fb97459fb9852e15b1fe52b3",
+        "cross_8f8b522b3012da248a195c0c",
+        "cross_8b52b207b2a558c612022ab6"
+      ]
+    }
+  ],
+  "total_relations": 2,
+  "total_pages": 1
+}

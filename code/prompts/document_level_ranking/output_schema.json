@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+    "ranked_sen_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "maxItems": 10
+    }
+  },
+  "required": [
+    "ranked_sen_ids"
+  ],
+  "additionalProperties": false
+}

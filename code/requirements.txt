@@ -1,0 +1,8 @@
+torch>=2.2
+transformers>=4.45
+numpy>=1.26
+tqdm>=4.66
+safetensors>=0.4
+huggingface-hub
+sentencepiece
+protobuf

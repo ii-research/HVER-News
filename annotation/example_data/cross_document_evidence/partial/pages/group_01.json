@@ -1,0 +1,183 @@
+{
+  "module": "annotation",
+  "view_id": "evidence_v2_partial",
+  "title": "Cross-document annotation · Only Partial",
+  "group": 1,
+  "protocol": "crossdoc_annotation_v1",
+  "pairs": [
+    {
+      "query_id": "q_399b537aba18bb04",
+      "query": "What evidence in the article supports that Pro-Russia Rebels and Russian Government acts contrary to the human value \"Have a safe country\"?",
+      "query_type": "Q1",
+      "relation_id": "rel_c4087579355e007c",
+      "source_article_id": "0-4299-6-2",
+      "doc_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0",
+      "split": "test_human_all",
+      "document_relevance": 1,
+      "document_label": "auxiliary_support",
+      "direct_sentence_ids": [],
+      "partial_sentence_ids": [
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s2",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s3"
+      ],
+      "identity_sentence_ids": [],
+      "actor_match": "yes",
+      "scope_match": "yes",
+      "issue": "none",
+      "source": "gemini",
+      "human_verified": false,
+      "validation_status": "structurally_valid",
+      "review_flags": [],
+      "pair_id": "cross_ca5f1f26ed28a918f642bd70",
+      "reference": {
+        "actor_name": "Pro-Russia Rebels and Russian Government",
+        "value_name": "Have a safe country",
+        "direction": "contradictory",
+        "unit_text": "Ukraine accuses Russia of military involvement -> Blasts occur in Donetsk, possibly hitting a chemical plant",
+        "nevu_explanation": "The combination of alleged military intervention and powerful blasts in a major city demonstrates a severe threat to safety. These actions create a dangerous environment for civilians and directly contradict the value of ensuring a safe country."
+      }
+    },
+    {
+      "query_id": "q_c38d688dc9582ff8",
+      "query": "Which passages show the Kremlin and separatist forces taking actions that contradict the goal to have a safe country?",
+      "query_type": "Q2",
+      "relation_id": "rel_c4087579355e007c",
+      "source_article_id": "0-4299-6-2",
+      "doc_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0",
+      "split": "test_human_all",
+      "document_relevance": 1,
+      "document_label": "auxiliary_support",
+      "direct_sentence_ids": [],
+      "partial_sentence_ids": [
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s2",
+        "https://www.bbc.com/news/articles/cj4en8djwyko#0::s3"
+      ],
+      "identity_sentence_ids": [],
+      "actor_match": "yes",
+      "scope_match": "yes",
+      "issue": "none",
+      "source": "gemini",
+      "human_verified": false,
+      "validation_status": "structurally_valid",
+      "review_flags": [],
+      "pair_id": "cross_6a90f8ba3ded96ea02eda7d0",
+      "reference": {
+        "actor_name": "Pro-Russia Rebels and Russian Government",
+        "value_name": "Have a safe country",
+        "direction": "contradictory",
+        "unit_text": "Ukraine accuses Russia of military involvement -> Blasts occur in Donetsk, possibly hitting a chemical plant",
+        "nevu_explanation": "The combination of alleged military intervention and powerful blasts in a major city demonstrates a severe threat to safety. These actions create a dangerous environment for civilians and directly contradict the value of ensuring a safe country."
+      }
+    }
+  ],
+  "articles": {
+    "https://www.bbc.com/news/articles/cj4en8djwyko#0": {
+      "doc_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0",
+      "split": "test_human_all",
+      "title": "Nato agrees spike in defence spending and stresses 'ironclad' security guarantee",
+      "text": "JOHN THYS/AFP The US president (L) has been pushing for Nato allies to \"equalise\" their defence spending for some time\nNato leaders meeting in The Hague have agreed to ramp up defence spending to 5% of their countries' economic output by 2025, following months of pressure from US President Donald Trump.\nIn a statement they said they were united against \"profound security threats and challenges, in particular the long-term threat posed by Russia to Euro-Atlantic security and the persistent threat of terrorism\".\nHowever, there was no mention of Russian aggression in its war in Ukraine, which there had been a year ago.\nNato leaders did reaffirm their \"ironclad commitment to collective defence\" - the Article Five mutual security guarantee if any one member comes under attack.\n\"No-one should doubt our capacity or determination should our security be challenged,\" said Nato Secretary General Mark Rutte.\n\"This is a stronger, fairer and more lethal alliance that our leaders have begun to build\".\nThe US president had earlier appeared to raise questions about the security guarantee, referring to \"various definitions of Article Five\".\nBut Trump said after the summit: \"I stand with [Article Five], that's why I'm here.\"\nThe Hague summit has been described by several leaders as historic, and Rutte said decisions made on Wednesday would include continued support for Ukraine while pushing for peace.\nThe commitment to raise defence spending over 10 years involves at least 3.5% of each member state's GDP on core defence expenditure by 2035, plus up to 1.5% on a broadly defined series of investments loosely connected to security infrastructure.\nAFP The Spanish prime minister (far right of photo) appeared to stand by himself in the Nato \"family photo\"\nThe US president hailed the summit as a \"big success\".\nHe had said earlier that the hike in spending would be a \"great victory for everybody, I think. We will be equalised shortly, and that's the way it has to be\".\nSpain in particular had objected to the 5% target ahead of the meeting.\nEconomy Minister Carlos Cuerpo said Madrid was making an \"enormous effort\" to reach a target of 2.1% and \"the discussion about the percentage is misguided\".\nAs the leaders gathered for the traditional \"family photo\", Spanish Prime Minister Pedro Sánchez appeared to stand by himself at the far end of the group.\nNevertheless, Sánchez later went ahead and signed Nato's statement, maintaining that it was \"sufficient, realistic and compatible\" for Madrid to meet its commitments while paying less.\nThe Belgian government had also expressed reservations, but Prime Minister Bart de Wever told reporters that while it wouldn't be easy \"3.5% within 10 years is a realistic goal\".\nSlovakia had also raised concerns about the big hike in defence spending, but President Peter Pellegrini indicated that Bratislava would not stand in the way.",
+      "sentences": [
+        {
+          "position": 0,
+          "sentence_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0::s0",
+          "text": "JOHN THYS/AFP The US president (L) has been pushing for Nato allies to \"equalise\" their defence spending for some time"
+        },
+        {
+          "position": 1,
+          "sentence_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0::s1",
+          "text": "Nato leaders meeting in The Hague have agreed to ramp up defence spending to 5% of their countries' economic output by 2025, following months of pressure from US President Donald Trump."
+        },
+        {
+          "position": 2,
+          "sentence_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0::s2",
+          "text": "In a statement they said they were united against \"profound security threats and challenges, in particular the long-term threat posed by Russia to Euro-Atlantic security and the persistent threat of terrorism\"."
+        },
+        {
+          "position": 3,
+          "sentence_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0::s3",
+          "text": "However, there was no mention of Russian aggression in its war in Ukraine, which there had been a year ago."
+        },
+        {
+          "position": 4,
+          "sentence_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0::s4",
+          "text": "Nato leaders did reaffirm their \"ironclad commitment to collective defence\" - the Article Five mutual security guarantee if any one member comes under attack."
+        },
+        {
+          "position": 5,
+          "sentence_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0::s5",
+          "text": "\"No-one should doubt our capacity or determination should our security be challenged,\" said Nato Secretary General Mark Rutte."
+        },
+        {
+          "position": 6,
+          "sentence_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0::s6",
+          "text": "\"This is a stronger, fairer and more lethal alliance that our leaders have begun to build\"."
+        },
+        {
+          "position": 7,
+          "sentence_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0::s7",
+          "text": "The US president had earlier appeared to raise questions about the security guarantee, referring to \"various definitions of Article Five\"."
+        },
+        {
+          "position": 8,
+          "sentence_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0::s8",
+          "text": "But Trump said after the summit: \"I stand with [Article Five], that's why I'm here.\""
+        },
+        {
+          "position": 9,
+          "sentence_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0::s9",
+          "text": "The Hague summit has been described by several leaders as historic, and Rutte said decisions made on Wednesday would include continued support for Ukraine while pushing for peace."
+        },
+        {
+          "position": 10,
+          "sentence_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0::s10",
+          "text": "The commitment to raise defence spending over 10 years involves at least 3.5% of each member state's GDP on core defence expenditure by 2035, plus up to 1.5% on a broadly defined series of investments loosely connected to security infrastructure."
+        },
+        {
+          "position": 11,
+          "sentence_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0::s11",
+          "text": "AFP The Spanish prime minister (far right of photo) appeared to stand by himself in the Nato \"family photo\""
+        },
+        {
+          "position": 12,
+          "sentence_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0::s12",
+          "text": "The US president hailed the summit as a \"big success\"."
+        },
+        {
+          "position": 13,
+          "sentence_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0::s13",
+          "text": "He had said earlier that the hike in spending would be a \"great victory for everybody, I think. We will be equalised shortly, and that's the way it has to be\"."
+        },
+        {
+          "position": 14,
+          "sentence_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0::s14",
+          "text": "Spain in particular had objected to the 5% target ahead of the meeting."
+        },
+        {
+          "position": 15,
+          "sentence_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0::s15",
+          "text": "Economy Minister Carlos Cuerpo said Madrid was making an \"enormous effort\" to reach a target of 2.1% and \"the discussion about the percentage is misguided\"."
+        },
+        {
+          "position": 16,
+          "sentence_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0::s16",
+          "text": "As the leaders gathered for the traditional \"family photo\", Spanish Prime Minister Pedro Sánchez appeared to stand by himself at the far end of the group."
+        },
+        {
+          "position": 17,
+          "sentence_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0::s17",
+          "text": "Nevertheless, Sánchez later went ahead and signed Nato's statement, maintaining that it was \"sufficient, realistic and compatible\" for Madrid to meet its commitments while paying less."
+        },
+        {
+          "position": 18,
+          "sentence_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0::s18",
+          "text": "The Belgian government had also expressed reservations, but Prime Minister Bart de Wever told reporters that while it wouldn't be easy \"3.5% within 10 years is a realistic goal\"."
+        },
+        {
+          "position": 19,
+          "sentence_id": "https://www.bbc.com/news/articles/cj4en8djwyko#0::s19",
+          "text": "Slovakia had also raised concerns about the big hike in defence spending, but President Peter Pellegrini indicated that Bratislava would not stand in the way."
+        }
+      ]
+    }
+  }
+}

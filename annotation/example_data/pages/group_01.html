@@ -1,0 +1,1023 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEVU Human Annotation - Group 01</title>
+<style>
+:root{
+  --bg:#f5f7fa;--panel:#fff;--line:#d9dee7;--text:#1f2937;--muted:#667085;
+  --direct:#dff4e6;--partial:#fff0bf;--orig:#e8eefc;--claude:#f3e8ff;
+  --stage1:#fff7e6;--stage2:#eefbf1;--danger:#fff0f0;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif}
+header{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--line);padding:10px 16px}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button,select,input,textarea{font:inherit}
+button,select{padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:#fff}
+button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.45}
+main{max-width:1220px;margin:16px auto 60px;padding:0 14px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px}
+.meta{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-bottom:14px}
+.meta>div{padding:7px 9px;background:#f8fafc;border-radius:7px}
+.label{font-size:11px;color:var(--muted)}.val{font-weight:600;word-break:break-word}
+.block{margin-top:16px}.block h3{font-size:15px;margin:0 0 7px}
+.explanation{background:#eef2ff;padding:10px;border-radius:7px;line-height:1.5}
+.rating{display:flex;gap:7px;flex-wrap:wrap;align-items:center;margin:8px 0}.rating label{font-size:13px}
+.qbox{border:1px solid var(--line);border-radius:10px;padding:12px;margin:10px 0}
+.qtype{font-size:12px;color:var(--muted);font-weight:700}
+.original{background:var(--orig);padding:8px;border-radius:7px;margin:6px 0;line-height:1.45}
+.claude{background:var(--claude);padding:10px;border-radius:7px;margin:8px 0;line-height:1.45}
+.query-edit{width:100%;min-height:66px;border:1px solid var(--line);border-radius:7px;padding:8px}
+.sentences{max-height:520px;overflow:auto;border:1px solid var(--line);border-radius:9px;padding:7px}
+.stage2 .sentences{background:#fff}
+.sentence{display:grid;grid-template-columns:70px 1fr 220px;gap:8px;align-items:start;
+padding:7px;border-radius:7px;margin:3px 0;border:1px solid transparent}
+.sentence.direct{background:var(--direct)}.sentence.partial{background:var(--partial)}
+.sid{font-size:12px;color:var(--muted);padding-top:5px}.tags{font-size:11px;color:var(--muted);margin-top:3px}
+.stateBtns{display:flex;gap:4px;justify-content:flex-end}.stateBtns button{font-size:11px;padding:5px 7px}
+.stateBtns .active{font-weight:700;border-color:#555}.small{font-size:12px;color:var(--muted)}
+.notes{width:100%;min-height:55px;border:1px solid var(--line);border-radius:7px;padding:7px}
+.nav{font-weight:700}.stageBox{border:1px solid var(--line);border-radius:12px;padding:14px;margin-top:16px}
+.stage1{background:var(--stage1)}.stage2{background:var(--stage2)}.stageTitle{font-weight:800;margin-bottom:5px}
+.lockedBadge{display:inline-block;padding:4px 8px;border-radius:999px;background:#dcfce7;font-size:12px;font-weight:700}
+.unlockedBadge{display:inline-block;padding:4px 8px;border-radius:999px;background:#fee2e2;font-size:12px;font-weight:700}
+.warning{background:var(--danger);padding:9px;border-radius:8px;margin-top:8px;font-size:12px}
+.diffGrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
+.diffCell{background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px}
+.diffLabel{font-size:11px;color:var(--muted);font-weight:700}.actionBtns{display:flex;gap:6px;flex-wrap:wrap;margin:7px 0}
+@media(max-width:850px){.meta{grid-template-columns:repeat(2,minmax(0,1fr))}
+.sentence{grid-template-columns:55px 1fr}.stateBtns{grid-column:2}.diffGrid{grid-template-columns:1fr}}
+
+.authOverlay{
+  position:fixed;inset:0;z-index:9999;background:rgba(17,24,39,.58);
+  display:flex;align-items:center;justify-content:center;padding:18px
+}
+.authOverlay.hidden{display:none}
+.authCard{
+  width:min(430px,96vw);background:#fff;border-radius:14px;padding:22px;
+  box-shadow:0 18px 55px rgba(0,0,0,.24)
+}
+.authCard h2{margin:0 0 6px}
+.authCard p{margin:0 0 14px;color:var(--muted);font-size:13px;line-height:1.45}
+.authField{margin:10px 0}
+.authField label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
+.authField input{width:100%;padding:10px;border:1px solid var(--line);border-radius:8px}
+.authActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.authMessage{min-height:20px;margin-top:10px;font-size:12px}
+.authMessage.error{color:#b42318}
+.authMessage.ok{color:#087a3e}
+
+</style>
+</head>
+<body>
+<header>
+<div class="toolbar">
+<strong>Human Annotation Group 01</strong>
+<span id="annotatorBadge" class="lockedBadge"></span>
+<span class="nav" id="counter"></span>
+<span id="saveStatus" class="small">Not saved yet</span>
+<button id="saveProgress">Save Progress</button>
+<button id="prev">← Previous relation</button>
+<button id="next">Next relation →</button>
+<button id="logoutBtn">Logout</button>
+<button id="exportData">Export corrected JSONL</button>
+<button id="exportLog">Export annotation log</button>
+</div>
+<div class="small" style="margin-top:6px">
+Stage 1 independently scores ORIGINAL data. Fable is fully hidden until the assessment is locked.
+When served through server.py, progress is autosaved to the shared server JSONL file as well as local browser storage.
+</div>
+</header>
+
+<div id="authOverlay" class="authOverlay hidden">
+  <div class="authCard">
+    <h2>NEVU Annotation Login</h2>
+    <p>
+      Each account has a separate annotation workspace in this browser.
+      Create an account once, then log in with the same username/password.
+    </p>
+
+    <div class="authField">
+      <label>Username</label>
+      <input id="authUser" autocomplete="username" placeholder="e.g., annotator01">
+    </div>
+
+    <div class="authField">
+      <label>Password</label>
+      <input id="authPass" type="password" autocomplete="current-password" placeholder="Password">
+    </div>
+
+    <div class="authField">
+      <label>Confirm password <span class="small">(Create Account only)</span></label>
+      <input id="authPass2" type="password" autocomplete="new-password" placeholder="Repeat password">
+    </div>
+
+    <div class="authActions">
+      <button id="loginBtn">Login</button>
+      <button id="registerBtn">Create Account</button>
+    </div>
+
+    <div id="authMessage" class="authMessage"></div>
+  </div>
+</div>
+
+<main><div id="app"></div></main>
+
+<script>
+const RELATIONS=[{"original": {"relation_id": "rel_02220f914400647c", "guid": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills", "article_title": "What Happens if You Don’t Pay Medical Bills? Exploring Medical Debt Options", "unit_level": "story_narrative", "unit_id": "0", "unit_text": "Patients incur high medical bills for complex procedures. When bills are not paid, debts are sent to collectors. Debt collectors sometimes negotiate settlements for less. Real patient stories illustrate financial strain and systemic flaws.", "actor_name": "Patients", "value_name": "Have no debts", "direction": "contradictory", "nevu_explanation": "The entire narrative revolves around the creation and consequences of medical debt. It details the cycle from incurring bills to dealing with collectors, which is fundamentally about the presence of debt, opposing the value of being debt-free.", "nevu_confidence": "9.654320e-01", "direct_doc_ids": ["https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s1", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s2"], "partial_doc_ids": ["https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s3", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s5", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s8", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s9", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s15"], "article_sentences": [{"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s0", "sentence_id": 0, "text": "A lawyer can help you explore the ramifications of not paying certain bills."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s1", "sentence_id": 1, "text": "Undergoing the labyrinthine process of meeting with doctors and specialists, as well as scheduling consultations before important surgeries, can lead to massive medical bills."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s2", "sentence_id": 2, "text": "Vanity procedures of all types, too, can rack up huge medical debt, and the line between necessary accessories and procedures isn't always clear in the eyes of insurance companies."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s3", "sentence_id": 3, "text": "What would happen, though, if you simply ignored the pile of bills urging you to pay immediately?"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s4", "sentence_id": 4, "text": "Are there any real consequences?"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s5", "sentence_id": 5, "text": "This is a very real problem that countless individuals and families experience daily in the U.S."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s6", "sentence_id": 6, "text": "If you were to choose not to pay any sort of bill, especially a medical bill, it would be best to consult with a lawyer to understand the local and federal rules dictating how your life could be affected by eschewing paying your bills."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s7", "sentence_id": 7, "text": "All of that said, let's explore some of the most obvious ramifications of not paying your medical bills and how your daily life may be impacted."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s8", "sentence_id": 8, "text": "If you do not pay your medical bill after failing to resolve any issues with your provider or insurance company, your bill will be sent to a debt collector, per Investopedia."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s9", "sentence_id": 9, "text": "As the financial resource website CreditNinja explains, depending on the cost of the medical debt, the length of time the debt has gone unpaid, and other factors, you may experience any number of severe financial consequences."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s10", "sentence_id": 10, "text": "\"Your credit score can drop, your wages can be garnished, and you may have difficulty getting loans in the future."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s11", "sentence_id": 11, "text": "In addition, unpaid bills and collections can stay on your credit report for up to seven years,\" per CreditNinja."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s12", "sentence_id": 12, "text": "Although some sources say that some medical debt will not show up on your credit report, it is best to consult with a lawyer in conjunction with a certified financial expert to verify your unique situation."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s13", "sentence_id": 13, "text": "A few weeks ago my wife went to the hospital for stomach pain."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s14", "sentence_id": 14, "text": "They did a CT Scan of her abdomen and thankfully didn't find anything serious."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s15", "sentence_id": 15, "text": "Today we got the bill in the mail: $9,117.42"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s16", "sentence_id": 16, "text": "Healthcare is broken."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s17", "sentence_id": 17, "text": "pic.twitter.com/XbNtppb33d — Matt Van Swol (@matt_vanswol) April 25, 2025"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s18", "sentence_id": 18, "text": "\"One important thing to remember when dealing with a debt collection agency is that they will often allow you to settle the debt for less than what you owe to the medical provider."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s19", "sentence_id": 19, "text": "So instead of avoiding the collection agency, it’s wiser to work with them to settle the amount,\" per CreditNinja."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s20", "sentence_id": 20, "text": "\"Since they pay less for the debt than what you owe, they may be willing to entirely get rid of the debt for much less than the total amount.\""}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s21", "sentence_id": 21, "text": "Remember: the billing operations at your provider's office are not infallible, and human mistakes happen all of the time."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s22", "sentence_id": 22, "text": "If you haven't yet done so, Investopedia recommends reviewing your bill closely to ensure that you weren't billed incorrectly or that your insurance didn't skip out on paying something they should have."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s23", "sentence_id": 23, "text": "According to the Centers for Medicare & Medicaid Services (CMS) the U.S. Department of Health and Human Services, the Department of Labor, and the Department of the Treasury released a surprise billing act (the multiple-part “Requirements Related to Surprise Billing\") to empower and protect patients."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s24", "sentence_id": 24, "text": "Because of this common-sense legislation, patients are entitled to several protections by law, including a dispute resolution process when issues arise."}], "queries": [{"query_id": "q_18a0909dc4c9cb79", "query_type": "entity_value_explicit", "query": "What evidence in the article supports that Patients acts contrary to the human value \"Have no debts\"?"}, {"query_id": "q_1c03ad6a3b9a5a3f", "query_type": "entity_implicit_value_explicit", "query": "Where in the article does it show healthcare recipients failing to have no debts after receiving treatment?"}, {"query_id": "q_9b6f370496d510ca", "query_type": "entity_explicit_value_naturalized", "query": "Does the report provide examples of patients struggling with overdue balances or accumulating unpaid healthcare obligations?"}, {"query_id": "q_01e8afdfffabfddd", "query_type": "entity_value_implicit", "query": "What evidence illustrates individuals who received medical care becoming burdened with delinquent financial liabilities?"}], "rows": [{"schema_version": "nevu_verification_sample_v2", "query_id": "q_18a0909dc4c9cb79", "relation_id": "rel_02220f914400647c", "guid": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills", "article_title": "What Happens if You Don’t Pay Medical Bills? Exploring Medical Debt Options", "query_type": "entity_value_explicit", "unit_level": "story_narrative", "unit_id": "0", "unit_text": "Patients incur high medical bills for complex procedures. When bills are not paid, debts are sent to collectors. Debt collectors sometimes negotiate settlements for less. Real patient stories illustrate financial strain and systemic flaws.", "scope_title": "Medical Debt Cycle and Patient Hardship", "actor_name": "Patients", "value_name": "Have no debts", "direction": "contradictory", "nevu_explanation": "The entire narrative revolves around the creation and consequences of medical debt. It details the cycle from incurring bills to dealing with collectors, which is fundamentally about the presence of debt, opposing the value of being debt-free.", "nevu_confidence": "9.654320e-01", "query": "What evidence in the article supports that Patients acts contrary to the human value \"Have no debts\"?", "direct_doc_ids": ["https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s1", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s2"], "partial_doc_ids": ["https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s3", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s5", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s8", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s9", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s15"], "direct_evidence": [{"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s1", "sentence_id": 1, "text": "Undergoing the labyrinthine process of meeting with doctors and specialists, as well as scheduling consultations before important surgeries, can lead to massive medical bills."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s2", "sentence_id": 2, "text": "Vanity procedures of all types, too, can rack up huge medical debt, and the line between necessary accessories and procedures isn't always clear in the eyes of insurance companies."}], "partial_evidence": [{"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s3", "sentence_id": 3, "text": "What would happen, though, if you simply ignored the pile of bills urging you to pay immediately?"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s5", "sentence_id": 5, "text": "This is a very real problem that countless individuals and families experience daily in the U.S."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s8", "sentence_id": 8, "text": "If you do not pay your medical bill after failing to resolve any issues with your provider or insurance company, your bill will be sent to a debt collector, per Investopedia."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s9", "sentence_id": 9, "text": "As the financial resource website CreditNinja explains, depending on the cost of the medical debt, the length of time the debt has gone unpaid, and other factors, you may experience any number of severe financial consequences."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s15", "sentence_id": 15, "text": "Today we got the bill in the mail: $9,117.42"}], "article_sentences": [{"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s0", "sentence_id": 0, "text": "A lawyer can help you explore the ramifications of not paying certain bills."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s1", "sentence_id": 1, "text": "Undergoing the labyrinthine process of meeting with doctors and specialists, as well as scheduling consultations before important surgeries, can lead to massive medical bills."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s2", "sentence_id": 2, "text": "Vanity procedures of all types, too, can rack up huge medical debt, and the line between necessary accessories and procedures isn't always clear in the eyes of insurance companies."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s3", "sentence_id": 3, "text": "What would happen, though, if you simply ignored the pile of bills urging you to pay immediately?"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s4", "sentence_id": 4, "text": "Are there any real consequences?"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s5", "sentence_id": 5, "text": "This is a very real problem that countless individuals and families experience daily in the U.S."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s6", "sentence_id": 6, "text": "If you were to choose not to pay any sort of bill, especially a medical bill, it would be best to consult with a lawyer to understand the local and federal rules dictating how your life could be affected by eschewing paying your bills."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s7", "sentence_id": 7, "text": "All of that said, let's explore some of the most obvious ramifications of not paying your medical bills and how your daily life may be impacted."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s8", "sentence_id": 8, "text": "If you do not pay your medical bill after failing to resolve any issues with your provider or insurance company, your bill will be sent to a debt collector, per Investopedia."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s9", "sentence_id": 9, "text": "As the financial resource website CreditNinja explains, depending on the cost of the medical debt, the length of time the debt has gone unpaid, and other factors, you may experience any number of severe financial consequences."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s10", "sentence_id": 10, "text": "\"Your credit score can drop, your wages can be garnished, and you may have difficulty getting loans in the future."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s11", "sentence_id": 11, "text": "In addition, unpaid bills and collections can stay on your credit report for up to seven years,\" per CreditNinja."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s12", "sentence_id": 12, "text": "Although some sources say that some medical debt will not show up on your credit report, it is best to consult with a lawyer in conjunction with a certified financial expert to verify your unique situation."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s13", "sentence_id": 13, "text": "A few weeks ago my wife went to the hospital for stomach pain."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s14", "sentence_id": 14, "text": "They did a CT Scan of her abdomen and thankfully didn't find anything serious."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s15", "sentence_id": 15, "text": "Today we got the bill in the mail: $9,117.42"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s16", "sentence_id": 16, "text": "Healthcare is broken."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s17", "sentence_id": 17, "text": "pic.twitter.com/XbNtppb33d — Matt Van Swol (@matt_vanswol) April 25, 2025"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s18", "sentence_id": 18, "text": "\"One important thing to remember when dealing with a debt collection agency is that they will often allow you to settle the debt for less than what you owe to the medical provider."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s19", "sentence_id": 19, "text": "So instead of avoiding the collection agency, it’s wiser to work with them to settle the amount,\" per CreditNinja."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s20", "sentence_id": 20, "text": "\"Since they pay less for the debt than what you owe, they may be willing to entirely get rid of the debt for much less than the total amount.\""}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s21", "sentence_id": 21, "text": "Remember: the billing operations at your provider's office are not infallible, and human mistakes happen all of the time."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s22", "sentence_id": 22, "text": "If you haven't yet done so, Investopedia recommends reviewing your bill closely to ensure that you weren't billed incorrectly or that your insurance didn't skip out on paying something they should have."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s23", "sentence_id": 23, "text": "According to the Centers for Medicare & Medicaid Services (CMS) the U.S. Department of Health and Human Services, the Department of Labor, and the Department of the Treasury released a surprise billing act (the multiple-part “Requirements Related to Surprise Billing\") to empower and protect patients."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s24", "sentence_id": 24, "text": "Because of this common-sense legislation, patients are entitled to several protections by law, including a dispute resolution process when issues arise."}]}, {"schema_version": "nevu_verification_sample_v2", "query_id": "q_1c03ad6a3b9a5a3f", "relation_id": "rel_02220f914400647c", "guid": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills", "article_title": "What Happens if You Don’t Pay Medical Bills? Exploring Medical Debt Options", "query_type": "entity_implicit_value_explicit", "unit_level": "story_narrative", "unit_id": "0", "unit_text": "Patients incur high medical bills for complex procedures. When bills are not paid, debts are sent to collectors. Debt collectors sometimes negotiate settlements for less. Real patient stories illustrate financial strain and systemic flaws.", "scope_title": "Medical Debt Cycle and Patient Hardship", "actor_name": "Patients", "value_name": "Have no debts", "direction": "contradictory", "nevu_explanation": "The entire narrative revolves around the creation and consequences of medical debt. It details the cycle from incurring bills to dealing with collectors, which is fundamentally about the presence of debt, opposing the value of being debt-free.", "nevu_confidence": "9.654320e-01", "query": "Where in the article does it show healthcare recipients failing to have no debts after receiving treatment?", "direct_doc_ids": ["https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s1", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s2"], "partial_doc_ids": ["https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s3", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s5", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s8", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s9", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s15"], "direct_evidence": [{"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s1", "sentence_id": 1, "text": "Undergoing the labyrinthine process of meeting with doctors and specialists, as well as scheduling consultations before important surgeries, can lead to massive medical bills."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s2", "sentence_id": 2, "text": "Vanity procedures of all types, too, can rack up huge medical debt, and the line between necessary accessories and procedures isn't always clear in the eyes of insurance companies."}], "partial_evidence": [{"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s3", "sentence_id": 3, "text": "What would happen, though, if you simply ignored the pile of bills urging you to pay immediately?"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s5", "sentence_id": 5, "text": "This is a very real problem that countless individuals and families experience daily in the U.S."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s8", "sentence_id": 8, "text": "If you do not pay your medical bill after failing to resolve any issues with your provider or insurance company, your bill will be sent to a debt collector, per Investopedia."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s9", "sentence_id": 9, "text": "As the financial resource website CreditNinja explains, depending on the cost of the medical debt, the length of time the debt has gone unpaid, and other factors, you may experience any number of severe financial consequences."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s15", "sentence_id": 15, "text": "Today we got the bill in the mail: $9,117.42"}], "article_sentences": [{"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s0", "sentence_id": 0, "text": "A lawyer can help you explore the ramifications of not paying certain bills."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s1", "sentence_id": 1, "text": "Undergoing the labyrinthine process of meeting with doctors and specialists, as well as scheduling consultations before important surgeries, can lead to massive medical bills."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s2", "sentence_id": 2, "text": "Vanity procedures of all types, too, can rack up huge medical debt, and the line between necessary accessories and procedures isn't always clear in the eyes of insurance companies."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s3", "sentence_id": 3, "text": "What would happen, though, if you simply ignored the pile of bills urging you to pay immediately?"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s4", "sentence_id": 4, "text": "Are there any real consequences?"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s5", "sentence_id": 5, "text": "This is a very real problem that countless individuals and families experience daily in the U.S."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s6", "sentence_id": 6, "text": "If you were to choose not to pay any sort of bill, especially a medical bill, it would be best to consult with a lawyer to understand the local and federal rules dictating how your life could be affected by eschewing paying your bills."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s7", "sentence_id": 7, "text": "All of that said, let's explore some of the most obvious ramifications of not paying your medical bills and how your daily life may be impacted."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s8", "sentence_id": 8, "text": "If you do not pay your medical bill after failing to resolve any issues with your provider or insurance company, your bill will be sent to a debt collector, per Investopedia."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s9", "sentence_id": 9, "text": "As the financial resource website CreditNinja explains, depending on the cost of the medical debt, the length of time the debt has gone unpaid, and other factors, you may experience any number of severe financial consequences."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s10", "sentence_id": 10, "text": "\"Your credit score can drop, your wages can be garnished, and you may have difficulty getting loans in the future."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s11", "sentence_id": 11, "text": "In addition, unpaid bills and collections can stay on your credit report for up to seven years,\" per CreditNinja."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s12", "sentence_id": 12, "text": "Although some sources say that some medical debt will not show up on your credit report, it is best to consult with a lawyer in conjunction with a certified financial expert to verify your unique situation."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s13", "sentence_id": 13, "text": "A few weeks ago my wife went to the hospital for stomach pain."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s14", "sentence_id": 14, "text": "They did a CT Scan of her abdomen and thankfully didn't find anything serious."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s15", "sentence_id": 15, "text": "Today we got the bill in the mail: $9,117.42"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s16", "sentence_id": 16, "text": "Healthcare is broken."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s17", "sentence_id": 17, "text": "pic.twitter.com/XbNtppb33d — Matt Van Swol (@matt_vanswol) April 25, 2025"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s18", "sentence_id": 18, "text": "\"One important thing to remember when dealing with a debt collection agency is that they will often allow you to settle the debt for less than what you owe to the medical provider."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s19", "sentence_id": 19, "text": "So instead of avoiding the collection agency, it’s wiser to work with them to settle the amount,\" per CreditNinja."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s20", "sentence_id": 20, "text": "\"Since they pay less for the debt than what you owe, they may be willing to entirely get rid of the debt for much less than the total amount.\""}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s21", "sentence_id": 21, "text": "Remember: the billing operations at your provider's office are not infallible, and human mistakes happen all of the time."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s22", "sentence_id": 22, "text": "If you haven't yet done so, Investopedia recommends reviewing your bill closely to ensure that you weren't billed incorrectly or that your insurance didn't skip out on paying something they should have."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s23", "sentence_id": 23, "text": "According to the Centers for Medicare & Medicaid Services (CMS) the U.S. Department of Health and Human Services, the Department of Labor, and the Department of the Treasury released a surprise billing act (the multiple-part “Requirements Related to Surprise Billing\") to empower and protect patients."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s24", "sentence_id": 24, "text": "Because of this common-sense legislation, patients are entitled to several protections by law, including a dispute resolution process when issues arise."}]}, {"schema_version": "nevu_verification_sample_v2", "query_id": "q_9b6f370496d510ca", "relation_id": "rel_02220f914400647c", "guid": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills", "article_title": "What Happens if You Don’t Pay Medical Bills? Exploring Medical Debt Options", "query_type": "entity_explicit_value_naturalized", "unit_level": "story_narrative", "unit_id": "0", "unit_text": "Patients incur high medical bills for complex procedures. When bills are not paid, debts are sent to collectors. Debt collectors sometimes negotiate settlements for less. Real patient stories illustrate financial strain and systemic flaws.", "scope_title": "Medical Debt Cycle and Patient Hardship", "actor_name": "Patients", "value_name": "Have no debts", "direction": "contradictory", "nevu_explanation": "The entire narrative revolves around the creation and consequences of medical debt. It details the cycle from incurring bills to dealing with collectors, which is fundamentally about the presence of debt, opposing the value of being debt-free.", "nevu_confidence": "9.654320e-01", "query": "Does the report provide examples of patients struggling with overdue balances or accumulating unpaid healthcare obligations?", "direct_doc_ids": ["https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s1", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s2"], "partial_doc_ids": ["https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s3", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s5", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s8", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s9", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s15"], "direct_evidence": [{"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s1", "sentence_id": 1, "text": "Undergoing the labyrinthine process of meeting with doctors and specialists, as well as scheduling consultations before important surgeries, can lead to massive medical bills."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s2", "sentence_id": 2, "text": "Vanity procedures of all types, too, can rack up huge medical debt, and the line between necessary accessories and procedures isn't always clear in the eyes of insurance companies."}], "partial_evidence": [{"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s3", "sentence_id": 3, "text": "What would happen, though, if you simply ignored the pile of bills urging you to pay immediately?"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s5", "sentence_id": 5, "text": "This is a very real problem that countless individuals and families experience daily in the U.S."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s8", "sentence_id": 8, "text": "If you do not pay your medical bill after failing to resolve any issues with your provider or insurance company, your bill will be sent to a debt collector, per Investopedia."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s9", "sentence_id": 9, "text": "As the financial resource website CreditNinja explains, depending on the cost of the medical debt, the length of time the debt has gone unpaid, and other factors, you may experience any number of severe financial consequences."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s15", "sentence_id": 15, "text": "Today we got the bill in the mail: $9,117.42"}], "article_sentences": [{"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s0", "sentence_id": 0, "text": "A lawyer can help you explore the ramifications of not paying certain bills."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s1", "sentence_id": 1, "text": "Undergoing the labyrinthine process of meeting with doctors and specialists, as well as scheduling consultations before important surgeries, can lead to massive medical bills."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s2", "sentence_id": 2, "text": "Vanity procedures of all types, too, can rack up huge medical debt, and the line between necessary accessories and procedures isn't always clear in the eyes of insurance companies."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s3", "sentence_id": 3, "text": "What would happen, though, if you simply ignored the pile of bills urging you to pay immediately?"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s4", "sentence_id": 4, "text": "Are there any real consequences?"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s5", "sentence_id": 5, "text": "This is a very real problem that countless individuals and families experience daily in the U.S."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s6", "sentence_id": 6, "text": "If you were to choose not to pay any sort of bill, especially a medical bill, it would be best to consult with a lawyer to understand the local and federal rules dictating how your life could be affected by eschewing paying your bills."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s7", "sentence_id": 7, "text": "All of that said, let's explore some of the most obvious ramifications of not paying your medical bills and how your daily life may be impacted."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s8", "sentence_id": 8, "text": "If you do not pay your medical bill after failing to resolve any issues with your provider or insurance company, your bill will be sent to a debt collector, per Investopedia."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s9", "sentence_id": 9, "text": "As the financial resource website CreditNinja explains, depending on the cost of the medical debt, the length of time the debt has gone unpaid, and other factors, you may experience any number of severe financial consequences."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s10", "sentence_id": 10, "text": "\"Your credit score can drop, your wages can be garnished, and you may have difficulty getting loans in the future."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s11", "sentence_id": 11, "text": "In addition, unpaid bills and collections can stay on your credit report for up to seven years,\" per CreditNinja."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s12", "sentence_id": 12, "text": "Although some sources say that some medical debt will not show up on your credit report, it is best to consult with a lawyer in conjunction with a certified financial expert to verify your unique situation."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s13", "sentence_id": 13, "text": "A few weeks ago my wife went to the hospital for stomach pain."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s14", "sentence_id": 14, "text": "They did a CT Scan of her abdomen and thankfully didn't find anything serious."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s15", "sentence_id": 15, "text": "Today we got the bill in the mail: $9,117.42"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s16", "sentence_id": 16, "text": "Healthcare is broken."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s17", "sentence_id": 17, "text": "pic.twitter.com/XbNtppb33d — Matt Van Swol (@matt_vanswol) April 25, 2025"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s18", "sentence_id": 18, "text": "\"One important thing to remember when dealing with a debt collection agency is that they will often allow you to settle the debt for less than what you owe to the medical provider."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s19", "sentence_id": 19, "text": "So instead of avoiding the collection agency, it’s wiser to work with them to settle the amount,\" per CreditNinja."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s20", "sentence_id": 20, "text": "\"Since they pay less for the debt than what you owe, they may be willing to entirely get rid of the debt for much less than the total amount.\""}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s21", "sentence_id": 21, "text": "Remember: the billing operations at your provider's office are not infallible, and human mistakes happen all of the time."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s22", "sentence_id": 22, "text": "If you haven't yet done so, Investopedia recommends reviewing your bill closely to ensure that you weren't billed incorrectly or that your insurance didn't skip out on paying something they should have."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s23", "sentence_id": 23, "text": "According to the Centers for Medicare & Medicaid Services (CMS) the U.S. Department of Health and Human Services, the Department of Labor, and the Department of the Treasury released a surprise billing act (the multiple-part “Requirements Related to Surprise Billing\") to empower and protect patients."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s24", "sentence_id": 24, "text": "Because of this common-sense legislation, patients are entitled to several protections by law, including a dispute resolution process when issues arise."}]}, {"schema_version": "nevu_verification_sample_v2", "query_id": "q_01e8afdfffabfddd", "relation_id": "rel_02220f914400647c", "guid": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills", "article_title": "What Happens if You Don’t Pay Medical Bills? Exploring Medical Debt Options", "query_type": "entity_value_implicit", "unit_level": "story_narrative", "unit_id": "0", "unit_text": "Patients incur high medical bills for complex procedures. When bills are not paid, debts are sent to collectors. Debt collectors sometimes negotiate settlements for less. Real patient stories illustrate financial strain and systemic flaws.", "scope_title": "Medical Debt Cycle and Patient Hardship", "actor_name": "Patients", "value_name": "Have no debts", "direction": "contradictory", "nevu_explanation": "The entire narrative revolves around the creation and consequences of medical debt. It details the cycle from incurring bills to dealing with collectors, which is fundamentally about the presence of debt, opposing the value of being debt-free.", "nevu_confidence": "9.654320e-01", "query": "What evidence illustrates individuals who received medical care becoming burdened with delinquent financial liabilities?", "direct_doc_ids": ["https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s1", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s2"], "partial_doc_ids": ["https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s3", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s5", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s8", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s9", "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s15"], "direct_evidence": [{"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s1", "sentence_id": 1, "text": "Undergoing the labyrinthine process of meeting with doctors and specialists, as well as scheduling consultations before important surgeries, can lead to massive medical bills."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s2", "sentence_id": 2, "text": "Vanity procedures of all types, too, can rack up huge medical debt, and the line between necessary accessories and procedures isn't always clear in the eyes of insurance companies."}], "partial_evidence": [{"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s3", "sentence_id": 3, "text": "What would happen, though, if you simply ignored the pile of bills urging you to pay immediately?"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s5", "sentence_id": 5, "text": "This is a very real problem that countless individuals and families experience daily in the U.S."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s8", "sentence_id": 8, "text": "If you do not pay your medical bill after failing to resolve any issues with your provider or insurance company, your bill will be sent to a debt collector, per Investopedia."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s9", "sentence_id": 9, "text": "As the financial resource website CreditNinja explains, depending on the cost of the medical debt, the length of time the debt has gone unpaid, and other factors, you may experience any number of severe financial consequences."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s15", "sentence_id": 15, "text": "Today we got the bill in the mail: $9,117.42"}], "article_sentences": [{"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s0", "sentence_id": 0, "text": "A lawyer can help you explore the ramifications of not paying certain bills."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s1", "sentence_id": 1, "text": "Undergoing the labyrinthine process of meeting with doctors and specialists, as well as scheduling consultations before important surgeries, can lead to massive medical bills."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s2", "sentence_id": 2, "text": "Vanity procedures of all types, too, can rack up huge medical debt, and the line between necessary accessories and procedures isn't always clear in the eyes of insurance companies."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s3", "sentence_id": 3, "text": "What would happen, though, if you simply ignored the pile of bills urging you to pay immediately?"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s4", "sentence_id": 4, "text": "Are there any real consequences?"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s5", "sentence_id": 5, "text": "This is a very real problem that countless individuals and families experience daily in the U.S."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s6", "sentence_id": 6, "text": "If you were to choose not to pay any sort of bill, especially a medical bill, it would be best to consult with a lawyer to understand the local and federal rules dictating how your life could be affected by eschewing paying your bills."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s7", "sentence_id": 7, "text": "All of that said, let's explore some of the most obvious ramifications of not paying your medical bills and how your daily life may be impacted."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s8", "sentence_id": 8, "text": "If you do not pay your medical bill after failing to resolve any issues with your provider or insurance company, your bill will be sent to a debt collector, per Investopedia."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s9", "sentence_id": 9, "text": "As the financial resource website CreditNinja explains, depending on the cost of the medical debt, the length of time the debt has gone unpaid, and other factors, you may experience any number of severe financial consequences."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s10", "sentence_id": 10, "text": "\"Your credit score can drop, your wages can be garnished, and you may have difficulty getting loans in the future."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s11", "sentence_id": 11, "text": "In addition, unpaid bills and collections can stay on your credit report for up to seven years,\" per CreditNinja."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s12", "sentence_id": 12, "text": "Although some sources say that some medical debt will not show up on your credit report, it is best to consult with a lawyer in conjunction with a certified financial expert to verify your unique situation."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s13", "sentence_id": 13, "text": "A few weeks ago my wife went to the hospital for stomach pain."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s14", "sentence_id": 14, "text": "They did a CT Scan of her abdomen and thankfully didn't find anything serious."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s15", "sentence_id": 15, "text": "Today we got the bill in the mail: $9,117.42"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s16", "sentence_id": 16, "text": "Healthcare is broken."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s17", "sentence_id": 17, "text": "pic.twitter.com/XbNtppb33d — Matt Van Swol (@matt_vanswol) April 25, 2025"}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s18", "sentence_id": 18, "text": "\"One important thing to remember when dealing with a debt collection agency is that they will often allow you to settle the debt for less than what you owe to the medical provider."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s19", "sentence_id": 19, "text": "So instead of avoiding the collection agency, it’s wiser to work with them to settle the amount,\" per CreditNinja."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s20", "sentence_id": 20, "text": "\"Since they pay less for the debt than what you owe, they may be willing to entirely get rid of the debt for much less than the total amount.\""}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s21", "sentence_id": 21, "text": "Remember: the billing operations at your provider's office are not infallible, and human mistakes happen all of the time."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s22", "sentence_id": 22, "text": "If you haven't yet done so, Investopedia recommends reviewing your bill closely to ensure that you weren't billed incorrectly or that your insurance didn't skip out on paying something they should have."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s23", "sentence_id": 23, "text": "According to the Centers for Medicare & Medicaid Services (CMS) the U.S. Department of Health and Human Services, the Department of Labor, and the Department of the Treasury released a surprise billing act (the multiple-part “Requirements Related to Surprise Billing\") to empower and protect patients."}, {"doc_id": "https://www.greenmatters.com/health-and-wellness/what-happens-if-you-dont-pay-medical-bills::s24", "sentence_id": 24, "text": "Because of this common-sense legislation, patients are entitled to several protections by law, including a dispute resolution process when issues arise."}]}]}, "claude": {}}, {"original": {"relation_id": "rel_8c59873df83698a3", "guid": "108167639", "article_title": "Trump ‘big beautiful bill' gives top 1% biggest tax cuts in these states", "unit_level": "story_narrative", "unit_id": "0", "unit_text": "House and Senate Republicans move the tax bill through Congress, culminating in President Trump signing the law which broadly benefits wealthy Americans.", "actor_name": "Wealthiest Households (Top 1% U.S.)", "value_name": "Have wealth", "direction": "aligned", "nevu_explanation": "The narrative states that the signed law broadly benefits wealthy Americans. This outcome directly aligns with the value of gaining wealth, as the entire legislative effort described culminates in their increased financial prosperity.", "nevu_confidence": "9.543210e-01", "direct_doc_ids": ["108167639::s1", "108167639::s3", "108167639::s14", "108167639::s18"], "partial_doc_ids": ["108167639::s4", "108167639::s6", "108167639::s7", "108167639::s12", "108167639::s13", "108167639::s17"], "article_sentences": [{"doc_id": "108167639::s0", "sentence_id": 0, "text": "Speaker of the House Mike Johnson, R-La., speaks to reporters as he walks back to his office as the House of Representatives waits to vote on President Trump's \"big beautiful bill\" reconciliation package on July 3, 2025."}, {"doc_id": "108167639::s1", "sentence_id": 1, "text": "A massive package of tax cuts President Trump signed into law on Friday would be a windfall for the wealthiest U.S. households."}, {"doc_id": "108167639::s2", "sentence_id": 2, "text": "But the size of that financial benefit depends largely on where high-income taxpayers live, according to a new analysis by the Institute on Taxation and Economic Policy."}, {"doc_id": "108167639::s3", "sentence_id": 3, "text": "The legislation would give the top 1% of U.S. households an average tax cut of about $66,000, or about 2.4% of their income, in 2026, according to ITEP, a left-leaning think tank."}, {"doc_id": "108167639::s4", "sentence_id": 4, "text": "(These households have incomes of $917,000 or more per year, averaging about $2.7 million, it said.)"}, {"doc_id": "108167639::s5", "sentence_id": 5, "text": "Some households stand to get a much bigger tax benefit."}, {"doc_id": "108167639::s6", "sentence_id": 6, "text": "The wealthiest households in three states — Wyoming, South Dakota and Texas — would see their annual tax bills fall by more than $100,000, ITEP found."}, {"doc_id": "108167639::s7", "sentence_id": 7, "text": "In Wyoming, the top 1% would see their taxes fall most: by an average of about $133,000 (or 3% of income) in 2026, it said."}, {"doc_id": "108167639::s8", "sentence_id": 8, "text": "The average income of the top 1% in the state is about $4.5 million."}, {"doc_id": "108167639::s9", "sentence_id": 9, "text": "\"The bill is most advantageous to conservative-leaning states that have a lot of very wealthy people living within their borders,\" said Carl Davis, ITEP's research director."}, {"doc_id": "108167639::s10", "sentence_id": 10, "text": "These states also don't levy personal income taxes, he said."}, {"doc_id": "108167639::s11", "sentence_id": 11, "text": "Wyoming and Texas \"are classic examples of states with a lot of wealthy people and which tax those wealthy people incredibly lightly,\" Davis said."}, {"doc_id": "108167639::s12", "sentence_id": 12, "text": "Senate Republicans passed the legislation, originally called the One Big Beautiful Bill Act, on Tuesday with the slimmest of margins."}, {"doc_id": "108167639::s13", "sentence_id": 13, "text": "House Republicans passed the bill on Thursday, and sent it to the president for his signature."}, {"doc_id": "108167639::s14", "sentence_id": 14, "text": "The legislation offers more than $4 trillion of net tax cuts over a decade, with most benefits accruing to higher-income households, analyses have found."}, {"doc_id": "108167639::s15", "sentence_id": 15, "text": "It also slashes the social safety net, cutting billions of dollars from programs like Medicaid and food stamps meant to help lower earners."}, {"doc_id": "108167639::s16", "sentence_id": 16, "text": "The centerpiece of the bill is an extension of 2017 tax cuts enacted during President Trump's first term in office."}, {"doc_id": "108167639::s17", "sentence_id": 17, "text": "Overall, the legislation lowers income tax rates, exempts a larger share of wealthy estates from taxation and offers tax breaks to business owners."}, {"doc_id": "108167639::s18", "sentence_id": 18, "text": "These are among the core ways the GOP bill benefits high-income households, Davis said."}, {"doc_id": "108167639::s19", "sentence_id": 19, "text": "It also caps the amount of state and local income taxes and property taxes that households can deduct from their taxable income each year, at $40,000."}, {"doc_id": "108167639::s20", "sentence_id": 20, "text": "That \"SALT\" policy doesn't negatively impact wealthy residents in states like Wyoming, South Dakota and Texas, where residents don't owe state income tax, Davis said."}, {"doc_id": "108167639::s21", "sentence_id": 21, "text": "But it has a large impact on states with high state and local income taxes and property taxes."}, {"doc_id": "108167639::s22", "sentence_id": 22, "text": "In other words, high-income residents of Wyoming, South Dakota and Texas generally get most of the tax upside and not much downside, he said."}, {"doc_id": "108167639::s23", "sentence_id": 23, "text": "Conversely, the highest earners in California and New Jersey would see a smaller tax cut in 2026, averaging about $34,000 and $21,000, respectively, ITEP found."}, {"doc_id": "108167639::s24", "sentence_id": 24, "text": "That represents about 1% of their income in each state."}], "queries": [{"query_id": "q_1f8b4b8c799a417a", "query_type": "entity_value_explicit", "query": "What evidence in the article supports that Wealthiest Households (Top 1% U.S.) is aligned with the human value \"Have wealth\"?"}, {"query_id": "q_57bc78e0bb51bc57", "query_type": "entity_implicit_value_explicit", "query": "Where does the text show high-income Americans taking actions or securing outcomes aligned with the desire to have wealth?"}, {"query_id": "q_cb3f7d25531ba41b", "query_type": "entity_explicit_value_naturalized", "query": "What passages document the Wealthiest Households (Top 1% U.S.) benefiting financially or expanding their fortunes under the proposed policy?"}, {"query_id": "q_949b2dd5de7fdd09", "query_type": "entity_value_implicit", "query": "What evidence indicates that top-tier income earners experienced substantial financial advantages and asset gains from the legislative changes?"}], "rows": [{"schema_version": "nevu_verification_sample_v2", "query_id": "q_1f8b4b8c799a417a", "relation_id": "rel_8c59873df83698a3", "guid": "108167639", "article_title": "Trump ‘big beautiful bill' gives top 1% biggest tax cuts in these states", "query_type": "entity_value_explicit", "unit_level": "story_narrative", "unit_id": "0", "unit_text": "House and Senate Republicans move the tax bill through Congress, culminating in President Trump signing the law which broadly benefits wealthy Americans.", "scope_title": "Legislative Advance and Bill Signing", "actor_name": "Wealthiest Households (Top 1% U.S.)", "value_name": "Have wealth", "direction": "aligned", "nevu_explanation": "The narrative states that the signed law broadly benefits wealthy Americans. This outcome directly aligns with the value of gaining wealth, as the entire legislative effort described culminates in their increased financial prosperity.", "nevu_confidence": "9.543210e-01", "query": "What evidence in the article supports that Wealthiest Households (Top 1% U.S.) is aligned with the human value \"Have wealth\"?", "direct_doc_ids": ["108167639::s1", "108167639::s3", "108167639::s14", "108167639::s18"], "partial_doc_ids": ["108167639::s4", "108167639::s6", "108167639::s7", "108167639::s12", "108167639::s13", "108167639::s17"], "direct_evidence": [{"doc_id": "108167639::s1", "sentence_id": 1, "text": "A massive package of tax cuts President Trump signed into law on Friday would be a windfall for the wealthiest U.S. households."}, {"doc_id": "108167639::s3", "sentence_id": 3, "text": "The legislation would give the top 1% of U.S. households an average tax cut of about $66,000, or about 2.4% of their income, in 2026, according to ITEP, a left-leaning think tank."}, {"doc_id": "108167639::s14", "sentence_id": 14, "text": "The legislation offers more than $4 trillion of net tax cuts over a decade, with most benefits accruing to higher-income households, analyses have found."}, {"doc_id": "108167639::s18", "sentence_id": 18, "text": "These are among the core ways the GOP bill benefits high-income households, Davis said."}], "partial_evidence": [{"doc_id": "108167639::s4", "sentence_id": 4, "text": "(These households have incomes of $917,000 or more per year, averaging about $2.7 million, it said.)"}, {"doc_id": "108167639::s6", "sentence_id": 6, "text": "The wealthiest households in three states — Wyoming, South Dakota and Texas — would see their annual tax bills fall by more than $100,000, ITEP found."}, {"doc_id": "108167639::s7", "sentence_id": 7, "text": "In Wyoming, the top 1% would see their taxes fall most: by an average of about $133,000 (or 3% of income) in 2026, it said."}, {"doc_id": "108167639::s12", "sentence_id": 12, "text": "Senate Republicans passed the legislation, originally called the One Big Beautiful Bill Act, on Tuesday with the slimmest of margins."}, {"doc_id": "108167639::s13", "sentence_id": 13, "text": "House Republicans passed the bill on Thursday, and sent it to the president for his signature."}, {"doc_id": "108167639::s17", "sentence_id": 17, "text": "Overall, the legislation lowers income tax rates, exempts a larger share of wealthy estates from taxation and offers tax breaks to business owners."}], "article_sentences": [{"doc_id": "108167639::s0", "sentence_id": 0, "text": "Speaker of the House Mike Johnson, R-La., speaks to reporters as he walks back to his office as the House of Representatives waits to vote on President Trump's \"big beautiful bill\" reconciliation package on July 3, 2025."}, {"doc_id": "108167639::s1", "sentence_id": 1, "text": "A massive package of tax cuts President Trump signed into law on Friday would be a windfall for the wealthiest U.S. households."}, {"doc_id": "108167639::s2", "sentence_id": 2, "text": "But the size of that financial benefit depends largely on where high-income taxpayers live, according to a new analysis by the Institute on Taxation and Economic Policy."}, {"doc_id": "108167639::s3", "sentence_id": 3, "text": "The legislation would give the top 1% of U.S. households an average tax cut of about $66,000, or about 2.4% of their income, in 2026, according to ITEP, a left-leaning think tank."}, {"doc_id": "108167639::s4", "sentence_id": 4, "text": "(These households have incomes of $917,000 or more per year, averaging about $2.7 million, it said.)"}, {"doc_id": "108167639::s5", "sentence_id": 5, "text": "Some households stand to get a much bigger tax benefit."}, {"doc_id": "108167639::s6", "sentence_id": 6, "text": "The wealthiest households in three states — Wyoming, South Dakota and Texas — would see their annual tax bills fall by more than $100,000, ITEP found."}, {"doc_id": "108167639::s7", "sentence_id": 7, "text": "In Wyoming, the top 1% would see their taxes fall most: by an average of about $133,000 (or 3% of income) in 2026, it said."}, {"doc_id": "108167639::s8", "sentence_id": 8, "text": "The average income of the top 1% in the state is about $4.5 million."}, {"doc_id": "108167639::s9", "sentence_id": 9, "text": "\"The bill is most advantageous to conservative-leaning states that have a lot of very wealthy people living within their borders,\" said Carl Davis, ITEP's research director."}, {"doc_id": "108167639::s10", "sentence_id": 10, "text": "These states also don't levy personal income taxes, he said."}, {"doc_id": "108167639::s11", "sentence_id": 11, "text": "Wyoming and Texas \"are classic examples of states with a lot of wealthy people and which tax those wealthy people incredibly lightly,\" Davis said."}, {"doc_id": "108167639::s12", "sentence_id": 12, "text": "Senate Republicans passed the legislation, originally called the One Big Beautiful Bill Act, on Tuesday with the slimmest of margins."}, {"doc_id": "108167639::s13", "sentence_id": 13, "text": "House Republicans passed the bill on Thursday, and sent it to the president for his signature."}, {"doc_id": "108167639::s14", "sentence_id": 14, "text": "The legislation offers more than $4 trillion of net tax cuts over a decade, with most benefits accruing to higher-income households, analyses have found."}, {"doc_id": "108167639::s15", "sentence_id": 15, "text": "It also slashes the social safety net, cutting billions of dollars from programs like Medicaid and food stamps meant to help lower earners."}, {"doc_id": "108167639::s16", "sentence_id": 16, "text": "The centerpiece of the bill is an extension of 2017 tax cuts enacted during President Trump's first term in office."}, {"doc_id": "108167639::s17", "sentence_id": 17, "text": "Overall, the legislation lowers income tax rates, exempts a larger share of wealthy estates from taxation and offers tax breaks to business owners."}, {"doc_id": "108167639::s18", "sentence_id": 18, "text": "These are among the core ways the GOP bill benefits high-income households, Davis said."}, {"doc_id": "108167639::s19", "sentence_id": 19, "text": "It also caps the amount of state and local income taxes and property taxes that households can deduct from their taxable income each year, at $40,000."}, {"doc_id": "108167639::s20", "sentence_id": 20, "text": "That \"SALT\" policy doesn't negatively impact wealthy residents in states like Wyoming, South Dakota and Texas, where residents don't owe state income tax, Davis said."}, {"doc_id": "108167639::s21", "sentence_id": 21, "text": "But it has a large impact on states with high state and local income taxes and property taxes."}, {"doc_id": "108167639::s22", "sentence_id": 22, "text": "In other words, high-income residents of Wyoming, South Dakota and Texas generally get most of the tax upside and not much downside, he said."}, {"doc_id": "108167639::s23", "sentence_id": 23, "text": "Conversely, the highest earners in California and New Jersey would see a smaller tax cut in 2026, averaging about $34,000 and $21,000, respectively, ITEP found."}, {"doc_id": "108167639::s24", "sentence_id": 24, "text": "That represents about 1% of their income in each state."}]}, {"schema_version": "nevu_verification_sample_v2", "query_id": "q_57bc78e0bb51bc57", "relation_id": "rel_8c59873df83698a3", "guid": "108167639", "article_title": "Trump ‘big beautiful bill' gives top 1% biggest tax cuts in these states", "query_type": "entity_implicit_value_explicit", "unit_level": "story_narrative", "unit_id": "0", "unit_text": "House and Senate Republicans move the tax bill through Congress, culminating in President Trump signing the law which broadly benefits wealthy Americans.", "scope_title": "Legislative Advance and Bill Signing", "actor_name": "Wealthiest Households (Top 1% U.S.)", "value_name": "Have wealth", "direction": "aligned", "nevu_explanation": "The narrative states that the signed law broadly benefits wealthy Americans. This outcome directly aligns with the value of gaining wealth, as the entire legislative effort described culminates in their increased financial prosperity.", "nevu_confidence": "9.543210e-01", "query": "Where does the text show high-income Americans taking actions or securing outcomes aligned with the desire to have wealth?", "direct_doc_ids": ["108167639::s1", "108167639::s3", "108167639::s14", "108167639::s18"], "partial_doc_ids": ["108167639::s4", "108167639::s6", "108167639::s7", "108167639::s12", "108167639::s13", "108167639::s17"], "direct_evidence": [{"doc_id": "108167639::s1", "sentence_id": 1, "text": "A massive package of tax cuts President Trump signed into law on Friday would be a windfall for the wealthiest U.S. households."}, {"doc_id": "108167639::s3", "sentence_id": 3, "text": "The legislation would give the top 1% of U.S. households an average tax cut of about $66,000, or about 2.4% of their income, in 2026, according to ITEP, a left-leaning think tank."}, {"doc_id": "108167639::s14", "sentence_id": 14, "text": "The legislation offers more than $4 trillion of net tax cuts over a decade, with most benefits accruing to higher-income households, analyses have found."}, {"doc_id": "108167639::s18", "sentence_id": 18, "text": "These are among the core ways the GOP bill benefits high-income households, Davis said."}], "partial_evidence": [{"doc_id": "108167639::s4", "sentence_id": 4, "text": "(These households have incomes of $917,000 or more per year, averaging about $2.7 million, it said.)"}, {"doc_id": "108167639::s6", "sentence_id": 6, "text": "The wealthiest households in three states — Wyoming, South Dakota and Texas — would see their annual tax bills fall by more than $100,000, ITEP found."}, {"doc_id": "108167639::s7", "sentence_id": 7, "text": "In Wyoming, the top 1% would see their taxes fall most: by an average of about $133,000 (or 3% of income) in 2026, it said."}, {"doc_id": "108167639::s12", "sentence_id": 12, "text": "Senate Republicans passed the legislation, originally called the One Big Beautiful Bill Act, on Tuesday with the slimmest of margins."}, {"doc_id": "108167639::s13", "sentence_id": 13, "text": "House Republicans passed the bill on Thursday, and sent it to the president for his signature."}, {"doc_id": "108167639::s17", "sentence_id": 17, "text": "Overall, the legislation lowers income tax rates, exempts a larger share of wealthy estates from taxation and offers tax breaks to business owners."}], "article_sentences": [{"doc_id": "108167639::s0", "sentence_id": 0, "text": "Speaker of the House Mike Johnson, R-La., speaks to reporters as he walks back to his office as the House of Representatives waits to vote on President Trump's \"big beautiful bill\" reconciliation package on July 3, 2025."}, {"doc_id": "108167639::s1", "sentence_id": 1, "text": "A massive package of tax cuts President Trump signed into law on Friday would be a windfall for the wealthiest U.S. households."}, {"doc_id": "108167639::s2", "sentence_id": 2, "text": "But the size of that financial benefit depends largely on where high-income taxpayers live, according to a new analysis by the Institute on Taxation and Economic Policy."}, {"doc_id": "108167639::s3", "sentence_id": 3, "text": "The legislation would give the top 1% of U.S. households an average tax cut of about $66,000, or about 2.4% of their income, in 2026, according to ITEP, a left-leaning think tank."}, {"doc_id": "108167639::s4", "sentence_id": 4, "text": "(These households have incomes of $917,000 or more per year, averaging about $2.7 million, it said.)"}, {"doc_id": "108167639::s5", "sentence_id": 5, "text": "Some households stand to get a much bigger tax benefit."}, {"doc_id": "108167639::s6", "sentence_id": 6, "text": "The wealthiest households in three states — Wyoming, South Dakota and Texas — would see their annual tax bills fall by more than $100,000, ITEP found."}, {"doc_id": "108167639::s7", "sentence_id": 7, "text": "In Wyoming, the top 1% would see their taxes fall most: by an average of about $133,000 (or 3% of income) in 2026, it said."}, {"doc_id": "108167639::s8", "sentence_id": 8, "text": "The average income of the top 1% in the state is about $4.5 million."}, {"doc_id": "108167639::s9", "sentence_id": 9, "text": "\"The bill is most advantageous to conservative-leaning states that have a lot of very wealthy people living within their borders,\" said Carl Davis, ITEP's research director."}, {"doc_id": "108167639::s10", "sentence_id": 10, "text": "These states also don't levy personal income taxes, he said."}, {"doc_id": "108167639::s11", "sentence_id": 11, "text": "Wyoming and Texas \"are classic examples of states with a lot of wealthy people and which tax those wealthy people incredibly lightly,\" Davis said."}, {"doc_id": "108167639::s12", "sentence_id": 12, "text": "Senate Republicans passed the legislation, originally called the One Big Beautiful Bill Act, on Tuesday with the slimmest of margins."}, {"doc_id": "108167639::s13", "sentence_id": 13, "text": "House Republicans passed the bill on Thursday, and sent it to the president for his signature."}, {"doc_id": "108167639::s14", "sentence_id": 14, "text": "The legislation offers more than $4 trillion of net tax cuts over a decade, with most benefits accruing to higher-income households, analyses have found."}, {"doc_id": "108167639::s15", "sentence_id": 15, "text": "It also slashes the social safety net, cutting billions of dollars from programs like Medicaid and food stamps meant to help lower earners."}, {"doc_id": "108167639::s16", "sentence_id": 16, "text": "The centerpiece of the bill is an extension of 2017 tax cuts enacted during President Trump's first term in office."}, {"doc_id": "108167639::s17", "sentence_id": 17, "text": "Overall, the legislation lowers income tax rates, exempts a larger share of wealthy estates from taxation and offers tax breaks to business owners."}, {"doc_id": "108167639::s18", "sentence_id": 18, "text": "These are among the core ways the GOP bill benefits high-income households, Davis said."}, {"doc_id": "108167639::s19", "sentence_id": 19, "text": "It also caps the amount of state and local income taxes and property taxes that households can deduct from their taxable income each year, at $40,000."}, {"doc_id": "108167639::s20", "sentence_id": 20, "text": "That \"SALT\" policy doesn't negatively impact wealthy residents in states like Wyoming, South Dakota and Texas, where residents don't owe state income tax, Davis said."}, {"doc_id": "108167639::s21", "sentence_id": 21, "text": "But it has a large impact on states with high state and local income taxes and property taxes."}, {"doc_id": "108167639::s22", "sentence_id": 22, "text": "In other words, high-income residents of Wyoming, South Dakota and Texas generally get most of the tax upside and not much downside, he said."}, {"doc_id": "108167639::s23", "sentence_id": 23, "text": "Conversely, the highest earners in California and New Jersey would see a smaller tax cut in 2026, averaging about $34,000 and $21,000, respectively, ITEP found."}, {"doc_id": "108167639::s24", "sentence_id": 24, "text": "That represents about 1% of their income in each state."}]}, {"schema_version": "nevu_verification_sample_v2", "query_id": "q_cb3f7d25531ba41b", "relation_id": "rel_8c59873df83698a3", "guid": "108167639", "article_title": "Trump ‘big beautiful bill' gives top 1% biggest tax cuts in these states", "query_type": "entity_explicit_value_naturalized", "unit_level": "story_narrative", "unit_id": "0", "unit_text": "House and Senate Republicans move the tax bill through Congress, culminating in President Trump signing the law which broadly benefits wealthy Americans.", "scope_title": "Legislative Advance and Bill Signing", "actor_name": "Wealthiest Households (Top 1% U.S.)", "value_name": "Have wealth", "direction": "aligned", "nevu_explanation": "The narrative states that the signed law broadly benefits wealthy Americans. This outcome directly aligns with the value of gaining wealth, as the entire legislative effort described culminates in their increased financial prosperity.", "nevu_confidence": "9.543210e-01", "query": "What passages document the Wealthiest Households (Top 1% U.S.) benefiting financially or expanding their fortunes under the proposed policy?", "direct_doc_ids": ["108167639::s1", "108167639::s3", "108167639::s14", "108167639::s18"], "partial_doc_ids": ["108167639::s4", "108167639::s6", "108167639::s7", "108167639::s12", "108167639::s13", "108167639::s17"], "direct_evidence": [{"doc_id": "108167639::s1", "sentence_id": 1, "text": "A massive package of tax cuts President Trump signed into law on Friday would be a windfall for the wealthiest U.S. households."}, {"doc_id": "108167639::s3", "sentence_id": 3, "text": "The legislation would give the top 1% of U.S. households an average tax cut of about $66,000, or about 2.4% of their income, in 2026, according to ITEP, a left-leaning think tank."}, {"doc_id": "108167639::s14", "sentence_id": 14, "text": "The legislation offers more than $4 trillion of net tax cuts over a decade, with most benefits accruing to higher-income households, analyses have found."}, {"doc_id": "108167639::s18", "sentence_id": 18, "text": "These are among the core ways the GOP bill benefits high-income households, Davis said."}], "partial_evidence": [{"doc_id": "108167639::s4", "sentence_id": 4, "text": "(These households have incomes of $917,000 or more per year, averaging about $2.7 million, it said.)"}, {"doc_id": "108167639::s6", "sentence_id": 6, "text": "The wealthiest households in three states — Wyoming, South Dakota and Texas — would see their annual tax bills fall by more than $100,000, ITEP found."}, {"doc_id": "108167639::s7", "sentence_id": 7, "text": "In Wyoming, the top 1% would see their taxes fall most: by an average of about $133,000 (or 3% of income) in 2026, it said."}, {"doc_id": "108167639::s12", "sentence_id": 12, "text": "Senate Republicans passed the legislation, originally called the One Big Beautiful Bill Act, on Tuesday with the slimmest of margins."}, {"doc_id": "108167639::s13", "sentence_id": 13, "text": "House Republicans passed the bill on Thursday, and sent it to the president for his signature."}, {"doc_id": "108167639::s17", "sentence_id": 17, "text": "Overall, the legislation lowers income tax rates, exempts a larger share of wealthy estates from taxation and offers tax breaks to business owners."}], "article_sentences": [{"doc_id": "108167639::s0", "sentence_id": 0, "text": "Speaker of the House Mike Johnson, R-La., speaks to reporters as he walks back to his office as the House of Representatives waits to vote on President Trump's \"big beautiful bill\" reconciliation package on July 3, 2025."}, {"doc_id": "108167639::s1", "sentence_id": 1, "text": "A massive package of tax cuts President Trump signed into law on Friday would be a windfall for the wealthiest U.S. households."}, {"doc_id": "108167639::s2", "sentence_id": 2, "text": "But the size of that financial benefit depends largely on where high-income taxpayers live, according to a new analysis by the Institute on Taxation and Economic Policy."}, {"doc_id": "108167639::s3", "sentence_id": 3, "text": "The legislation would give the top 1% of U.S. households an average tax cut of about $66,000, or about 2.4% of their income, in 2026, according to ITEP, a left-leaning think tank."}, {"doc_id": "108167639::s4", "sentence_id": 4, "text": "(These households have incomes of $917,000 or more per year, averaging about $2.7 million, it said.)"}, {"doc_id": "108167639::s5", "sentence_id": 5, "text": "Some households stand to get a much bigger tax benefit."}, {"doc_id": "108167639::s6", "sentence_id": 6, "text": "The wealthiest households in three states — Wyoming, South Dakota and Texas — would see their annual tax bills fall by more than $100,000, ITEP found."}, {"doc_id": "108167639::s7", "sentence_id": 7, "text": "In Wyoming, the top 1% would see their taxes fall most: by an average of about $133,000 (or 3% of income) in 2026, it said."}, {"doc_id": "108167639::s8", "sentence_id": 8, "text": "The average income of the top 1% in the state is about $4.5 million."}, {"doc_id": "108167639::s9", "sentence_id": 9, "text": "\"The bill is most advantageous to conservative-leaning states that have a lot of very wealthy people living within their borders,\" said Carl Davis, ITEP's research director."}, {"doc_id": "108167639::s10", "sentence_id": 10, "text": "These states also don't levy personal income taxes, he said."}, {"doc_id": "108167639::s11", "sentence_id": 11, "text": "Wyoming and Texas \"are classic examples of states with a lot of wealthy people and which tax those wealthy people incredibly lightly,\" Davis said."}, {"doc_id": "108167639::s12", "sentence_id": 12, "text": "Senate Republicans passed the legislation, originally called the One Big Beautiful Bill Act, on Tuesday with the slimmest of margins."}, {"doc_id": "108167639::s13", "sentence_id": 13, "text": "House Republicans passed the bill on Thursday, and sent it to the president for his signature."}, {"doc_id": "108167639::s14", "sentence_id": 14, "text": "The legislation offers more than $4 trillion of net tax cuts over a decade, with most benefits accruing to higher-income households, analyses have found."}, {"doc_id": "108167639::s15", "sentence_id": 15, "text": "It also slashes the social safety net, cutting billions of dollars from programs like Medicaid and food stamps meant to help lower earners."}, {"doc_id": "108167639::s16", "sentence_id": 16, "text": "The centerpiece of the bill is an extension of 2017 tax cuts enacted during President Trump's first term in office."}, {"doc_id": "108167639::s17", "sentence_id": 17, "text": "Overall, the legislation lowers income tax rates, exempts a larger share of wealthy estates from taxation and offers tax breaks to business owners."}, {"doc_id": "108167639::s18", "sentence_id": 18, "text": "These are among the core ways the GOP bill benefits high-income households, Davis said."}, {"doc_id": "108167639::s19", "sentence_id": 19, "text": "It also caps the amount of state and local income taxes and property taxes that households can deduct from their taxable income each year, at $40,000."}, {"doc_id": "108167639::s20", "sentence_id": 20, "text": "That \"SALT\" policy doesn't negatively impact wealthy residents in states like Wyoming, South Dakota and Texas, where residents don't owe state income tax, Davis said."}, {"doc_id": "108167639::s21", "sentence_id": 21, "text": "But it has a large impact on states with high state and local income taxes and property taxes."}, {"doc_id": "108167639::s22", "sentence_id": 22, "text": "In other words, high-income residents of Wyoming, South Dakota and Texas generally get most of the tax upside and not much downside, he said."}, {"doc_id": "108167639::s23", "sentence_id": 23, "text": "Conversely, the highest earners in California and New Jersey would see a smaller tax cut in 2026, averaging about $34,000 and $21,000, respectively, ITEP found."}, {"doc_id": "108167639::s24", "sentence_id": 24, "text": "That represents about 1% of their income in each state."}]}, {"schema_version": "nevu_verification_sample_v2", "query_id": "q_949b2dd5de7fdd09", "relation_id": "rel_8c59873df83698a3", "guid": "108167639", "article_title": "Trump ‘big beautiful bill' gives top 1% biggest tax cuts in these states", "query_type": "entity_value_implicit", "unit_level": "story_narrative", "unit_id": "0", "unit_text": "House and Senate Republicans move the tax bill through Congress, culminating in President Trump signing the law which broadly benefits wealthy Americans.", "scope_title": "Legislative Advance and Bill Signing", "actor_name": "Wealthiest Households (Top 1% U.S.)", "value_name": "Have wealth", "direction": "aligned", "nevu_explanation": "The narrative states that the signed law broadly benefits wealthy Americans. This outcome directly aligns with the value of gaining wealth, as the entire legislative effort described culminates in their increased financial prosperity.", "nevu_confidence": "9.543210e-01", "query": "What evidence indicates that top-tier income earners experienced substantial financial advantages and asset gains from the legislative changes?", "direct_doc_ids": ["108167639::s1", "108167639::s3", "108167639::s14", "108167639::s18"], "partial_doc_ids": ["108167639::s4", "108167639::s6", "108167639::s7", "108167639::s12", "108167639::s13", "108167639::s17"], "direct_evidence": [{"doc_id": "108167639::s1", "sentence_id": 1, "text": "A massive package of tax cuts President Trump signed into law on Friday would be a windfall for the wealthiest U.S. households."}, {"doc_id": "108167639::s3", "sentence_id": 3, "text": "The legislation would give the top 1% of U.S. households an average tax cut of about $66,000, or about 2.4% of their income, in 2026, according to ITEP, a left-leaning think tank."}, {"doc_id": "108167639::s14", "sentence_id": 14, "text": "The legislation offers more than $4 trillion of net tax cuts over a decade, with most benefits accruing to higher-income households, analyses have found."}, {"doc_id": "108167639::s18", "sentence_id": 18, "text": "These are among the core ways the GOP bill benefits high-income households, Davis said."}], "partial_evidence": [{"doc_id": "108167639::s4", "sentence_id": 4, "text": "(These households have incomes of $917,000 or more per year, averaging about $2.7 million, it said.)"}, {"doc_id": "108167639::s6", "sentence_id": 6, "text": "The wealthiest households in three states — Wyoming, South Dakota and Texas — would see their annual tax bills fall by more than $100,000, ITEP found."}, {"doc_id": "108167639::s7", "sentence_id": 7, "text": "In Wyoming, the top 1% would see their taxes fall most: by an average of about $133,000 (or 3% of income) in 2026, it said."}, {"doc_id": "108167639::s12", "sentence_id": 12, "text": "Senate Republicans passed the legislation, originally called the One Big Beautiful Bill Act, on Tuesday with the slimmest of margins."}, {"doc_id": "108167639::s13", "sentence_id": 13, "text": "House Republicans passed the bill on Thursday, and sent it to the president for his signature."}, {"doc_id": "108167639::s17", "sentence_id": 17, "text": "Overall, the legislation lowers income tax rates, exempts a larger share of wealthy estates from taxation and offers tax breaks to business owners."}], "article_sentences": [{"doc_id": "108167639::s0", "sentence_id": 0, "text": "Speaker of the House Mike Johnson, R-La., speaks to reporters as he walks back to his office as the House of Representatives waits to vote on President Trump's \"big beautiful bill\" reconciliation package on July 3, 2025."}, {"doc_id": "108167639::s1", "sentence_id": 1, "text": "A massive package of tax cuts President Trump signed into law on Friday would be a windfall for the wealthiest U.S. households."}, {"doc_id": "108167639::s2", "sentence_id": 2, "text": "But the size of that financial benefit depends largely on where high-income taxpayers live, according to a new analysis by the Institute on Taxation and Economic Policy."}, {"doc_id": "108167639::s3", "sentence_id": 3, "text": "The legislation would give the top 1% of U.S. households an average tax cut of about $66,000, or about 2.4% of their income, in 2026, according to ITEP, a left-leaning think tank."}, {"doc_id": "108167639::s4", "sentence_id": 4, "text": "(These households have incomes of $917,000 or more per year, averaging about $2.7 million, it said.)"}, {"doc_id": "108167639::s5", "sentence_id": 5, "text": "Some households stand to get a much bigger tax benefit."}, {"doc_id": "108167639::s6", "sentence_id": 6, "text": "The wealthiest households in three states — Wyoming, South Dakota and Texas — would see their annual tax bills fall by more than $100,000, ITEP found."}, {"doc_id": "108167639::s7", "sentence_id": 7, "text": "In Wyoming, the top 1% would see their taxes fall most: by an average of about $133,000 (or 3% of income) in 2026, it said."}, {"doc_id": "108167639::s8", "sentence_id": 8, "text": "The average income of the top 1% in the state is about $4.5 million."}, {"doc_id": "108167639::s9", "sentence_id": 9, "text": "\"The bill is most advantageous to conservative-leaning states that have a lot of very wealthy people living within their borders,\" said Carl Davis, ITEP's research director."}, {"doc_id": "108167639::s10", "sentence_id": 10, "text": "These states also don't levy personal income taxes, he said."}, {"doc_id": "108167639::s11", "sentence_id": 11, "text": "Wyoming and Texas \"are classic examples of states with a lot of wealthy people and which tax those wealthy people incredibly lightly,\" Davis said."}, {"doc_id": "108167639::s12", "sentence_id": 12, "text": "Senate Republicans passed the legislation, originally called the One Big Beautiful Bill Act, on Tuesday with the slimmest of margins."}, {"doc_id": "108167639::s13", "sentence_id": 13, "text": "House Republicans passed the bill on Thursday, and sent it to the president for his signature."}, {"doc_id": "108167639::s14", "sentence_id": 14, "text": "The legislation offers more than $4 trillion of net tax cuts over a decade, with most benefits accruing to higher-income households, analyses have found."}, {"doc_id": "108167639::s15", "sentence_id": 15, "text": "It also slashes the social safety net, cutting billions of dollars from programs like Medicaid and food stamps meant to help lower earners."}, {"doc_id": "108167639::s16", "sentence_id": 16, "text": "The centerpiece of the bill is an extension of 2017 tax cuts enacted during President Trump's first term in office."}, {"doc_id": "108167639::s17", "sentence_id": 17, "text": "Overall, the legislation lowers income tax rates, exempts a larger share of wealthy estates from taxation and offers tax breaks to business owners."}, {"doc_id": "108167639::s18", "sentence_id": 18, "text": "These are among the core ways the GOP bill benefits high-income households, Davis said."}, {"doc_id": "108167639::s19", "sentence_id": 19, "text": "It also caps the amount of state and local income taxes and property taxes that households can deduct from their taxable income each year, at $40,000."}, {"doc_id": "108167639::s20", "sentence_id": 20, "text": "That \"SALT\" policy doesn't negatively impact wealthy residents in states like Wyoming, South Dakota and Texas, where residents don't owe state income tax, Davis said."}, {"doc_id": "108167639::s21", "sentence_id": 21, "text": "But it has a large impact on states with high state and local income taxes and property taxes."}, {"doc_id": "108167639::s22", "sentence_id": 22, "text": "In other words, high-income residents of Wyoming, South Dakota and Texas generally get most of the tax upside and not much downside, he said."}, {"doc_id": "108167639::s23", "sentence_id": 23, "text": "Conversely, the highest earners in California and New Jersey would see a smaller tax cut in 2026, averaging about $34,000 and $21,000, respectively, ITEP found."}, {"doc_id": "108167639::s24", "sentence_id": 24, "text": "That represents about 1% of their income in each state."}]}]}, "claude": {}}];
+const GROUP=1;
+
+let annotator=null;
+let idx=0;
+let states={};
+let saveTimer=null;
+
+const SERVER_SYNC_ENABLED=(location.protocol==="http:"||location.protocol==="https:");
+const ANNOTATION_PROTOCOL="independent_original_assessment_then_fable_assisted_human_adjudication";
+const serverSaveTimers={};
+
+function isoNow(){return new Date().toISOString()}
+function parseTime(s){const t=Date.parse(s||"");return Number.isFinite(t)?t:0}
+function cloneJson(x){return JSON.parse(JSON.stringify(x))}
+
+function currentRelationAndState(){
+  if(!RELATIONS.length)return [null,null];
+  const r=RELATIONS[idx];
+  const rid=r?.original?.relation_id;
+  return [rid,rid?states[rid]:null];
+}
+
+async function sendStateToServer(payload){
+  if(!SERVER_SYNC_ENABLED)return {ok:false,disabled:true};
+  const resp=await fetch("/api/save",{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify(payload),
+    cache:"no-store"
+  });
+  const data=await resp.json().catch(()=>({ok:false,error:"invalid server response"}));
+  if(!resp.ok||!data.ok)throw new Error(data.error||(`HTTP ${resp.status}`));
+  return data;
+}
+
+function queueServerSaveRelation(rid,state,delay=650){
+  if(!SERVER_SYNC_ENABLED||!annotator||!rid||!state)return;
+  clearTimeout(serverSaveTimers[rid]);
+  const payload={
+    annotator:annotator,
+    group:String(GROUP),
+    relation_id:String(rid),
+    client_updated_at:String(state._client_updated_at||""),
+    protocol:ANNOTATION_PROTOCOL,
+    state:cloneJson(state)
+  };
+  serverSaveTimers[rid]=setTimeout(async()=>{
+    try{
+      await sendStateToServer(payload);
+      const currentRid=RELATIONS[idx]?.original?.relation_id;
+      if(String(currentRid)===String(rid))markSaved("Saved to server");
+    }catch(e){
+      console.warn("server autosave failed",e);
+      const currentRid=RELATIONS[idx]?.original?.relation_id;
+      if(String(currentRid)===String(rid))markSaved("Saved locally; SERVER SAVE FAILED",true);
+    }
+  },delay);
+}
+
+async function loadServerStates(){
+  if(!SERVER_SYNC_ENABLED||!annotator)return;
+  try{
+    const url=`/api/load?annotator=${encodeURIComponent(annotator)}&group=${encodeURIComponent(String(GROUP))}`;
+    const resp=await fetch(url,{cache:"no-store"});
+    const data=await resp.json();
+    if(!resp.ok||!data.ok)throw new Error(data.error||(`HTTP ${resp.status}`));
+
+    const remote=data.states||{};
+    const meta=data.meta||{};
+    let restored=0,localNewer=0;
+    Object.entries(remote).forEach(([rid,rstate])=>{
+      const local=states[rid];
+      const remoteTime=parseTime(rstate?._client_updated_at)||
+        parseTime(meta[rid]?.client_updated_at)||parseTime(meta[rid]?.server_saved_at);
+      const localTime=parseTime(local?._client_updated_at);
+      if(!local||remoteTime>=localTime){
+        states[rid]=rstate;
+        restored++;
+      }else{
+        localNewer++;
+        queueServerSaveRelation(rid,local,50);
+      }
+    });
+    localStorage.setItem(storageKey(),JSON.stringify(states));
+    if(restored||localNewer){
+      markSaved(`Server restored ${restored}; local-newer ${localNewer}`);
+    }else{
+      markSaved("Connected to server; no prior server state");
+    }
+  }catch(e){
+    console.warn("server restore failed",e);
+    markSaved("Using local backup; SERVER LOAD FAILED",true);
+  }
+}
+
+async function syncAllStates(){
+  if(!SERVER_SYNC_ENABLED||!annotator)return false;
+  try{
+    const resp=await fetch("/api/save-batch",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        annotator:annotator,
+        group:String(GROUP),
+        protocol:ANNOTATION_PROTOCOL,
+        states:states
+      }),
+      cache:"no-store"
+    });
+    const data=await resp.json();
+    if(!resp.ok||!data.ok)throw new Error(data.error||(`HTTP ${resp.status}`));
+    markSaved(`Saved ${data.saved_relations} relations to server`);
+    return true;
+  }catch(e){
+    console.warn("batch server save failed",e);
+    markSaved("Saved locally; SERVER SAVE FAILED",true);
+    return false;
+  }
+}
+
+function beaconCurrentState(){
+  if(!SERVER_SYNC_ENABLED||!annotator||!navigator.sendBeacon)return;
+  const [rid,state]=currentRelationAndState();
+  if(!rid||!state)return;
+  const payload={
+    annotator:annotator,
+    group:String(GROUP),
+    relation_id:String(rid),
+    client_updated_at:String(state._client_updated_at||""),
+    protocol:ANNOTATION_PROTOCOL,
+    state:state
+  };
+  try{
+    navigator.sendBeacon("/api/save",new Blob([JSON.stringify(payload)],{type:"application/json"}));
+  }catch(e){}
+}
+
+
+function safeAnnotator(){
+  return (annotator||"annotator").replace(/[^A-Za-z0-9._-]+/g,"_").slice(0,60)||"annotator";
+}
+function storageKey(){
+  if(!annotator)return "";
+  return "nevu_human_locked_group_"+GROUP+"__annotator__"+encodeURIComponent(annotator);
+}
+function loadStates(){
+  if(!annotator)return {};
+  try{return JSON.parse(localStorage.getItem(storageKey())||"{}")}catch(e){return {}}
+}
+
+function esc(s){return String(s??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;")}
+
+function updateUserBadge(){
+  const el=document.getElementById("annotatorBadge");
+  if(el)el.textContent="Annotator: "+annotator;
+}
+
+function markSaved(message="Saved locally",isError=false){
+  const el=document.getElementById("saveStatus");
+  if(el){
+    const t=new Date().toLocaleTimeString();
+    el.textContent=(isError?"⚠ ":"✓ ")+message+" · "+t;
+    el.style.color=isError?"#b42318":"";
+  }
+}
+
+function save(){
+  if(!annotator)return;
+  const [rid,state]=currentRelationAndState();
+  if(state)state._client_updated_at=isoNow();
+  localStorage.setItem(storageKey(),JSON.stringify(states));
+  markSaved(SERVER_SYNC_ENABLED?"Saved locally; syncing…":"Saved locally");
+  if(rid&&state)queueServerSaveRelation(rid,state);
+}
+
+function persistCurrent(){
+  const r=RELATIONS[idx],s=getState(r);
+  if(s.locked)harvestStage2();else harvestStage1();
+  save();
+}
+
+function scheduleAutosave(){
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(()=>{
+    try{persistCurrent()}catch(e){console.warn("autosave failed",e)}
+  },350);
+}
+
+
+const ACCOUNT_DB_KEY="nevu_annotation_accounts_v2";
+const SESSION_KEY="nevu_annotation_session_user_v2";
+
+function getAccounts(){
+  try{return JSON.parse(localStorage.getItem(ACCOUNT_DB_KEY)||"{}")}
+  catch(e){return {}}
+}
+
+function saveAccounts(accounts){
+  localStorage.setItem(ACCOUNT_DB_KEY,JSON.stringify(accounts));
+}
+
+function bytesToHex(bytes){
+  return Array.from(bytes).map(b=>b.toString(16).padStart(2,"0")).join("");
+}
+
+function hexToBytes(hex){
+  const out=new Uint8Array(hex.length/2);
+  for(let i=0;i<out.length;i++){
+    out[i]=parseInt(hex.slice(i*2,i*2+2),16);
+  }
+  return out;
+}
+
+function newSalt(){
+  const b=new Uint8Array(16);
+  crypto.getRandomValues(b);
+  return bytesToHex(b);
+}
+
+async function passwordHash(password,saltHex){
+  if(!window.crypto || !crypto.subtle){
+    throw new Error(
+      "Web Crypto is unavailable. Open the page in a modern browser, preferably via http://localhost."
+    );
+  }
+
+  const enc=new TextEncoder();
+  const baseKey=await crypto.subtle.importKey(
+    "raw",enc.encode(password),"PBKDF2",false,["deriveBits"]
+  );
+
+  const bits=await crypto.subtle.deriveBits(
+    {
+      name:"PBKDF2",
+      salt:hexToBytes(saltHex),
+      iterations:150000,
+      hash:"SHA-256"
+    },
+    baseKey,
+    256
+  );
+
+  return bytesToHex(new Uint8Array(bits));
+}
+
+function authMessage(text,type=""){
+  const el=document.getElementById("authMessage");
+  if(!el)return;
+  el.textContent=text||"";
+  el.className="authMessage"+(type?(" "+type):"");
+}
+
+function showAuth(message=""){
+  document.getElementById("authOverlay")?.classList.remove("hidden");
+  authMessage(message);
+  setTimeout(()=>document.getElementById("authUser")?.focus(),50);
+}
+
+function hideAuth(){
+  document.getElementById("authOverlay")?.classList.add("hidden");
+  authMessage("");
+  const p=document.getElementById("authPass");
+  const p2=document.getElementById("authPass2");
+  if(p)p.value="";
+  if(p2)p2.value="";
+}
+
+async function enterWorkspace(username){
+  annotator=username;
+  sessionStorage.setItem(SESSION_KEY,annotator);
+  states=loadStates();
+  idx=0;
+  hideAuth();
+  updateUserBadge();
+  markSaved(SERVER_SYNC_ENABLED?"Loading server backup…":"User workspace loaded");
+  await loadServerStates();
+  render();
+}
+
+async function registerAccount(){
+  const username=(document.getElementById("authUser")?.value||"").trim();
+  const password=document.getElementById("authPass")?.value||"";
+  const confirm=document.getElementById("authPass2")?.value||"";
+
+  if(username.length<2){
+    authMessage("Username must contain at least 2 characters.","error");
+    return;
+  }
+  if(password.length<6){
+    authMessage("Password must contain at least 6 characters.","error");
+    return;
+  }
+  if(password!==confirm){
+    authMessage("The two passwords do not match.","error");
+    return;
+  }
+
+  const accounts=getAccounts();
+  if(accounts[username]){
+    authMessage("This username already exists. Please login instead.","error");
+    return;
+  }
+
+  try{
+    authMessage("Creating account...");
+    const salt=newSalt();
+    const hash=await passwordHash(password,salt);
+    accounts[username]={
+      salt:salt,
+      hash:hash,
+      created_at:new Date().toISOString(),
+      kdf:"PBKDF2-SHA256-150000"
+    };
+    saveAccounts(accounts);
+    authMessage("Account created.","ok");
+    await enterWorkspace(username);
+  }catch(e){
+    authMessage(String(e),"error");
+  }
+}
+
+async function loginAccount(){
+  const username=(document.getElementById("authUser")?.value||"").trim();
+  const password=document.getElementById("authPass")?.value||"";
+  const accounts=getAccounts();
+  const account=accounts[username];
+
+  if(!account){
+    authMessage("Unknown username. Create an account first.","error");
+    return;
+  }
+
+  try{
+    authMessage("Checking password...");
+    const hash=await passwordHash(password,account.salt);
+    if(hash!==account.hash){
+      authMessage("Incorrect password.","error");
+      return;
+    }
+    await enterWorkspace(username);
+  }catch(e){
+    authMessage(String(e),"error");
+  }
+}
+
+async function logoutAccount(){
+  try{persistCurrent();await syncAllStates()}catch(e){console.warn(e)}
+  sessionStorage.removeItem(SESSION_KEY);
+  annotator=null;
+  states={};
+  idx=0;
+
+  const badge=document.getElementById("annotatorBadge");
+  if(badge)badge.textContent="";
+  const status=document.getElementById("saveStatus");
+  if(status)status.textContent="Logged out";
+  const app=document.getElementById("app");
+  if(app)app.innerHTML="";
+
+  showAuth("Logged out. Login to continue.");
+}
+
+async function bootAuth(){
+  const accounts=getAccounts();
+  const sessionUser=sessionStorage.getItem(SESSION_KEY);
+
+  if(sessionUser && accounts[sessionUser]){
+    await enterWorkspace(sessionUser);
+  }else{
+    sessionStorage.removeItem(SESSION_KEY);
+    showAuth();
+  }
+}
+
+
+function defaultState(r){
+  const evidence={};
+  (r.original.direct_doc_ids||[]).forEach(x=>evidence[String(x)]="direct");
+  (r.original.partial_doc_ids||[]).forEach(x=>{if(!evidence[String(x)])evidence[String(x)]="partial"});
+  const qs={};
+  r.original.queries.forEach(q=>{
+    qs[q.query_id]={
+      final_query:q.query,
+      query_quality:"",
+      query_evidence_consistency:"",
+      status:"keep",
+      note:""
+    };
+  });
+  return {
+    locked:false,
+    locked_at:"",
+    original_assessment_snapshot:null,
+    evidence:evidence,
+    direct_evidence_validity:"",
+    partial_evidence_validity:"",
+    evidence_set_sufficiency:"",
+    evidence_note:"",
+    queries:qs,
+    claude_visible:false
+  };
+}
+
+function getState(r){
+  const rid=r.original.relation_id;
+  if(!states[rid])states[rid]=defaultState(r);
+  return states[rid];
+}
+
+function scoreSelect(id,value,dimension,disabled=false){
+  const labels={
+    direct_evidence_validity:{
+      "2":"2 Valid Direct evidence",
+      "1":"1 Mostly valid / borderline Direct",
+      "0":"0 Invalid or mislabeled Direct"
+    },
+    partial_evidence_validity:{
+      "2":"2 Valid Partial evidence",
+      "1":"1 Mostly valid / borderline Partial",
+      "0":"0 Invalid or misgraded Partial"
+    },
+    evidence_set_sufficiency:{
+      "2":"2 Sufficient as a set",
+      "1":"1 Partially sufficient",
+      "0":"0 Insufficient"
+    },
+    query_faithfulness:{
+      "2":"2 Faithful to Intended Relation",
+      "1":"1 Mostly Faithful / Mildly Ambiguous",
+      "0":"0 Unfaithful / Material Drift"
+    },
+    query_evidence_consistency:{
+      "2":"2 Consistent / Supported by Evidence",
+      "1":"1 Partially / Indirectly Consistent",
+      "0":"0 Inconsistent / Unsupported"
+    }
+  };
+  const L=labels[dimension]||labels.query_faithfulness;
+  return `<select id="${id}" ${disabled?"disabled":""}>
+    <option value="" ${value===""?"selected":""}>-- score --</option>
+    <option value="2" ${String(value)==="2"?"selected":""}>${L["2"]}</option>
+    <option value="1" ${String(value)==="1"?"selected":""}>${L["1"]}</option>
+    <option value="0" ${String(value)==="0"?"selected":""}>${L["0"]}</option>
+  </select>`;
+}
+
+function queryTypeHint(qtype){
+  const hints={
+    "entity_value_explicit":
+      "Expected form: actor and value are explicit. Judge whether the semantic actor–value–direction relation is preserved.",
+    "entity_implicit_value_explicit":
+      "Expected form: the actor may be implicit or indirectly referred to; the value is explicit. Do NOT penalize the missing literal actor name.",
+    "entity_explicit_value_naturalized":
+      "Expected form: the actor is explicit; the value may be naturally paraphrased. Do NOT require the exact taxonomy label.",
+    "entity_value_implicit":
+      "Expected form: both actor and value may be implicit/contextual. Do NOT penalize intended implicitness; judge whether the intended relation is still semantically recoverable."
+  };
+  return hints[qtype]||"Judge the intended relation semantically, not by literal string overlap.";
+}
+
+function originalTag(r,did){
+  const t=[];
+  if((r.original.direct_doc_ids||[]).includes(did))t.push("Original:Direct");
+  if((r.original.partial_doc_ids||[]).includes(did))t.push("Original:Partial");
+  return t.join(" · ");
+}
+function fableTag(r,did){
+  const t=[];
+  if((r.claude?.direct_doc_ids||[]).includes(did))t.push("Fable:Direct");
+  if((r.claude?.partial_doc_ids||[]).includes(did))t.push("Fable:Partial");
+  return t.join(" · ");
+}
+
+function evidenceDiffSummary(r){
+  const od=new Set((r.original.direct_doc_ids||[]).map(String));
+  const op=new Set((r.original.partial_doc_ids||[]).map(String));
+  const fd=new Set((r.claude?.direct_doc_ids||[]).map(String));
+  const fp=new Set((r.claude?.partial_doc_ids||[]).map(String));
+  const promoted=[...fd].filter(x=>op.has(x));
+  const demoted=[...fp].filter(x=>od.has(x));
+  const added=[...new Set([...fd,...fp])].filter(x=>!od.has(x)&&!op.has(x));
+  const removed=[...new Set([...od,...op])].filter(x=>!fd.has(x)&&!fp.has(x));
+  const fmt=xs=>xs.length?xs.join(", "):"none";
+  return `<div class="diffGrid">
+    <div class="diffCell"><div class="diffLabel">Fable added</div>${esc(fmt(added))}</div>
+    <div class="diffCell"><div class="diffLabel">Fable removed</div>${esc(fmt(removed))}</div>
+    <div class="diffCell"><div class="diffLabel">Partial → Direct</div>${esc(fmt(promoted))}</div>
+    <div class="diffCell"><div class="diffLabel">Direct → Partial</div>${esc(fmt(demoted))}</div>
+  </div>`;
+}
+
+function harvestStage1(){
+  const r=RELATIONS[idx],s=getState(r);
+  if(s.locked)return;
+  s.direct_evidence_validity=(r.original.direct_doc_ids||[]).length? (document.getElementById("dv")?.value||"") : null;
+  s.partial_evidence_validity=(r.original.partial_doc_ids||[]).length? (document.getElementById("pv")?.value||"") : null;
+  s.evidence_set_sufficiency=document.getElementById("es")?.value||"";
+  s.evidence_note=document.getElementById("evnote")?.value||"";
+  r.original.queries.forEach(q=>{
+    const z=s.queries[q.query_id];
+    z.query_quality=document.getElementById("qq_"+q.query_id)?.value||"";
+    z.query_evidence_consistency=document.getElementById("qc_"+q.query_id)?.value||"";
+    z.note=document.getElementById("note_"+q.query_id)?.value||"";
+  });
+  save();
+}
+
+function harvestStage2(){
+  const r=RELATIONS[idx],s=getState(r);
+  if(!s.locked)return;
+  r.original.queries.forEach(q=>{
+    const z=s.queries[q.query_id];
+    z.final_query=document.getElementById("q_"+q.query_id)?.value||q.query;
+    z.status=document.getElementById("status_"+q.query_id)?.value||"keep";
+    z.note=document.getElementById("note_"+q.query_id)?.value||z.note||"";
+  });
+  s.evidence_note=document.getElementById("evnote2")?.value||s.evidence_note||"";
+  save();
+}
+
+function scoresComplete(r,s){
+  if((r.original.direct_doc_ids||[]).length && !["0","1","2"].includes(String(s.direct_evidence_validity)))return false;
+  if((r.original.partial_doc_ids||[]).length && !["0","1","2"].includes(String(s.partial_evidence_validity)))return false;
+  if(!["0","1","2"].includes(String(s.evidence_set_sufficiency)))return false;
+  for(const q of r.original.queries){
+    const z=s.queries[q.query_id];
+    if(!["0","1","2"].includes(String(z.query_quality)))return false;
+    if(!["0","1","2"].includes(String(z.query_evidence_consistency)))return false;
+  }
+  return true;
+}
+
+window.lockOriginalAssessment=function(){
+  harvestStage1();
+  const r=RELATIONS[idx],s=getState(r);
+  if(!scoresComplete(r,s)){
+    alert("Please complete all applicable ORIGINAL scores before locking.");
+    return;
+  }
+  const snapshotQueries={};
+  r.original.queries.forEach(q=>{
+    const z=s.queries[q.query_id];
+    snapshotQueries[q.query_id]={
+      query_quality:z.query_quality,
+      query_evidence_consistency:z.query_evidence_consistency,
+      note:z.note||""
+    };
+  });
+  s.original_assessment_snapshot={
+    direct_evidence_validity:s.direct_evidence_validity,
+    partial_evidence_validity:s.partial_evidence_validity,
+    evidence_set_sufficiency:s.evidence_set_sufficiency,
+    evidence_note:s.evidence_note||"",
+    queries:snapshotQueries
+  };
+  s.locked=true;
+  s.locked_at=new Date().toISOString();
+  save();
+  render();
+};
+
+window.resetBeforeLock=function(){
+  const r=RELATIONS[idx],s=getState(r);
+  if(s.locked){alert("Already locked.");return;}
+  if(!confirm("Reset Stage-1 scores for this relation?"))return;
+  states[r.original.relation_id]=defaultState(r);
+  save();render();
+};
+
+window.toggleFable=function(){
+  const r=RELATIONS[idx],s=getState(r);
+  if(!s.locked){alert("Lock Stage 1 first.");return;}
+  s.claude_visible=!s.claude_visible;
+  save();render();
+};
+
+window.setEvidence=function(did,state){
+  harvestStage2();
+  const r=RELATIONS[idx],s=getState(r);
+  if(!s.locked){alert("Evidence editing is disabled before lock.");return;}
+  if(state==="none")delete s.evidence[did];else s.evidence[did]=state;
+  save();render();
+};
+
+window.useOriginalEvidence=function(){
+  harvestStage2();
+  const r=RELATIONS[idx],s=getState(r);
+  if(!s.locked)return;
+  s.evidence={};
+  (r.original.direct_doc_ids||[]).forEach(x=>s.evidence[String(x)]="direct");
+  (r.original.partial_doc_ids||[]).forEach(x=>{if(!s.evidence[String(x)])s.evidence[String(x)]="partial"});
+  save();render();
+};
+
+window.applyFableEvidence=function(){
+  harvestStage2();
+  const r=RELATIONS[idx],s=getState(r);
+  if(!s.locked||!s.claude_visible||!Array.isArray(r.claude?.direct_doc_ids))return;
+  s.evidence={};
+  (r.claude?.direct_doc_ids||[]).forEach(x=>s.evidence[String(x)]="direct");
+  (r.claude?.partial_doc_ids||[]).forEach(x=>{if(!s.evidence[String(x)])s.evidence[String(x)]="partial"});
+  save();render();
+};
+
+window.useOriginalQuery=function(qid){
+  harvestStage2();
+  const r=RELATIONS[idx],s=getState(r);
+  const oq=r.original.queries.find(x=>x.query_id===qid)?.query||"";
+  s.queries[qid].final_query=oq;
+  s.queries[qid].status="keep";
+  save();render();
+};
+
+window.useFableQuery=function(qid){
+  harvestStage2();
+  const r=RELATIONS[idx],s=getState(r);
+  if(!s.claude_visible)return;
+  const cq=(r.claude?.queries||[]).find(x=>x.query_id===qid);
+  if(!cq||!cq.query)return;
+  const action=String(cq.action||"keep").toLowerCase();
+  if(action==="exclude" || action==="drop"){
+    s.queries[qid].final_query=r.original.queries.find(x=>x.query_id===qid)?.query||"";
+    s.queries[qid].status="exclude";
+  }else if(action==="surface_edit"){
+    s.queries[qid].final_query=cq.query;
+    s.queries[qid].status="surface_edit";
+  }else if(action==="semantic_edit" || action==="edit"){
+    s.queries[qid].final_query=cq.query;
+    s.queries[qid].status="semantic_edit";
+  }else{
+    s.queries[qid].final_query=r.original.queries.find(x=>x.query_id===qid)?.query||"";
+    s.queries[qid].status="keep";
+  }
+  save();render();
+};
+
+function sentenceRows(r,s){
+  return r.original.article_sentences.map(x=>{
+    const did=String(x.doc_id),st=s.evidence[did]||"none";
+    const tags=[originalTag(r,did)];
+    if(s.locked&&s.claude_visible)tags.push(fableTag(r,did));
+    const tagText=tags.filter(Boolean).join(" · ");
+    const dis=!s.locked?"disabled":"";
+    return `<div class="sentence ${st}">
+      <div class="sid">S${esc(x.sentence_id)}</div>
+      <div><div>${esc(x.text)}</div><div class="tags">${esc(tagText)}</div></div>
+      <div class="stateBtns">
+        <button ${dis} class="${st==="none"?"active":""}" onclick="setEvidence('${esc(did)}','none')">None</button>
+        <button ${dis} class="${st==="direct"?"active":""}" onclick="setEvidence('${esc(did)}','direct')">Direct</button>
+        <button ${dis} class="${st==="partial"?"active":""}" onclick="setEvidence('${esc(did)}','partial')">Partial</button>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+function stage1Query(r,s,q){
+  const z=s.queries[q.query_id];
+  return `<div class="qbox">
+    <div class="qtype">${esc(q.query_type)} · ${esc(q.query_id)}</div>
+    <div class="small" style="margin:4px 0 6px"><b>How to judge this type:</b> ${esc(queryTypeHint(q.query_type))}</div>
+    <div class="original">${esc(q.query)}</div>
+    <div class="rating">
+      <label>Query Semantic Faithfulness ${scoreSelect("qq_"+q.query_id,z.query_quality,"query_faithfulness",s.locked)}</label>
+      <label>Query–Evidence Consistency ${scoreSelect("qc_"+q.query_id,z.query_evidence_consistency,"query_evidence_consistency",s.locked)}</label>
+    </div>
+    ${s.locked
+      ? `<div class="small">Locked Stage-1 score.</div>`
+      : `<input style="width:100%;padding:7px;border:1px solid #d9dee7;border-radius:7px"
+          id="note_${esc(q.query_id)}" value="${esc(z.note||"")}" placeholder="Optional Stage-1 note">`
+    }
+  </div>`;
+}
+
+function stage2Query(r,s,q){
+  const z=s.queries[q.query_id];
+  const cq=(r.claude?.queries||[]).find(x=>x.query_id===q.query_id);
+  const fable=s.claude_visible
+    ? `<div class="claude"><b>Fable suggestion:</b><br>${esc(cq?.query||"(none)")}
+       <div class="small" style="margin-top:5px">
+         Semantic faithfulness: ${esc(cq?.query_semantic_faithfulness_score ?? "")}/2 ·
+         Material issue: ${esc(cq?.material_issue ?? false)} ·
+         Issue type: ${esc(cq?.query_issue_type ?? "none")} ·
+         Action: ${esc(cq?.action ?? "keep")}
+       </div>
+       ${cq?.reason?`<div class="small" style="margin-top:5px">Reason: ${esc(cq.reason)}</div>`:""}
+       </div>`
+    : "";
+  return `<div class="qbox">
+    <div class="qtype">${esc(q.query_type)} · ${esc(q.query_id)}</div>
+    <div class="small" style="margin:4px 0 6px"><b>Expected explicitness:</b> ${esc(queryTypeHint(q.query_type))}</div>
+    <div class="small">Original query</div><div class="original">${esc(q.query)}</div>
+    ${fable}
+    <div class="actionBtns">
+      <button onclick="useOriginalQuery('${esc(q.query_id)}')">Use Original</button>
+      <button ${s.claude_visible?"":"disabled"} onclick="useFableQuery('${esc(q.query_id)}')">Use Fable</button>
+    </div>
+    <div class="small">Final human-edited query. Do not rewrite merely for style; use Surface Edit only if you intentionally polish wording, and Semantic Edit only for a material relation/meaning correction.</div>
+    <textarea class="query-edit" id="q_${esc(q.query_id)}">${esc(z.final_query)}</textarea>
+    <div class="rating"><label>Status
+      <select id="status_${esc(q.query_id)}">
+        <option value="keep" ${z.status==="keep"?"selected":""}>Keep</option>
+        <option value="surface_edit" ${z.status==="surface_edit"?"selected":""}>Surface Edit (grammar/style only)</option>
+        <option value="semantic_edit" ${z.status==="semantic_edit"||z.status==="edited"?"selected":""}>Semantic Edit (material)</option>
+        <option value="exclude" ${z.status==="exclude"?"selected":""}>Exclude</option>
+      </select></label></div>
+    <input style="width:100%;padding:7px;border:1px solid #d9dee7;border-radius:7px"
+      id="note_${esc(q.query_id)}" value="${esc(z.note||"")}" placeholder="Optional adjudication note">
+  </div>`;
+}
+
+function render(){
+  const app=document.getElementById("app"),r=RELATIONS[idx],s=getState(r);
+  document.getElementById("counter").innerHTML=
+    `Relation ${idx+1}/${RELATIONS.length} · `+
+    (s.locked?`<span class="lockedBadge">Stage 1 locked</span>`:`<span class="unlockedBadge">Stage 1</span>`);
+
+  const stage1Queries=r.original.queries.map(q=>stage1Query(r,s,q)).join("");
+  const article=`<div class="block"><h3>Full article / evidence view</h3>
+    <div class="small">Before locking: original evidence only, read-only. After locking: editable human evidence.</div>
+    <div class="sentences">${sentenceRows(r,s)}</div></div>`;
+
+  const stage1=`<div class="stageBox stage1">
+    <div class="stageTitle">Stage 1 — Independent quality assessment of ORIGINAL data</div>
+    <div class="small">Fable is hidden and editing is disabled until this assessment is locked. You are independently evaluating the ORIGINAL evidence grading and queries for the fixed relation; you are NOT answering the query itself. Judge meaning semantically: paraphrases, synonyms, and naturalized/implicit wording are valid when the actor--value--direction relation is preserved.</div>
+    <div class="small" style="margin:8px 0"><b>Evidence grading:</b> Direct should independently support the complete relation; Partial should provide relevant but incomplete/contextual support; Sufficiency judges Direct + Partial together.</div>
+    <div class="rating">
+      <label>Direct Evidence Validity ${(r.original.direct_doc_ids||[]).length ? scoreSelect("dv",s.direct_evidence_validity,"direct_evidence_validity",s.locked) : '<span class="small">N/A — no original Direct evidence</span>'}</label>
+      <label>Partial Evidence Validity ${(r.original.partial_doc_ids||[]).length ? scoreSelect("pv",s.partial_evidence_validity,"partial_evidence_validity",s.locked) : '<span class="small">N/A — no original Partial evidence</span>'}</label>
+      <label>Evidence Set Sufficiency ${scoreSelect("es",s.evidence_set_sufficiency,"evidence_set_sufficiency",s.locked)}</label>
+    </div>
+    ${s.locked
+      ? `<div class="small">Locked at ${esc(s.locked_at||"")}</div>`
+      : `<textarea class="notes" id="evnote" placeholder="Optional Stage-1 evidence note">${esc(s.evidence_note||"")}</textarea>`
+    }
+    <div class="block"><h3>Original query scores</h3>${stage1Queries}</div>
+    ${s.locked
+      ? `<span class="lockedBadge">Original assessment is locked.</span>`
+      : `<div class="actionBtns">
+           <button onclick="lockOriginalAssessment()">Lock Original Assessment</button>
+           <button onclick="resetBeforeLock()">Reset Stage-1 Scores</button>
+         </div>
+         <div class="warning">All applicable Stage-1 scores are required before lock.</div>`
+    }
+  </div>`;
+
+  let stage2="";
+  if(s.locked){
+    const fableBlock=s.claude_visible
+      ? `<div class="claude"><b>Fable evidence assessment (assistant only)</b><br>
+         Direct validity: ${esc(r.claude?.direct_evidence_validity_score??"N/A")} / 2<br>
+         Partial validity: ${esc(r.claude?.partial_evidence_validity_score??"N/A")} / 2<br>
+         Set sufficiency: ${esc(r.claude?.evidence_set_sufficiency_score??"")} / 2
+         ${r.claude?.evidence_reason?`<div class="small">Reason: ${esc(r.claude.evidence_reason)}</div>`:""}
+         ${evidenceDiffSummary(r)}
+         </div>`
+      : "";
+    stage2=`<div class="stageBox stage2">
+      <div class="stageTitle">Stage 2 — Human adjudication / correction</div>
+      <div class="small">Fable is optional assistance. The final decision is human.</div>
+      <div class="actionBtns">
+        <button onclick="toggleFable()">${s.claude_visible?"Hide":"Reveal"} Fable Suggestions</button>
+        <button onclick="useOriginalEvidence()">Reset Evidence to Original</button>
+        <button ${s.claude_visible?"":"disabled"} onclick="applyFableEvidence()">Apply Fable Evidence</button>
+      </div>
+      ${fableBlock}
+      <div class="block"><h3>Editable evidence</h3><div class="sentences">${sentenceRows(r,s)}</div>
+        <textarea class="notes" id="evnote2" placeholder="Optional final evidence note">${esc(s.evidence_note||"")}</textarea>
+      </div>
+      <div class="block"><h3>Editable queries</h3>${r.original.queries.map(q=>stage2Query(r,s,q)).join("")}</div>
+    </div>`;
+  }
+
+  app.innerHTML=`<div class="card">
+    <div class="meta">
+      <div><div class="label">Scope</div><div class="val">${esc(r.original.unit_level)}</div></div>
+      <div><div class="label">Actor</div><div class="val">${esc(r.original.actor_name)}</div></div>
+      <div><div class="label">Value</div><div class="val">${esc(r.original.value_name)}</div></div>
+      <div><div class="label">Direction</div><div class="val">${esc(r.original.direction)}</div></div>
+      <div><div class="label">Relation ID</div><div class="val">${esc(r.original.relation_id)}</div></div>
+      <div><div class="label">Article</div><div class="val">${esc(r.original.article_title||r.original.guid)}</div></div>
+      <div><div class="label">Unit ID</div><div class="val">${esc(r.original.unit_id)}</div></div>
+      <div><div class="label">NEVU confidence</div><div class="val">${esc(r.original.nevu_confidence)}</div></div>
+    </div>
+    <div class="block"><h3>Semantic unit</h3><div class="explanation">${esc(r.original.unit_text)}</div></div>
+    <div class="block"><h3>NEVU explanation</h3><div class="explanation">${esc(r.original.nevu_explanation)}</div></div>
+    ${article}
+    ${stage1}
+    ${stage2}
+  </div>`;
+}
+
+function move(d){
+  const r=RELATIONS[idx],s=getState(r);
+  if(s.locked)harvestStage2();else harvestStage1();
+  idx=(idx+d+RELATIONS.length)%RELATIONS.length;
+  render();window.scrollTo(0,0);
+}
+document.getElementById("prev").onclick=()=>move(-1);
+document.getElementById("next").onclick=()=>move(1);
+
+function evidenceObjects(r,s,state){
+  return r.original.article_sentences
+    .filter(x=>(s.evidence[String(x.doc_id)]||"none")===state)
+    .map(x=>({doc_id:String(x.doc_id),sentence_id:x.sentence_id,text:x.text}));
+}
+function buildCorrectedRows(){
+  const r=RELATIONS[idx],s=getState(r);
+  if(s.locked)harvestStage2();else harvestStage1();
+  let rows=[];
+  RELATIONS.forEach(rel=>{
+    const st=getState(rel);
+    if(!st.locked)return;
+    const direct=evidenceObjects(rel,st,"direct");
+    const partial=evidenceObjects(rel,st,"partial");
+    const directIds=direct.map(x=>String(x.doc_id));
+    const partialIds=partial.map(x=>String(x.doc_id));
+    rel.original.rows.forEach(orig=>{
+      const qs=st.queries[orig.query_id];
+      if(qs.status==="exclude")return;
+      const x=JSON.parse(JSON.stringify(orig));
+      x.query=qs.final_query;
+      x.direct_doc_ids=directIds;
+      x.partial_doc_ids=partialIds;
+      x.direct_evidence=direct;
+      x.partial_evidence=partial;
+      x.human_verified=true;
+      x.human_group=GROUP;
+      x.human_annotator=annotator;
+      x.human_original_assessment_locked_at=st.locked_at;
+      x.human_query_edit_status=qs.status;
+      rows.push(x);
+    });
+  });
+  return rows;
+}
+function allLocked(){return RELATIONS.every(r=>getState(r).locked)}
+function download(name,text,type="text/plain"){
+  const blob=new Blob([text],{type}),a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);a.download=name;a.click();URL.revokeObjectURL(a.href);
+}
+document.getElementById("saveProgress").onclick=async()=>{
+  persistCurrent();
+  if(SERVER_SYNC_ENABLED)await syncAllStates();
+  else markSaved("Progress saved locally");
+};
+
+document.getElementById("logoutBtn").onclick=logoutAccount;
+document.getElementById("loginBtn").onclick=loginAccount;
+document.getElementById("registerBtn").onclick=registerAccount;
+
+document.getElementById("authPass").addEventListener("keydown",e=>{
+  if(e.key==="Enter")loginAccount();
+});
+document.getElementById("authPass2").addEventListener("keydown",e=>{
+  if(e.key==="Enter")registerAccount();
+});
+
+document.getElementById("exportData").onclick=()=>{
+  persistCurrent();
+  if(!allLocked()){
+    const n=RELATIONS.filter(r=>getState(r).locked).length;
+    if(!confirm(`Only ${n}/${RELATIONS.length} relations are locked. Export completed relations only?`))return;
+  }
+  const rows=buildCorrectedRows();
+  download(
+    `human_${safeAnnotator()}_group_${String(GROUP).padStart(2,"0")}.jsonl`,
+    rows.map(x=>JSON.stringify(x)).join("\n")+"\n"
+  );
+};
+document.getElementById("exportLog").onclick=()=>{
+  persistCurrent();
+  download(
+    `human_${safeAnnotator()}_group_${String(GROUP).padStart(2,"0")}_annotations.json`,
+    JSON.stringify({
+      annotator:annotator,
+      group:GROUP,
+      exported_at:new Date().toISOString(),
+      protocol:"independent_original_assessment_then_fable_assisted_human_adjudication",
+      states:states
+    },null,2),
+    "application/json"
+  );
+};
+
+// Real-time local autosave for text fields and selects.
+document.addEventListener("input",scheduleAutosave);
+document.addEventListener("change",scheduleAutosave);
+window.addEventListener("beforeunload",beaconCurrentState);
+
+bootAuth();
+</script>
+</body>
+</html>

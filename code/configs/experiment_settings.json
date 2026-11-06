@@ -1,0 +1,68 @@
+{
+  "seeds": [
+    13,
+    42,
+    87
+  ],
+  "component_ablation_seed": 42,
+  "query_view_seed": 42,
+  "epochs": 3,
+  "weight_decay": 0.01,
+  "warmup_ratio": 0.06,
+  "dense_generic_ft": {
+    "learning_rate": 2e-05,
+    "global_batch_size": 16,
+    "temperature": 0.05,
+    "pairwise_negative_weight": 1.0
+  },
+  "document_level_provence_generic_ft": {
+    "learning_rate": 3e-06,
+    "effective_batch_size": 16,
+    "precision": "bf16",
+    "head": "official binary pruning"
+  },
+  "document_level_hver_news": {
+    "learning_rate": 3e-06,
+    "head_learning_rate": 3e-05,
+    "effective_batch_size": 16,
+    "sentence_width": 256,
+    "sampled_negatives_max": 3,
+    "precision": "bf16"
+  },
+  "corpus_level_provence_generic_ft": {
+    "learning_rate": 3e-06,
+    "head_learning_rate": 3e-05,
+    "batch_size": 16,
+    "candidate_depth": 20
+  },
+  "corpus_level_hierarchical": {
+    "learning_rate": 3e-06,
+    "head_learning_rate": 3e-05,
+    "interaction_learning_rate": 3e-06,
+    "document_loss_weight": 0.25,
+    "effective_query_set_batch_size": 4,
+    "negative_documents_max": 3,
+    "candidate_depth": 20,
+    "first_stage_model": "BAAI/bge-m3"
+  },
+  "checkpoint_selection": {
+    "corpus_level_provence_generic_ft": "dev document nDCG@10",
+    "other_finetuned_models": "dev sentence nDCG@10"
+  },
+  "optimizer": "AdamW",
+  "max_grad_norm": 1.0,
+  "sentence_interaction": {
+    "width": 256,
+    "layers": 2,
+    "heads": 4,
+    "feedforward_width": 1024,
+    "dropout": 0.1
+  },
+  "document_interaction": {
+    "width": 256,
+    "layers": 1,
+    "heads": 4,
+    "feedforward_width": 1024,
+    "dropout": 0.1
+  }
+}

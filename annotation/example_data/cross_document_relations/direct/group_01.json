@@ -1,0 +1,911 @@
+{
+  "bucket": "direct",
+  "group": 1,
+  "tasks": [
+    {
+      "bucket": "direct",
+      "relation_id": "rel_0081519444f95d07",
+      "pairs": [
+        {
+          "query_id": "q_13a62544dbbeb065",
+          "query": "What evidence in the article supports that European Union and Member States is aligned with the human value \"Be responsible\"?",
+          "query_type": "Q1",
+          "relation_id": "rel_0081519444f95d07",
+          "source_article_id": "1-14823-1-1",
+          "doc_id": "12-7895-1-t",
+          "split": "test_human_all",
+          "document_relevance": 2,
+          "document_label": "sufficient_support",
+          "direct_sentence_ids": [
+            "12-7895-1-t::s6",
+            "12-7895-1-t::s7",
+            "12-7895-1-t::s43"
+          ],
+          "partial_sentence_ids": [
+            "12-7895-1-t::s0",
+            "12-7895-1-t::s1",
+            "12-7895-1-t::s2",
+            "12-7895-1-t::s4",
+            "12-7895-1-t::s5",
+            "12-7895-1-t::s20",
+            "12-7895-1-t::s39",
+            "12-7895-1-t::s40"
+          ],
+          "identity_sentence_ids": [],
+          "actor_match": "yes",
+          "scope_match": "yes",
+          "issue": "none",
+          "source": "gemini",
+          "human_verified": false,
+          "validation_status": "structurally_valid",
+          "review_flags": [],
+          "pair_id": "cross_fbead235103e3256db1f8cf2",
+          "reference": {
+            "actor_name": "European Union and Member States",
+            "value_name": "Be responsible",
+            "direction": "aligned",
+            "unit_text": "EU and UK prepare for talks on fisheries -> EU and UK set out negotiating mandates",
+            "nevu_explanation": "The chain of preparing for talks and then setting out formal negotiating mandates shows a responsible, structured approach to managing a complex and contentious international disagreement, following established diplomatic protocols."
+          },
+          "storage_bucket": "direct",
+          "storage_group": 31
+        },
+        {
+          "query_id": "q_13a62544dbbeb065",
+          "query": "What evidence in the article supports that European Union and Member States is aligned with the human value \"Be responsible\"?",
+          "query_type": "Q1",
+          "relation_id": "rel_0081519444f95d07",
+          "source_article_id": "1-14823-1-1",
+          "doc_id": "17-27378-4-1",
+          "split": "test_human_all",
+          "document_relevance": 2,
+          "document_label": "sufficient_support",
+          "direct_sentence_ids": [
+            "17-27378-4-1::s5",
+            "17-27378-4-1::s15",
+            "17-27378-4-1::s16",
+            "17-27378-4-1::s39",
+            "17-27378-4-1::s40",
+            "17-27378-4-1::s41",
+            "17-27378-4-1::s42"
+          ],
+          "partial_sentence_ids": [
+            "17-27378-4-1::s8",
+            "17-27378-4-1::s9",
+            "17-27378-4-1::s18",
+            "17-27378-4-1::s24"
+          ],
+          "identity_sentence_ids": [],
+          "actor_match": "yes",
+          "scope_match": "yes",
+          "issue": "none",
+          "source": "gemini",
+          "human_verified": false,
+          "validation_status": "structurally_valid",
+          "review_flags": [],
+          "pair_id": "cross_6652e13e580fe65ac3147096",
+          "reference": {
+            "actor_name": "European Union and Member States",
+            "value_name": "Be responsible",
+            "direction": "aligned",
+            "unit_text": "EU and UK prepare for talks on fisheries -> EU and UK set out negotiating mandates",
+            "nevu_explanation": "The chain of preparing for talks and then setting out formal negotiating mandates shows a responsible, structured approach to managing a complex and contentious international disagreement, following established diplomatic protocols."
+          },
+          "storage_bucket": "direct",
+          "storage_group": 31
+        }
+      ],
+      "articles": {
+        "12-7895-1-t": {
+          "doc_id": "12-7895-1-t",
+          "split": "test_human_all",
+          "title": "NextGenerationEU: European Commission endorses Portugal's €16.6 billion recovery and resilience plan",
+          "text": "he European Commission has today adopted a positive assessment of Portugal's recovery and resilience plan.\nThis is an important step towards the EU disbursing €13.9 billion in grants and €2.7 billion in loans under the Recovery and Resilience Facility (RRF) over the period 2021-2026.\nThis financing will support the implementation of the crucial investment and reform measures outlined in Portugal's recovery and resilience plan.\nIt will play a key role in enabling Portugal to emerge stronger from the COVID-19 pandemic.\nThe RRF - at the heart of NextGenerationEU - will provide up to €672.5 billion (in current prices) to support investments and reforms across the EU.\nThe Portuguese plan forms part of an unprecedented coordinated EU response to the COVID-19 crisis, to address common European challenges by embracing the green and digital transitions, to strengthen economic and social resilience and the cohesion of the Single Market.\nThe Commission assessed Portugal's plan based on the criteria set out in the RRF Regulation.\nThe Commission's analysis considered, in particular, whether the investments and reforms contained in Portugal's plan support the green and digital transitions; contribute to effectively addressing challenges identified in the European Semester; and strengthen its growth potential, job creation and economic and social resilience.\nThe Commission's assessment finds that Portugal's plan devotes 38% of its total allocation to measures that support climate objectives.\nThis includes investments to finance a large-scale renovation programme to increase the energy efficiency of buildings or the promotion of energy efficiency and the use of alternative energy sources in industrial processes.\nThe Commission finds that the Portugal's plan devotes 22% of its total allocation to measures that support the digital transition.\nThis includes efforts to digitalise the public administration and to modernise the computer systems of the National Health Service, as well as technological laboratories in secondary schools and professional training centres.\nThe Commission considers that Portugal's plan includes an extensive set of mutually reinforcing reforms and investments that contribute to effectively addressing all or a significant subset of the economic and social challenges outlined in the country-specific recommendations addressed to Portugal by the Council in the European Semester in 2019 and in 2020.\nIt includes measures in the areas of accessibility and resilience of social services and the health system, labour market, education and skills, R&D and innovation, climate and digital transition, business environment, quality and sustainability of public finances and efficiency of the justice system.\nThe plan represents a comprehensive and adequately balanced response to Portugal's economic and social situation, thereby contributing appropriately to all six pillars of the RRF Regulation.\nPortugal's plan proposes projects in six European flagship areas.\nThese are specific investment projects, which address issues that are common to all Member States in areas that create jobs and growth and are needed for the green and digital transition.\nFor instance, Portugal has proposed to provide €610 million to renovate public and private buildings to improve their energy performance.\nThis will result in Portugal reducing its energy bill, greenhouse gas emissions and energy dependence, as well as reducing energy poverty.\nThe assessment also finds that none of the measures included in the plan significantly harm the environment, in line with the requirements laid out in the RRF Regulation.\nThe control systems put in place by Portugal are considered adequate to protect the financial interests of the Union.\nThe plan provides sufficient details on how national authorities will prevent, detect and correct instances of conflict of interest, corruption and fraud relating to the use of funds.\nPresident Ursula von der Leyen said: “Today, the European Commission has decided to give its green light to Portugal's €16.6 billion recovery and resilience plan, the first to be endorsed by the Commission.\nThe plan was designed in Portugal.\nThe reforms and investments contained in this plan will allow Portugal to emerge from the COVID-19 crisis stronger, more resilient, and better prepared for the future.\nIn short, it will help build a better future for the Portuguese people.\nWe will stand by Portugal every step of the way.\nYour success will be our success.\nA European success.”\nValdis Dombrovskis, Executive Vice-President for an Economy that Works for People, said: “Portugal was the first country to present its plan and today we are happy to confirm our positive assessment.\nThis is a solid plan that will put Portugal on a path of higher growth, create new jobs for the future as well as stronger and sustainable social protection.\nThe proposed measures cover a broad spectrum of reforms and investments to equip Portugal for the green and digital transition, ranging from digitalising the public administration, improving workers' skills, creating energy-efficient housing, to better protecting the country's vast forests.\nI also welcome the plan's strong social focus, including measures to improve childcare and strengthen the health care system.\nThis plan will allow Portugal to grow back stronger.\nWe will now work closely with Portugal on its full implementation.”\nPaolo Gentiloni, Commissioner for Economy, said: “The reforms and investments included in the Portuguese plan will enhance the country's resilience and give a strong boost to its climate transition and digital transformation efforts.\nWith its measures to support social services, the national health service and education and training, the plan also has a very strong social dimension.\nThis is our first completed assessment of a national recovery and resilience plan, marking a key milestone in the implementation of NextGenerationEU.\nAnd it is fitting that the first plan to be assessed positively is Portugal's: not only because it was the first to be submitted, but also because the Portuguese Presidency played such a key role in putting in place the legal and financial framework for this unprecedented common European endeavour.”\nThe Commission has today adopted a proposal for a Council Implementing Decision to provide €13.9 billion in grants and €2.7 billion in loans to Portugal under the RRF.\nThe Council will now have, as a rule, four weeks to adopt the Commission's proposal.\nThe Council's approval of the plan would allow for the disbursement of €2.2 billion to Portugal in pre-financing.\nThis represents 13% of the total allocated amount for Portugal.\nThe Commission will authorise further disbursements based on the satisfactory fulfilment of the milestones and targets outlined in the Council Implementing Decision, reflecting progress on the implementation of the investments and reforms.",
+          "sentences": [
+            {
+              "position": 0,
+              "sentence_id": "12-7895-1-t::s0",
+              "text": "he European Commission has today adopted a positive assessment of Portugal's recovery and resilience plan."
+            },
+            {
+              "position": 1,
+              "sentence_id": "12-7895-1-t::s1",
+              "text": "This is an important step towards the EU disbursing €13.9 billion in grants and €2.7 billion in loans under the Recovery and Resilience Facility (RRF) over the period 2021-2026."
+            },
+            {
+              "position": 2,
+              "sentence_id": "12-7895-1-t::s2",
+              "text": "This financing will support the implementation of the crucial investment and reform measures outlined in Portugal's recovery and resilience plan."
+            },
+            {
+              "position": 3,
+              "sentence_id": "12-7895-1-t::s3",
+              "text": "It will play a key role in enabling Portugal to emerge stronger from the COVID-19 pandemic."
+            },
+            {
+              "position": 4,
+              "sentence_id": "12-7895-1-t::s4",
+              "text": "The RRF - at the heart of NextGenerationEU - will provide up to €672.5 billion (in current prices) to support investments and reforms across the EU."
+            },
+            {
+              "position": 5,
+              "sentence_id": "12-7895-1-t::s5",
+              "text": "The Portuguese plan forms part of an unprecedented coordinated EU response to the COVID-19 crisis, to address common European challenges by embracing the green and digital transitions, to strengthen economic and social resilience and the cohesion of the Single Market."
+            },
+            {
+              "position": 6,
+              "sentence_id": "12-7895-1-t::s6",
+              "text": "The Commission assessed Portugal's plan based on the criteria set out in the RRF Regulation."
+            },
+            {
+              "position": 7,
+              "sentence_id": "12-7895-1-t::s7",
+              "text": "The Commission's analysis considered, in particular, whether the investments and reforms contained in Portugal's plan support the green and digital transitions; contribute to effectively addressing challenges identified in the European Semester; and strengthen its growth potential, job creation and economic and social resilience."
+            },
+            {
+              "position": 8,
+              "sentence_id": "12-7895-1-t::s8",
+              "text": "The Commission's assessment finds that Portugal's plan devotes 38% of its total allocation to measures that support climate objectives."
+            },
+            {
+              "position": 9,
+              "sentence_id": "12-7895-1-t::s9",
+              "text": "This includes investments to finance a large-scale renovation programme to increase the energy efficiency of buildings or the promotion of energy efficiency and the use of alternative energy sources in industrial processes."
+            },
+            {
+              "position": 10,
+              "sentence_id": "12-7895-1-t::s10",
+              "text": "The Commission finds that the Portugal's plan devotes 22% of its total allocation to measures that support the digital transition."
+            },
+            {
+              "position": 11,
+              "sentence_id": "12-7895-1-t::s11",
+              "text": "This includes efforts to digitalise the public administration and to modernise the computer systems of the National Health Service, as well as technological laboratories in secondary schools and professional training centres."
+            },
+            {
+              "position": 12,
+              "sentence_id": "12-7895-1-t::s12",
+              "text": "The Commission considers that Portugal's plan includes an extensive set of mutually reinforcing reforms and investments that contribute to effectively addressing all or a significant subset of the economic and social challenges outlined in the country-specific recommendations addressed to Portugal by the Council in the European Semester in 2019 and in 2020."
+            },
+            {
+              "position": 13,
+              "sentence_id": "12-7895-1-t::s13",
+              "text": "It includes measures in the areas of accessibility and resilience of social services and the health system, labour market, education and skills, R&D and innovation, climate and digital transition, business environment, quality and sustainability of public finances and efficiency of the justice system."
+            },
+            {
+              "position": 14,
+              "sentence_id": "12-7895-1-t::s14",
+              "text": "The plan represents a comprehensive and adequately balanced response to Portugal's economic and social situation, thereby contributing appropriately to all six pillars of the RRF Regulation."
+            },
+            {
+              "position": 15,
+              "sentence_id": "12-7895-1-t::s15",
+              "text": "Portugal's plan proposes projects in six European flagship areas."
+            },
+            {
+              "position": 16,
+              "sentence_id": "12-7895-1-t::s16",
+              "text": "These are specific investment projects, which address issues that are common to all Member States in areas that create jobs and growth and are needed for the green and digital transition."
+            },
+            {
+              "position": 17,
+              "sentence_id": "12-7895-1-t::s17",
+              "text": "For instance, Portugal has proposed to provide €610 million to renovate public and private buildings to improve their energy performance."
+            },
+            {
+              "position": 18,
+              "sentence_id": "12-7895-1-t::s18",
+              "text": "This will result in Portugal reducing its energy bill, greenhouse gas emissions and energy dependence, as well as reducing energy poverty."
+            },
+            {
+              "position": 19,
+              "sentence_id": "12-7895-1-t::s19",
+              "text": "The assessment also finds that none of the measures included in the plan significantly harm the environment, in line with the requirements laid out in the RRF Regulation."
+            },
+            {
+              "position": 20,
+              "sentence_id": "12-7895-1-t::s20",
+              "text": "The control systems put in place by Portugal are considered adequate to protect the financial interests of the Union."
+            },
+            {
+              "position": 21,
+              "sentence_id": "12-7895-1-t::s21",
+              "text": "The plan provides sufficient details on how national authorities will prevent, detect and correct instances of conflict of interest, corruption and fraud relating to the use of funds."
+            },
+            {
+              "position": 22,
+              "sentence_id": "12-7895-1-t::s22",
+              "text": "President Ursula von der Leyen said: “Today, the European Commission has decided to give its green light to Portugal's €16.6 billion recovery and resilience plan, the first to be endorsed by the Commission."
+            },
+            {
+              "position": 23,
+              "sentence_id": "12-7895-1-t::s23",
+              "text": "The plan was designed in Portugal."
+            },
+            {
+              "position": 24,
+              "sentence_id": "12-7895-1-t::s24",
+              "text": "The reforms and investments contained in this plan will allow Portugal to emerge from the COVID-19 crisis stronger, more resilient, and better prepared for the future."
+            },
+            {
+              "position": 25,
+              "sentence_id": "12-7895-1-t::s25",
+              "text": "In short, it will help build a better future for the Portuguese people."
+            },
+            {
+              "position": 26,
+              "sentence_id": "12-7895-1-t::s26",
+              "text": "We will stand by Portugal every step of the way."
+            },
+            {
+              "position": 27,
+              "sentence_id": "12-7895-1-t::s27",
+              "text": "Your success will be our success."
+            },
+            {
+              "position": 28,
+              "sentence_id": "12-7895-1-t::s28",
+              "text": "A European success.”"
+            },
+            {
+              "position": 29,
+              "sentence_id": "12-7895-1-t::s29",
+              "text": "Valdis Dombrovskis, Executive Vice-President for an Economy that Works for People, said: “Portugal was the first country to present its plan and today we are happy to confirm our positive assessment."
+            },
+            {
+              "position": 30,
+              "sentence_id": "12-7895-1-t::s30",
+              "text": "This is a solid plan that will put Portugal on a path of higher growth, create new jobs for the future as well as stronger and sustainable social protection."
+            },
+            {
+              "position": 31,
+              "sentence_id": "12-7895-1-t::s31",
+              "text": "The proposed measures cover a broad spectrum of reforms and investments to equip Portugal for the green and digital transition, ranging from digitalising the public administration, improving workers' skills, creating energy-efficient housing, to better protecting the country's vast forests."
+            },
+            {
+              "position": 32,
+              "sentence_id": "12-7895-1-t::s32",
+              "text": "I also welcome the plan's strong social focus, including measures to improve childcare and strengthen the health care system."
+            },
+            {
+              "position": 33,
+              "sentence_id": "12-7895-1-t::s33",
+              "text": "This plan will allow Portugal to grow back stronger."
+            },
+            {
+              "position": 34,
+              "sentence_id": "12-7895-1-t::s34",
+              "text": "We will now work closely with Portugal on its full implementation.”"
+            },
+            {
+              "position": 35,
+              "sentence_id": "12-7895-1-t::s35",
+              "text": "Paolo Gentiloni, Commissioner for Economy, said: “The reforms and investments included in the Portuguese plan will enhance the country's resilience and give a strong boost to its climate transition and digital transformation efforts."
+            },
+            {
+              "position": 36,
+              "sentence_id": "12-7895-1-t::s36",
+              "text": "With its measures to support social services, the national health service and education and training, the plan also has a very strong social dimension."
+            },
+            {
+              "position": 37,
+              "sentence_id": "12-7895-1-t::s37",
+              "text": "This is our first completed assessment of a national recovery and resilience plan, marking a key milestone in the implementation of NextGenerationEU."
+            },
+            {
+              "position": 38,
+              "sentence_id": "12-7895-1-t::s38",
+              "text": "And it is fitting that the first plan to be assessed positively is Portugal's: not only because it was the first to be submitted, but also because the Portuguese Presidency played such a key role in putting in place the legal and financial framework for this unprecedented common European endeavour.”"
+            },
+            {
+              "position": 39,
+              "sentence_id": "12-7895-1-t::s39",
+              "text": "The Commission has today adopted a proposal for a Council Implementing Decision to provide €13.9 billion in grants and €2.7 billion in loans to Portugal under the RRF."
+            },
+            {
+              "position": 40,
+              "sentence_id": "12-7895-1-t::s40",
+              "text": "The Council will now have, as a rule, four weeks to adopt the Commission's proposal."
+            },
+            {
+              "position": 41,
+              "sentence_id": "12-7895-1-t::s41",
+              "text": "The Council's approval of the plan would allow for the disbursement of €2.2 billion to Portugal in pre-financing."
+            },
+            {
+              "position": 42,
+              "sentence_id": "12-7895-1-t::s42",
+              "text": "This represents 13% of the total allocated amount for Portugal."
+            },
+            {
+              "position": 43,
+              "sentence_id": "12-7895-1-t::s43",
+              "text": "The Commission will authorise further disbursements based on the satisfactory fulfilment of the milestones and targets outlined in the Council Implementing Decision, reflecting progress on the implementation of the investments and reforms."
+            }
+          ]
+        },
+        "17-27378-4-1": {
+          "doc_id": "17-27378-4-1",
+          "split": "test_human_all",
+          "title": "What the US Colonial pipeline cyberattack means for Europe",
+          "text": "The shutdown of a major fuel pipeline in the U.S. is a cybersecurity wakeup call for EU energy operators.\nPreliminary investigations indicate that a group of Russian criminal hackers known as Darkside were likely behind the ransomware attack that shut down the nearly 9,000-kilometer Colonial Pipeline — which transports almost half the jet fuel, diesel, gasoline and heating fuel used on the East Coast of the United States.\nSimilar incidents have happened in Europe.\nRussia-based cyberattacks on critical energy infrastructure have put the EU on high alert since 2014, when the annexation of Crimea and war in the Donbas led to Ukraine being hit with a series of attacks crippling everything from power grids to election systems.\nThose infiltrations culminated in the 2017 NotPetya attack, which paralyzed multinationals like the Danish shipping giant Maersk, logistics giant FedEx, pharma company Merck and other major corporations, and cost an estimated $10 billion to clean up.\nSince then, the EU has moved to strengthen its energy system resilience — but the work is far from over.\n\"The attack on Colonial just screams out for new regulation on critical infrastructure companies,\" said Bart Groothuis, a Dutch member of the European Parliament who leads negotiations on draft EU rules for cybersecurity of networks and IT systems.\nAccording to the European Union's Cybersecurity Agency (ENISA), the sector reported roughly 100 significant cybersecurity incidents in 2020 — half of which were ransomware attacks.\nEnergy system operators in Europe have so far faced only limited requirements under the bloc's first-ever 2016 cybersecurity legislation, the Networks and Information Security (NIS) Directive— as well as some sectoral legislation.\nThose include applying minimum cybersecurity standards and promptly reporting incidents as they happen.\nAccording to the EU Agency for the Cooperation of Energy Regulators (ACER), the most exposed elements of the bloc's pipeline systems are so-called SCADAs — supervisory control and data acquisition systems that govern hardware such as pressure-reducing stations, valves and compressor stations.\n\"These are typically not linked to any other network, precisely to reduce the exposure to cyberattacks,\" said ACER spokesperson Una Shortall.\nThe Colonial attack, however, didn't directly hit the infrastructure.\nInstead, it targeted the business-side computer systems of the private operator, which shut down the pipeline as a precaution.\n\"In a case like this, the company itself is the first line of defense and the first line of response to crisis,\" Shortall added.\nThe bloc has several measures in place to ensure it can weather emergency shutdowns.\nTo avoid the kind of fuel shortages and gasoline price increases currently being experienced in parts of the U.S., all EU countries are required under the Oil Stocks Directive to keep at least 90 days’ worth of crude oil or petroleum product imports on hand, or 61 days’ worth of consumption — whichever is greater.\nBut it’s not always respected.\nIn December, the European Commission chastised Bulgaria, Romania and the Czech Republic for repeatedly failing to keep the minimum supplies on hand, in some cases going as far back as 2013.\nThe good news is that upwards of 80 percent the bloc's crude imports arrive on oil tankers and trucks, according to the International Association of Oil and Gas Producers (IOGP).\nRefined products like gasoline and diesel are also transported through the EU by truck and rail, rather than through fixed pipelines — vastly upping flexibility.\n\"The EU crude oil pipeline network is a lot less dense — pipe imports of crude are a very small share,\" said Nareg Terzian, EU spokesperson for IOGP.\n\"It actually makes sense if you think about it: Historically, the oil market has been more liquid and open than the gas one, also because oil is simply much easier to store and transport than gas.\"\nNatural gas is a bigger worry for the EU.\nFollowing the 2006 and 2009 gas crises, Europe's network of gas transmission system operators has conducted regular simulations of supply interruptions on all EU import pipelines — and prepared rerouting plans using the Continent's system of cross-border interconnectors, underground storage reserves and liquefied natural gas (LNG) terminals.\nThe most recent analysis, published in October, simulated winter gas cutoffs of up to two months on three major Russian supply routes: via Finland and down to the Baltic States; via Ukraine; and along the Trans-Balkan pipeline flowing to Romania, Bulgaria and Greece.\nIn the Finnish case, the response would be ramping up LNG imports in Lithuania to maximum capacity and tapping Latvia's storage reserves to supply the region.\nThe Baltic connector pipeline — which launched in December 2019 and links Estonia to Finland — would send flows north.\nShould the Trans-Balkan pipeline shut down, flows destined for Bulgaria could be sent through the second line of TurkStream, at the Turkish-Bulgarian border.\nBut if the Ukrainian route to the EU is hit with a long-term outage in the dead of winter, Romania could be left stranded — even if Russian gas flows are maintained through Belarus and through Germany’s Nord Stream pipeline.\n“Romania has no other possibilities to import gas” after its storage stocks are used up, the analysis warns.\nThe scenarios don’t account for countries dialing down usage.\nThey also focus more on accidents on individual routes, rather than deliberate shutdowns on multiple routes by a single supplier like Russia.\n\"The EU must think long and hard about energy diversification and consider once again the risks of Nord Stream 2, which, if built, will concentrate 80 percent of all Russian gas supplies to Europe to one submarine pipeline system,\" said Sergiy Makogon, CEO of Ukraine's gas grid operator.\n\"Digital threats have just come to the fore, but they can’t overshadow physical security,\" Makogon added.\n\"We have seen mysterious accidents reshape the European energy landscape in 2009, when an unexplained blast destroyed a portion of the Turkmenistan-Russia pipeline, ending exports of Turkmen gas to Europe.\nOr the 2006 pipeline exposition that left Georgia and Armenia without gas in the middle of winter.\"\nThe rise of digital attacks could change the way those scenarios are modeled.\n\"Cyber has introduced in the energy sector a new way to think about threats and risks: Better to simulate and stimulate a reaction and to derive a preventive strategy than to have a scenario that will rarely repeat twice on large scale infrastructures,\" ACER's Shortall said.\nEuropean companies could soon face tougher cybersecurity rules, when EU legislators pass a proposal by the European Commission to strengthen the NIS regime.\nIn the draft law, energy firms risk being fined up to 2 percent of their annual turnover if they don't put in place security audits, have incident response policies and check the security of their suppliers.\nThe proposal also added a range of subsectors of the energy market to the scope of the law, including hydrogen production, district heating, electricity production and central oil stockholding.\nThe EU is also working on a \"network code\" on cybersecurity for electricity firms that would be adopted next year; a similar code for gas is also in the works.\nAnd the sector is already working with public authorities to share information on attacks and incidents within a European Energy Information Sharing and Analysis Center.\n\"The sector is catching up in terms of cybersecurity,\" said Evangelos Ouzounis, head of secure infrastructure and services at ENISA, adding that more investments and continuous information sharing were needed to rule out incidents like the Colonial catastrophe.",
+          "sentences": [
+            {
+              "position": 0,
+              "sentence_id": "17-27378-4-1::s0",
+              "text": "The shutdown of a major fuel pipeline in the U.S. is a cybersecurity wakeup call for EU energy operators."
+            },
+            {
+              "position": 1,
+              "sentence_id": "17-27378-4-1::s1",
+              "text": "Preliminary investigations indicate that a group of Russian criminal hackers known as Darkside were likely behind the ransomware attack that shut down the nearly 9,000-kilometer Colonial Pipeline — which transports almost half the jet fuel, diesel, gasoline and heating fuel used on the East Coast of the United States."
+            },
+            {
+              "position": 2,
+              "sentence_id": "17-27378-4-1::s2",
+              "text": "Similar incidents have happened in Europe."
+            },
+            {
+              "position": 3,
+              "sentence_id": "17-27378-4-1::s3",
+              "text": "Russia-based cyberattacks on critical energy infrastructure have put the EU on high alert since 2014, when the annexation of Crimea and war in the Donbas led to Ukraine being hit with a series of attacks crippling everything from power grids to election systems."
+            },
+            {
+              "position": 4,
+              "sentence_id": "17-27378-4-1::s4",
+              "text": "Those infiltrations culminated in the 2017 NotPetya attack, which paralyzed multinationals like the Danish shipping giant Maersk, logistics giant FedEx, pharma company Merck and other major corporations, and cost an estimated $10 billion to clean up."
+            },
+            {
+              "position": 5,
+              "sentence_id": "17-27378-4-1::s5",
+              "text": "Since then, the EU has moved to strengthen its energy system resilience — but the work is far from over."
+            },
+            {
+              "position": 6,
+              "sentence_id": "17-27378-4-1::s6",
+              "text": "\"The attack on Colonial just screams out for new regulation on critical infrastructure companies,\" said Bart Groothuis, a Dutch member of the European Parliament who leads negotiations on draft EU rules for cybersecurity of networks and IT systems."
+            },
+            {
+              "position": 7,
+              "sentence_id": "17-27378-4-1::s7",
+              "text": "According to the European Union's Cybersecurity Agency (ENISA), the sector reported roughly 100 significant cybersecurity incidents in 2020 — half of which were ransomware attacks."
+            },
+            {
+              "position": 8,
+              "sentence_id": "17-27378-4-1::s8",
+              "text": "Energy system operators in Europe have so far faced only limited requirements under the bloc's first-ever 2016 cybersecurity legislation, the Networks and Information Security (NIS) Directive— as well as some sectoral legislation."
+            },
+            {
+              "position": 9,
+              "sentence_id": "17-27378-4-1::s9",
+              "text": "Those include applying minimum cybersecurity standards and promptly reporting incidents as they happen."
+            },
+            {
+              "position": 10,
+              "sentence_id": "17-27378-4-1::s10",
+              "text": "According to the EU Agency for the Cooperation of Energy Regulators (ACER), the most exposed elements of the bloc's pipeline systems are so-called SCADAs — supervisory control and data acquisition systems that govern hardware such as pressure-reducing stations, valves and compressor stations."
+            },
+            {
+              "position": 11,
+              "sentence_id": "17-27378-4-1::s11",
+              "text": "\"These are typically not linked to any other network, precisely to reduce the exposure to cyberattacks,\" said ACER spokesperson Una Shortall."
+            },
+            {
+              "position": 12,
+              "sentence_id": "17-27378-4-1::s12",
+              "text": "The Colonial attack, however, didn't directly hit the infrastructure."
+            },
+            {
+              "position": 13,
+              "sentence_id": "17-27378-4-1::s13",
+              "text": "Instead, it targeted the business-side computer systems of the private operator, which shut down the pipeline as a precaution."
+            },
+            {
+              "position": 14,
+              "sentence_id": "17-27378-4-1::s14",
+              "text": "\"In a case like this, the company itself is the first line of defense and the first line of response to crisis,\" Shortall added."
+            },
+            {
+              "position": 15,
+              "sentence_id": "17-27378-4-1::s15",
+              "text": "The bloc has several measures in place to ensure it can weather emergency shutdowns."
+            },
+            {
+              "position": 16,
+              "sentence_id": "17-27378-4-1::s16",
+              "text": "To avoid the kind of fuel shortages and gasoline price increases currently being experienced in parts of the U.S., all EU countries are required under the Oil Stocks Directive to keep at least 90 days’ worth of crude oil or petroleum product imports on hand, or 61 days’ worth of consumption — whichever is greater."
+            },
+            {
+              "position": 17,
+              "sentence_id": "17-27378-4-1::s17",
+              "text": "But it’s not always respected."
+            },
+            {
+              "position": 18,
+              "sentence_id": "17-27378-4-1::s18",
+              "text": "In December, the European Commission chastised Bulgaria, Romania and the Czech Republic for repeatedly failing to keep the minimum supplies on hand, in some cases going as far back as 2013."
+            },
+            {
+              "position": 19,
+              "sentence_id": "17-27378-4-1::s19",
+              "text": "The good news is that upwards of 80 percent the bloc's crude imports arrive on oil tankers and trucks, according to the International Association of Oil and Gas Producers (IOGP)."
+            },
+            {
+              "position": 20,
+              "sentence_id": "17-27378-4-1::s20",
+              "text": "Refined products like gasoline and diesel are also transported through the EU by truck and rail, rather than through fixed pipelines — vastly upping flexibility."
+            },
+            {
+              "position": 21,
+              "sentence_id": "17-27378-4-1::s21",
+              "text": "\"The EU crude oil pipeline network is a lot less dense — pipe imports of crude are a very small share,\" said Nareg Terzian, EU spokesperson for IOGP."
+            },
+            {
+              "position": 22,
+              "sentence_id": "17-27378-4-1::s22",
+              "text": "\"It actually makes sense if you think about it: Historically, the oil market has been more liquid and open than the gas one, also because oil is simply much easier to store and transport than gas.\""
+            },
+            {
+              "position": 23,
+              "sentence_id": "17-27378-4-1::s23",
+              "text": "Natural gas is a bigger worry for the EU."
+            },
+            {
+              "position": 24,
+              "sentence_id": "17-27378-4-1::s24",
+              "text": "Following the 2006 and 2009 gas crises, Europe's network of gas transmission system operators has conducted regular simulations of supply interruptions on all EU import pipelines — and prepared rerouting plans using the Continent's system of cross-border interconnectors, underground storage reserves and liquefied natural gas (LNG) terminals."
+            },
+            {
+              "position": 25,
+              "sentence_id": "17-27378-4-1::s25",
+              "text": "The most recent analysis, published in October, simulated winter gas cutoffs of up to two months on three major Russian supply routes: via Finland and down to the Baltic States; via Ukraine; and along the Trans-Balkan pipeline flowing to Romania, Bulgaria and Greece."
+            },
+            {
+              "position": 26,
+              "sentence_id": "17-27378-4-1::s26",
+              "text": "In the Finnish case, the response would be ramping up LNG imports in Lithuania to maximum capacity and tapping Latvia's storage reserves to supply the region."
+            },
+            {
+              "position": 27,
+              "sentence_id": "17-27378-4-1::s27",
+              "text": "The Baltic connector pipeline — which launched in December 2019 and links Estonia to Finland — would send flows north."
+            },
+            {
+              "position": 28,
+              "sentence_id": "17-27378-4-1::s28",
+              "text": "Should the Trans-Balkan pipeline shut down, flows destined for Bulgaria could be sent through the second line of TurkStream, at the Turkish-Bulgarian border."
+            },
+            {
+              "position": 29,
+              "sentence_id": "17-27378-4-1::s29",
+              "text": "But if the Ukrainian route to the EU is hit with a long-term outage in the dead of winter, Romania could be left stranded — even if Russian gas flows are maintained through Belarus and through Germany’s Nord Stream pipeline."
+            },
+            {
+              "position": 30,
+              "sentence_id": "17-27378-4-1::s30",
+              "text": "“Romania has no other possibilities to import gas” after its storage stocks are used up, the analysis warns."
+            },
+            {
+              "position": 31,
+              "sentence_id": "17-27378-4-1::s31",
+              "text": "The scenarios don’t account for countries dialing down usage."
+            },
+            {
+              "position": 32,
+              "sentence_id": "17-27378-4-1::s32",
+              "text": "They also focus more on accidents on individual routes, rather than deliberate shutdowns on multiple routes by a single supplier like Russia."
+            },
+            {
+              "position": 33,
+              "sentence_id": "17-27378-4-1::s33",
+              "text": "\"The EU must think long and hard about energy diversification and consider once again the risks of Nord Stream 2, which, if built, will concentrate 80 percent of all Russian gas supplies to Europe to one submarine pipeline system,\" said Sergiy Makogon, CEO of Ukraine's gas grid operator."
+            },
+            {
+              "position": 34,
+              "sentence_id": "17-27378-4-1::s34",
+              "text": "\"Digital threats have just come to the fore, but they can’t overshadow physical security,\" Makogon added."
+            },
+            {
+              "position": 35,
+              "sentence_id": "17-27378-4-1::s35",
+              "text": "\"We have seen mysterious accidents reshape the European energy landscape in 2009, when an unexplained blast destroyed a portion of the Turkmenistan-Russia pipeline, ending exports of Turkmen gas to Europe."
+            },
+            {
+              "position": 36,
+              "sentence_id": "17-27378-4-1::s36",
+              "text": "Or the 2006 pipeline exposition that left Georgia and Armenia without gas in the middle of winter.\""
+            },
+            {
+              "position": 37,
+              "sentence_id": "17-27378-4-1::s37",
+              "text": "The rise of digital attacks could change the way those scenarios are modeled."
+            },
+            {
+              "position": 38,
+              "sentence_id": "17-27378-4-1::s38",
+              "text": "\"Cyber has introduced in the energy sector a new way to think about threats and risks: Better to simulate and stimulate a reaction and to derive a preventive strategy than to have a scenario that will rarely repeat twice on large scale infrastructures,\" ACER's Shortall said."
+            },
+            {
+              "position": 39,
+              "sentence_id": "17-27378-4-1::s39",
+              "text": "European companies could soon face tougher cybersecurity rules, when EU legislators pass a proposal by the European Commission to strengthen the NIS regime."
+            },
+            {
+              "position": 40,
+              "sentence_id": "17-27378-4-1::s40",
+              "text": "In the draft law, energy firms risk being fined up to 2 percent of their annual turnover if they don't put in place security audits, have incident response policies and check the security of their suppliers."
+            },
+            {
+              "position": 41,
+              "sentence_id": "17-27378-4-1::s41",
+              "text": "The proposal also added a range of subsectors of the energy market to the scope of the law, including hydrogen production, district heating, electricity production and central oil stockholding."
+            },
+            {
+              "position": 42,
+              "sentence_id": "17-27378-4-1::s42",
+              "text": "The EU is also working on a \"network code\" on cybersecurity for electricity firms that would be adopted next year; a similar code for gas is also in the works."
+            },
+            {
+              "position": 43,
+              "sentence_id": "17-27378-4-1::s43",
+              "text": "And the sector is already working with public authorities to share information on attacks and incidents within a European Energy Information Sharing and Analysis Center."
+            },
+            {
+              "position": 44,
+              "sentence_id": "17-27378-4-1::s44",
+              "text": "\"The sector is catching up in terms of cybersecurity,\" said Evangelos Ouzounis, head of secure infrastructure and services at ENISA, adding that more investments and continuous information sharing were needed to rule out incidents like the Colonial catastrophe."
+            }
+          ]
+        }
+      },
+      "required_pair_ids": [
+        "cross_fbead235103e3256db1f8cf2",
+        "cross_6652e13e580fe65ac3147096"
+      ]
+    },
+    {
+      "bucket": "direct",
+      "relation_id": "rel_008f36305352c5e1",
+      "pairs": [
+        {
+          "query_id": "q_62b3961191d5c4d0",
+          "query": "Where does the text show civil rights campaigners and demonstration participants striving to have a world at peace?",
+          "query_type": "Q2",
+          "relation_id": "rel_008f36305352c5e1",
+          "source_article_id": "1-15879-14-t",
+          "doc_id": "1-15205-8-t",
+          "split": "test_human_all",
+          "document_relevance": 2,
+          "document_label": "sufficient_support",
+          "direct_sentence_ids": [
+            "1-15205-8-t::s6",
+            "1-15205-8-t::s19",
+            "1-15205-8-t::s42"
+          ],
+          "partial_sentence_ids": [
+            "1-15205-8-t::s0",
+            "1-15205-8-t::s8",
+            "1-15205-8-t::s26"
+          ],
+          "identity_sentence_ids": [],
+          "actor_match": "yes",
+          "scope_match": "yes",
+          "issue": "none",
+          "source": "gemini",
+          "human_verified": false,
+          "validation_status": "structurally_valid",
+          "review_flags": [],
+          "pair_id": "cross_4703a200615f4293e85a2b73",
+          "reference": {
+            "actor_name": "Protestors / Advocates (#EndSARS activists, Ruggedman, campaigners, victims)",
+            "value_name": "Have a world at peace",
+            "direction": "aligned",
+            "unit_text": "Ruggedman releases protest music video -> Video showcases police misconduct -> Features cameos supporting #EndSARS",
+            "nevu_explanation": "Campaign seeks long-term societal harmony by addressing systemic abuses."
+          },
+          "storage_bucket": "direct",
+          "storage_group": 52
+        },
+        {
+          "query_id": "q_1b30fc77375e51cb",
+          "query": "Which excerpts describe reform campaigners engaging in efforts to curb conflict, brutality, and societal unrest?",
+          "query_type": "Q4",
+          "relation_id": "rel_008f36305352c5e1",
+          "source_article_id": "1-15879-14-t",
+          "doc_id": "1-15205-8-t",
+          "split": "test_human_all",
+          "document_relevance": 2,
+          "document_label": "sufficient_support",
+          "direct_sentence_ids": [
+            "1-15205-8-t::s6",
+            "1-15205-8-t::s8",
+            "1-15205-8-t::s19",
+            "1-15205-8-t::s42"
+          ],
+          "partial_sentence_ids": [
+            "1-15205-8-t::s4",
+            "1-15205-8-t::s7",
+            "1-15205-8-t::s30",
+            "1-15205-8-t::s33"
+          ],
+          "identity_sentence_ids": [
+            "1-15205-8-t::s9"
+          ],
+          "actor_match": "yes",
+          "scope_match": "yes",
+          "issue": "none",
+          "source": "gemini",
+          "human_verified": false,
+          "validation_status": "structurally_valid",
+          "review_flags": [],
+          "pair_id": "cross_a9201634b0ab2e6d7e881ff0",
+          "reference": {
+            "actor_name": "Protestors / Advocates (#EndSARS activists, Ruggedman, campaigners, victims)",
+            "value_name": "Have a world at peace",
+            "direction": "aligned",
+            "unit_text": "Ruggedman releases protest music video -> Video showcases police misconduct -> Features cameos supporting #EndSARS",
+            "nevu_explanation": "Campaign seeks long-term societal harmony by addressing systemic abuses."
+          },
+          "storage_bucket": "direct",
+          "storage_group": 52
+        }
+      ],
+      "articles": {
+        "1-15205-8-t": {
+          "doc_id": "1-15205-8-t",
+          "split": "test_human_all",
+          "title": "March on Washington: George Floyd family urge protesters to 'be his legacy'",
+          "text": "The sister of George Floyd, whose death in police custody sparked months of racial turmoil across the US, has urged civil rights protesters to \"be his legacy\" as thousands gathered for a rally in Washington DC.\n\"My brother cannot be a voice today,\" said Bridgett Floyd.\n\"We have to be that voice, we have to be the change\".\nMs Floyd was one of several relatives of black Americans harmed or killed by police to address the event commemorating a historic 1963 civil rights march.\nSpeakers demanded racial justice and urged people to vote.\nJacob Blake Sr, whose son was shot in Wisconsin on Sunday, told the rally they were holding court on racism in America - and the verdict was \"guilty, guilty, guilty!\".\nThousands of people gathered in Washington DC for the event that commemorated the 1963 civil rights March on Washington and in protest at police violence.\nCalled the Commitment March: Get Your Knee Off Our Necks - a reference to the death of George Floyd, who died in May after a policeman knelt on his neck for several minutes - it follows renewed protests over the police shooting of Jacob Blake.\nThe event brought together generations of activists to call for police reform and to urge Americans to vote in November's general election.\nIt was organised by civil rights leader Reverend Al Sharpton and Martin Luther King III - the eldest son of Mr King Jr.\nThe families of black Americans shot or killed by police spoke at the same site where Martin Luther King Jr delivered his I Have a Dream speech.\nThe 1963 March on Washington was a seismic event in US history, credited with spurring the passage of the Civil Rights Act outlawing segregation the following year.\nSome 250,000 supporters packed the 1.9 miles (3 km) strip from Lincoln Memorial to the Washington Monument, making it one of the largest political gatherings the country had ever seen.\nRev Sharpton announced the 2020 march - which falls on the 57th anniversary of the 1963 event - at Mr Floyd's memorial service in June.\nHis organisation, the National Action Network, worked with Mr King III to convene the rally.\n\"The nation has never seen such a mighty movement, a modern day incarnation of what my father called the coalition of conscience,\" said Mr King III.\n\"And if we move forward with purpose and passion, we will complete the work so boldly began in the 1960s.\"\nThe event comes in the wake of at times violent protests over Mr Blake's shooting that have left two dead in Kenosha, Wisconsin.\nMr Blake was shot and injured by police.\nSince Mr Floyd's death in May, marches in support of the Black Lives Matter movement and against racism and police brutality have swept the US and the globe.\nAttendees lined along Constitution avenue as early as 7am in anticipation of the march.\nLloyd Miner travelled from Philadelphia as says: \"I'm here to play my role and give this administration the mandate that we mean what we say: we want change,\" he says.\nFor Rex Ikwueme there's a sense of urgency.\n\"We're in a crisis and we really have got to get things in order,\" he says.\n\"We can't be living like this and we can't be seeing my people die on film every week.\nThat's not normal.\"\n\"Clearly with the way that the police have been behaving in different areas of the country, they're looking at us as targets and we can't have that,\" he continued.\n\"It contradicts the entire American dream.\"\nPolice violence against African-Americans is top of mind today for many marchers.\nArtelia Bryant, from Roanoke, Virginia, says in her opinion, little has changed since 1963.\nBryant wants lawmakers and law enforcement held accountable for the deaths of black people in police custody.\n\"Cops being arrested,\" says Bryant.\n\"They can start with the cops that killed Breonna Taylor.\"\nMany called for the immediate passage of national police reform legislation known as the George Floyd Justice in Policing Act and the John Lewis Voting Rights Advancement Act, named after the late civil rights icon and congressman.\nPatrick Reyes travelled to Washington from Brooklyn, New York.\nHe points out the 57 years since the first March on Washington saw seminal policies like the Voting Rights Act - a landmark law designed to protect minority voters - but says empty legislation has followed since then: \"Voter suppression still exists today.\"\n\"We're not asking for it, we're not requesting it,\" said Reyes.\n\"We're demanding justice.\"\nSpeakers during the morning's programming included congresswoman Ayanna Pressley, who paid tribute to the activism of black Americans of the past whose \"sacrifice and self-determination shaped history and brought us to this moment\".\n\"We are Black with a capital B,\" she said.\n\"We are the manifestation of the movement.\nWe are a symbol of social, political and cultural progress.\"\nOther presenters included a young activist who called for an end to the gun violence that plagues black communities, and representatives from unions, gay rights groups and Hispanic activism groups, who expressed solidarity with the Black Lives Matter movement.\nDemocratic vice-presidential nominee Senator Kamala Harris addressed the rally virtually.\nHarris, who grew up in an activist household, paid tribute to civil rights leaders of the past.\n\"Let's March on for our ancestors and let's march on for our children and grandchildren,\" she said.\nAmong the initiatives on the agenda were slavery reparations, defunding police departments and investment in healthcare, housing and social services in black communities, organisers said.\nIt was drafted by hundreds of delegates from across the country.",
+          "sentences": [
+            {
+              "position": 0,
+              "sentence_id": "1-15205-8-t::s0",
+              "text": "The sister of George Floyd, whose death in police custody sparked months of racial turmoil across the US, has urged civil rights protesters to \"be his legacy\" as thousands gathered for a rally in Washington DC."
+            },
+            {
+              "position": 1,
+              "sentence_id": "1-15205-8-t::s1",
+              "text": "\"My brother cannot be a voice today,\" said Bridgett Floyd."
+            },
+            {
+              "position": 2,
+              "sentence_id": "1-15205-8-t::s2",
+              "text": "\"We have to be that voice, we have to be the change\"."
+            },
+            {
+              "position": 3,
+              "sentence_id": "1-15205-8-t::s3",
+              "text": "Ms Floyd was one of several relatives of black Americans harmed or killed by police to address the event commemorating a historic 1963 civil rights march."
+            },
+            {
+              "position": 4,
+              "sentence_id": "1-15205-8-t::s4",
+              "text": "Speakers demanded racial justice and urged people to vote."
+            },
+            {
+              "position": 5,
+              "sentence_id": "1-15205-8-t::s5",
+              "text": "Jacob Blake Sr, whose son was shot in Wisconsin on Sunday, told the rally they were holding court on racism in America - and the verdict was \"guilty, guilty, guilty!\"."
+            },
+            {
+              "position": 6,
+              "sentence_id": "1-15205-8-t::s6",
+              "text": "Thousands of people gathered in Washington DC for the event that commemorated the 1963 civil rights March on Washington and in protest at police violence."
+            },
+            {
+              "position": 7,
+              "sentence_id": "1-15205-8-t::s7",
+              "text": "Called the Commitment March: Get Your Knee Off Our Necks - a reference to the death of George Floyd, who died in May after a policeman knelt on his neck for several minutes - it follows renewed protests over the police shooting of Jacob Blake."
+            },
+            {
+              "position": 8,
+              "sentence_id": "1-15205-8-t::s8",
+              "text": "The event brought together generations of activists to call for police reform and to urge Americans to vote in November's general election."
+            },
+            {
+              "position": 9,
+              "sentence_id": "1-15205-8-t::s9",
+              "text": "It was organised by civil rights leader Reverend Al Sharpton and Martin Luther King III - the eldest son of Mr King Jr."
+            },
+            {
+              "position": 10,
+              "sentence_id": "1-15205-8-t::s10",
+              "text": "The families of black Americans shot or killed by police spoke at the same site where Martin Luther King Jr delivered his I Have a Dream speech."
+            },
+            {
+              "position": 11,
+              "sentence_id": "1-15205-8-t::s11",
+              "text": "The 1963 March on Washington was a seismic event in US history, credited with spurring the passage of the Civil Rights Act outlawing segregation the following year."
+            },
+            {
+              "position": 12,
+              "sentence_id": "1-15205-8-t::s12",
+              "text": "Some 250,000 supporters packed the 1.9 miles (3 km) strip from Lincoln Memorial to the Washington Monument, making it one of the largest political gatherings the country had ever seen."
+            },
+            {
+              "position": 13,
+              "sentence_id": "1-15205-8-t::s13",
+              "text": "Rev Sharpton announced the 2020 march - which falls on the 57th anniversary of the 1963 event - at Mr Floyd's memorial service in June."
+            },
+            {
+              "position": 14,
+              "sentence_id": "1-15205-8-t::s14",
+              "text": "His organisation, the National Action Network, worked with Mr King III to convene the rally."
+            },
+            {
+              "position": 15,
+              "sentence_id": "1-15205-8-t::s15",
+              "text": "\"The nation has never seen such a mighty movement, a modern day incarnation of what my father called the coalition of conscience,\" said Mr King III."
+            },
+            {
+              "position": 16,
+              "sentence_id": "1-15205-8-t::s16",
+              "text": "\"And if we move forward with purpose and passion, we will complete the work so boldly began in the 1960s.\""
+            },
+            {
+              "position": 17,
+              "sentence_id": "1-15205-8-t::s17",
+              "text": "The event comes in the wake of at times violent protests over Mr Blake's shooting that have left two dead in Kenosha, Wisconsin."
+            },
+            {
+              "position": 18,
+              "sentence_id": "1-15205-8-t::s18",
+              "text": "Mr Blake was shot and injured by police."
+            },
+            {
+              "position": 19,
+              "sentence_id": "1-15205-8-t::s19",
+              "text": "Since Mr Floyd's death in May, marches in support of the Black Lives Matter movement and against racism and police brutality have swept the US and the globe."
+            },
+            {
+              "position": 20,
+              "sentence_id": "1-15205-8-t::s20",
+              "text": "Attendees lined along Constitution avenue as early as 7am in anticipation of the march."
+            },
+            {
+              "position": 21,
+              "sentence_id": "1-15205-8-t::s21",
+              "text": "Lloyd Miner travelled from Philadelphia as says: \"I'm here to play my role and give this administration the mandate that we mean what we say: we want change,\" he says."
+            },
+            {
+              "position": 22,
+              "sentence_id": "1-15205-8-t::s22",
+              "text": "For Rex Ikwueme there's a sense of urgency."
+            },
+            {
+              "position": 23,
+              "sentence_id": "1-15205-8-t::s23",
+              "text": "\"We're in a crisis and we really have got to get things in order,\" he says."
+            },
+            {
+              "position": 24,
+              "sentence_id": "1-15205-8-t::s24",
+              "text": "\"We can't be living like this and we can't be seeing my people die on film every week."
+            },
+            {
+              "position": 25,
+              "sentence_id": "1-15205-8-t::s25",
+              "text": "That's not normal.\""
+            },
+            {
+              "position": 26,
+              "sentence_id": "1-15205-8-t::s26",
+              "text": "\"Clearly with the way that the police have been behaving in different areas of the country, they're looking at us as targets and we can't have that,\" he continued."
+            },
+            {
+              "position": 27,
+              "sentence_id": "1-15205-8-t::s27",
+              "text": "\"It contradicts the entire American dream.\""
+            },
+            {
+              "position": 28,
+              "sentence_id": "1-15205-8-t::s28",
+              "text": "Police violence against African-Americans is top of mind today for many marchers."
+            },
+            {
+              "position": 29,
+              "sentence_id": "1-15205-8-t::s29",
+              "text": "Artelia Bryant, from Roanoke, Virginia, says in her opinion, little has changed since 1963."
+            },
+            {
+              "position": 30,
+              "sentence_id": "1-15205-8-t::s30",
+              "text": "Bryant wants lawmakers and law enforcement held accountable for the deaths of black people in police custody."
+            },
+            {
+              "position": 31,
+              "sentence_id": "1-15205-8-t::s31",
+              "text": "\"Cops being arrested,\" says Bryant."
+            },
+            {
+              "position": 32,
+              "sentence_id": "1-15205-8-t::s32",
+              "text": "\"They can start with the cops that killed Breonna Taylor.\""
+            },
+            {
+              "position": 33,
+              "sentence_id": "1-15205-8-t::s33",
+              "text": "Many called for the immediate passage of national police reform legislation known as the George Floyd Justice in Policing Act and the John Lewis Voting Rights Advancement Act, named after the late civil rights icon and congressman."
+            },
+            {
+              "position": 34,
+              "sentence_id": "1-15205-8-t::s34",
+              "text": "Patrick Reyes travelled to Washington from Brooklyn, New York."
+            },
+            {
+              "position": 35,
+              "sentence_id": "1-15205-8-t::s35",
+              "text": "He points out the 57 years since the first March on Washington saw seminal policies like the Voting Rights Act - a landmark law designed to protect minority voters - but says empty legislation has followed since then: \"Voter suppression still exists today.\""
+            },
+            {
+              "position": 36,
+              "sentence_id": "1-15205-8-t::s36",
+              "text": "\"We're not asking for it, we're not requesting it,\" said Reyes."
+            },
+            {
+              "position": 37,
+              "sentence_id": "1-15205-8-t::s37",
+              "text": "\"We're demanding justice.\""
+            },
+            {
+              "position": 38,
+              "sentence_id": "1-15205-8-t::s38",
+              "text": "Speakers during the morning's programming included congresswoman Ayanna Pressley, who paid tribute to the activism of black Americans of the past whose \"sacrifice and self-determination shaped history and brought us to this moment\"."
+            },
+            {
+              "position": 39,
+              "sentence_id": "1-15205-8-t::s39",
+              "text": "\"We are Black with a capital B,\" she said."
+            },
+            {
+              "position": 40,
+              "sentence_id": "1-15205-8-t::s40",
+              "text": "\"We are the manifestation of the movement."
+            },
+            {
+              "position": 41,
+              "sentence_id": "1-15205-8-t::s41",
+              "text": "We are a symbol of social, political and cultural progress.\""
+            },
+            {
+              "position": 42,
+              "sentence_id": "1-15205-8-t::s42",
+              "text": "Other presenters included a young activist who called for an end to the gun violence that plagues black communities, and representatives from unions, gay rights groups and Hispanic activism groups, who expressed solidarity with the Black Lives Matter movement."
+            },
+            {
+              "position": 43,
+              "sentence_id": "1-15205-8-t::s43",
+              "text": "Democratic vice-presidential nominee Senator Kamala Harris addressed the rally virtually."
+            },
+            {
+              "position": 44,
+              "sentence_id": "1-15205-8-t::s44",
+              "text": "Harris, who grew up in an activist household, paid tribute to civil rights leaders of the past."
+            },
+            {
+              "position": 45,
+              "sentence_id": "1-15205-8-t::s45",
+              "text": "\"Let's March on for our ancestors and let's march on for our children and grandchildren,\" she said."
+            },
+            {
+              "position": 46,
+              "sentence_id": "1-15205-8-t::s46",
+              "text": "Among the initiatives on the agenda were slavery reparations, defunding police departments and investment in healthcare, housing and social services in black communities, organisers said."
+            },
+            {
+              "position": 47,
+              "sentence_id": "1-15205-8-t::s47",
+              "text": "It was drafted by hundreds of delegates from across the country."
+            }
+          ]
+        }
+      },
+      "required_pair_ids": [
+        "cross_4703a200615f4293e85a2b73",
+        "cross_a9201634b0ab2e6d7e881ff0"
+      ]
+    }
+  ],
+  "total_relations": 2,
+  "total_pages": 1
+}

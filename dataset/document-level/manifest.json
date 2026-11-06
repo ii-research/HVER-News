@@ -1,0 +1,51 @@
+{
+  "dataset": "document-level evidence ranking",
+  "policy": "Use only instances with scope=within; candidates are all sentences in source_article_id; cross rows and cross-document qrels are excluded.",
+  "statistics": {
+    "train": {
+      "split": "train",
+      "articles": 1469,
+      "sentences": 59424,
+      "relations": 16355,
+      "queries": 65420,
+      "direct_qrels": 124180,
+      "partial_qrels": 216136,
+      "query_type_counts": {
+        "entity_explicit_value_naturalized": 16355,
+        "entity_implicit_value_explicit": 16355,
+        "entity_value_explicit": 16355,
+        "entity_value_implicit": 16355
+      }
+    },
+    "dev": {
+      "split": "dev",
+      "articles": 236,
+      "sentences": 9565,
+      "relations": 2506,
+      "queries": 10024,
+      "direct_qrels": 18784,
+      "partial_qrels": 32388,
+      "query_type_counts": {
+        "entity_explicit_value_naturalized": 2506,
+        "entity_implicit_value_explicit": 2506,
+        "entity_value_explicit": 2506,
+        "entity_value_implicit": 2506
+      }
+    },
+    "test": {
+      "split": "test",
+      "articles": 530,
+      "sentences": 19906,
+      "relations": 5539,
+      "queries": 22156,
+      "direct_qrels": 47156,
+      "partial_qrels": 76424,
+      "query_type_counts": {
+        "entity_explicit_value_naturalized": 5539,
+        "entity_implicit_value_explicit": 5539,
+        "entity_value_explicit": 5539,
+        "entity_value_implicit": 5539
+      }
+    }
+  }
+}

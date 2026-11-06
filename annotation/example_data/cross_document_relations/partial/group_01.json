@@ -1,0 +1,306 @@
+{
+  "bucket": "partial",
+  "group": 1,
+  "tasks": [
+    {
+      "bucket": "partial",
+      "relation_id": "rel_009a4a1ec27e4399",
+      "pairs": [
+        {
+          "query_id": "q_6418a3d9413e4428",
+          "query": "What evidence in the article supports that Government and Legal Authorities is aligned with the human value \"Be responsible\"?",
+          "query_type": "Q1",
+          "relation_id": "rel_009a4a1ec27e4399",
+          "source_article_id": "5-6054-2-1",
+          "doc_id": "3-wiki-img/17073-7/17073-7-1",
+          "split": "test_human_all",
+          "document_relevance": 1,
+          "document_label": "auxiliary_support",
+          "direct_sentence_ids": [],
+          "partial_sentence_ids": [
+            "3-wiki-img/17073-7/17073-7-1::s2",
+            "3-wiki-img/17073-7/17073-7-1::s6",
+            "3-wiki-img/17073-7/17073-7-1::s13"
+          ],
+          "identity_sentence_ids": [],
+          "actor_match": "yes",
+          "scope_match": "yes",
+          "issue": "none",
+          "source": "gemini",
+          "human_verified": false,
+          "validation_status": "structurally_valid",
+          "review_flags": [],
+          "pair_id": "cross_099122359370bed559bdea47",
+          "reference": {
+            "actor_name": "Government and Legal Authorities",
+            "value_name": "Be responsible",
+            "direction": "aligned",
+            "unit_text": "Philippine authorities seize KAT.ph domain -> Record labels file complaint against KickassTorrents -> Philippine IPO issues restraining order",
+            "nevu_explanation": "Coordinated judicial measures demonstrate systemic accountability for IP protection."
+          },
+          "storage_bucket": "partial",
+          "storage_group": 15
+        }
+      ],
+      "articles": {
+        "3-wiki-img/17073-7/17073-7-1": {
+          "doc_id": "3-wiki-img/17073-7/17073-7-1",
+          "split": "test_human_all",
+          "title": "Malaysia Arrests Thousands Amid Coronavirus Lockdown",
+          "text": "Malaysia has arrested more than 4,000 people for violating virus lockdown orders, marking the toughest law enforcement action in Southeast Asia after the Philippines, where the president encourages police to shoot offenders.\nMalaysia is entering what it calls a “harsh mode” or a harsher phase of its official Movement Control Order to keep citizens in isolation and curb the spread of coronavirus, which threatens both the economy and human rights.\nPolice set up hundreds of roadblocks, have been conducting inspections, and have arrested thousands, including one man who jumped into the Strait of Malacca to avoid arrest, according to the government news service Bernama.\n“At first, the police enforcement was done in the soft and advisory mode, then it changed into the stern mode, and now it has entered the harsh mode,” Bernama quoted Datuk Seri Ismail Sabri Yaakob, the senior minister for security, as saying at a press conference Thursday.\n“So I hope the people will adhere to the MCO.”\nLockdown enforcement around the world has ranged from Florida charging a pastor who violated orders against mass gatherings, to Australia fining citizens who gather in groups of two or more.\nBut Malaysia reports one of the highest arrest rates, with 4,189 people arrested for loitering since March 18, including 1,449 charged in court.\nThe rate is higher in the Philippines, where police arrested more than 20,000 lockdown violators, and Philippine President Rodrigo Duterte said to “shoot them dead” if needed.\nMalaysia said its lockdown is decreasing the spread of COVID-19.\nIt has reported 3,116 total cases and 50 deaths as of Friday.\nGoogle published data showing how much mobility has changed in each nation amid lockdown, using cell phone data.\nMalaysia saw the presence of citizens at retail and recreation sites decrease by 81% on Sunday, compared with about a month earlier, according to Google.\nThe law enforcement actions have included a crackdown on speech, however, that activists worry could threaten human rights, as the former ruling party that ran Malaysia for all except two years of its modern history returns to power.\nIn addition to lockdown violators, the authorities have arrested people for allegedly spreading misinformation online about the virus.\nJournalists say they are self-censoring news about the virus to avoid punishment from the government.\n“Human rights workers, free expression advocates, bloggers, software developers, and activists are all in danger when government uses leeway obtained during a crisis to curtail free expression far beyond what’s required,” said Jason Kelley, a digital strategist at the Electronic Frontier Foundation, which advocates for an open internet.\nHe noted in a blog post that Malaysia is among several governments arresting people for alleged misinformation, and he says many of those arrested are activists.\nEconomists say the political turmoil in Kuala Lumpur will make it hard for the government to fight the coronavirus.\nMahathir Mohamad, who became prime minister again in 2018 thanks mostly to the 1MDB corruption scandal that sank the prior regime, tried to consolidate power in February.\nHis failure caused a political crisis until the old ruling party stepped into the power vacuum in March.\nWith the old party back in power, the government has started to stabilize, but the virus is still threatening the economy.\nMalaysia is one of the first three economies in the region, in addition to Singapore and Thailand, to predict a recession this year because of the coronavirus.\nIn response, the government announced last week the “People's Economic Stimulus Package,” locally abbreviated as PRIHATIN, to deal with COVID-19.\nThe package includes $57.3 billion worth of cash aid, loans, deferred taxes and debt payments, along with other aid.\n“The sheer size of PRIHATIN signals the seriousness and sincerity in the government's approach,” said Jason Liang and Krystal Ng, partners at law firm Wong & Partners, in a joint assessment.\n“These measures ought to be far-reaching and should provide a source of encouragement and relief.”",
+          "sentences": [
+            {
+              "position": 0,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s0",
+              "text": "Malaysia has arrested more than 4,000 people for violating virus lockdown orders, marking the toughest law enforcement action in Southeast Asia after the Philippines, where the president encourages police to shoot offenders."
+            },
+            {
+              "position": 1,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s1",
+              "text": "Malaysia is entering what it calls a “harsh mode” or a harsher phase of its official Movement Control Order to keep citizens in isolation and curb the spread of coronavirus, which threatens both the economy and human rights."
+            },
+            {
+              "position": 2,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s2",
+              "text": "Police set up hundreds of roadblocks, have been conducting inspections, and have arrested thousands, including one man who jumped into the Strait of Malacca to avoid arrest, according to the government news service Bernama."
+            },
+            {
+              "position": 3,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s3",
+              "text": "“At first, the police enforcement was done in the soft and advisory mode, then it changed into the stern mode, and now it has entered the harsh mode,” Bernama quoted Datuk Seri Ismail Sabri Yaakob, the senior minister for security, as saying at a press conference Thursday."
+            },
+            {
+              "position": 4,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s4",
+              "text": "“So I hope the people will adhere to the MCO.”"
+            },
+            {
+              "position": 5,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s5",
+              "text": "Lockdown enforcement around the world has ranged from Florida charging a pastor who violated orders against mass gatherings, to Australia fining citizens who gather in groups of two or more."
+            },
+            {
+              "position": 6,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s6",
+              "text": "But Malaysia reports one of the highest arrest rates, with 4,189 people arrested for loitering since March 18, including 1,449 charged in court."
+            },
+            {
+              "position": 7,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s7",
+              "text": "The rate is higher in the Philippines, where police arrested more than 20,000 lockdown violators, and Philippine President Rodrigo Duterte said to “shoot them dead” if needed."
+            },
+            {
+              "position": 8,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s8",
+              "text": "Malaysia said its lockdown is decreasing the spread of COVID-19."
+            },
+            {
+              "position": 9,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s9",
+              "text": "It has reported 3,116 total cases and 50 deaths as of Friday."
+            },
+            {
+              "position": 10,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s10",
+              "text": "Google published data showing how much mobility has changed in each nation amid lockdown, using cell phone data."
+            },
+            {
+              "position": 11,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s11",
+              "text": "Malaysia saw the presence of citizens at retail and recreation sites decrease by 81% on Sunday, compared with about a month earlier, according to Google."
+            },
+            {
+              "position": 12,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s12",
+              "text": "The law enforcement actions have included a crackdown on speech, however, that activists worry could threaten human rights, as the former ruling party that ran Malaysia for all except two years of its modern history returns to power."
+            },
+            {
+              "position": 13,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s13",
+              "text": "In addition to lockdown violators, the authorities have arrested people for allegedly spreading misinformation online about the virus."
+            },
+            {
+              "position": 14,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s14",
+              "text": "Journalists say they are self-censoring news about the virus to avoid punishment from the government."
+            },
+            {
+              "position": 15,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s15",
+              "text": "“Human rights workers, free expression advocates, bloggers, software developers, and activists are all in danger when government uses leeway obtained during a crisis to curtail free expression far beyond what’s required,” said Jason Kelley, a digital strategist at the Electronic Frontier Foundation, which advocates for an open internet."
+            },
+            {
+              "position": 16,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s16",
+              "text": "He noted in a blog post that Malaysia is among several governments arresting people for alleged misinformation, and he says many of those arrested are activists."
+            },
+            {
+              "position": 17,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s17",
+              "text": "Economists say the political turmoil in Kuala Lumpur will make it hard for the government to fight the coronavirus."
+            },
+            {
+              "position": 18,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s18",
+              "text": "Mahathir Mohamad, who became prime minister again in 2018 thanks mostly to the 1MDB corruption scandal that sank the prior regime, tried to consolidate power in February."
+            },
+            {
+              "position": 19,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s19",
+              "text": "His failure caused a political crisis until the old ruling party stepped into the power vacuum in March."
+            },
+            {
+              "position": 20,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s20",
+              "text": "With the old party back in power, the government has started to stabilize, but the virus is still threatening the economy."
+            },
+            {
+              "position": 21,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s21",
+              "text": "Malaysia is one of the first three economies in the region, in addition to Singapore and Thailand, to predict a recession this year because of the coronavirus."
+            },
+            {
+              "position": 22,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s22",
+              "text": "In response, the government announced last week the “People's Economic Stimulus Package,” locally abbreviated as PRIHATIN, to deal with COVID-19."
+            },
+            {
+              "position": 23,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s23",
+              "text": "The package includes $57.3 billion worth of cash aid, loans, deferred taxes and debt payments, along with other aid."
+            },
+            {
+              "position": 24,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s24",
+              "text": "“The sheer size of PRIHATIN signals the seriousness and sincerity in the government's approach,” said Jason Liang and Krystal Ng, partners at law firm Wong & Partners, in a joint assessment."
+            },
+            {
+              "position": 25,
+              "sentence_id": "3-wiki-img/17073-7/17073-7-1::s25",
+              "text": "“These measures ought to be far-reaching and should provide a source of encouragement and relief.”"
+            }
+          ]
+        }
+      },
+      "required_pair_ids": [
+        "cross_099122359370bed559bdea47"
+      ]
+    },
+    {
+      "bucket": "partial",
+      "relation_id": "rel_0199a7c14271115a",
+      "pairs": [
+        {
+          "query_id": "q_8ee76d3418c6db9e",
+          "query": "What evidence in the article supports that UK Government is aligned with the human value \"Have a stable society\"?",
+          "query_type": "Q1",
+          "relation_id": "rel_0199a7c14271115a",
+          "source_article_id": "https://www.bbc.com/news/articles/c8e6zk5p9l5o#2",
+          "doc_id": "26-13937-1-t",
+          "split": "test_human_all",
+          "document_relevance": 1,
+          "document_label": "auxiliary_support",
+          "direct_sentence_ids": [],
+          "partial_sentence_ids": [
+            "26-13937-1-t::s0",
+            "26-13937-1-t::s2",
+            "26-13937-1-t::s3"
+          ],
+          "identity_sentence_ids": [],
+          "actor_match": "yes",
+          "scope_match": "yes",
+          "issue": "insufficient_evidence",
+          "source": "gemini",
+          "human_verified": false,
+          "validation_status": "structurally_valid",
+          "review_flags": [],
+          "pair_id": "cross_1e5f64e8809d30d16c103f3e",
+          "reference": {
+            "actor_name": "UK Government",
+            "value_name": "Have a stable society",
+            "direction": "aligned",
+            "unit_text": "Chancellor announces government's housing pledge and funding increase -> UK Government compares new investment levels to previous administrations",
+            "nevu_explanation": "Policy initiatives to significantly increase housing investment aim to stabilize and enrich society."
+          },
+          "storage_bucket": "partial",
+          "storage_group": 20
+        }
+      ],
+      "articles": {
+        "26-13937-1-t": {
+          "doc_id": "26-13937-1-t",
+          "split": "test_human_all",
+          "title": "UK's Johnson attacks 'unacceptable' Extinction Rebellion newspaper blockade",
+          "text": "Blockades by climate activists that delayed several British newspapers from going on sale on Saturday have been branded as \"unacceptable\" by UK Prime Minister Boris Johnson.\nMore than 100 protesters from Extinction Rebellion, also known as XR, had chained themselves to vehicles and blocked roads to three sites across the UK that belong to media magnate Rupert Murdoch.\n\"A free press is vital in holding the government and other powerful institutions to account on issues critical for the future of our country, including the fight against climate change,\" Johnson wrote on his Twitter account.\n\"It is completely unacceptable to seek to limit the public’s access to news in this way,\" he said.\nExtinction Rebellion said the protest was to highlight what it sees as the British media's failure to report on the \"climate emergency\" fairly and accurately.\nThe group on Saturday tweeted that the UK's current Conservative government was \"out of touch with the people.\"\nThe demonstration led leading to major delays in deliveries of several national newspapers.\nThe plants print The Sun and The Times, which belong to the Australian-born businessman's News UK group, as well as the Daily Mail, the Daily Telegraph, and the Financial Times.\nA Newsprinters spokeswoman said the disruption meant printing had to be transferred to other sites.\n\"This attack on all of the free press impacted many workers going about their jobs.\nOvernight print workers, delivery drivers, wholesale workers and retail newsagents have faced delays and financial penalty,\" the spokeswoman was quoted by the Reuters news agency as saying.\nPolice on Saturday said they had arrested dozens of people so far at different sites.",
+          "sentences": [
+            {
+              "position": 0,
+              "sentence_id": "26-13937-1-t::s0",
+              "text": "Blockades by climate activists that delayed several British newspapers from going on sale on Saturday have been branded as \"unacceptable\" by UK Prime Minister Boris Johnson."
+            },
+            {
+              "position": 1,
+              "sentence_id": "26-13937-1-t::s1",
+              "text": "More than 100 protesters from Extinction Rebellion, also known as XR, had chained themselves to vehicles and blocked roads to three sites across the UK that belong to media magnate Rupert Murdoch."
+            },
+            {
+              "position": 2,
+              "sentence_id": "26-13937-1-t::s2",
+              "text": "\"A free press is vital in holding the government and other powerful institutions to account on issues critical for the future of our country, including the fight against climate change,\" Johnson wrote on his Twitter account."
+            },
+            {
+              "position": 3,
+              "sentence_id": "26-13937-1-t::s3",
+              "text": "\"It is completely unacceptable to seek to limit the public’s access to news in this way,\" he said."
+            },
+            {
+              "position": 4,
+              "sentence_id": "26-13937-1-t::s4",
+              "text": "Extinction Rebellion said the protest was to highlight what it sees as the British media's failure to report on the \"climate emergency\" fairly and accurately."
+            },
+            {
+              "position": 5,
+              "sentence_id": "26-13937-1-t::s5",
+              "text": "The group on Saturday tweeted that the UK's current Conservative government was \"out of touch with the people.\""
+            },
+            {
+              "position": 6,
+              "sentence_id": "26-13937-1-t::s6",
+              "text": "The demonstration led leading to major delays in deliveries of several national newspapers."
+            },
+            {
+              "position": 7,
+              "sentence_id": "26-13937-1-t::s7",
+              "text": "The plants print The Sun and The Times, which belong to the Australian-born businessman's News UK group, as well as the Daily Mail, the Daily Telegraph, and the Financial Times."
+            },
+            {
+              "position": 8,
+              "sentence_id": "26-13937-1-t::s8",
+              "text": "A Newsprinters spokeswoman said the disruption meant printing had to be transferred to other sites."
+            },
+            {
+              "position": 9,
+              "sentence_id": "26-13937-1-t::s9",
+              "text": "\"This attack on all of the free press impacted many workers going about their jobs."
+            },
+            {
+              "position": 10,
+              "sentence_id": "26-13937-1-t::s10",
+              "text": "Overnight print workers, delivery drivers, wholesale workers and retail newsagents have faced delays and financial penalty,\" the spokeswoman was quoted by the Reuters news agency as saying."
+            },
+            {
+              "position": 11,
+              "sentence_id": "26-13937-1-t::s11",
+              "text": "Police on Saturday said they had arrested dozens of people so far at different sites."
+            }
+          ]
+        }
+      },
+      "required_pair_ids": [
+        "cross_1e5f64e8809d30d16c103f3e"
+      ]
+    }
+  ],
+  "total_relations": 2,
+  "total_pages": 1
+}
