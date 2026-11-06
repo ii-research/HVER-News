@@ -12,7 +12,7 @@ from safetensors.torch import load_file, save_file
 from transformers import get_linear_schedule_with_warmup
 from .data import CorpusData, balanced_one_per_relation, read_jsonl, sha256, write_jsonl
 from .evaluate import metrics_from_predictions
-from .provence_rerank import load_modules, pseudo_row, score_query_finetuned
+from .baselines.provence import load_modules, pseudo_row, score_query_finetuned
 
 
 def save_json(path: Path, payload) -> None:
@@ -133,7 +133,7 @@ def evaluate(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description="Train Provence for corpus-level evidence ranking (CER).")
     parser.add_argument("--data-dir", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--bundle", type=Path, required=True)

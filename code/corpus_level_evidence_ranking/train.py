@@ -16,12 +16,12 @@ from torch.optim import AdamW
 from torch.utils.data import DataLoader, Dataset, DistributedSampler
 from transformers import get_linear_schedule_with_warmup
 
-from avr_retriever_experiment.losses import (
+from document_level_evidence_ranking.losses import (
     distributed_inbatch_contrastive_loss,
     inbatch_contrastive_loss,
     pairwise_negative_loss,
 )
-from avr_retriever_experiment.model import DualEncoder, resolve_device
+from document_level_evidence_ranking.model import DualEncoder, resolve_device
 from .data import CorpusData, balanced_one_per_relation, write_jsonl
 from .evaluate import metrics_from_predictions, rank_dense_model
 
@@ -117,7 +117,7 @@ def setup_distributed() -> tuple[bool, int, int, torch.device]:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description="Train a dense model for corpus-level evidence ranking (CER).")
     parser.add_argument("--model", required=True)
     parser.add_argument(
         "--data-dir",

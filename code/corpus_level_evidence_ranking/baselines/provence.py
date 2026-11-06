@@ -8,8 +8,8 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 from safetensors.torch import load_file
-from .data import CorpusData, read_jsonl, sha256, write_jsonl
-from .evaluate import metrics_from_predictions
+from ..data import CorpusData, read_jsonl, sha256, write_jsonl
+from ..evaluate import metrics_from_predictions
 
 
 def load_candidate_rows(path: Path) -> dict[str, dict]:

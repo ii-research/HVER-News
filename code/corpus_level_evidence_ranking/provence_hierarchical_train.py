@@ -20,7 +20,7 @@ from transformers import get_linear_schedule_with_warmup
 from .data import CorpusData, balanced_one_per_relation, read_jsonl, sha256, write_jsonl
 from .evaluate import metrics_from_predictions
 from .provence_hierarchical_model import HierarchicalProvence
-from .provence_rerank import load_modules, pseudo_row
+from .baselines.provence import load_modules, pseudo_row
 from .provence_train import eligible_documents, save_json
 
 

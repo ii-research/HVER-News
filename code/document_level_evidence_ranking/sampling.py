@@ -5,8 +5,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Dict, List, Optional, Sequence, Tuple
 
-from avr_retriever_experiment.data import BenchmarkData
-from avr_retriever_experiment.support.io import read_json, write_json
+from document_level_evidence_ranking.data import BenchmarkData
+from document_level_evidence_ranking.support.io import read_json, write_json
 
 
 DEFAULT_QUERY_TYPES: Tuple[str, ...] = (

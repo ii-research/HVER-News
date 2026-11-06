@@ -10,9 +10,9 @@ from pathlib import Path
 import torch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
-from .data import CorpusData
-from .evaluate import metrics_from_predictions
-from .score_export import finite_document_score_export
+from ..data import CorpusData
+from ..evaluate import metrics_from_predictions
+from ..score_export import finite_document_score_export
 
 
 def read_jsonl(path: Path):
@@ -55,7 +55,7 @@ def main() -> None:
     parser.add_argument(
         "--data-dir",
         type=Path,
-        default=Path(__file__).resolve().parents[2] / "dataset/corpus-level",
+        default=Path(__file__).resolve().parents[3] / "dataset/corpus-level",
     )
     parser.add_argument("--results-dir", type=Path, required=True)
     parser.add_argument("--batch-size", type=int, default=128)

@@ -14,12 +14,12 @@ from pathlib import Path
 import torch
 import torch.distributed as dist
 
-from avr_retriever_experiment.config import ExperimentConfig
-from avr_retriever_experiment.data import load_split
-from avr_retriever_experiment.runner import run_setting
-from avr_retriever_experiment.sampling import select_experiment_query_ids
-from avr_retriever_experiment.settings import all_settings
-from avr_retriever_experiment.support.seed import seed_everything
+from document_level_evidence_ranking.config import ExperimentConfig
+from document_level_evidence_ranking.data import load_split
+from document_level_evidence_ranking.runner import run_setting
+from document_level_evidence_ranking.sampling import select_experiment_query_ids
+from document_level_evidence_ranking.settings import all_settings
+from document_level_evidence_ranking.support.seed import seed_everything
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -29,7 +29,7 @@ DEFAULT_MODELS = Path("models/document-level")
 
 
 def parse_args():
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description="Document-level evidence ranking (DER): rank source-article sentences.")
     parser.add_argument(
         "--setting",
         required=True,

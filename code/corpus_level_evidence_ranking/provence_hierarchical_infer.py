@@ -11,7 +11,7 @@ from safetensors.torch import load_file
 from .data import CorpusData, read_jsonl, sha256
 from .provence_hierarchical_model import HierarchicalProvence
 from .provence_hierarchical_train import VARIANTS, evaluate
-from .provence_rerank import load_modules
+from .baselines.provence import load_modules
 from .provence_train import save_json
 
 

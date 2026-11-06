@@ -5,7 +5,7 @@ from collections import defaultdict
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Sequence, Set
 
-from avr_retriever_experiment.data import BenchmarkData
+from document_level_evidence_ranking.data import BenchmarkData
 
 
 @dataclass

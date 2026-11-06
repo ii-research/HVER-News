@@ -112,7 +112,7 @@ def rank_dense(
     batch_size: int,
     device_name: str,
 ) -> list[dict]:
-    from avr_retriever_experiment.model import DualEncoder, resolve_device
+    from document_level_evidence_ranking.model import DualEncoder, resolve_device
 
     device = resolve_device(device_name)
     checkpoint = Path(model_path)
@@ -197,6 +197,11 @@ def prediction_row(
 
 
 def metrics_from_predictions(data: CorpusData, rows: list[dict]) -> dict:
+    """Score CER in full; cross_only_* excludes each query's source article.
+
+    document/sentence name the ranking unit, not DER/CER task scopes.
+    Cross-document-only is a diagnostic subset, not a third task.
+    """
     query_types = {
         qid: str(row.get("query_type", "unknown")) for qid, row in data.queries.items()
     }
@@ -241,7 +246,7 @@ def metrics_from_predictions(data: CorpusData, rows: list[dict]) -> dict:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(description="Corpus-level evidence ranking (CER): source and other articles in the split.")
     parser.add_argument("--setting", required=True, choices=("bm25", "dense"))
     parser.add_argument("--model")
     parser.add_argument(

@@ -110,7 +110,7 @@ def write_json(path, payload):
 def benchmark(root):
     sys.path.insert(0, str(Path(root).resolve()))
     return tuple(
-        importlib.import_module("avr_retriever_experiment." + name)
+        importlib.import_module("document_level_evidence_ranking." + name)
         for name in ("data", "negative_mining", "evaluation", "config")
     )
 

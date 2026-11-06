@@ -42,8 +42,8 @@ def main() -> None:
     checkpoint = args.checkpoint.resolve()
     sys.path.insert(0, str(project))
 
-    from avr_retriever_experiment.data import load_split
-    from avr_retriever_experiment.sampling import select_experiment_query_ids
+    from document_level_evidence_ranking.data import load_split
+    from document_level_evidence_ranking.sampling import select_experiment_query_ids
 
     shared = root / "shared"
     shared.mkdir(parents=True, exist_ok=True)
@@ -148,7 +148,7 @@ def main() -> None:
     tracked.extend(shared.glob("*"))
     tracked.append(root / "four_query_manifest.json")
     tracked.extend((root / "scripts").rglob("*.py"))
-    tracked.extend((project / "avr_retriever_experiment").glob("*.py"))
+    tracked.extend((project / "document_level_evidence_ranking").glob("*.py"))
     tracked.extend(checkpoint.glob("*"))
     hashes = {}
     for path in tracked:

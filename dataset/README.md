@@ -49,7 +49,7 @@ Full IDs and the displayed records are available in [example.json](overview/exam
 ## Two views
 
 - `corpus-level/{train,dev,test}`: six files per split for corpus-level evidence ranking. Source-article and cross-document judgments share query, article, and sentence IDs.
-- `document-level/{train,dev,test}`: the exact view used by the document-level experiment loaders; this is not a cross-document export. Use its `qrels.tsv` with `avr_retriever_experiment`.
+- `document-level/{train,dev,test}`: the exact view used by the document-level experiment loaders; this is not a cross-document export. Use its `qrels.tsv` with `document_level_evidence_ranking`.
 
 Labels, query text, evidence and qrels are preserved from the final datasets. Do not substitute the integrated instances into the document-level loader: their schemas differ.
 
@@ -58,7 +58,7 @@ Labels, query text, evidence and qrels are preserved from the final datasets. Do
 | File | Contents |
 |---|---|
 | `articles.jsonl` | Articles and their sentence lists |
-| `corpus.jsonl` | Sentence retrieval units |
+| `corpus.jsonl` | Sentence ranking units |
 | `queries.jsonl` | Query text, formulation, relation and source article |
 | `instances.jsonl` | Query–article judgments, sentence evidence, scope |
 | `qrels.documents.tsv` | Query–article relevance |
@@ -72,7 +72,14 @@ All source-article sentences are candidates, with sentences outside the Direct/P
 
 The public Test instances omit label-origin and review-tracking fields (`source`, `human_verified`, `provenance`, and `document_label_source`). Labels, evidence IDs and qrels are unchanged. This metadata omission does not alter annotation or review status.
 
-`scope=within/cross` and `source_article_id` identify evidence location, not annotation origin, and remain available. The document-level loader retains its compatibility fields and `qrels.tsv`.
+`scope` identifies the location of a query–article pair, not the task or annotation origin:
+
+| Stored value | Meaning | Task membership |
+|---|---|---|
+| `within` | Source article | Document-level evidence; also included in corpus-level |
+| `cross` | Another article in the same split | Cross-document-only evidence; included in corpus-level |
+
+Corpus-level combines both locations. `cross` does not mean the full corpus-level dataset. `source_article_id` identifies the query's source article. The loaders are `document_level_evidence_ranking` and `corpus_level_evidence_ranking`; the stored scope values remain `within` and `cross`.
 
 ## Detailed evidence statistics
 

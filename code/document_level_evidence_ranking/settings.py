@@ -1,7 +1,7 @@
 from __future__ import annotations
 from dataclasses import dataclass
 from typing import Dict, Optional
-from avr_retriever_experiment.training_data import TrainingRecipe
+from document_level_evidence_ranking.training_data import TrainingRecipe
 
 
 @dataclass(frozen=True)

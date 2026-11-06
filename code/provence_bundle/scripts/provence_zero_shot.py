@@ -15,8 +15,8 @@ import torch
 from huggingface_hub import hf_hub_download
 from transformers import AutoModel, AutoTokenizer
 
-from eval_retrieval_baseline import retrieval_metrics
-from prepare_retrieval_baseline import load_corpus, read_jsonl, validate_instance
+from eval_document_level_baseline import evidence_ranking_metrics
+from prepare_document_level_baseline import load_corpus, read_jsonl, validate_instance
 
 MODEL = "naver/provence-reranker-debertav3-v1"
 REVISION = "ef49e233e3c6e50efc476c68f1390f8a63add4d4"
@@ -248,7 +248,7 @@ def load_fixed_queries(path: Path, source: Path, split: str):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--source", type=Path, default=Path("dataset/retrieval_dataset")
+        "--source", type=Path, default=Path(__file__).resolve().parents[3] / "dataset/document-level"
     )
     parser.add_argument("--split", choices=["dev", "test"], default="test")
     parser.add_argument("--checkpoint", default=MODEL)
@@ -299,7 +299,7 @@ def main():
         "dtype": "float32",
         "inference_script_sha256": sha256(Path(__file__)),
         "metrics_script_sha256": sha256(
-            Path(__file__).with_name("eval_retrieval_baseline.py")
+            Path(__file__).with_name("eval_document_level_baseline.py")
         ),
         "max_length": 512,
         "batch_size": args.batch_size,
@@ -353,7 +353,7 @@ def main():
             or min(record["valid_token_counts"]) < 1
         ):
             raise ValueError("Incomplete token coverage")
-        metrics = retrieval_metrics(row, scores)
+        metrics = evidence_ranking_metrics(row, scores)
         for k, value in metrics.items():
             totals[k] += value
             by_type[row["query_type"]][k] += value

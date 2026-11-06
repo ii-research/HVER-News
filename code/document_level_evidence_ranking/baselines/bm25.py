@@ -5,9 +5,9 @@ import re
 from collections import Counter, defaultdict
 from typing import List, Sequence
 
-from avr_retriever_experiment.config import ExperimentConfig
-from avr_retriever_experiment.data import BenchmarkData, candidate_doc_ids
-from avr_retriever_experiment.evaluation import _aggregate, _per_query
+from document_level_evidence_ranking.config import ExperimentConfig
+from document_level_evidence_ranking.data import BenchmarkData, candidate_doc_ids
+from document_level_evidence_ranking.evaluation import _aggregate, _per_query
 
 _TOKEN_RE = re.compile(r"\w+", flags=re.UNICODE)
 

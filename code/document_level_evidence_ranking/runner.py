@@ -6,16 +6,16 @@ import os
 
 import torch.distributed as dist
 
-from avr_retriever_experiment.baselines.bm25 import evaluate_bm25
-from avr_retriever_experiment.config import ExperimentConfig
-from avr_retriever_experiment.data import BenchmarkData
-from avr_retriever_experiment.evaluation import evaluate_model
-from avr_retriever_experiment.model import DualEncoder
-from avr_retriever_experiment.negative_mining import RelationNegativeMiner
-from avr_retriever_experiment.settings import ExperimentSetting
-from avr_retriever_experiment.support.io import write_json, write_jsonl
-from avr_retriever_experiment.train import train_setting
-from avr_retriever_experiment.training_data import (
+from document_level_evidence_ranking.baselines.bm25 import evaluate_bm25
+from document_level_evidence_ranking.config import ExperimentConfig
+from document_level_evidence_ranking.data import BenchmarkData
+from document_level_evidence_ranking.evaluation import evaluate_model
+from document_level_evidence_ranking.model import DualEncoder
+from document_level_evidence_ranking.negative_mining import RelationNegativeMiner
+from document_level_evidence_ranking.settings import ExperimentSetting
+from document_level_evidence_ranking.support.io import write_json, write_jsonl
+from document_level_evidence_ranking.train import train_setting
+from document_level_evidence_ranking.training_data import (
     RetrievalTrainingDataset,
 )
 

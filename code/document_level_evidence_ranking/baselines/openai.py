@@ -1,4 +1,4 @@
-"""Run an OpenAI LLM article-local reranking baseline on the full Q1--Q4 test.
+"""Run an OpenAI LLM document-level evidence ranking baseline on the full Q1--Q4 test.
 
 This uses the Batch API so 22,156 independent Responses requests can be
 submitted cheaply and resumed safely.  The model may only rank candidate
@@ -17,12 +17,12 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
 
-from avr_retriever_experiment.data import candidate_doc_ids, load_split
-from avr_retriever_experiment.sampling import DEFAULT_QUERY_TYPES
-from avr_retriever_experiment.support.io import write_json, write_jsonl
+from document_level_evidence_ranking.data import candidate_doc_ids, load_split
+from document_level_evidence_ranking.sampling import DEFAULT_QUERY_TYPES
+from document_level_evidence_ranking.support.io import write_json, write_jsonl
 
 
-from avr_retriever_experiment.api_prompts import (SYSTEM_PROMPT, OUTPUT_SCHEMA, format_ranking_prompt, ranked_sentence_ids, resolve_sentence_ids, ranking_for_evaluation, PROMPT_FINGERPRINT)
+from document_level_evidence_ranking.api_prompts import (SYSTEM_PROMPT, OUTPUT_SCHEMA, format_ranking_prompt, ranked_sentence_ids, resolve_sentence_ids, ranking_for_evaluation, PROMPT_FINGERPRINT)
 
 
 def build_complete_four_query_view(data) -> tuple[list[str], list[dict], dict]:
@@ -509,8 +509,8 @@ def download(args) -> None:
 
 
 def evaluate(args) -> None:
-    from avr_retriever_experiment.config import ExperimentConfig
-    from avr_retriever_experiment.evaluation import _aggregate, _per_query
+    from document_level_evidence_ranking.config import ExperimentConfig
+    from document_level_evidence_ranking.evaluation import _aggregate, _per_query
 
     data = load_split(args.project_root.parent / "dataset/document-level/test", "test")
     query_ids, _, audit = build_complete_four_query_view(data)
@@ -564,8 +564,8 @@ def evaluate(args) -> None:
 
 
 def evaluate_smoke(args) -> None:
-    from avr_retriever_experiment.config import ExperimentConfig
-    from avr_retriever_experiment.evaluation import _aggregate, _per_query
+    from document_level_evidence_ranking.config import ExperimentConfig
+    from document_level_evidence_ranking.evaluation import _aggregate, _per_query
 
     data = load_split(args.project_root.parent / "dataset/document-level/test", "test")
     predictions = list(read_jsonl(args.output / "predictions.jsonl"))

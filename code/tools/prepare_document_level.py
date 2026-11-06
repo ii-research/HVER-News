@@ -5,8 +5,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
-from avr_retriever_experiment.data import load_split
-from avr_retriever_experiment.sampling import (
+from document_level_evidence_ranking.data import load_split
+from document_level_evidence_ranking.sampling import (
     select_experiment_query_ids,
     DEFAULT_QUERY_TYPES,
 )

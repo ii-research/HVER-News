@@ -1,4 +1,4 @@
-"""Validate local retrieval data and export sentence-window pruning supervision."""
+"""Validate document-level evidence data and export sentence-window pruning supervision."""
 
 from __future__ import annotations
 
@@ -97,10 +97,10 @@ def make_windows(row, corpus, tokenizer, max_length):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--source", type=Path, default=Path("dataset/retrieval_dataset")
+        "--source", type=Path, default=Path(__file__).resolve().parents[3] / "dataset/document-level"
     )
     parser.add_argument(
-        "--output", type=Path, default=Path("output/retrieval_baseline/data")
+        "--output", type=Path, default=Path("output/document-level/provence/data")
     )
     parser.add_argument(
         "--tokenizer", default="Alibaba-NLP/gte-reranker-modernbert-base"

@@ -137,7 +137,7 @@ def per_query(ranked: List[str], qrels: Dict[str, int], ks=(1, 3, 5, 10)):
             out["mrr_full"] = 1.0 / rank
             break
 
-    # Compatibility with current avr_retriever_experiment/evaluation.py:
+    # Compatibility with current document_level_evidence_ranking/evaluation.py:
     # it truncates ranking to max(k) before MRR, so existing paper "MRR" is MRR@10.
     max_k = max(ks)
     out["mrr"] = 0.0
@@ -184,7 +184,7 @@ def main():
 
     root = args.project_root.expanduser().resolve()
     sys.path.insert(0, str(root))
-    from avr_retriever_experiment.data import load_split, candidate_doc_ids
+    from document_level_evidence_ranking.data import load_split, candidate_doc_ids
 
     test_dir = (
         args.test_dir.expanduser().resolve()
@@ -310,7 +310,7 @@ def main():
         {
             "model_name": args.model_name,
             "evaluation_scope": "article_local",
-            "task": "sentence_level_evidence_ranking",
+            "task": "document_level_evidence_ranking",
             "query_count": len(qids),
             "reference_predictions": (
                 str(args.reference_predictions) if args.reference_predictions else None

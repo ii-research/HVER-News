@@ -6,7 +6,7 @@ The document-level GPT and DeepSeek ranking baselines share the same prompt and 
 - [`document_level_ranking/user_template.txt`](document_level_ranking/user_template.txt): query and ordered candidate sentences.
 - [`document_level_ranking/output_schema.json`](document_level_ranking/output_schema.json): structured response schema.
 
-`avr_retriever_experiment/api_prompts.py` loads this single official prompt for both providers. No variant selection is required.
+`document_level_evidence_ranking/api_prompts.py` loads this single official prompt for both providers. No variant selection is required.
 
 ## Input and output
 
@@ -24,7 +24,7 @@ From `code/`:
 
 ```bash
 python - <<'PY'
-from avr_retriever_experiment.api_prompts import SYSTEM_PROMPT, format_ranking_prompt
+from document_level_evidence_ranking.api_prompts import SYSTEM_PROMPT, format_ranking_prompt
 print(SYSTEM_PROMPT)
 print(format_ranking_prompt(
     "Which statements show the company protecting its employees?",

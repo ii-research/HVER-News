@@ -4,6 +4,8 @@ Counts are query–sentence pairs, not unique sentences. Non-supporting counts c
 
 Computed from the released dataset files. Positive labels are checked against sentence qrels; source-article labels are checked against the document-level view.
 
+The `document-level` rows count source-article evidence, `cross-document-only` rows count other-article evidence, and `corpus-level` rows combine both. Cross-document-only is an evidence subset, not a third ranking task.
+
 ## Train
 
 | Scope | Query | Queries with judgments | Direct | Partial | Non-supporting |

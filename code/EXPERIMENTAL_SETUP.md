@@ -1,11 +1,13 @@
 # Experimental Setup
 
-This document summarizes the released experiment protocol. Executable commands are in [README.md](README.md); numeric settings are in [experiment_settings.json](configs/experiment_settings.json). Changing task names does not change the model or evaluation protocol.
+This document summarizes the released experiment protocol. Executable commands are in [README.md](README.md); numeric settings are in [experiment_settings.json](configs/experiment_settings.json).
 
 ## Tasks and data
 
-- **Document-level evidence ranking:** rank all sentences in the query's source article using `dataset/document-level`. Use its `qrels.tsv` and document-level loader.
-- **Corpus-level evidence ranking:** rank evidence across articles using `dataset/corpus-level`. Use `qrels.sentences.tsv` for sentence evaluation and `qrels.documents.tsv` for document evaluation. Dense/sparse first-stage ranking and candidate-based reranking are distinct configurations.
+The two tasks are DER and CER. Cross-document-only excludes the source article from CER and is reported as a diagnostic subset, not a third task.
+
+- **Document-level evidence ranking (DER):** rank all sentences in the query's source article using `dataset/document-level`. Use its `qrels.tsv` and document-level loader.
+- **Corpus-level evidence ranking (CER):** rank evidence across the split's articles, including the source article, using `dataset/corpus-level`. Use `qrels.sentences.tsv` for sentence evaluation and `qrels.documents.tsv` for document evaluation. Dense/sparse first-stage ranking and candidate-based reranking are distinct configurations.
 
 | Split | Articles | Sentences | Relations | Queries |
 |---|---:|---:|---:|---:|
@@ -65,7 +67,7 @@ Train and infer with the same variant. Compare seed-42 ablations with the seed-4
 
 Report nDCG and Recall at 1, 3, 5 and 10, and MRR@10. nDCG uses graded gains `2^relevance - 1`, with Direct=2, Partial=1 and Non-supporting=0. Recall and reciprocal rank count Direct evidence only. The document-level dense evaluator stores MRR@10 under the key `mrr`; the corpus evaluator uses `mrr@10`.
 
-Metrics are macro-averaged over evaluated queries. The corpus evaluator includes queries with at least one Direct qrel and keeps returned items at their original ranks, assigning zero gain when no qrel exists. Cross-only evaluation removes source-article results and qrels, then applies the same eligibility rule. Check exported query counts: missing predictions are not a license to silently reduce evaluation coverage.
+Metrics are macro-averaged over evaluated queries. The corpus evaluator includes queries with at least one Direct qrel and keeps returned items at their original ranks, assigning zero gain when no qrel exists. Cross-document-only evaluation removes source-article results and qrels, then applies the same eligibility rule. Check exported query counts: missing predictions are not a license to silently reduce evaluation coverage.
 
 For three-seed results, report the arithmetic mean of seed-level metrics and, if needed, sample standard deviation (`ddof=1`). Do not assign a standard deviation to a single run or replace missing runs with zero. API baselines return only top-ten IDs, not full sentence-score matrices.
 
@@ -79,4 +81,4 @@ Use Python 3.11+ and [requirements.txt](requirements.txt); the API runners addit
 
 The repository specifies dependency lower bounds, not an exact lockfile for every experiment. It does not establish one uniform GPU model, CUDA version, API model snapshot or wall-clock runtime for all experiments. Report such details from the original run logs rather than inferring them from default code. No training or paid API calls are required to read this setup.
 
-Implementation references: [document runner](avr_retriever_experiment/run_document_level.py), [document metrics](avr_retriever_experiment/evaluation.py), [corpus metrics](corpus_evidence_ranking/metrics.py), [Provence configuration generator](tools/make_provence_configs.py), and [hierarchical model](corpus_evidence_ranking/provence_hierarchical_model.py).
+Implementation references: [document runner](document_level_evidence_ranking/run_document_level.py), [document metrics](document_level_evidence_ranking/evaluation.py), [corpus metrics](corpus_level_evidence_ranking/metrics.py), [Provence configuration generator](tools/make_provence_configs.py), and [hierarchical model](corpus_level_evidence_ranking/provence_hierarchical_model.py).

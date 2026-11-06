@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List
 
-from avr_retriever_experiment.support.io import read_jsonl
+from document_level_evidence_ranking.support.io import read_jsonl
 
 
 @dataclass

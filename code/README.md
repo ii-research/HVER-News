@@ -11,16 +11,46 @@ export PYTHONPATH="$PWD:$PWD/provence_bundle/scripts:$PWD/provence_bundle/script
 
 Install a CUDA-compatible PyTorch build for your hardware before training. The dependency file gives compatibility requirements, not a frozen reproduction environment; this repository does not include environment snapshots. Optional API baselines require their own SDKs (`openai`) and credentials supplied through environment variables. They are not run by any setup command.
 
+## Tasks and evidence subsets
+
+| Name | Scope | Code |
+|---|---|---|
+| Document-level evidence ranking (DER) | Sentences in the query's source article | `document_level_evidence_ranking/` |
+| Corpus-level evidence ranking (CER) | Sentences in the split's article collection, including the source article | `corpus_level_evidence_ranking/` |
+| Cross-document-only | Other-article subset of CER; excludes the source article | `cross_only_*` diagnostics in the corpus-level evaluator |
+
+`baselines/cross_encoder.py` names the cross-encoder architecture, not a cross-document-only task. Each task has its own cross-encoder entry point. Shared Provence scripts `eval_document_level_baseline.py` and `prepare_document_level_baseline.py` operate on the document-level dataset.
+
+The corpus-level metrics use `sentence` for full CER sentence scores and `document` for auxiliary article scores. `cross_only_sentence` and `cross_only_document` exclude source-article results and qrels; they are diagnostic subsets, not the full CER scores. Here `document` names the ranking unit, not the document-level task.
+
+## Code layout
+
+```text
+code/
+├── document_level_evidence_ranking/  # Document-level task
+│   ├── baselines/                   # BM25, cross-encoder, GPT and DeepSeek
+│   └── ...                          # Training, data loading and evaluation
+├── corpus_level_evidence_ranking/    # Corpus-level task
+│   ├── baselines/                   # Cross-encoder and Provence reranking
+│   └── ...                          # Dense ranking, training and interaction models
+├── provence_bundle/                 # Provence components shared by both tasks
+├── prompts/                         # Commercial API ranking prompts
+├── configs/                         # Experiment settings
+└── tools/                           # Data preparation and configuration utilities
+```
+
+Task-specific baselines live under each task package. Dense training and evaluation share the task-level data and metric modules. The shared Provence implementation supports both baseline and interaction-model experiments.
+
 ## Document-level baselines
 
 ```bash
-python -m avr_retriever_experiment.run_document_level \
+python -m document_level_evidence_ranking.run_document_level \
   --setting bm25 --data-dir ../dataset/document-level --device cpu
-python -m avr_retriever_experiment.run_document_level \
+python -m document_level_evidence_ranking.run_document_level \
   --setting e5_generic_ft --train-seed 42 --data-dir ../dataset/document-level --device cuda
 ```
 
-Other settings: e5_zero_shot, bge_m3_zero_shot, qwen3_zero_shot, qwen3_generic_ft. Repeat training for seeds 13 and 87 where required. Model identifiers and sampling recipes are defined in `avr_retriever_experiment/settings.py`. Results and checkpoints go to generated results/models directories.
+Other settings: e5_zero_shot, bge_m3_zero_shot, qwen3_zero_shot, qwen3_generic_ft. Repeat training for seeds 13 and 87 where required. Model identifiers and sampling recipes are defined in `document_level_evidence_ranking/settings.py`. Results and checkpoints go to generated results/models directories.
 
 ## Provence initialization and document-level HVER-News
 
@@ -59,13 +89,13 @@ done
 
 Use `zero-full` as the stage to evaluate official Provence zero-shot on all four formulations.
 
-## Corpus-level retrieval
+## Corpus-level evidence ranking
 
 First-stage BGE-M3 rankings for reranking:
 
 ```bash
 for split in dev test; do
-  python -m corpus_evidence_ranking.evaluate --setting dense --model BAAI/bge-m3 \
+  python -m corpus_level_evidence_ranking.evaluate --setting dense --model BAAI/bge-m3 \
     --data-dir ../dataset/corpus-level --split "$split" \
     --results-dir "results/candidates/$split" --device cuda
 done
@@ -76,14 +106,14 @@ The resulting `predictions.jsonl` files can be supplied directly as candidate fi
 Dense Generic FT:
 
 ```bash
-python -m corpus_evidence_ranking.train --model intfloat/e5-base-v2 \
+python -m corpus_level_evidence_ranking.train --model intfloat/e5-base-v2 \
   --data-dir ../dataset/corpus-level --output-dir models/corpus-level/e5/seed_42 --seed 42
 ```
 
 Corpus-level Provence Generic FT:
 
 ```bash
-python -m corpus_evidence_ranking.provence_train \
+python -m corpus_level_evidence_ranking.provence_train \
   --data-dir ../dataset/corpus-level --output-dir models/corpus-level/provence/seed_42 \
   --bundle provence_bundle --checkpoint checkpoints/provence_official \
   --variant adapted_provence --seed 42 \
@@ -94,14 +124,14 @@ python -m corpus_evidence_ranking.provence_train \
 Corpus-level hierarchical HVER-News (four GPUs, effective query-set batch 4):
 
 ```bash
-torchrun --standalone --nproc_per_node=4 -m corpus_evidence_ranking.provence_hierarchical_train \
+torchrun --standalone --nproc_per_node=4 -m corpus_level_evidence_ranking.provence_hierarchical_train \
   --data-dir ../dataset/corpus-level --output-dir models/corpus-level/hierarchical/seed_42 \
   --bundle provence_bundle --checkpoint checkpoints/provence_official \
   --variant hierarchical --seed 42 --query-view-seed 42 \
   --dev-candidates results/candidates/dev/predictions.jsonl \
   --query-set-batch-size 1 --block-batch-size 4 --negative-documents 3 \
   --document-loss-weight 0.25
-python -m corpus_evidence_ranking.provence_hierarchical_infer \
+python -m corpus_level_evidence_ranking.provence_hierarchical_infer \
   --data-dir ../dataset/corpus-level --split test --output-dir results/corpus-level/hierarchical/seed_42 \
   --bundle provence_bundle --checkpoint checkpoints/provence_official \
   --trained-checkpoint models/corpus-level/hierarchical/seed_42/best_checkpoint/model.safetensors \
@@ -137,9 +167,9 @@ Ablation mapping: hierarchical=SI+DI; sentence_only=w/o DI; document_only=w/o SI
 
 ### Metrics
 
-nDCG uses grades 2/1/0 and gain 2^rel-1. Recall and MRR count Direct only. Corpus evaluator retains unjudged items at their retrieved ranks and assigns zero gain, rather than deleting them. It averages only queries with at least one Direct qrel. Cross-only removes source-article results/qrels and applies that eligibility rule: 3,305 Test queries, versus 4,049 with any positive non-source evidence (Direct or Partial).
+nDCG uses grades 2/1/0 and gain 2^rel-1. Recall and MRR count Direct only. Corpus evaluator retains unjudged items at their retrieved ranks and assigns zero gain, rather than deleting them. It averages only queries with at least one Direct qrel. Cross-document-only (`cross_only_*`) removes source-article results/qrels and applies that eligibility rule: 3,305 Test queries, versus 4,049 with any positive non-source evidence (Direct or Partial).
 
-The source files are authoritative: `corpus_evidence_ranking/metrics.py`, `avr_retriever_experiment/evaluation.py`, `provence_bundle/scripts/provence_finetune.py`, `provence_bundle/scripts/provence_final_suite/model.py`, and `corpus_evidence_ranking/provence_hierarchical_model.py`.
+The source files are authoritative: `corpus_level_evidence_ranking/metrics.py`, `document_level_evidence_ranking/evaluation.py`, `provence_bundle/scripts/provence_finetune.py`, `provence_bundle/scripts/provence_final_suite/model.py`, and `corpus_level_evidence_ranking/provence_hierarchical_model.py`.
 
 
 ## Additional published baselines
@@ -147,7 +177,7 @@ The source files are authoritative: `corpus_evidence_ranking/metrics.py`, `avr_r
 The BGE cross-encoder baseline ranks all source-article sentences document-level:
 
 ```bash
-python -m avr_retriever_experiment.run_cross_encoder_reranker \
+python -m document_level_evidence_ranking.baselines.cross_encoder \
   --project-root "$PWD" --test-dir ../dataset/document-level/test \
   --output-dir results/document-level/bge_reranker --model-name BAAI/bge-reranker-v2-m3 \
   --device cuda --batch-size 128 --max-length 256
@@ -156,7 +186,7 @@ python -m avr_retriever_experiment.run_cross_encoder_reranker \
 For corpus-level BGE cross-encoder ranking, the reported candidate depth is 100:
 
 ```bash
-python -m corpus_evidence_ranking.rerank \
+python -m corpus_level_evidence_ranking.baselines.cross_encoder \
   --model BAAI/bge-reranker-v2-m3 --data-dir ../dataset/corpus-level \
   --first-stage results/candidates/test/predictions.jsonl \
   --results-dir results/corpus-level/bge_reranker --candidate-depth 100 --batch-size 128
@@ -165,7 +195,7 @@ python -m corpus_evidence_ranking.rerank \
 Corpus-level official Provence zero-shot uses candidate depth 20:
 
 ```bash
-python -m corpus_evidence_ranking.provence_rerank \
+python -m corpus_level_evidence_ranking.baselines.provence \
   --data-dir ../dataset/corpus-level --split test \
   --bundle provence_bundle --checkpoint checkpoints/provence_official \
   --candidates results/candidates/test/predictions.jsonl \
@@ -175,7 +205,7 @@ python -m corpus_evidence_ranking.provence_rerank \
 
 For corpus-level Qwen3 Generic FT, replace `intfloat/e5-base-v2` with
 `Qwen/Qwen3-Embedding-0.6B` in the dense training command and give it a separate output directory.
-Use the same three seeds. For zero-shot dense results, use `corpus_evidence_ranking.evaluate`
+Use the same three seeds. For zero-shot dense results, use `corpus_level_evidence_ranking.evaluate`
 with the E5, BGE-M3 or Qwen3 model identifier and `--split test`.
 
 ## Document-level API baselines
@@ -184,7 +214,7 @@ The current official commercial-model prompts are published in [`prompts/README.
 [`system.txt`](prompts/document_level_ranking/system.txt),
 [`user_template.txt`](prompts/document_level_ranking/user_template.txt), and
 [`output_schema.json`](prompts/document_level_ranking/output_schema.json).
-GPT and DeepSeek read the same files through `avr_retriever_experiment/api_prompts.py`.
+GPT and DeepSeek read the same files through `document_level_evidence_ranking/api_prompts.py`.
 Each request supplies one query and ordered source-article sentences and returns at most ten sentence IDs; no gold labels or original rationales are supplied. These are ranking-experiment prompts, not dataset annotation prompts. The prompt README includes an offline preview example.
 
 These optional commands send requests to external providers and incur API charges.
@@ -195,24 +225,24 @@ rankings rather than complete sentence score matrices.
 
 ```bash
 python -m pip install openai
-python -m avr_retriever_experiment.run_openai_llm_baseline prepare \
+python -m document_level_evidence_ranking.baselines.openai prepare \
   --project-root "$PWD" --output results/document-level/gpt6_luna --model gpt-6-luna
-python -m avr_retriever_experiment.run_openai_llm_baseline submit \
+python -m document_level_evidence_ranking.baselines.openai submit \
   --project-root "$PWD" --output results/document-level/gpt6_luna --max-new-jobs 12
-python -m avr_retriever_experiment.run_openai_llm_baseline status \
+python -m document_level_evidence_ranking.baselines.openai status \
   --project-root "$PWD" --output results/document-level/gpt6_luna
 # Run download after the submitted batches have finished, then evaluate.
-python -m avr_retriever_experiment.run_openai_llm_baseline download \
+python -m document_level_evidence_ranking.baselines.openai download \
   --project-root "$PWD" --output results/document-level/gpt6_luna
-python -m avr_retriever_experiment.run_openai_llm_baseline evaluate \
+python -m document_level_evidence_ranking.baselines.openai evaluate \
   --project-root "$PWD" --output results/document-level/gpt6_luna
 
-python -m avr_retriever_experiment.run_deepseek_llm_baseline prepare \
+python -m document_level_evidence_ranking.baselines.deepseek prepare \
   --project-root "$PWD" --output results/document-level/deepseek_flash --model deepseek-flash
-python -m avr_retriever_experiment.run_deepseek_llm_baseline run \
+python -m document_level_evidence_ranking.baselines.deepseek run \
   --project-root "$PWD" --output results/document-level/deepseek_flash --model deepseek-flash \
   --concurrency 32 --max-output-tokens 1024
-python -m avr_retriever_experiment.run_deepseek_llm_baseline evaluate \
+python -m document_level_evidence_ranking.baselines.deepseek evaluate \
   --project-root "$PWD" --output results/document-level/deepseek_flash
 ```
 
@@ -269,7 +299,7 @@ results can vary across hardware/software versions.
 
 Use `dataset/document-level` and `dataset/corpus-level`. Experiment outputs use `results/document-level`, `models/document-level`, `results/corpus-level` and `models/corpus-level`.
 
-The document-level entry points are `avr_retriever_experiment.run_document_level` and `tools/prepare_document_level.py`. The corpus-level implementation is in `corpus_evidence_ranking`.
+The document-level entry points are `document_level_evidence_ranking.run_document_level` and `tools/prepare_document_level.py`. The corpus-level implementation is in `corpus_level_evidence_ranking`.
 
 ### API output format
 

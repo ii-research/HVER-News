@@ -22,8 +22,8 @@ The benchmark provides two tasks:
 
 | Task | Ranking scope | Dataset |
 |---|---|---|
-| **Document-level** | Rank evidence sentences within the query’s source article. | [document-level/](dataset/document-level) |
-| **Corpus-level** | Rank evidence sentences across the split’s article collection, including the source article and other articles. | [corpus-level/](dataset/corpus-level) |
+| **Document-level (DER)** | Rank evidence sentences within the query’s source article. | [document-level/](dataset/document-level) |
+| **Corpus-level (CER)** | Rank evidence sentences across the split’s article collection, including the source article and other articles. | [corpus-level/](dataset/corpus-level) |
 
 Cross-document judgments extend the source-article evidence; they are part of the corpus-level view, rather than a separate third task.
 

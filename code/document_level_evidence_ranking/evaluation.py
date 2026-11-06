@@ -9,9 +9,9 @@ import numpy as np
 import torch
 from tqdm import tqdm
 
-from avr_retriever_experiment.config import ExperimentConfig
-from avr_retriever_experiment.data import BenchmarkData, candidate_doc_ids
-from avr_retriever_experiment.model import DualEncoder, resolve_device
+from document_level_evidence_ranking.config import ExperimentConfig
+from document_level_evidence_ranking.data import BenchmarkData, candidate_doc_ids
+from document_level_evidence_ranking.model import DualEncoder, resolve_device
 
 
 def _dcg(rels: Sequence[int]) -> float:

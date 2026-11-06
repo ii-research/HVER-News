@@ -1,4 +1,4 @@
-"""Evaluate sentence retrieval over every candidate in each query's own article."""
+"""Evaluate document-level evidence ranking over all source-article sentences."""
 
 from __future__ import annotations
 
@@ -8,10 +8,10 @@ import math
 from collections import defaultdict
 from pathlib import Path
 
-from prepare_retrieval_baseline import load_corpus, read_jsonl, validate_instance
+from prepare_document_level_baseline import load_corpus, read_jsonl, validate_instance
 
 
-def retrieval_metrics(row, scores, threshold=0.1):
+def evidence_ranking_metrics(row, scores, threshold=0.1):
     candidates = row["article_local_candidate_doc_ids"]
     if len(scores) != len(candidates) or not all(math.isfinite(x) for x in scores):
         raise ValueError(f"Invalid sentence probabilities: {row['query_id']}")
@@ -52,7 +52,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--model", required=True)
     parser.add_argument(
-        "--source", type=Path, default=Path("dataset/retrieval_dataset")
+        "--source", type=Path, default=Path(__file__).resolve().parents[3] / "dataset/document-level"
     )
     parser.add_argument("--split", choices=["dev", "test"], default="dev")
     parser.add_argument("--limit", type=int)
@@ -92,7 +92,7 @@ def main():
                 show_progress=False,
             )
             scores = result["sentence_probabilities"][0]
-            metrics = retrieval_metrics(row, scores, args.threshold)
+            metrics = evidence_ranking_metrics(row, scores, args.threshold)
             count += 1
             counts[row["query_type"]] += 1
             for key, value in metrics.items():

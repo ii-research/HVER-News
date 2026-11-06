@@ -1,4 +1,4 @@
-"""Run the DeepSeek article-local LLM baseline on the full Q1--Q4 test.
+"""Run the DeepSeek document-level evidence ranking baseline on the full Q1--Q4 test.
 
 DeepSeek exposes an OpenAI-compatible Responses API but not an equivalent
 documented Batch API. This runner therefore uses bounded async concurrency,
@@ -16,9 +16,9 @@ from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
 
-from avr_retriever_experiment.api_prompts import (ranked_sentence_ids, resolve_sentence_ids, ranking_for_evaluation, PROMPT_FINGERPRINT)
-from avr_retriever_experiment.data import candidate_doc_ids, load_split
-from avr_retriever_experiment.run_openai_llm_baseline import (
+from document_level_evidence_ranking.api_prompts import (ranked_sentence_ids, resolve_sentence_ids, ranking_for_evaluation, PROMPT_FINGERPRINT)
+from document_level_evidence_ranking.data import candidate_doc_ids, load_split
+from document_level_evidence_ranking.baselines.openai import (
     OUTPUT_SCHEMA,
     SYSTEM_PROMPT,
     build_complete_four_query_view,
@@ -27,7 +27,7 @@ from avr_retriever_experiment.run_openai_llm_baseline import (
     read_jsonl,
     sha256,
 )
-from avr_retriever_experiment.support.io import write_json, write_jsonl
+from document_level_evidence_ranking.support.io import write_json, write_jsonl
 
 
 def prepare(args) -> None:
@@ -249,8 +249,8 @@ def evaluate(args) -> None:
 
 def evaluate_smoke(args) -> None:
     """Score only completed smoke queries; never label this as a formal result."""
-    from avr_retriever_experiment.config import ExperimentConfig
-    from avr_retriever_experiment.evaluation import _aggregate, _per_query
+    from document_level_evidence_ranking.config import ExperimentConfig
+    from document_level_evidence_ranking.evaluation import _aggregate, _per_query
 
     data = load_split(args.project_root.parent / "dataset/document-level/test", "test")
     expected, _, _ = build_complete_four_query_view(data)

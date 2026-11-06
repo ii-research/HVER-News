@@ -14,18 +14,18 @@ from torch.utils.data import DataLoader, DistributedSampler
 from tqdm import tqdm
 from transformers import get_linear_schedule_with_warmup
 
-from avr_retriever_experiment.config import ExperimentConfig
-from avr_retriever_experiment.data import BenchmarkData
-from avr_retriever_experiment.evaluation import evaluate_model
-from avr_retriever_experiment.losses import (
+from document_level_evidence_ranking.config import ExperimentConfig
+from document_level_evidence_ranking.data import BenchmarkData
+from document_level_evidence_ranking.evaluation import evaluate_model
+from document_level_evidence_ranking.losses import (
     distributed_inbatch_contrastive_loss,
     inbatch_contrastive_loss,
     pairwise_negative_loss,
 )
-from avr_retriever_experiment.model import DualEncoder, resolve_device
-from avr_retriever_experiment.settings import ExperimentSetting
-from avr_retriever_experiment.support.io import write_json
-from avr_retriever_experiment.training_data import (
+from document_level_evidence_ranking.model import DualEncoder, resolve_device
+from document_level_evidence_ranking.settings import ExperimentSetting
+from document_level_evidence_ranking.support.io import write_json
+from document_level_evidence_ranking.training_data import (
     RetrievalTrainingDataset,
     collate_training,
 )

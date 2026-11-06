@@ -2,6 +2,12 @@
 
 This directory contains an English-localized copy of the existing HVER-News annotation system. It reuses the original pages, routes, evidence editor, grouped relation views, storage implementation and administrator dashboard.
 
+## Task scope
+
+Document-level modules assess or annotate evidence in a query's source article. Cross-document modules assess or annotate **cross-document-only** query–article pairs: the candidate article differs from the source article. Those judgments supplement source-article judgments to form the **corpus-level** dataset; cross-document-only is not a separate benchmark task.
+
+`server_crossdoc_relations.py` serves the unified dashboard, including both document-level and cross-document-only modules. The `crossdoc_*` filenames and routes identify annotation components, not the full corpus-level experimental pipeline. Experiments use `code/document_level_evidence_ranking/` and `code/corpus_level_evidence_ranking/`.
+
 ## Run locally
 
 Python 3.11 or later is recommended. The server uses the Python standard library.
@@ -31,11 +37,11 @@ Open http://127.0.0.1:8016/ and provide the configured token. Both servers bind 
 | Original annotation | Original Stage 1 assessment and Stage 2 evidence annotation | `/original/` |
 | Post-annotation quality | Document-level quality reassessment | `/quality-review/` |
 | Remaining annotation | Document-level Stage 2 annotation, example Group 41 | `/remaining/` |
-| Cross-document pre-assessment | Quality assessment before evidence annotation | `/crossdoc-quality/` |
-| Cross-document Direct | Evidence annotation for pairs with Direct evidence | `/crossdoc-rel-direct/` |
-| Cross-document Partial | Evidence annotation for pairs with Partial evidence only | `/crossdoc-rel-partial/` |
-| Cross-document no evidence | Optional review of pairs without positive evidence | `/crossdoc-rel-empty/` |
-| Cross-document post-assessment | Quality reassessment of the same sampled pairs | `/crossdoc-quality-after/` |
+| Cross-document-only pre-assessment | Quality assessment before evidence annotation | `/crossdoc-quality/` |
+| Cross-document-only Direct | Evidence annotation for pairs with Direct evidence | `/crossdoc-rel-direct/` |
+| Cross-document-only Partial | Evidence annotation for pairs with Partial evidence only | `/crossdoc-rel-partial/` |
+| Cross-document-only no evidence | Optional review of pairs without positive evidence | `/crossdoc-rel-empty/` |
+| Cross-document-only post-assessment | Quality reassessment of the same sampled pairs | `/crossdoc-quality-after/` |
 
 Use the dashboard links to open a group. Cross-document annotation groups combine queries and candidate articles under their source relation. Direct and Partial selections remain query-specific. Existing confirmation, invalid-item handling and navigation checks are retained.
 

@@ -7,8 +7,8 @@ from typing import Dict, List, Optional, Sequence, Tuple
 
 from torch.utils.data import Dataset
 
-from avr_retriever_experiment.data import BenchmarkData
-from avr_retriever_experiment.negative_mining import RelationNegativeMiner
+from document_level_evidence_ranking.data import BenchmarkData
+from document_level_evidence_ranking.negative_mining import RelationNegativeMiner
 
 
 @dataclass(frozen=True)
