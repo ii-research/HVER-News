@@ -65,7 +65,7 @@ Checkpoint selection uses development sentence nDCG@10, except corpus-level Prov
 | Training seeds | 13, 42, 87 | 13, 42, 87 |
 | Checkpoint selection | Dev sentence nDCG@10 | Dev sentence nDCG@10 |
 
-These settings describe HVER-News; baseline-specific configurations are listed above. The corpus-level effective batch size refers to the recorded four-GPU setup. Supplementary [article-ranking results](../appendix/corpus_level_article_ranking.md) are reported separately from sentence-ranking results.
+These settings describe HVER-News; baseline-specific configurations are listed above. The corpus-level effective batch size refers to the recorded four-GPU setup. Supplementary [article-ranking results](../appendix/README.md#main-results) are reported separately from sentence-ranking results.
 
 ## Ablations
 
