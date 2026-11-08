@@ -29,6 +29,12 @@ Cross-document judgments extend the source-article evidence; they are part of th
 
 See the [dataset overview and real examples](dataset/README.md) for query formulations, article contexts, and sentence evidence labels.
 
+## Position in an evidence-based news workflow
+
+![HVER-News sentence-level evidence ranking within an illustrative retrieval-augmented news workflow](figures/rag_evidence_ranking.svg)
+
+In a retrieval-augmented news assistant, retrieved articles provide external information, while sentence-level evidence ranking prioritizes the passages that support the user's judgment. The highlighted stage shows **HVER-News's evaluation scope**: ranking evidence for the actor, value and direction expressed in the query, beyond topic similarity. We evaluate this task within a source article (DER) and across a news corpus (CER). The surrounding RAG workflow illustrates how ranked evidence can inform a grounded answer.
+
 ## Start here
 
 | I want to… | Go to |
