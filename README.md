@@ -114,6 +114,10 @@ Value direction and evidence relevance are distinct: a sentence can directly sup
 
 For Direct, Partial, and Non-supporting **query–sentence counts**, see the [detailed tables](dataset/statistics/README.md) or [download the CSV](dataset/statistics/evidence_by_query_type.csv). These distinguish document-level, cross-document-only, and corpus-level evidence.
 
+## Supplementary Results
+
+The [appendix](appendix/README.md) provides corpus-level article-ranking results, seed-42 interaction ablations, and downloadable result tables. Full [training settings](code/EXPERIMENTAL_SETUP.md#training-settings-for-hver-news) cover both evidence-ranking tasks.
+
 ## Repository map
 
 ```text
@@ -123,6 +127,7 @@ HVER-News/
 │   ├── corpus-level/      # Train / dev / test: integrated evidence
 │   └── statistics/        # Evidence counts and summary tables
 ├── code/                  # Training, ranking, evaluation, and API prompts
+├── appendix/              # Supplementary results and numeric tables
 └── annotation/            # English annotation and quality-assessment interface
     ├── index.html         # Unified home page
     └── example_data/      # Small demonstration inputs

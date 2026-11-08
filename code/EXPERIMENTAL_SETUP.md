@@ -50,6 +50,23 @@ Dense token limits are 128 for queries and 256 for passages. Provence uses query
 
 Checkpoint selection uses development sentence nDCG@10, except corpus-level Provence Generic FT, which uses development document nDCG@10.
 
+## Training settings for HVER-News
+
+| Setting | Document-level | Corpus-level |
+|---|---|---|
+| Optimizer | AdamW | AdamW |
+| Training epochs | 3 | 3 |
+| Backbone learning rate | `3e-6` | `3e-6` |
+| Task-head learning rate | `3e-5` | `3e-5` |
+| Effective batch size | 16 queries | 4 query sets |
+| Weight decay | 0.01 | 0.01 |
+| Warmup ratio | 0.06 | 0.06 |
+| Document-loss weight | Not used | 0.25 |
+| Training seeds | 13, 42, 87 | 13, 42, 87 |
+| Checkpoint selection | Dev sentence nDCG@10 | Dev sentence nDCG@10 |
+
+These settings describe HVER-News; baseline-specific configurations are listed above. The corpus-level effective batch size refers to the recorded four-GPU setup. Supplementary [article-ranking results](../appendix/corpus_level_article_ranking.md) are reported separately from sentence-ranking results.
+
 ## Ablations
 
 | Task | Paper configuration | Implementation identifier | Seeds |
